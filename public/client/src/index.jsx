@@ -17,6 +17,7 @@ class App extends React.Component{
         <h1>Project Atelier</h1>
         <Overview />
         <RatingsAndReviews />
+        <QandA />
       </div>
 
     )
