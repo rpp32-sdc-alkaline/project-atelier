@@ -10,6 +10,9 @@ class RatingsAndReviews extends React.Component{
   render() {
     return (
       <h3>Ratings and Reviews</h3>
+      <div>
+        <h5>Example Review</h5>
+      </div>
     )
   }
 }
