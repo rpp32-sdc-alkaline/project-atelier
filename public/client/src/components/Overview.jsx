@@ -8,7 +8,6 @@ class Overview extends React.Component{
   }
 
   render() {
-    console.log('rendered')
     return (
       <h2>Overview</h2>
     )
