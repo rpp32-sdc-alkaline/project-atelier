@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 class RatingsAndReviews extends React.Component{
   constructor(props) {

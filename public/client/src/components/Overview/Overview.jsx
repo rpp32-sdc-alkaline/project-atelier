@@ -1,5 +1,4 @@
 import React from 'react';
-import App from '../index.jsx';
 
 class Overview extends React.Component{
   constructor(props) {
