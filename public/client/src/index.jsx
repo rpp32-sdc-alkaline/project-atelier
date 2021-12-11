@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Overview from './components/Overview.jsx'
+import RatingsAndReviews from './components/RatingsAndReviews.jsx'
 
 class App extends React.Component{
   constructor(props) {
@@ -14,8 +15,8 @@ class App extends React.Component{
     return (
       <div>
         <h1>Project Atelier</h1>
-        <Overview/>
-
+        <Overview />
+        <RatingsAndReviews />
       </div>
 
     )
