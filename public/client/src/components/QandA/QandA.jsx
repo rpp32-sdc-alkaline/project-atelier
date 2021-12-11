@@ -1,5 +1,4 @@
 import React from 'react';
-import App from '../index.jsx';
 
 class QandA extends React.Component{
   constructor(props) {
