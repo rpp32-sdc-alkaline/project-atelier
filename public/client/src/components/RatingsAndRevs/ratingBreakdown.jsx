@@ -8,7 +8,6 @@ class RatingBreakdown extends React.Component {
 
   render() {
     let ratings = this.props.metadata.ratings
-    console.log('ratings', ratings)
     let totalRatings = ratings[1] + ratings[2] + ratings[3] + ratings[4] + ratings[5]
     let avgRating = ((ratings[1] + 2 * ratings[2] + 3 * ratings[3] + 4 * ratings[4] + 5 * ratings[5]) / totalRatings )
     let numFiveStars = ratings[5]/totalRatings

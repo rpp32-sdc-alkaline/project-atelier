@@ -5,7 +5,7 @@ class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numToShow: 1,
+      numToShow: 2,
       showingAll: false
     }
   }
@@ -43,8 +43,8 @@ class Reviews extends React.Component {
         <option value="helpful">Helpful</option>
         <option value="newest">Newest</option>
       </select>
-      {reviews.slice(0, this.state.numToShow + 1).map(review =>
-        <Review review={review} />
+      {reviews.slice(0, this.state.numToShow).map(review =>
+        <Review review={review} key={review.review_id} />
       )}
         {!this.state.showingAll &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}

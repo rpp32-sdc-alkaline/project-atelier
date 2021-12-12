@@ -18,8 +18,6 @@ class Date extends React.Component {
       day = date.slice(8,10)
     }
     let year = date.slice(0,4)
-    console.log('date', date)
-    console.log(`month ${month}, day ${day}, year ${year}`)
     let dateString = ""
     //set month
     if (month === "01") {
