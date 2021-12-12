@@ -7,38 +7,20 @@ class RatingBreakdown extends React.Component {
   }
 
   render() {
-    let reviews = this.props.reviews
-    let numReviews = reviews.length
-    let sumOfRatings = 0;
-    let numFiveStars = 0;
-    let numFourStars = 0;
-    let numThreeStars = 0;
-    let numTwoStars = 0;
-    let numOneStar = 0;
-    for (var i = 0; i < reviews.length; i++) {
-      sumOfRatings +=reviews[i].rating
-      if (reviews[i].rating === 5) {
-        numFiveStars++
-      } else if (reviews[i].rating === 4) {
-        numFourStars++
-      } else if (reviews[i].rating === 3) {
-        numThreeStars++
-      } else if (reviews[i].rating === 2) {
-        numTwoStars++
-      } else if (reviews[i].rating === 1) {
-        numOneStar++
-      }
-    }
-    sumOfRatings /= numReviews
-    numFiveStars /= numReviews
-    numFourStars /= numReviews
-    numThreeStars /= numReviews
-    numTwoStars /= numReviews
-    numOneStar /= numReviews
+    let ratings = this.props.metadata.ratings
+    console.log('ratings', ratings)
+    let totalRatings = ratings[1] + ratings[2] + ratings[3] + ratings[4] + ratings[5]
+    let avgRating = ((ratings[1] + 2 * ratings[2] + 3 * ratings[3] + 4 * ratings[4] + 5 * ratings[5]) / totalRatings )
+    let numFiveStars = ratings[5]/totalRatings
+    let numFourStars = ratings[4]/totalRatings
+    let numThreeStars = ratings[3]/totalRatings
+    let numTwoStars = ratings[2]/totalRatings
+    let numOneStar = ratings[1]/totalRatings
+
     return (
       <div>
         <h5>Rating Breakdown</h5>
-        <p>{sumOfRatings} Stars</p>
+        <p>{avgRating} Stars</p>
         <p>Five Stars: {numFiveStars * 100}%</p>
         <p>Four Stars: {numFourStars * 100}%</p>
         <p>Three Stars: {numThreeStars * 100}%</p>
