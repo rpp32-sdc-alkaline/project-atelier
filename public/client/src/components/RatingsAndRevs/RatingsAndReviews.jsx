@@ -82,17 +82,143 @@ class RatingsAndReviews extends React.Component{
             "reviewer_name": "bigbrotherbenjamin",
             "helpfulness": 5,
             "photos": [],
-          }
+          },
+          {
+            "review_id": 6,
+            "rating": 5,
+            "summary": "I'm REALLY enjoying wearing these shades",
+            "recommend": true,
+            "response": null,
+            "body": "VERY Comfortable and practical.",
+            "date": "2019-04-14T00:00:00.000Z",
+            "reviewer_name": "Bob",
+            "helpfulness": 5,
+            "photos": [{
+                "id": 1,
+                "url": "urlplaceholder/review_5_photo_number_1.jpg"
+              },
+              {
+                "id": 2,
+                "url": "urlplaceholder/review_5_photo_number_2.jpg"
+              },
+              // ...
+            ]
+          },
+          {
+            "review_id": 7,
+            "rating": 4,
+            "summary": "I'm SUPER DUPER enjoying wearing these shades",
+            "recommend": true,
+            "response": null,
+            "body": "EXTREMELY Comfortable and practical.",
+            "date": "2019-04-14T00:00:00.000Z",
+            "reviewer_name": "Joe",
+            "helpfulness": 5,
+            "photos": [{
+                "id": 1,
+                "url": "urlplaceholder/review_5_photo_number_1.jpg"
+              },
+              {
+                "id": 2,
+                "url": "urlplaceholder/review_5_photo_number_2.jpg"
+              },
+              // ...
+            ]
+          },
+          {
+            "review_id": 8,
+            "rating": 1,
+            "summary": "I'm NOT enjoying wearing these shades",
+            "recommend": false,
+            "response": null,
+            "body": "Uncomfortable and impractical.",
+            "date": "2019-04-14T00:00:00.000Z",
+            "reviewer_name": "Bill",
+            "helpfulness": 5,
+            "photos": [{
+                "id": 1,
+                "url": "urlplaceholder/review_5_photo_number_1.jpg"
+              },
+              {
+                "id": 2,
+                "url": "urlplaceholder/review_5_photo_number_2.jpg"
+              },
+              // ...
+            ]
+          },
+          {
+            "review_id": 9,
+            "rating": 4,
+            "summary": "I'm very much enjoying wearing these shades",
+            "recommend": true,
+            "response": null,
+            "body": "Wow! Comfortable and practical.",
+            "date": "2019-04-14T00:00:00.000Z",
+            "reviewer_name": "Jane",
+            "helpfulness": 5,
+            "photos": [{
+                "id": 1,
+                "url": "urlplaceholder/review_5_photo_number_1.jpg"
+              },
+              {
+                "id": 2,
+                "url": "urlplaceholder/review_5_photo_number_2.jpg"
+              },
+              // ...
+            ]
+          },
+          {
+            "review_id": 10,
+            "rating": 4,
+            "summary": "I'm mostly enjoying wearing these shades",
+            "recommend": true,
+            "response": null,
+            "body": "Nice, comfortable and practical.",
+            "date": "2019-04-14T00:00:00.000Z",
+            "reviewer_name": "Mary",
+            "helpfulness": 5,
+            "photos": [{
+                "id": 1,
+                "url": "urlplaceholder/review_5_photo_number_1.jpg"
+              },
+              {
+                "id": 2,
+                "url": "urlplaceholder/review_5_photo_number_2.jpg"
+              },
+              // ...
+            ]
+          },
+          {
+            "review_id": 11,
+            "rating": 1,
+            "summary": "I'm NOT AT ALL enjoying wearing these shades",
+            "recommend": false,
+            "response": null,
+            "body": "Horrible.",
+            "date": "2019-04-14T00:00:00.000Z",
+            "reviewer_name": "Suzy",
+            "helpfulness": 5,
+            "photos": [{
+                "id": 1,
+                "url": "urlplaceholder/review_5_photo_number_1.jpg"
+              },
+              {
+                "id": 2,
+                "url": "urlplaceholder/review_5_photo_number_2.jpg"
+              },
+              // ...
+            ]
+          },
         ]
       },
       metadata: {
         "product_id": "2",
         "ratings": {
-          1: 0,
-          2: 1,
-          3: 1,
-          4: 2,
-          5: 1
+          1: 3,
+          2: 7,
+          3: 15,
+          4: 26,
+          5: 21
           // ...
         },
         "recommended": {
