@@ -46,17 +46,45 @@ class RatingsAndReviews extends React.Component{
             "photos": [],
           }
         ]
+      },
+      metadata: {
+        "product_id": "2",
+        "ratings": {
+          2: 1,
+          3: 1,
+          4: 2,
+          // ...
+        },
+        "recommended": {
+          0: 5
+          // ...
+        },
+        "characteristics": {
+          "Size": {
+            "id": 14,
+            "value": "4.0000"
+          },
+          "Width": {
+            "id": 15,
+            "value": "3.5000"
+          },
+          "Comfort": {
+            "id": 16,
+            "value": "4.0000"
+          },
+          // ...
       }
     }
   }
+}
 
   render() {
     return (
       <div>
         <h3>Ratings and Reviews</h3>
         <Reviews reviews={this.state.reviews}/>
-        <RatingBreakdown reviews={this.state.reviews.results}/>
-        <ProductBreakdown reviews={this.state.reviews}/>
+        <RatingBreakdown reviews={this.state.reviews.results} metadata={this.state.metadata}/>
+        <ProductBreakdown reviews={this.state.reviews} metadata={this.state.metadata}/>
       </div>
     )
   }
