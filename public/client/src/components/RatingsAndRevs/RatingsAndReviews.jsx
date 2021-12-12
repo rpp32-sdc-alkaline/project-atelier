@@ -7,6 +7,15 @@ class RatingsAndReviews extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
+      haveData: false,
+      reviews: {},
+      metadata: {}
+  }
+}
+
+  componentDidMount() {
+    //server calls to get review data and metadata
+    this.setState({
       reviews: {
         "product": "2",
         "page": 0,
@@ -76,11 +85,17 @@ class RatingsAndReviews extends React.Component{
           },
           // ...
       }
-    }
+    },
+    haveData: true
+    })
   }
-}
 
   render() {
+    if (!this.state.haveData) {
+      return(<div>
+        <p>Loading</p>
+      </div>)
+    } else {
     return (
       <div>
         <h3>Ratings and Reviews</h3>
@@ -90,6 +105,7 @@ class RatingsAndReviews extends React.Component{
       </div>
     )
   }
+}
 }
 
 export default RatingsAndReviews;
