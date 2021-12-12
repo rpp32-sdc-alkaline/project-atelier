@@ -57,7 +57,7 @@ class Date extends React.Component {
       return (<div></div>)
     } else {
       return (
-        <div class="date">
+        <div>
           <p>{this.state.dateString}</p>
         </div>
       )

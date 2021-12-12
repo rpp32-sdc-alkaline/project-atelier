@@ -55,7 +55,7 @@ class RatingsAndReviews extends React.Component{
       <div>
         <h3>Ratings and Reviews</h3>
         <Reviews reviews={this.state.reviews}/>
-        <RatingBreakdown reviews={this.state.reviews}/>
+        <RatingBreakdown reviews={this.state.reviews.results}/>
         <ProductBreakdown reviews={this.state.reviews}/>
       </div>
     )
