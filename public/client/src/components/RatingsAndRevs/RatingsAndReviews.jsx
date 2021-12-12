@@ -100,8 +100,8 @@ class RatingsAndReviews extends React.Component{
       <div>
         <h3>Ratings and Reviews</h3>
         <Reviews reviews={this.state.reviews}/>
-        <RatingBreakdown reviews={this.state.reviews.results} metadata={this.state.metadata}/>
-        <ProductBreakdown reviews={this.state.reviews} metadata={this.state.metadata}/>
+        <RatingBreakdown metadata={this.state.metadata}/>
+        <ProductBreakdown metadata={this.state.metadata}/>
       </div>
     )
   }
