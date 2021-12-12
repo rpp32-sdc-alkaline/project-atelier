@@ -2,20 +2,49 @@ import React from 'react'
 import Reviews from './reviews.jsx'
 import RatingBreakdown from './ratingBreakdown.jsx'
 import ProductBreakdown from './productBreakdown.jsx'
+import axios from 'axios'
+import API_KEY from '../../../dist/config.js'
+
 
 class RatingsAndReviews extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
       haveData: false,
+      getParams: {
+        product: 1,
+        sort: 'helpful',
+        page: 1,
+        count: 5
+      },
       reviews: {},
       metadata: {}
   }
 }
 
   componentDidMount() {
+    let params = this.state.getParams
+    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${params.sort}&product_id=${params.product}`
+    console.log('url', reviewsUrl)
+    console.log('api key', API_KEY)
     //server calls to get review data and metadata
+    axios.get(reviewsUrl, {
+      headers: {
+        'Authorization': API_KEY
+      }
+    })
+    .then(result => console.log('reviews in client', result.data))
+    .catch(error => console.log('error!', error))
+    // axios.get('/reviews/meta', {
+    //   params: {
+    //     product: 1
+    //   }
+    // })
+    // .then (result => console.log('metadata', result))
+    // .catch(error => console.log('error!', error))
+    // console.log(`in componentDidMount, reviews = ${reviews}, metadata = ${metadata}`)
     this.setState({
+      //TO DO: replace dummy data with data from server calls
       reviews: {
         "product": "2",
         "page": 0,

@@ -19,7 +19,7 @@ class RatingBreakdown extends React.Component {
     return (
       <div>
         <h5>Rating Breakdown</h5>
-        <p>{avgRating} Stars</p>
+        <p>{avgRating} Stars, {totalRatings} Ratings</p>
         <p>Five Stars: {numFiveStars * 100}%</p>
         <p>Four Stars: {numFourStars * 100}%</p>
         <p>Three Stars: {numThreeStars * 100}%</p>
