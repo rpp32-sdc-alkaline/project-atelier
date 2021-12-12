@@ -1,5 +1,6 @@
 import React from 'react'
 import Review from './review.jsx'
+import WriteReview from './writeReview.jsx'
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class Reviews extends React.Component {
         {!this.state.showingAll &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
         <button>Add A Review +</button>
+        <WriteReview />
       </div>
     )
   }

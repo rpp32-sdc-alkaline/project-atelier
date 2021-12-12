@@ -28,8 +28,8 @@ class Review extends React.Component {
         <p>{review.reviewer_name}</p>
         <Date date={review.date.slice(0,10)} />
         <Helpful helpfulness={review.helpfulness} />
-        {review.photos.map(photo =>
-          <img key={photo.id} src={photo.url}></img>)}
+        {/* {review.photos.map(photo =>
+          <img key={photo.id} src={photo.url}></img>)} */}
       </div>
     )
   }

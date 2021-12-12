@@ -24,7 +24,8 @@ class RatingsAndReviews extends React.Component{
 
   componentDidMount() {
     let params = this.state.getParams
-    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${params.sort}&product_id=${params.product}`
+    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=helpful&product_id=1`
+    // let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${params.sort}&product_id=${params.product}`
     console.log('url', reviewsUrl)
     console.log('api key', API_KEY)
     //server calls to get review data and metadata
