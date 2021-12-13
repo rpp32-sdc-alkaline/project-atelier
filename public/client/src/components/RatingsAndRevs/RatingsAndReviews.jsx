@@ -26,16 +26,16 @@ class RatingsAndReviews extends React.Component{
     let params = this.state.getParams
     let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=helpful&product_id=1`
     // let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${params.sort}&product_id=${params.product}`
-    console.log('url', reviewsUrl)
-    console.log('api key', API_KEY)
+    // console.log('url', reviewsUrl)
+    // console.log('api key', API_KEY)
     //server calls to get review data and metadata
-    axios.get(reviewsUrl, {
-      headers: {
-        'Authorization': API_KEY
-      }
-    })
-    .then(result => console.log('reviews in client', result.data))
-    .catch(error => console.log('error!', error))
+    // axios.get(reviewsUrl, {
+    //   headers: {
+    //     'Authorization': API_KEY
+    //   }
+    // })
+    // .then(result => console.log('reviews in client', result.data))
+    // .catch(error => console.log('error!', error))
     // axios.get('/reviews/meta', {
     //   params: {
     //     product: 1

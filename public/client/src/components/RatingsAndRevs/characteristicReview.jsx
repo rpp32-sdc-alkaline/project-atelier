@@ -9,7 +9,8 @@ class CharacteristicReview extends React.Component {
       twoDescription: '',
       threeDescription: '',
       fourDescription: '',
-      fiveDescription: ''
+      fiveDescription: '',
+      selection: null
     }
   }
 
@@ -71,23 +72,33 @@ class CharacteristicReview extends React.Component {
     }
   }
 
+  handleClick(e) {
+    console.log('e.target.value', e.target.value)
+    console.log('this.state.selection', this.state.selection)
+    this.setState({
+      selection: e.target.value
+    })
+    this.props.rateChar(this.props.thisChar, e.target.value)
+  }
+
   render() {
-    let oneId = 'one-' + this.props.thisChar
-    let twoId = 'two-' + this.props.thisChar
-    let threeId = 'three-' + this.props.thisChar
-    let fourId = 'four-' + this.props.thisChar
-    let fiveId = 'five-' + this.props.thisChar
+    let char = this.props.thisChar
+    let oneId = 'one-' + char
+    let twoId = 'two-' + char
+    let threeId = 'three-' + char
+    let fourId = 'four-' + char
+    let fiveId = 'five-' + char
     return (
       <div>
-        <form>
-        <input type="radio" name={oneId} id={oneId} value="1"></input>
-        <input type="radio" name={twoId} id={twoId}value="2"></input>
-        <input type="radio" name={threeId} id={threeId}value="3"></input>
-        <input type="radio" name={fourId} id={fourId}value="4"></input>
-        <input type="radio" name={fiveId} id={fiveId}value="5"></input>
+        <p>{char}</p>
+        <input type="radio" name={char} id={oneId} value="1" onClick={this.handleClick.bind(this)}></input>
+        <input type="radio" name={char} id={twoId}value="2" onClick={this.handleClick.bind(this)}></input>
+        <input type="radio" name={char} id={threeId}value="3" onClick={this.handleClick.bind(this)}></input>
+        <input type="radio" name={char} id={fourId}value="4" onClick={this.handleClick.bind(this)}></input>
+        <input type="radio" name={char} id={fiveId}value="5" onClick={this.handleClick.bind(this)}></input>
         <p>{this.state.oneDescription}</p>
         <p>{this.state.fiveDescription}</p>
-        </form>
+        <br></br>
       </div>
     )
   }
