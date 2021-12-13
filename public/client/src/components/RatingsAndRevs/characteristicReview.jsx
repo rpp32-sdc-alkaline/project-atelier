@@ -15,7 +15,7 @@ class CharacteristicReview extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.thisChar === 'size') {
+    if (this.props.thisChar === 'Size') {
       this.setState({
         oneDescription: 'A size too small',
         twoDescription: '1/2 a size too small',
@@ -24,7 +24,7 @@ class CharacteristicReview extends React.Component {
         fiveDescription: 'A size too wide',
         loaded: true
       })
-    } else if (this.props.thisChar === 'width') {
+    } else if (this.props.thisChar === 'Width') {
       this.setState({
         oneDescription: 'Too narrow',
         twoDescription: 'Slightly narrow',
@@ -33,7 +33,7 @@ class CharacteristicReview extends React.Component {
         fiveDescription: 'Too wide',
         loaded: true
       })
-    } else if (this.props.thisChar === 'comfort') {
+    } else if (this.props.thisChar === 'Comfort') {
       this.setState({
         oneDescription: 'Uncomfortable',
         twoDescription: 'Slightly uncomfortable',
@@ -42,7 +42,7 @@ class CharacteristicReview extends React.Component {
         fiveDescription: 'Perfect',
         loaded: true
       })
-    } else if (this.props.thisChar === 'quality') {
+    } else if (this.props.thisChar === 'Quality') {
       this.setState({
         oneDescription: 'Poor',
         twoDescription: 'Below average',
@@ -51,7 +51,7 @@ class CharacteristicReview extends React.Component {
         fiveDescription: 'Perfect',
         loaded: true
       })
-    } else if (this.props.thisChar === 'length') {
+    } else if (this.props.thisChar === 'Length') {
       this.setState({
         oneDescription: 'Runs short',
         twoDescription: 'Runs slightly short',
@@ -60,7 +60,7 @@ class CharacteristicReview extends React.Component {
         fiveDescription: 'Runs long',
         loaded: true
       })
-    } else if (this.props.thisChar === 'fit') {
+    } else if (this.props.thisChar === 'Fit') {
       this.setState({
         oneDescription: 'Runs tight',
         twoDescription: 'Runs slightly tight',

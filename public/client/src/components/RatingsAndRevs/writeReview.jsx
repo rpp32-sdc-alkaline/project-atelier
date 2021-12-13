@@ -18,7 +18,7 @@ class WriteReview extends React.Component {
       photos: {},
       nickname: null,
       email: null,
-      chars: ['size', 'fit', 'width', 'comfort', 'quality', 'length']
+      chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
     }
   }
 
@@ -29,6 +29,7 @@ class WriteReview extends React.Component {
   }
 
   rateCharacteristic(char, rating) {
+    char = char.toLowerCase()
     this.setState({
       [char]: rating
     })
@@ -80,7 +81,10 @@ class WriteReview extends React.Component {
     } if (this.state.recommend === null) {
       invalidFields += 'Do you recommend this product?\n'
     } for (var i = 0; i < this.state.chars.length; i++) {
-      if (this.state[this.state.chars[i]] === null) {
+      let char = this.state.chars[i].toLowerCase()
+      console.log('char', char)
+      if (this.state[char] === null) {
+        console.log('this.state.char === null')
         invalidFields += `Characteristic: ${this.state.chars[i]}\n`
       }
     } if (this.state.body === '' || this.state.body.length < 50) {
