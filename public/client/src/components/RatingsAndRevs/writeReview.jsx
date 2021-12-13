@@ -1,10 +1,12 @@
 import React from 'react'
 import CharacteristicReview from './characteristicReview.jsx'
+import axios from 'axios'
 
 class WriteReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: null,
       rating: null,
       recommend: null,
       size: null,
@@ -15,7 +17,7 @@ class WriteReview extends React.Component {
       fit: null,
       summary: '',
       body: '',
-      photos: {},
+      photos: [],
       nickname: null,
       email: null,
       chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
@@ -98,6 +100,18 @@ class WriteReview extends React.Component {
     if (invalidFields) {
       alert(`You must enter the following:\n${invalidFields}`)
     } else {
+      let reviewFormData = {
+        product_id: parseInt(this.props.id, 10),
+        rating: parseInt(this.state.rating, 10),
+        summary: this.state.summary,
+        body: this.state.body,
+        recommend: this.state.recommend,
+        name: this.state.nickname,
+        email: this.state.email,
+        photos: this.state.photos
+        //add characteristics
+        }
+      }
       //create object
       //send object in server post request
     }
