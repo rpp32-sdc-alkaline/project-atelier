@@ -4,7 +4,7 @@
   "description": "Front End Capstone: Dominic, Meredith, Zac, Jeff",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon server/index.js",
     "build": "webpack --watch",
     "dev": "npm run start & npm run build"
@@ -36,5 +36,9 @@
     "underscore": "^1.13.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "babel-jest": "^27.4.5",
+    "react-test-renderer": "^17.0.2"
   }
 }
