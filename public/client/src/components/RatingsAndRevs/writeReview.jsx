@@ -109,17 +109,13 @@ class WriteReview extends React.Component {
         name: this.state.nickname,
         email: this.state.email,
         photos: this.state.photos
-        //add characteristics
         }
       }
-      //create object
-      //send object in server post request
     }
-  }
+
 
   render() {
     let chars = Array.from(this.state.chars)
-    // console.log('chars', chars)
     return (
       <div>
         <h3>Write Your Review</h3>
@@ -171,5 +167,6 @@ class WriteReview extends React.Component {
     )
   }
 }
+
 
 export default WriteReview
