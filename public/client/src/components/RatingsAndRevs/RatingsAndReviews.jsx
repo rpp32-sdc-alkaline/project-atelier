@@ -3,7 +3,7 @@ import Reviews from './reviews.jsx'
 import RatingBreakdown from './ratingBreakdown.jsx'
 import ProductBreakdown from './productBreakdown.jsx'
 import axios from 'axios'
-import API_KEY from '../../../dist/config.js'
+// import API_KEY from '../../../dist/config.js'
 
 
 class RatingsAndReviews extends React.Component{
