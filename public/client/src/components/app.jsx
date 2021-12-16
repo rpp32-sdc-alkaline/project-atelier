@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Overview from './components/Overview/Overview.jsx'
-import RatingsAndReviews from './components/RatingsAndRevs/RatingsAndReviews.jsx'
-import QandA from './components/QandA/QandA.jsx'
+import Overview from './Overview/Overview.jsx'
+import RatingsAndReviews from './RatingsAndRevs/RatingsAndReviews.jsx'
+import QandA from './QandA/QandA.jsx'
 
 class App extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
-
     }
   }
 
@@ -20,11 +19,8 @@ class App extends React.Component{
         <QandA />
         <RatingsAndReviews />
       </div>
-
     )
   }
-
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
-
+export default App
