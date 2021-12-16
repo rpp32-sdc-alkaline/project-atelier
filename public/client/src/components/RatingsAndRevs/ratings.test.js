@@ -1,11 +1,12 @@
-import { render, screen, cleanup } from '@testing-library/react'
+import { render, screen, cleanup } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RatingsAndReviews from './RatingsAndReviews.jsx'
-import WriteReview from './writeReview.jsx'
+import App from '../app.jsx';
 
-test('renders without crashing', () => {
-  render(<WriteReview id={"2"}/>);
-  const writeElement = screen.getByTestId('write-1')
-  expect(writeElement).toBeInTheDocument()
+
+describe('App', () => {
+  test('renders App component', () => {
+    render(<App />);
+  });
 })
+

@@ -3,7 +3,7 @@ import Reviews from './reviews.jsx'
 import RatingBreakdown from './ratingBreakdown.jsx'
 import ProductBreakdown from './productBreakdown.jsx'
 import axios from 'axios'
-// import API_KEY from '../../../dist/config.js'
+import API_KEY from '../../../dist/config.js'
 
 
 class RatingsAndReviews extends React.Component{
@@ -12,7 +12,7 @@ class RatingsAndReviews extends React.Component{
     this.state = {
       haveData: false,
       getParams: {
-        product: 1,
+        product: "2",
         sort: 'helpful',
         page: 1,
         count: 5
@@ -24,25 +24,25 @@ class RatingsAndReviews extends React.Component{
 
   componentDidMount() {
     let params = this.state.getParams
-    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=helpful&product_id=1`
-    // let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${params.sort}&product_id=${params.product}`
-    // console.log('url', reviewsUrl)
-    // console.log('api key', API_KEY)
-    //server calls to get review data and metadata
-    // axios.get(reviewsUrl, {
-    //   headers: {
-    //     'Authorization': API_KEY
-    //   }
-    // })
-    // .then(result => console.log('reviews in client', result.data))
-    // .catch(error => console.log('error!', error))
-    // axios.get('/reviews/meta', {
-    //   params: {
-    //     product: 1
-    //   }
-    // })
-    // .then (result => console.log('metadata', result))
-    // .catch(error => console.log('error!', error))
+    // let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=helpful&product_id=1`
+    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${params.sort}&product_id=${params.product}`
+    console.log('url', reviewsUrl)
+    console.log('api key', API_KEY)
+    // server calls to get review data and metadata
+    axios.get(reviewsUrl, {
+      headers: {
+        'Authorization': API_KEY
+      }
+    })
+    .then(result => console.log('reviews in client', result.data))
+    .catch(error => console.log('error!', error))
+    axios.get('/reviews/meta', {
+      params: {
+        product: 1
+      }
+    })
+    .then (result => console.log('metadata', result))
+    .catch(error => console.log('error!', error))
     // console.log(`in componentDidMount, reviews = ${reviews}, metadata = ${metadata}`)
     this.setState({
       //TO DO: replace dummy data with data from server calls
