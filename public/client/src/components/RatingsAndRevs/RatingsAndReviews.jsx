@@ -3,7 +3,8 @@ import Reviews from './reviews.jsx'
 import RatingBreakdown from './ratingBreakdown.jsx'
 import ProductBreakdown from './productBreakdown.jsx'
 import axios from 'axios'
-import API_KEY from '/Users/carullohome/hackreactor/project-atelier/config.js';
+// import API_KEY from '/Users/carullohome/hackreactor/project-atelier/config.js';
+import API_KEY from '/Users/meredithwhite/JavaScript/HackReactor/RPP32/Senior/project-atelier/config.js'
 
 
 class RatingsAndReviews extends React.Component{
