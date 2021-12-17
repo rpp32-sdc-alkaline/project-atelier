@@ -1,6 +1,10 @@
 import React from 'react';
-import StarRating from './starRating.jsx'
-import Category from './Category.jsx'
+import StarRating from './starRating.jsx';
+import Category from './Category.jsx';
+import ProductTitle from './ProductTitle.jsx';
+import Description from './Description.jsx';
+import StyleSelector from './StyleSelector.jsx'
+import Price from './Price.jsx';
 import axios from 'axios'
 
 class Overview extends React.Component{
@@ -72,13 +76,20 @@ class Overview extends React.Component{
 
 
   render() {
+    var description;
+    if(this.state.product.description) {
+      description = <Description description={this.state.product.description} />
+    }
     return (
       <div>
         <h2>Overview</h2>
         <StarRating ratings={this.state.ratings.ratings}/>
         <Category category = {this.state.product.category}/>
+        <ProductTitle name={this.state.product.name}/>
+        <Price style={this.state.styles[0]}/>
+        {description}
+        <StyleSelector styles={this.state.styles[0]} />
       </div>
-
 
     )
   }
