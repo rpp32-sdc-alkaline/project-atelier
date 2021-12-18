@@ -5,16 +5,19 @@ class RatingBreakdown extends React.Component {
     super(props);
     this.state = {}
   }
+  componentDidMount() {
+    console.log('this.props.metadata', this.props.metadata)
+  }
 
   render() {
     let ratings = this.props.metadata.ratings
-    let totalRatings = ratings[1] + ratings[2] + ratings[3] + ratings[4] + ratings[5]
-    let avgRating = ((ratings[1] + 2 * ratings[2] + 3 * ratings[3] + 4 * ratings[4] + 5 * ratings[5]) / totalRatings ).toFixed(2)
-    let numFiveStars = Math.floor(ratings[5]/totalRatings*100)
-    let numFourStars = Math.floor(ratings[4]/totalRatings*100)
-    let numThreeStars = Math.floor(ratings[3]/totalRatings*100)
-    let numTwoStars = Math.floor(ratings[2]/totalRatings*100)
-    let numOneStar = Math.floor(ratings[1]/totalRatings*100)
+    let totalRatings = JSON.parse(ratings[1]) + JSON.parse(ratings[2]) + JSON.parse(ratings[3]) + JSON.parse(ratings[4]) + JSON.parse(ratings[5])
+    let avgRating = ((JSON.parse(ratings[1]) + 2 * JSON.parse(ratings[2]) + 3 * JSON.parse(ratings[3]) + 4 * JSON.parse(ratings[4]) + 5 * JSON.parse(ratings[5])) / totalRatings ).toFixed(2)
+    let numFiveStars = Math.floor(JSON.parse(ratings[5])/totalRatings*100)
+    let numFourStars = Math.floor(JSON.parse(ratings[4])/totalRatings*100)
+    let numThreeStars = Math.floor(JSON.parse(ratings[3])/totalRatings*100)
+    let numTwoStars = Math.floor(JSON.parse(ratings[2])/totalRatings*100)
+    let numOneStar = Math.floor(JSON.parse(ratings[1])/totalRatings*100)
 
     return (
       <div>
