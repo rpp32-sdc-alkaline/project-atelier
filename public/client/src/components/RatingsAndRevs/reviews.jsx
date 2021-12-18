@@ -7,7 +7,8 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       numToShow: 2,
-      showingAll: false
+      showingAll: false,
+      showWriteReview: false
     }
   }
 
@@ -31,6 +32,12 @@ class Reviews extends React.Component {
         numToShow: results.length,
         showingAll: true})
     }
+  }
+
+  showWriteReview() {
+    this.setState({
+      showWriteReview: true
+    })
   }
 
   render() {
