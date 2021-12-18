@@ -1,15 +1,18 @@
-import React from 'react';
-import StarRating from './starRating.jsx';
-import Category from './Category.jsx';
-import ProductTitle from './ProductTitle.jsx';
-import Description from './Description.jsx';
+import React from 'react'
+import StarRating from './starRating.jsx'
+import Category from './Category.jsx'
+import ProductTitle from './ProductTitle.jsx'
+import Description from './Description.jsx'
 import StyleSelector from './StyleSelector.jsx'
-import Price from './Price.jsx';
+import Price from './Price.jsx'
 import axios from 'axios'
+var token = require('../../../dist/config.js')
 
 class Overview extends React.Component{
   constructor(props) {
     super(props)
+    this.getProductById = this.getProductById.bind(this)
+
     this.state = {
       product: {
         "id": 1,
@@ -69,10 +72,33 @@ class Overview extends React.Component{
   }
 }
 
-  getProducts()  {
+  getProductById(id)  {
+    var options = {
+      method: 'GET',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`,
+      headers: {
+        'Authorization': token.TOKEN
+      }
+    }
+    axios(options)
+    .then(result => {
+      console.log('product by id', result.data)
+      this.setState({
+        'productDetails': result.data[0]
+      })
+    })
+    .catch(err =>
+      console.log('error in get product by id')
+    )
+
   }
   //on component did mount-- query api for products
-
+  componentDidMount() {
+    this.setState({
+      'id': this.props.id
+    })
+    this.getProductById(this.props.id)
+  }
 
 
   render() {

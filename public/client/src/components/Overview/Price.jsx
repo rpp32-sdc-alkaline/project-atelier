@@ -5,5 +5,5 @@ const Price = (props) => {
     <div>${props.style.original_price}</div>
   )
 }
-
+//
 export default Price;

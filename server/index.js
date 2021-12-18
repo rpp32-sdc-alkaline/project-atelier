@@ -26,9 +26,7 @@ app.get('/API', (req, res) => {
   .catch((error) => {
     throw error;
   })
-
-
-  })
+})
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`)
