@@ -19,10 +19,12 @@ class App extends React.Component{
       console.log('productList', productList)
       this.setState({
         'productList': productList,
-        'currentProductId': productList[4].id
+        'currentProductId': productList[0].id
       })
     })
   }
+
+  //TO DO: function that changes the current product id
 
 
   render() {
@@ -36,8 +38,8 @@ class App extends React.Component{
       return (
         <div>
           <h1>Project Atelier</h1>
-          <Overview />
-          <QandA />
+          <Overview id={this.state.currentProductId}/>
+          <QandA id={this.state.currentProductId}/>
           <RatingsAndReviews id={this.state.currentProductId}/>
         </div>
       )
