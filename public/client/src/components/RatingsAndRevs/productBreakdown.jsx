@@ -6,6 +6,8 @@ class ProductBreakdown extends React.Component {
     this.state = {}
   }
 
+  co
+
   render() {
     let metadata = this.props.metadata
     var chars = metadata.characteristics

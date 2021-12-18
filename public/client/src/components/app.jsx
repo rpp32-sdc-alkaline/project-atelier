@@ -18,21 +18,32 @@ class App extends React.Component{
     .then((productList) => {
       console.log('productList', productList)
       this.setState({
-        'productList': productList
+        'productList': productList,
+        'currentProductId': productList[0].id
       })
     })
   }
 
+  //TO DO: function that changes the current product id
+
 
   render() {
-    return (
-      <div>
-        <h1>Project Atelier</h1>
-        <Overview />
-        <QandA />
-        <RatingsAndReviews />
-      </div>
-    )
+    if (!this.state.productList) {
+      return (
+        <div>
+          <h1>Project Atelier</h1>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h1>Project Atelier</h1>
+          <Overview id={this.state.currentProductId}/>
+          <QandA id={this.state.currentProductId}/>
+          <RatingsAndReviews id={this.state.currentProductId}/>
+        </div>
+      )
+    }
   }
 }
 
