@@ -28,9 +28,9 @@ class App extends React.Component{
     return (
       <div>
         <h1>Project Atelier</h1>
-        <Overview />
-        <QandA />
-        <RatingsAndReviews />
+        <Overview props = {this.state}/>
+        <QandA props = {this.state}/>
+        <RatingsAndReviews props = {this.state}/>
       </div>
     )
   }
