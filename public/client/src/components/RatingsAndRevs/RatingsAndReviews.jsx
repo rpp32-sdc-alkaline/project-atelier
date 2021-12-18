@@ -3,7 +3,6 @@ import Reviews from './reviews.jsx'
 import RatingBreakdown from './ratingBreakdown.jsx'
 import ProductBreakdown from './productBreakdown.jsx'
 import axios from 'axios'
-// import API_KEY from './../../../dist/config.js';
 const token = require('../../../dist/config.js');
 
 
