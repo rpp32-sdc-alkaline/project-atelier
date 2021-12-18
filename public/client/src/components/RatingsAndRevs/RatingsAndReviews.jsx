@@ -3,7 +3,9 @@ import Reviews from './reviews.jsx'
 import RatingBreakdown from './ratingBreakdown.jsx'
 import ProductBreakdown from './productBreakdown.jsx'
 import axios from 'axios'
-import API_KEY from './../../../dist/config.js';
+// import API_KEY from './../../../dist/config.js';
+const token = require('../../../dist/config.js');
+
 
 
 class RatingsAndReviews extends React.Component{
@@ -11,7 +13,7 @@ class RatingsAndReviews extends React.Component{
     super(props)
     this.state = {
       haveData: false,
-      product: "59553",
+      product: 0,
       sort: 'helpful',
       page: 1,
       count: 5,
@@ -22,34 +24,22 @@ class RatingsAndReviews extends React.Component{
   }
 
   componentDidMount() {
-    let id = this.props.id || 59553
+    console.log('API_KEY', token)
+    let id = this.props.id
+    console.log('id', id)
+    this.setState({
+      product: id
+    })
     this.getReviewData(id, 'helpful', 1, 5)
   }
 
   getReviewData(product, sort, page, count) {
-    if (product) {
-      this.setState({
-        product: product
-      })
-    } if (sort) {
-      this.setState({
-        sort: sort
-      })
-    } if (page) {
-      this.setState({
-        page: page
-      })
-    } if (count) {
-      this.setState({
-        count: count
-      })
-    }
     let reviews
     let metadata
-    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${this.state.sort}&product_id=${this.state.product}&page=${this.state.page}&count=${this.state.count}`
-    let metadataUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${this.state.product}`
+    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${sort}&product_id=${product}&page=${page}&count=${count}`
+    let metadataUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${product}`
     let headers = {
-      'Authorization': API_KEY
+      'Authorization': token.TOKEN
     }
     axios.get(reviewsUrl, {
       headers: headers
@@ -73,6 +63,7 @@ class RatingsAndReviews extends React.Component{
       })
     })
     .catch(error => console.log('error!', error))
+    console.log('this.state', this.state)
   }
 
   render() {
