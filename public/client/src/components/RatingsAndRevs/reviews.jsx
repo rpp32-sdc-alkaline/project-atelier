@@ -56,10 +56,12 @@ class Reviews extends React.Component {
             <Review review={review} key={review.review_id} />
           )}
         </div>
-          {!this.state.showingAll &&
-          <button onClick={this.showMore.bind(this)}>More Reviews</button>}
-          <button>Add A Review +</button>
+        {!this.state.showingAll &&
+        <button onClick={this.showMore.bind(this)}>More Reviews</button>}
+        <button onClick={this.showWriteReview.bind(this)}>Add A Review +</button>
+        {this.state.showWriteReview &&
         <WriteReview id={this.props.reviews.product}/>
+        }
       </div>
     )
   }
