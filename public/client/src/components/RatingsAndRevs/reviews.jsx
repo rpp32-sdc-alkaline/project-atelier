@@ -7,7 +7,8 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       numToShow: 2,
-      showingAll: false
+      showingAll: false,
+      showWriteReview: false
     }
   }
 
@@ -33,24 +34,34 @@ class Reviews extends React.Component {
     }
   }
 
+  showWriteReview() {
+    this.setState({
+      showWriteReview: true
+    })
+  }
+
   render() {
     let reviews = this.props.reviews.results
     return (
       <div id="reviews">
-      <h4>Reviews Component</h4>
-      <h5>999 reviews. Sort on:</h5>
-      <select name="review-sort-options" id="review-sort-options">
-        <option value="relevance">Relevant</option>
-        <option value="helpful">Helpful</option>
-        <option value="newest">Newest</option>
-      </select>
-      {reviews.slice(0, this.state.numToShow).map(review =>
-        <Review review={review} key={review.review_id} />
-      )}
+        <h4>Reviews Component</h4>
+        <h5>999 reviews. Sort on:</h5>
+        <select name="review-sort-options" id="review-sort-options">
+          <option value="relevance">Relevant</option>
+          <option value="helpful">Helpful</option>
+          <option value="newest">Newest</option>
+        </select>
+        <div id="reviews-scroll">
+          {reviews.slice(0, this.state.numToShow).map(review =>
+            <Review review={review} key={review.review_id} />
+          )}
+        </div>
         {!this.state.showingAll &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
-        <button>Add A Review +</button>
+        <button onClick={this.showWriteReview.bind(this)}>Add A Review +</button>
+        {this.state.showWriteReview &&
         <WriteReview id={this.props.reviews.product}/>
+        }
       </div>
     )
   }
