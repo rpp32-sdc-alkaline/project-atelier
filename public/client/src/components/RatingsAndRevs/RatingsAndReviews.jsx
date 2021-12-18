@@ -22,7 +22,8 @@ class RatingsAndReviews extends React.Component{
   }
 
   componentDidMount() {
-    this.getReviewData(59553, 'helpful', 1, 5)
+    let id = this.props.id || 59553
+    this.getReviewData(id, 'helpful', 1, 5)
   }
 
   getReviewData(product, sort, page, count) {
