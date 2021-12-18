@@ -23,9 +23,7 @@ class RatingsAndReviews extends React.Component{
   }
 
   componentDidMount() {
-    console.log('API_KEY', token)
     let id = this.props.id
-    console.log('id', id)
     this.setState({
       product: id
     })
@@ -44,7 +42,7 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then(result => {
-      console.log('reviews in client', result.data),
+      // console.log('reviews in client', result.data),
       this.setState({
         reviews: result.data
       })
@@ -55,14 +53,14 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then (result => {
-      console.log('metadata', result.data),
+      // console.log('metadata', result.data),
       this.setState({
         metadata: result.data,
         haveData: true
       })
     })
     .catch(error => console.log('error!', error))
-    console.log('this.state', this.state)
+    // console.log('this.state', this.state)
   }
 
   render() {

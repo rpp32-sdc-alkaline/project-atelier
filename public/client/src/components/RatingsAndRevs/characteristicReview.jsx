@@ -73,8 +73,8 @@ class CharacteristicReview extends React.Component {
   }
 
   handleClick(e) {
-    console.log('e.target.value', e.target.value)
-    console.log('this.state.selection', this.state.selection)
+    // console.log('e.target.value', e.target.value)
+    // console.log('this.state.selection', this.state.selection)
     this.setState({
       selection: e.target.value
     })

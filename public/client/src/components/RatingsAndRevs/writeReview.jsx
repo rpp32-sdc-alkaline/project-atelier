@@ -35,11 +35,9 @@ class WriteReview extends React.Component {
     this.setState({
       [char]: rating
     })
-    console.log('this.state', this.state)
   }
 
   handleRecommend(e) {
-    console.log('e.target.value', e.target.value)
     this.setState({
       recommend: e.target.value
     })
@@ -75,7 +73,6 @@ class WriteReview extends React.Component {
 
   onSubmit(e) {
     e.preventDefault()
-    console.log('state in on submit', this.state)
     //validate fields
     let invalidFields = ''
     if (!this.state.rating) {
@@ -84,9 +81,7 @@ class WriteReview extends React.Component {
       invalidFields += 'Do you recommend this product?\n'
     } for (var i = 0; i < this.state.chars.length; i++) {
       let char = this.state.chars[i].toLowerCase()
-      console.log('char', char)
       if (this.state[char] === null) {
-        console.log('this.state.char === null')
         invalidFields += `Characteristic: ${this.state.chars[i]}\n`
       }
     } if (this.state.body === '' || this.state.body.length < 50) {
