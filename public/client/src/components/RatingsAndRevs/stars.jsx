@@ -1,10 +1,15 @@
 import React from 'react'
 import Star from './star.jsx'
 
-let StarsRatingBreakdown = (props) => {
-  let {average} = props;
+let Stars = (props) => {
+  let { average, area } = props;
   let fullStars = Math.floor(average)
   let quarters = Math.round((average - fullStars)*4)
+  if (quarters === 4) {
+    quarters = 'gold'
+  } else if (quarters === 0) {
+    quarters = 'grey'
+  }
   let greyStars = Math.floor(5 - average)
   console.log('average', average, 'full stars', fullStars, 'quarters', quarters, 'greystars', greyStars)
   let starsFill=[]
@@ -18,10 +23,10 @@ let StarsRatingBreakdown = (props) => {
   return (
     <div className="rating-breakdown-stars">
       {starsFill.map((info, i) =>
-      <Star starFill={info} key={i}/>)
+      <Star starFill={info} area={area} key={i}/>)
       }
     </div>
   )
 }
 
-export default StarsRatingBreakdown
+export default Stars

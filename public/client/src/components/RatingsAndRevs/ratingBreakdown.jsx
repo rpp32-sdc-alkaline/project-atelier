@@ -1,6 +1,6 @@
 import React from 'react'
 import IndividualRatingBreakdown from './individualRatingBreakdown.jsx'
-import StarsRatingBreakdown from './starsRatingBreakdown.jsx'
+import Stars from './stars.jsx'
 
 class RatingBreakdown extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class RatingBreakdown extends React.Component {
     return (
       <div>
         <h5>Rating Breakdown</h5>
-        <StarsRatingBreakdown average={avgRating}/>
+        <Stars average={avgRating} area="rating-breakdown"/>
         <p>{avgRating} Stars, {totalRatings} Ratings</p>
         <IndividualRatingBreakdown numStars={5} percent={numFiveStars} ratings={ratings[5]}/>
         <IndividualRatingBreakdown numStars={4} percent={numFourStars} ratings={ratings[4]}/>

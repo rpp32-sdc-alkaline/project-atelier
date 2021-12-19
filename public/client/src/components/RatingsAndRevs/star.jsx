@@ -6,9 +6,11 @@ import threeQuartersStar from '../../../../../assets/images/three-quarters-gold-
 import outlineStar from '../../../../../assets/images/star-outline.png'
 
 const Star = (props) => {
-  const { starFill, key} = props
-  console.log('key', key)
+  const { starFill, area, key } = props
+  console.log('starFill', starFill)
+  console.log('area', area)
   let imgSrc
+  let style
   if (typeof starFill === 'number') {
     if (starFill === 1) {
       imgSrc = oneQuarterStar
@@ -21,10 +23,20 @@ const Star = (props) => {
     imgSrc = fullStar
   } else if (starFill === 'grey') {
     imgSrc = outlineStar
+  } if (area === 'review') {
+    style = {
+      height: '20px',
+      width: '20px'
+    }
+  } else {
+    style = {
+      height: '35px',
+      width: '35px'
+    }
   }
   return (
     <div>
-      <img src={imgSrc} height="35px" width="35px"></img>
+      <img src={imgSrc} style={style}></img>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import Date from './date.jsx'
 import Helpful from './helpful.jsx'
 import ReviewStars from './reviewStars.jsx'
+import Stars from './stars.jsx'
 
 class Review extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Review extends React.Component {
     return (
       <div>
         <h5>Individual Review</h5>
-        <ReviewStars stars={review.rating} />
+        <Stars average={review.rating} area="review"/>
         <p>Summary: {review.summary}</p>
         <p>Body: {review.body}</p>
         {review.response &&
@@ -28,8 +29,8 @@ class Review extends React.Component {
         <p>{review.reviewer_name}</p>
         <Date date={review.date.slice(0,10)} />
         <Helpful helpfulness={review.helpfulness} />
-        {/* {review.photos.map(photo =>
-          <img key={photo.id} src={photo.url}></img>)} */}
+        {review.photos.map(photo =>
+          <img key={photo.id} src={photo.url} height="45px" width="45px"></img>)}
       </div>
     )
   }
