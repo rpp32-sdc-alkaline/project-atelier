@@ -2,5 +2,19 @@
 
 #reviews-scroll {
   overflow: scroll;
-  height: 550px
+  height: 550px;
+  background-color: honeydew;
+}
+
+.rating-breakdown-bar-container {
+  background-color: rgb(192, 189, 189);
+  width: 100px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.rating-breakdown-bar-filler {
+  background-color: rgb(3, 172, 3);
+  height: inherit;
+  border-radius: inherit;
 }

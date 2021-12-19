@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/rpp32-fec-oyster/project-atelier.git"
   },
-  "author": "DominicCarullo, merwhite11, zacjsmith, jefffock",
+  "author": "DominicCarullo, merwhite11, jefffock",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rpp32-fec-oyster/project-atelier/issues"
@@ -47,5 +47,10 @@
     "underscore": "^1.13.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16"
   }
 }
