@@ -11,113 +11,90 @@ var token = require('../../../dist/config.js')
 class Overview extends React.Component{
   constructor(props) {
     super(props)
-    this.getProductById = this.getProductById.bind(this)
+    this.state = {}
 
-    this.state = {
-      product: {
-        "id": 1,
-        "name": "Camo Onesie",
-        "slogan": "Blend in to your crowd",
-        "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
-        "category": "Jackets",
-        "default_price": "140"
-    },
-
-    styles: [
-      {
-        "style_id": 1,
-        "name": "Forest Green & Black",
-        "original_price": "140",
-        "sale_price": "0",
-        "default?": true,
-        "photos": [
-          {
-          "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
-          "url": "urlplaceholder/style_1_photo_number.jpg"
-          },
-          {
-          "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
-          "url": "urlplaceholder/style_1_photo_number.jpg"
-          }
-        ],
-        "skus": {
-                "37": {
-                      "quantity": 8,
-                      "size": "XS"
-                },
-                "38": {
-                      "quantity": 16,
-                      "size": "S"
-                },
-                "39": {
-                      "quantity": 17,
-                      "size": "M"
-                },
-
-                }
-      }
-    ],
-
-    ratings: {
-      "product_id": "2",
-      "ratings": {
-        1: 1,
-        2: 1,
-        3: 1,
-        4: 2,
-      },
-
-    }
-
+    this.getProductData = this.getProductData.bind(this)
+    this.changeStyle = this.changeStyle.bind(this)
   }
-}
 
-  getProductById(id)  {
-    var options = {
-      method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`,
-      headers: {
+  getProductData(id)  {
+      let productUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`
+      let ratingsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${id}`
+      let stylesUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`
+      let headers = {
         'Authorization': token.TOKEN
       }
-    }
-    axios(options)
+    axios.get(productUrl, {headers})
     .then(result => {
-      console.log('product by id', result.data)
+      // console.log('product by id', result.data)
       this.setState({
-        'productDetails': result.data[0]
+        'product': result.data
       })
     })
+    .then(() => {
+      axios.get(ratingsUrl, {headers})
+      .then(result => {
+        // console.log('ratings data', result.data)
+        this.setState({
+          'ratings': result.data.ratings
+        })
+      })
+    })
+   .then(() => {
+     axios.get(stylesUrl, {headers})
+     .then(result => {
+      //  console.log('result from styles', result.data.results)
+       this.setState({
+         'styles': result.data.results,
+         'displayedStyleName': result.data.results[0].name,
+         'hasData': true
+       })
+     })
+   })
     .catch(err =>
       console.log('error in get product by id')
     )
+    }
 
+  changeStyle(name, salePrice) {
+    // console.log('change style display called', name)
+    this.setState({
+      'displayedStyleName': name,
+      'salePrice': salePrice
+    })
   }
+
+
   //on component did mount-- query api for products
   componentDidMount() {
     this.setState({
       'id': this.props.id
     })
-    this.getProductById(this.props.id)
+    this.getProductData(this.props.id)
   }
 
 
   render() {
-    var description;
-    if(this.state.product.description) {
-      description = <Description description={this.state.product.description} />
+    if (!this.state.hasData) {
+      return <div>Loading Product Overview</div>
+    } else {
+      var description;
+      if(this.state.product.description) {
+        description = <Description description={this.state.product.description} />
+      }
+      return (
+        <div>
+          <h2>Overview</h2>
+          <StarRating ratings={this.state.ratings}/>
+          <Category category = {this.state.product.category}/>
+          <ProductTitle name={this.state.product.name}/>
+          <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
+          {description}
+          <h3>{this.state.displayedStyleName}</h3>
+          <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
+        </div>
+      )
     }
-    return (
-      <div>
-        <h2>Overview</h2>
-        <StarRating ratings={this.state.ratings.ratings}/>
-        <Category category = {this.state.product.category}/>
-        <ProductTitle name={this.state.product.name}/>
-        <Price style={this.state.styles[0]}/>
-        {description}
-        <StyleSelector styles={this.state.styles[0]} />
-      </div>
-
-    )
   }
 }
 
