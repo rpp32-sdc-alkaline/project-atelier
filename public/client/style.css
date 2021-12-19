@@ -22,3 +22,11 @@
 .gold {
   background-image: 'assets/images/full-gold-star.png';
 }
+
+.stars-row {
+  display: flex;
+}
+
+.stars-column {
+  flex: 20%
+}
