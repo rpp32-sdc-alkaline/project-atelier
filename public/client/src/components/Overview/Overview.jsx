@@ -5,16 +5,26 @@ import ProductTitle from './ProductTitle.jsx'
 import Description from './Description.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import Price from './Price.jsx'
+import SizeSelector from './SizeSelector.jsx'
 import axios from 'axios'
 var token = require('../../../dist/config.js')
 
 class Overview extends React.Component{
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      product: [],
+      ratings: {},
+      styles: [],
+      displayedStyleName: '',
+      skus: {},
+      salePrice: null,
+      hasData: false
+    }
 
     this.getProductData = this.getProductData.bind(this)
     this.changeStyle = this.changeStyle.bind(this)
+    this.selectSize = this.selectSize.bind(this)
   }
 
   getProductData(id)  {
@@ -28,7 +38,7 @@ class Overview extends React.Component{
     .then(result => {
       // console.log('product by id', result.data)
       this.setState({
-        'product': result.data
+        product: result.data
       })
     })
     .then(() => {
@@ -36,18 +46,20 @@ class Overview extends React.Component{
       .then(result => {
         // console.log('ratings data', result.data)
         this.setState({
-          'ratings': result.data.ratings
+          ratings: result.data.ratings
         })
       })
     })
    .then(() => {
      axios.get(stylesUrl, {headers})
      .then(result => {
-      //  console.log('result from styles', result.data.results)
+      //  console.log('result from styles', result.data)
        this.setState({
-         'styles': result.data.results,
-         'displayedStyleName': result.data.results[0].name,
-         'hasData': true
+         styles: result.data.results,
+         displayedStyleName: result.data.results[0].name,
+         skus: result.data.results[0].skus,
+         salePrice: result.data.results[0].sale_price,
+         hasData: true
        })
      })
    })
@@ -56,12 +68,19 @@ class Overview extends React.Component{
     )
     }
 
-  changeStyle(name, salePrice) {
-    // console.log('change style display called', name)
+  changeStyle(name, salePrice, skus) {
+    console.log('change style display called', skus)
     this.setState({
-      'displayedStyleName': name,
-      'salePrice': salePrice
+      displayedStyleName: name,
+      skus: skus,
+      salePrice: salePrice
     })
+  }
+
+  selectSize(quantity) {
+    // console.log('select size called', sku)
+
+
   }
 
 
@@ -92,6 +111,7 @@ class Overview extends React.Component{
           {description}
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
+          <SizeSelector skus={this.state.skus} selectSize={this.selectSize}/>
         </div>
       )
     }
