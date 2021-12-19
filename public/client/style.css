@@ -18,3 +18,7 @@
   height: inherit;
   border-radius: inherit;
 }
+
+.gold {
+  background-image: 'assets/images/full-gold-star.png';
+}

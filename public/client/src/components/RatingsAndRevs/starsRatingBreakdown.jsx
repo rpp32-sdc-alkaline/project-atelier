@@ -7,19 +7,19 @@ let StarsRatingBreakdown = (props) => {
   let quarters = Math.round((average - fullStars)*4)
   let greyStars = Math.floor(5 - average)
   console.log('average', average, 'full stars', fullStars, 'quarters', quarters, 'greystars', greyStars)
-  let starsColors=[]
+  let starsFill=[]
   for (var i = 0; i < fullStars; i++) {
-    starsColors.push('gold')
-  } starsColors.push(quarters)
+    starsFill.push('gold')
+  } starsFill.push(quarters)
   for (var i = 0; i < greyStars; i++) {
-    starsColors.push('grey')
+    starsFill.push('grey')
   }
-  console.log('starsColors', starsColors)
+  console.log('starsColors', starsFill)
   return (
-    <div>
-      {/* {starsColors.map((color) =>
-      <Star color={color}/>)
-      } */}
+    <div className="rating-breakdown-stars">
+      {starsFill.map((info, i) =>
+      <Star starFill={info} key={i}/>)
+      }
     </div>
   )
 }
