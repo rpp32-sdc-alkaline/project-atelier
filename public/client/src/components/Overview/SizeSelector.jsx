@@ -1,57 +1,70 @@
 import React from 'react'
-import DropDownList from './DropDownList.jsx'
+import SizeDropDown from './SizeDropDown.jsx'
 
 class SizeSelector extends React.Component {
   constructor(props) {
     super(props)
     // console.log('skus', this.props)
     this.state = {
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
-       selectedSize: '',
-       selectValue: '',
+       disabled: false,
+       display: '',
        testData: {
-        2122801: {quantity: 8, size: 'XS'},
+        2122801: {quantity: 1, size: 'XS'},
         2122802: {quantity: 0, size: 'S'},
-        2122803: {quantity: 17, size: 'M'},
+        2122803: {quantity: 0, size: 'M'},
         2122804: {quantity: 0, size: 'L'},
-        2122805: {quantity: 15, size: 'XL'},
-        2122806: {quantity: 6, size: 'XXL'}
+        2122805: {quantity: 0, size: 'XL'},
+        2122806: {quantity: 0, size: 'XXL'}
       }
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(e) {
-    console.log('value', e.target.value)
-    const quantity = e.target.value
-    // this.props.selectSize(e.target.value)
-    if(quantity === 0) {
+    console.log('value', e.target.value.split(' '))
+    const selected = e.target.value.split(' ')
+    const size = selected[0]
+    const quantity = selected[1]
+    this.props.selectSize(size, quantity)
+    if(quantity === '0') {
       this.setState({
-        selectValue: 'OUT OF STOCK'
-      })
-    } else {
-      this.setState({
-        selectValue: e.target.value
+        disabled: true
       })
     }
+
   }
 
-  render() {
-    var placeholder;
-    if(this.state.outOfStock) {
-      placeholder = 'OUT OF STOCK'
-    } else {
-      placeholder = 'Select Size'
+  componentDidMount() {
+    var sum = 0;
+    var display;
+    for (let sku in this.props.skus) {
+      const quantity = this.props.skus[sku].quantity
+      console.log('quant', quantity)
+      sum += quantity
     }
+    if (sum === 0) {
+       this.setState({
+         disabled: true,
+         display: 'OUT OF STOCK'
+       })
+    } else {
+      this.setState({
+        disabled: false,
+        display: 'Select Size'
+      })
+    }
+    console.log('sum', sum)
+  }
+
+
+  render() {
   return (
-      <select value={this.state.selectValue} onChange={this.handleChange}>
-        <option>{placeholder}</option>
-        <DropDownList
-        data={this.state.sizes}
-        // skus={this.props.skus}
-        skus={this.state.testData}
-        value={this.state.selectValue}
-        handleChange={this.handleChange}
+      <select onChange={this.handleChange} disabled={this.state.disabled}>
+        <option>{this.state.display}</option>
+
+        <SizeDropDown
+        skus={this.props.skus}
+        // skus={this.state.testData}
         />
       </select>
   )

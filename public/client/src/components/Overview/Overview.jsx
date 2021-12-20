@@ -3,9 +3,10 @@ import StarRating from './starRating.jsx'
 import Category from './Category.jsx'
 import ProductTitle from './ProductTitle.jsx'
 import Description from './Description.jsx'
-import StyleSelector from './StyleSelector.jsx'
 import Price from './Price.jsx'
+import StyleSelector from './StyleSelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
+import QuantitySelector from './QuantitySelector.jsx'
 import axios from 'axios'
 var token = require('../../../dist/config.js')
 
@@ -19,12 +20,16 @@ class Overview extends React.Component{
       displayedStyleName: '',
       skus: {},
       salePrice: null,
-      hasData: false
+      hasData: false,
+      selectedSize: '',
+      availableQuantity: '',
+      selectedQuantity: ''
     }
 
     this.getProductData = this.getProductData.bind(this)
     this.changeStyle = this.changeStyle.bind(this)
     this.selectSize = this.selectSize.bind(this)
+    this.selectQuantity = this.selectQuantity.bind(this)
   }
 
   getProductData(id)  {
@@ -77,10 +82,20 @@ class Overview extends React.Component{
     })
   }
 
-  selectSize(quantity) {
-    // console.log('select size called', sku)
+  selectSize(size, available) {
+    console.log('select size called', size)
+    console.log('available', Number(available))
+    this.setState({
+      selectedSize: size,
+      availableQuantity: Number(available)
+    })
+  }
 
-
+  selectQuantity(quantity) {
+    console.log('selectquantity called', quantity)
+    this.setState({
+      selectedQuantity: quantity
+    })
   }
 
 
@@ -112,6 +127,8 @@ class Overview extends React.Component{
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
           <SizeSelector skus={this.state.skus} selectSize={this.selectSize}/>
+          <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
+          selectQuantity={this.selectQuantity}/>
         </div>
       )
     }
