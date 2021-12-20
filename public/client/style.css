@@ -2,22 +2,17 @@
 .ratings-grid-container {
   display: grid;
   grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr 1fr;
+  /* grid-template-rows: auto auto; */
+  padding: 10px
 }
 
 #reviews {
-  grid-column-start: 2;
-}
-
-.rating-breakdown {
-  width: 70px;
+  grid-column: 2;
   grid-row: 1;
-  grid-column-start: 1;
-
+  align-self: start;
 }
 
-.product-breakdown {
-  grid-row: 2;
+.ratings-left-sidebar {
   grid-column: 1;
 }
 

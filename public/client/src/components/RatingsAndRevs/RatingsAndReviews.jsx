@@ -60,7 +60,6 @@ class RatingsAndReviews extends React.Component{
       })
     })
     .catch(error => console.log('error!', error))
-    // console.log('this.state', this.state)
   }
 
   render() {
@@ -71,10 +70,11 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <h3>Ratings and Reviews</h3>
         <Reviews reviews={this.state.reviews}/>
-        <RatingBreakdown metadata={this.state.metadata}/>
-        <ProductBreakdown metadata={this.state.metadata}/>
+        <div className="ratings-left-sidebar">
+          <RatingBreakdown metadata={this.state.metadata}/>
+          <ProductBreakdown metadata={this.state.metadata}/>
+        </div>
       </div>
     )
   }

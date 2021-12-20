@@ -1,7 +1,6 @@
 import React from 'react'
 import Date from './date.jsx'
 import Helpful from './helpful.jsx'
-import ReviewStars from './reviewStars.jsx'
 import Stars from './stars.jsx'
 
 class Review extends React.Component {

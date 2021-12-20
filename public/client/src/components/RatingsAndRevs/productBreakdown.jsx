@@ -11,7 +11,6 @@ class ProductBreakdown extends React.Component {
   render() {
     let metadata = this.props.metadata
     var chars = metadata.characteristics
-    console.log('chars', chars)
     return (
       <div className="product-breakdown">
         <h5>Product Breakdown</h5>

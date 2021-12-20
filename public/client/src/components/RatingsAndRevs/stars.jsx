@@ -9,7 +9,6 @@ let Stars = (props) => {
     quarters = 'gold'
   }
   let greyStars = Math.floor(5 - average)
-  console.log('average', average, 'full stars', fullStars, 'quarters', quarters, 'greystars', greyStars)
   let starsFill=[]
   for (var i = 0; i < fullStars; i++) {
     starsFill.push('gold')
@@ -18,11 +17,10 @@ let Stars = (props) => {
   } for (var i = 0; i < greyStars; i++) {
     starsFill.push('grey')
   }
-  console.log('starsColors', starsFill)
   return (
     <div className="stars-row">
-      {starsFill.map((info, i) =>
-      <Star starFill={info} area={area} key={i}/>)
+      {starsFill.map((info, index) =>
+      <Star starFill={info} area={area} key={index}/>)
       }
     </div>
   )

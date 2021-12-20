@@ -6,9 +6,7 @@ import threeQuartersStar from '../../../../../assets/images/three-quarters-gold-
 import outlineStar from '../../../../../assets/images/star-outline.png'
 
 const Star = (props) => {
-  const { starFill, area, key } = props
-  console.log('starFill', starFill)
-  console.log('area', area)
+  const { starFill, area } = props
   let imgSrc
   let style
   if (typeof starFill === 'number') {
