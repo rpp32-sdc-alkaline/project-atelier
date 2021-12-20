@@ -70,7 +70,7 @@ class RatingsAndReviews extends React.Component{
       </div>)
     } else {
     return (
-      <div>
+      <div className="ratings-grid-container">
         <h3>Ratings and Reviews</h3>
         <Reviews reviews={this.state.reviews}/>
         <RatingBreakdown metadata={this.state.metadata}/>

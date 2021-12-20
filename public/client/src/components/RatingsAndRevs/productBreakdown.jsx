@@ -13,7 +13,7 @@ class ProductBreakdown extends React.Component {
     var chars = metadata.characteristics
     console.log('chars', chars)
     return (
-      <div>
+      <div className="product-breakdown">
         <h5>Product Breakdown</h5>
         {chars.Size &&
         <p>Size: JSON.parse{JSON.parse(chars.Size.value).toFixed(1)}</p>}

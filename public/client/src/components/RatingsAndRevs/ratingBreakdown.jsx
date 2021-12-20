@@ -21,7 +21,7 @@ class RatingBreakdown extends React.Component {
     let numTwoStars = Math.floor(JSON.parse(ratings[2])/totalRatings*100)
     let numOneStar = Math.floor(JSON.parse(ratings[1])/totalRatings*100)
     return (
-      <div>
+      <div className-="rating-breakdown">
         <h5>Rating Breakdown</h5>
         <Stars average={avgRating} area="rating-breakdown"/>
         <p>{avgRating} Stars, {totalRatings} Ratings</p>

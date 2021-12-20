@@ -10,8 +10,10 @@ class IndividualRatingBreakdown extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>{this.props.numStars} Stars: <BarRatingBreakdown percent={this.props.percent} stars={this.props.numStars}/> {this.props.ratings}</p>
+      <div className="individual-rating-breakdown-row">
+        <p className>{this.props.numStars} Stars</p>
+        <BarRatingBreakdown percent={this.props.percent} stars={this.props.numStars}/>
+        <p>{this.props.ratings}</p>
 
       </div>
       )

@@ -1,4 +1,25 @@
+/* Ratings and Reviews Styles */
+.ratings-grid-container {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 1fr 1fr;
+}
 
+#reviews {
+  grid-column-start: 2;
+}
+
+.rating-breakdown {
+  width: 70px;
+  grid-row: 1;
+  grid-column-start: 1;
+
+}
+
+.product-breakdown {
+  grid-row: 2;
+  grid-column: 1;
+}
 
 #reviews-scroll {
   overflow: scroll;
@@ -8,7 +29,7 @@
 
 .rating-breakdown-bar-container {
   background-color: rgb(192, 189, 189);
-  width: 100px;
+  width: 70px;
   height: 10px;
   border-radius: 5px;
 }
@@ -30,3 +51,10 @@
 .stars-column {
   flex: 20%
 }
+
+.individual-rating-breakdown-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
