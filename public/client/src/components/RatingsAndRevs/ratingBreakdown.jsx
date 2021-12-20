@@ -23,7 +23,7 @@ class RatingBreakdown extends React.Component {
     return (
       <div className="rating-breakdown">
         <h3>Ratings and Reviews</h3>
-        <Stars average={avgRating} area="rating-breakdown"/>
+        <Stars average={avgRating} size={25}/>
         <p>{avgRating} Stars, {totalRatings} Ratings</p>
         <IndividualRatingBreakdown numStars={5} percent={numFiveStars} ratings={ratings[5]}/>
         <IndividualRatingBreakdown numStars={4} percent={numFourStars} ratings={ratings[4]}/>
