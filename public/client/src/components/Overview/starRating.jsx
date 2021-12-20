@@ -2,9 +2,14 @@ import React from 'react';
 
 
 class StarRating extends React.Component {
+
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      // ratings: this.props.ratings,
+      // length: this.props.ratings.length,
+      // average: this.average
+    }
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -14,14 +19,26 @@ class StarRating extends React.Component {
   }
 
   render () {
-    console.log(Object.values(this.props.ratings))
-    const ratings = Object.values(this.props.ratings);
-    const length = ratings.length
-    const average = ratings.reduce((acc, curr, ) =>
-    acc + curr / ratings.length , 0)
+    // console.log('this.props.ratings', this.props.ratings)
+    const ratings = Object.keys(this.props.ratings).map(rating=>Number(rating))
+    // console.log('ratings keys', ratings)
+    const quantities = Object.values(this.props.ratings).map(quantity=>Number(quantity))
+    // console.log('ratings array', quantities)
+    const length = quantities.reduce((acc, curr) => acc + curr, 0)
+
+    // const average = Math.floor(ratings.reduce((acc, curr, ) =>
+    // acc + curr / ratings.length , 0))
+    let sum = 0;
+    for (let i = 0; i < ratings.length; i++) {
+      // console.log('quantities at i', quantities[i])
+      sum += quantities[i] * (i + 1)
+    }
+    const average = (sum/length)
+    const roundedAverage = Number.parseFloat(average).toFixed(2)
+
   return (
     <div>
-    <div>Star Rating of {ratings.length} reviews: {average}
+    <div>Star Rating of {length} reviews: {roundedAverage}
    </div>
    <a href = "http://localhost:3000" onClick={this.handleClick}>Read Reviews</a>
    </div>
