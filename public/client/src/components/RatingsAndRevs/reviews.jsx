@@ -13,10 +13,12 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.numToShow >= this.props.reviews.results.length) {
-      this.setState({
-        showingAll: true
-      })
+    if (this.props.reviews.results) {
+      if (this.state.numToShow >= this.props.reviews.results.length) {
+        this.setState({
+          showingAll: true
+        })
+      }
     }
   }
 
@@ -42,9 +44,16 @@ class Reviews extends React.Component {
 
   render() {
     let reviews = this.props.reviews.results
+    if (!reviews) {
+      return (
+        <div>
+          <h4>Reviews</h4>
+        </div>
+      )
+    }
     return (
       <div id="reviews">
-        <h4>Reviews Component</h4>
+        <h4>Reviews</h4>
         <h5>999 reviews. Sort on:</h5>
         <select name="review-sort-options" id="review-sort-options">
           <option value="relevance">Relevant</option>
