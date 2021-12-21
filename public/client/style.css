@@ -53,3 +53,12 @@
   gap: 5px;
 }
 
+.wrapper {
+  position: relative;
+}
+
+.thumbnail-bar {
+  position: absolute;
+  bottom: 0;
+}
+

@@ -20,14 +20,21 @@ class AddToCart extends React.Component {
 }
 
   render() {
+    var button;
     var display;
-    if (this.props.noSizeSelected) {
-      display = <div>Please Select a Size</div>
+    if (this.props.hide) {
+      button = null
+    } else {
+      button = <button onClick={this.handleClick} style={{margin: 10}} disabled={this.props.disable}>Add To Cart</button>
+      if (this.props.noSizeSelected) {
+        display = <div>Please Select a Size</div>
+      }
     }
   return (
     <div>
       {display}
-      <button onClick={this.handleClick} style={{margin: 10}}>Add To Cart</button>
+      {button}
+      {/* <button onClick={this.handleClick} style={{margin: 10}} disabled={this.props.disable}>Add To Cart</button> */}
     </div>
   )
 }
