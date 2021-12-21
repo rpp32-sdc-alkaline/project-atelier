@@ -10,7 +10,7 @@ class QuantitySelector extends React.Component {
 }
 
 handleChange(e) {
-  console.log('quantity', e.target.value)
+  // console.log('quantity', e.target.value)
   var quantity = e.target.value
   this.props.selectQuantity(quantity)
 }
@@ -23,7 +23,7 @@ handleChange(e) {
       disable = false
     }
     return (
-      <select onChange={this.handleChange} disabled={disable}>
+      <select style={{margin: 10}} onChange={this.handleChange} disabled={disable}>
         <option value={1}>{disable? '-' : '1'}</option>
         <QuantityDropDown size={this.props.size} available={this.props.available}/>
       </select>

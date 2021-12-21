@@ -7,6 +7,7 @@ import Price from './Price.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
+import AddToCart from './AddToCart.jsx'
 import axios from 'axios'
 var token = require('../../../dist/config.js')
 
@@ -21,7 +22,7 @@ class Overview extends React.Component{
       skus: {},
       salePrice: null,
       hasData: false,
-      selectedSize: '',
+      selectedSize: 'Select Size',
       availableQuantity: '',
       selectedQuantity: ''
     }
@@ -30,7 +31,8 @@ class Overview extends React.Component{
     this.changeStyle = this.changeStyle.bind(this)
     this.selectSize = this.selectSize.bind(this)
     this.selectQuantity = this.selectQuantity.bind(this)
-  }
+    this.addToCart = this.addToCart.bind(this)
+  };
 
   getProductData(id)  {
       let productUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`
@@ -71,7 +73,7 @@ class Overview extends React.Component{
     .catch(err =>
       console.log('error in get product by id')
     )
-    }
+ };
 
   changeStyle(name, salePrice, skus) {
     console.log('change style display called', skus)
@@ -80,22 +82,41 @@ class Overview extends React.Component{
       skus: skus,
       salePrice: salePrice
     })
-  }
+  };
 
   selectSize(size, available) {
     console.log('select size called', size)
     console.log('available', Number(available))
     this.setState({
       selectedSize: size,
-      availableQuantity: Number(available)
+      availableQuantity: Number(available),
+      selectedQuantity: 1
     })
-  }
+  };
 
   selectQuantity(quantity) {
     console.log('selectquantity called', quantity)
     this.setState({
       selectedQuantity: quantity
     })
+  };
+
+  openSizeDropDown() {
+    return (
+      <select style={{margin: 10}} onChange={this.handleChange} disabled={this.state.disabled}>
+      <option>{this.state.display}</option>
+
+      <SizeDropDown
+      skus={this.props.skus}
+      // skus={this.state.testData}
+      />
+    </select>
+    )
+  }
+
+  addToCart() {
+    console.log('add to cart called')
+
   }
 
 
@@ -129,6 +150,7 @@ class Overview extends React.Component{
           <SizeSelector skus={this.state.skus} selectSize={this.selectSize}/>
           <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
           selectQuantity={this.selectQuantity}/>
+          <AddToCart addToCart={this.addToCart} style={this.state.displayedStyleName} size={this.state.selectedSize} quantity={this.state.selectedQuantity} />
         </div>
       )
     }
