@@ -23,7 +23,7 @@ class SizeSelector extends React.Component {
   }
 
   handleChange(size, quantity) {
-    console.log('value', size)
+    // console.log('value', size)
     this.props.selectSize(size, quantity)
     this.setState({
       openList: false,
@@ -36,7 +36,7 @@ class SizeSelector extends React.Component {
     };
 
   openDropDown() {
-    console.log('open drop down called')
+    // console.log('open drop down called')
     this.setState({
       openList: true
     })

@@ -115,7 +115,7 @@ class Overview extends React.Component{
   }
 
   addToCart() {
-    console.log('add to cart called')
+    // console.log('add to cart called')
 
   }
 
