@@ -19,9 +19,6 @@ class QandA extends React.Component{
   }
 
   componentDidMount () {
-    //set state to questions for passed in product
-    //organize in order of helpfulness
-    console.log('props', this.props);
 
     let id = this.props.id;
     this.setState({
@@ -34,9 +31,14 @@ class QandA extends React.Component{
     let headers = {
       'Authorization': token.TOKEN
     };
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions', { parameters: {product: id}, headers: headers})
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${id}&page=${page}&count=${count}`, {headers: headers})
     .then((result) => {
-      console.log('qandA get results', result);
+      console.log('qandA get results', result.data.results);
+      this.setState({
+        questionData: result.data.results,
+        haveData: true
+      })
+
     })
     .catch((error) => {
       throw error;
@@ -53,7 +55,7 @@ class QandA extends React.Component{
           <div>
         <h2>Q and A</h2>
         <Search />
-        <Question />
+        <Question questions={this.state.questionData}/>
         <button>More Anwsered Questions</button>
         <AddQuestion />
         </div>

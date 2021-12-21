@@ -11,18 +11,24 @@ class Question extends React.Component{
     }
   }
 
+  componentDidMount() {
+    console.log('question', this.props.questions)
+  }
+
+  sortQuestions() {
+    this.props.questions.map((question) => {
+      <div>
+        <div>{question.question_body}</div>
+        <Answer data={question}/>
+      </div>
+    })
+  }
+
   render() {
     return (
       <div>
-        <div>
-          <p>How much wood could a woodchuck chuck
-             If a woodchuck could chuck wood?</p>
-          <Answer />
-        </div>
-        <div>
-          <p>question2</p>
-          <Answer />
-        </div>
+        {this.props.questions[0].question_body}
+        <Answer data={this.props.questions[0]}/>
       </div>
     )
   }
