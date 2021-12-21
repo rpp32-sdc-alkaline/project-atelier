@@ -23,7 +23,7 @@ class MainImage extends React.Component {
       padding: 10
     }
     return (
-      <div class="wrapper">
+      <div className="wrapper">
         <img style={format} src={this.state.currentMain}/>
         <ThumbnailBar changeThumbnail={this.changeThumbnail}
         photos={this.props.photos} currentMain={this.state.currentMain}/>

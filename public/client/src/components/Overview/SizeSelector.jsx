@@ -28,14 +28,6 @@ class SizeSelector extends React.Component {
       display: size
     })
     this.props.selectSize(size, quantity)
-    // this.setState({
-    //   openList: false,
-    //   display: size
-    // })
-
-    //if they've selected a size aka not 'Select Size'
-    //then change 'selected' state prop to true --> allow add to cart
-    //form input type as form --> dropdown
   };
 
   openDropDown() {
@@ -58,7 +50,7 @@ class SizeSelector extends React.Component {
       const quantity = this.state.testData[sku].quantity
       // const quantity = this.props.skus[sku].quantity
       sum += quantity
-      console.log('quant', quantity)
+      // console.log('quant', quantity)
     }
     if (sum === 0) {
       this.props.hideAddToCart()
@@ -72,7 +64,7 @@ class SizeSelector extends React.Component {
         display: 'Select Size'
       })
     }
-    console.log('sum', sum)
+    // console.log('sum', sum)
   }
 
 
