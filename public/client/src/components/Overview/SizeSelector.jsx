@@ -24,22 +24,29 @@ class SizeSelector extends React.Component {
 
   handleChange(size, quantity) {
     // console.log('value', size)
-    this.props.selectSize(size, quantity)
     this.setState({
-      openList: false,
       display: size
     })
+    this.props.selectSize(size, quantity)
+    // this.setState({
+    //   openList: false,
+    //   display: size
+    // })
 
-      //if they've selected a size aka not 'Select Size'
-      //then change 'selected' state prop to true --> allow add to cart
-      //form input type as form --> dropdown
-    };
+    //if they've selected a size aka not 'Select Size'
+    //then change 'selected' state prop to true --> allow add to cart
+    //form input type as form --> dropdown
+  };
 
   openDropDown() {
     // console.log('open drop down called')
     this.setState({
       openList: true
     })
+    this.props.openSizeDropDown()
+
+
+
     // return (
     //   <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
     //   // skus={this.state.testData}
@@ -71,7 +78,7 @@ class SizeSelector extends React.Component {
 
   render() {
     var list;
-    if(this.state.openList) {
+    if(this.props.showSizes) {
       list = <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
     } else {
       list = null
