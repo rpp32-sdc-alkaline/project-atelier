@@ -17,7 +17,8 @@ class RatingsAndReviews extends React.Component{
       page: 1,
       count: 5,
       reviews: [],
-      metadata: []
+      metadata: [],
+      filters: []
     }
     this.getReviewData.bind(this)
   }
@@ -27,7 +28,7 @@ class RatingsAndReviews extends React.Component{
     this.setState({
       product: id
     })
-    this.getReviewData(id, 'helpful', 1, 5)
+    this.getReviewData(id, 'helpful', 1, 100)
   }
 
   getReviewData(product, sort, page, count) {
@@ -42,18 +43,15 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then(result => {
-      // console.log('reviews in client', result.data),
       this.setState({
         reviews: result.data
       })
     })
     .catch(error => console.log('error!', error))
-      //get metadata
     axios.get(metadataUrl, {
       headers: headers
     })
     .then (result => {
-      // console.log('metadata', result.data),
       this.setState({
         metadata: result.data,
         haveData: true
@@ -61,6 +59,23 @@ class RatingsAndReviews extends React.Component{
     })
     .catch(error => console.log('error!', error))
   }
+
+  //review filtering function that will update state with only the reviews to show
+  //filterReviews(rating) {
+    //get current filters
+    //if current filters contain [input rating]
+      //remove current rating from filters
+      //if filters is empty
+        //render method will return "normal" - passing this.state.reviews to props
+    //else
+      //add current rating to filters
+      //iterate through this.state.reviews
+        //if the rating is in filters
+          //push that review to filteredReviews
+          
+
+  // }
+  //
 
   render() {
     if (!this.state.haveData) {
