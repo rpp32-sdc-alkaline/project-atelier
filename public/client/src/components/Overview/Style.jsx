@@ -7,7 +7,7 @@ const Style = (props) => {
     padding: 10
   }
   return (
-  <img style={format} src={props.photos[0].thumbnail_url} onClick={(e)=>props.changeStyle(props.name, props.salePrice)}></img>
+  <img style={format} src={props.photos[0].thumbnail_url} onClick={(e)=>props.changeStyle(props.name, props.salePrice, props.skus)}></img>
   )
 }
 
