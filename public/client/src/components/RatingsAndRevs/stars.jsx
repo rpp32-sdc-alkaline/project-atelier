@@ -2,7 +2,7 @@ import React from 'react'
 import Star from './star.jsx'
 
 let Stars = (props) => {
-  let { average, area } = props;
+  let { average, size } = props;
   let fullStars = Math.floor(average)
   let quarters = Math.round((average - fullStars)*4)
   if (quarters === 4) {
@@ -20,7 +20,7 @@ let Stars = (props) => {
   return (
     <div className="stars-row">
       {starsFill.map((info, index) =>
-      <Star starFill={info} area={area} key={index}/>)
+      <Star starFill={info} size={size} key={index}/>)
       }
     </div>
   )

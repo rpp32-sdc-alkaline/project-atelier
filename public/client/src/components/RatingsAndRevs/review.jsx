@@ -18,7 +18,7 @@ class Review extends React.Component {
     return (
       <div>
         <h5>Individual Review</h5>
-        <Stars average={review.rating} area="review"/>
+        <Stars average={review.rating} size={15}/>
         <p>Summary: {review.summary}</p>
         <p>Body: {review.body}</p>
         {review.response &&
