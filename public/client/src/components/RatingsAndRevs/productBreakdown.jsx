@@ -12,20 +12,20 @@ class ProductBreakdown extends React.Component {
     let metadata = this.props.metadata
     var chars = metadata.characteristics
     return (
-      <div>
+      <div className="product-breakdown">
         <h5>Product Breakdown</h5>
         {chars.Size &&
-        <p>Size: {chars.Size.value}</p>}
+        <p>Size: JSON.parse{JSON.parse(chars.Size.value).toFixed(1)}</p>}
         {chars.Width &&
-        <p>Width: {chars.Width.value}</p>}
+        <p>Width: {JSON.parse(chars.Width.value).toFixed(1)}</p>}
         {chars.Comfort &&
-        <p>Comfort: {chars.Comfort.value}</p>}
+        <p>Comfort: {JSON.parse(chars.Comfort.value).toFixed(1)}</p>}
         {chars.Quality &&
-        <p>Quality: {chars.Quality.value}</p>}
+        <p>Quality: {JSON.parse(chars.Quality.value).toFixed(1)}</p>}
         {chars.Length &&
-        <p>Length: {chars.Length.value}</p>}
+        <p>Length: {JSON.parse(chars.Length.value).toFixed(1)}</p>}
         {chars.Fit &&
-        <p>Fit: {chars.Fit.value}</p>}
+        <p>Fit: {JSON.parse(chars.Fit.value).toFixed(1)}</p>}
       </div>
     )
   }
