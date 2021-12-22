@@ -11,12 +11,13 @@ class ThumbnailBar extends React.Component {
   this.selectThumbnail = this.selectThumbnail.bind(this)
   }
 
-  selectThumbnail(photo) {
+  selectThumbnail(photoUrl) {
+    // console.log('photo', photoUrl)
     this.setState({
       clicked: true,
-      selected: photo.url
+      selected: photoUrl
     })
-  this.props.changeThumbnail(photo)
+  this.props.changeThumbnail(photoUrl)
   }
 
   render() {
@@ -26,16 +27,21 @@ class ThumbnailBar extends React.Component {
     //   padding: 10
     // }
     // var className = this.state.clicked ? 'click-state' : 'base-state'
-    var className;
+
     return (
-      <div class="thumbnail-bar">
+      <div className="thumbnail-bar">
         {this.props.photos.map((photo) => {
-          className = photo.url === this.state.selected ? 'click-state' : 'base-state'
+          // console.log('photo.url', photo.url)
+          // console.log('this.state.selected', this.state.selected)
+
+          var className = photo.url === this.state.selected ? 'click-state' : 'base-state'
           return (
-            <img class={className} key={photo.url} onClick={(e)=>{this.selectThumbnail(photo.url)}}
+            <div key={photo.url}>
+            <img className={className} onClick={(e)=>{this.selectThumbnail(photo.url)}}
             // style={format}
             src={photo.thumbnail_url}>
             </img>
+          </div>
           )
          })
         }

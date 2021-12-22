@@ -5,7 +5,8 @@ class MainImage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentMain: props.photos[0].url
+      currentMain: ''
+      // currentMain: props.photos[0].url
     }
   this.changeThumbnail = this.changeThumbnail.bind(this)
   }
@@ -16,6 +17,20 @@ class MainImage extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.photos[0] !== prevProps.photos[0]) {
+      this.setState({
+        currentMain: this.props.photos[0].url
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentMain: this.props.photos[0].url
+    })
+  }
+
   render() {
     const format = {
       height: 700,
@@ -23,7 +38,7 @@ class MainImage extends React.Component {
       padding: 10
     }
     return (
-      <div class="wrapper">
+      <div className="wrapper">
         <img style={format} src={this.state.currentMain}/>
         <ThumbnailBar changeThumbnail={this.changeThumbnail}
         photos={this.props.photos} currentMain={this.state.currentMain}/>
