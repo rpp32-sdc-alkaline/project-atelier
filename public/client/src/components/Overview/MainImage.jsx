@@ -5,7 +5,8 @@ class MainImage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentMain: props.photos[0].url
+      currentMain: ''
+      // currentMain: props.photos[0].url
     }
   this.changeThumbnail = this.changeThumbnail.bind(this)
   }
@@ -13,6 +14,20 @@ class MainImage extends React.Component {
   changeThumbnail(photo) {
     this.setState({
       currentMain: photo,
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.photos[0] !== prevProps.photos[0]) {
+      this.setState({
+        currentMain: this.props.photos[0].url
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentMain: this.props.photos[0].url
     })
   }
 
