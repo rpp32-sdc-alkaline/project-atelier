@@ -53,3 +53,30 @@
   gap: 5px;
 }
 
+.wrapper {
+  position: relative;
+}
+
+.thumbnail-bar {
+  position: absolute;
+  left: 3px;
+  bottom: 0
+}
+
+.click-state {
+  border: 5px;
+  border-color: chartreuse;
+  border-style: inset;
+  height: 100px;
+  width: 80px;
+  margin: 5px;
+}
+
+.base-state {
+  height: 100px;
+  width: 80px;
+  margin: 5px;
+}
+
+
+

@@ -8,6 +8,7 @@ import StyleSelector from './StyleSelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
 import AddToCart from './AddToCart.jsx'
+import MainImage from './MainImage.jsx'
 import axios from 'axios'
 var token = require('../../../dist/config.js')
 
@@ -21,10 +22,16 @@ class Overview extends React.Component{
       displayedStyleName: '',
       skus: {},
       salePrice: null,
+      selectedStylePhotos: [],
       hasData: false,
       selectedSize: 'Select Size',
+      showSizes: false,
+      noSizeSelected: false,
       availableQuantity: '',
-      selectedQuantity: ''
+      selectedQuantity: '',
+      hideAddToCart: false,
+      displayAddToCart: false,
+      cart: []
     }
 
     this.getProductData = this.getProductData.bind(this)
@@ -32,6 +39,8 @@ class Overview extends React.Component{
     this.selectSize = this.selectSize.bind(this)
     this.selectQuantity = this.selectQuantity.bind(this)
     this.addToCart = this.addToCart.bind(this)
+    this.hideAddToCart = this.hideAddToCart.bind(this)
+    this.openSizeDropDown = this.openSizeDropDown.bind(this)
   };
 
   getProductData(id)  {
@@ -64,6 +73,7 @@ class Overview extends React.Component{
        this.setState({
          styles: result.data.results,
          displayedStyleName: result.data.results[0].name,
+         selectedStylePhotos: result.data.results[0].photos,
          skus: result.data.results[0].skus,
          salePrice: result.data.results[0].sale_price,
          hasData: true
@@ -75,50 +85,57 @@ class Overview extends React.Component{
     )
  };
 
-  changeStyle(name, salePrice, skus) {
-    console.log('change style display called', skus)
+  changeStyle(name, salePrice, skus, photos) {
+    console.log('change style display called', photos)
     this.setState({
       displayedStyleName: name,
       skus: skus,
-      salePrice: salePrice
+      salePrice: salePrice,
+      selectedStylePhotos: photos
     })
   };
 
   selectSize(size, available) {
-    console.log('select size called', size)
-    console.log('available', Number(available))
+    // console.log('select size called', size)
+    // console.log('available', Number(available))
     this.setState({
       selectedSize: size,
       availableQuantity: Number(available),
-      selectedQuantity: 1
+      selectedQuantity: 1,
+      showSizes: false,
+      noSizeSelected: false
     })
   };
 
   selectQuantity(quantity) {
-    console.log('selectquantity called', quantity)
+    // console.log('selectquantity called', quantity)
     this.setState({
       selectedQuantity: quantity
     })
   };
 
   openSizeDropDown() {
-    return (
-      <select style={{margin: 10}} onChange={this.handleChange} disabled={this.state.disabled}>
-      <option>{this.state.display}</option>
-
-      <SizeDropDown
-      skus={this.props.skus}
-      // skus={this.state.testData}
-      />
-    </select>
-    )
+    // console.log('open size parent called')
+    this.setState({
+      showSizes: true,
+      noSizeSelected: true
+    })
   }
 
   addToCart() {
     console.log('add to cart called')
-
+    this.setState({
+      displayAddToCart: true
+    })
   }
 
+  hideAddToCart() {
+    console.log('hide add to cart called')
+    this.setState({
+      hideAddToCart: true
+    })
+
+  }
 
   //on component did mount-- query api for products
   componentDidMount() {
@@ -134,9 +151,20 @@ class Overview extends React.Component{
       return <div>Loading Product Overview</div>
     } else {
       var description;
+      var displayAdded;
       if(this.state.product.description) {
         description = <Description description={this.state.product.description} />
       }
+      if(this.state.displayAddToCart) {
+        displayAdded = <div>
+          <p>{`${this.state.displayedStyleName}`}</p>
+          <p>{`size: ${this.state.selectedSize}`}</p>
+          <p>{`qty: ${this.state.selectedQuantity}`}</p>
+          <p>added to cart!</p>
+        </div>
+      }
+    }
+
       return (
         <div>
           <h2>Overview</h2>
@@ -145,15 +173,20 @@ class Overview extends React.Component{
           <ProductTitle name={this.state.product.name}/>
           <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
           {description}
+          <MainImage photos={this.state.selectedStylePhotos} />
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
-          <SizeSelector skus={this.state.skus} selectSize={this.selectSize}/>
+          <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
+          openSizeDropDown={this.openSizeDropDown} showSizes={this.state.showSizes}
+          hideAddToCart={this.hideAddToCart} />
           <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
           selectQuantity={this.selectQuantity}/>
-          <AddToCart addToCart={this.addToCart} style={this.state.displayedStyleName} size={this.state.selectedSize} quantity={this.state.selectedQuantity} />
+          <AddToCart addToCart={this.addToCart} openSizeDropDown={this.openSizeDropDown} noSizeSelected={this.state.noSizeSelected}
+          style={this.state.displayedStyleName} size={this.state.selectedSize}
+          quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
+          {displayAdded}
         </div>
-      )
-    }
+    )
   }
 }
 

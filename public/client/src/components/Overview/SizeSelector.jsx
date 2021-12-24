@@ -10,7 +10,7 @@ class SizeSelector extends React.Component {
        display: '',
        openList: false,
        testData: {
-        2122801: {quantity: 0, size: 'XS'},
+        2122801: {quantity: 20, size: 'XS'},
         2122802: {quantity: 0, size: 'S'},
         2122803: {quantity: 0, size: 'M'},
         2122804: {quantity: 0, size: 'L'},
@@ -23,23 +23,19 @@ class SizeSelector extends React.Component {
   }
 
   handleChange(size, quantity) {
-    console.log('value', size)
-    this.props.selectSize(size, quantity)
+    // console.log('value', size)
     this.setState({
-      openList: false,
       display: size
     })
-
-      //if they've selected a size aka not 'Select Size'
-      //then change 'selected' state prop to true --> allow add to cart
-      //form input type as form --> dropdown
-    };
+    this.props.selectSize(size, quantity)
+  };
 
   openDropDown() {
-    console.log('open drop down called')
+    // console.log('open drop down called')
     this.setState({
       openList: true
     })
+    this.props.openSizeDropDown()
     // return (
     //   <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
     //   // skus={this.state.testData}
@@ -49,12 +45,15 @@ class SizeSelector extends React.Component {
   componentDidMount() {
     var sum = 0;
     var display;
-    for (let sku in this.props.skus) {
-      const quantity = this.props.skus[sku].quantity
-      // console.log('quant', quantity)
+    for(let sku in this.state.testData) {
+    // for (let sku in this.props.skus) {
+      const quantity = this.state.testData[sku].quantity
+      // const quantity = this.props.skus[sku].quantity
       sum += quantity
+      // console.log('quant', quantity)
     }
     if (sum === 0) {
+      this.props.hideAddToCart()
        this.setState({
          disabled: true,
          display: 'OUT OF STOCK'
@@ -71,16 +70,16 @@ class SizeSelector extends React.Component {
 
   render() {
     var list;
-    if(this.state.openList) {
-      list = <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+    if(this.props.showSizes) {
+      // list = <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+      list = <SizeDropDown skus={this.state.testData} handleChange={this.handleChange} />
     } else {
       list = null
     }
   return (
    <div>
-     <button onClick={this.openDropDown}>{this.state.display}</button>
+     <button onClick={this.openDropDown} disabled={this.state.disabled}>{this.state.display}</button>
      {/* <div style={{margin: 10}} onClick={this.openDropDown}>{this.state.display}</div> */}
-
      {list}
    </div>
 
