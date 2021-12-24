@@ -1,6 +1,6 @@
 import React from 'react';
 import Search from './Search.jsx';
-import Question from './Question.jsx';
+import Questions from './Questions.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import axios from 'axios';
 const token = require('../../../dist/config.js');
@@ -33,7 +33,6 @@ class QandA extends React.Component{
     };
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${id}&page=${page}&count=${count}`, {headers: headers})
     .then((result) => {
-      console.log('qandA get results', result.data.results);
       this.setState({
         questionData: result.data.results,
         haveData: true
@@ -55,7 +54,7 @@ class QandA extends React.Component{
           <div>
         <h2>Q and A</h2>
         <Search />
-        <Question questions={this.state.questionData}/>
+        <Questions questions={this.state.questionData}/>
         <button>More Anwsered Questions</button>
         <AddQuestion />
         </div>

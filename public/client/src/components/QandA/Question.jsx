@@ -1,37 +1,22 @@
 import React from 'react';
 import Answer from './Answer.jsx';
 
+const Question = (props) => {
 
-class Question extends React.Component{
-  constructor(props) {
-    super(props)
-    this.state = {
-      aToDisplay: 2
-
-    }
-  }
-
-  componentDidMount() {
-    console.log('question', this.props.questions)
-  }
-
-  sortQuestions() {
-    this.props.questions.map((question) => {
-      <div>
-        <div>{question.question_body}</div>
-        <Answer data={question}/>
-      </div>
-    })
-  }
-
-  render() {
+  let eachQuestion = props.props.map((item) => {
     return (
       <div>
-        {this.props.questions[0].question_body}
-        <Answer data={this.props.questions[0]}/>
+        {item.question_body}
+        <Answer props ={item}/>
       </div>
     )
-  }
+  })
+
+  return (
+    <div>
+      {eachQuestion}
+    </div>
+  )
 }
 
 export default Question;
