@@ -1,31 +1,22 @@
 import React from 'react';
 import Answer from './Answer.jsx';
 
+const Question = (props) => {
 
-class Question extends React.Component{
-  constructor(props) {
-    super(props)
-    this.state = {
-      aToDisplay: 2
-
-    }
-  }
-
-  render() {
+  let eachQuestion = props.props.map((item) => {
     return (
       <div>
-        <div>
-          <p>How much wood could a woodchuck chuck
-             If a woodchuck could chuck wood?</p>
-          <Answer />
-        </div>
-        <div>
-          <p>question2</p>
-          <Answer />
-        </div>
+        {item.question_body}
+        <Answer props ={item}/>
       </div>
     )
-  }
+  })
+
+  return (
+    <div>
+      {eachQuestion}
+    </div>
+  )
 }
 
 export default Question;
