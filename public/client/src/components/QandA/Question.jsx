@@ -7,7 +7,7 @@ const Question = (props) => {
     //console.log('questionItem', item);
     return (
       <div>
-        Q:{item.question_body} <div className='helpful'>Helpful? <a>Yes ({item.question_helpfulness})</a> | <a>Report</a></div>
+        Q:{item.question_body} <a className='helpful'>Helpful? <a>Yes ({item.question_helpfulness})</a> | <a>Report</a></a><br></br>
         <Answer props ={item}/>
       </div>
     )

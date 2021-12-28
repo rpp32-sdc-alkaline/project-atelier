@@ -70,16 +70,16 @@ class Answer extends React.Component{
       let eachAnwser = this.state.answerData.map((item) => {
         console.log('answerItem', item)
         return (
-          <div>
-            A:{item.body} <a className='helpful'>Helpful? <a>Yes ({item.helpfulness})</a> | <a>Report</a></a><br></br>
-            by {item.answerer_name}, {this.dateFormat(item.date)}
-          </div>
+          <a>
+            {item.body} <br></br>
+            by {item.answerer_name}, {this.dateFormat(item.date)} <a className='helpful'>Helpful? <a>Yes ({item.helpfulness})</a> | <a>Report</a></a><br></br>
+          </a>
         )
       })
       return (
         <div>
-          {eachAnwser}
-          <button onClick={this.getMore}>More Answers</button>
+          A: {eachAnwser} <br></br>
+          <button onClick={this.getMore}>Load More Answers</button>
         </div>
       )
     }
