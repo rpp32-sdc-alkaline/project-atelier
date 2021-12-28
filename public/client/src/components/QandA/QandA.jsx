@@ -54,12 +54,22 @@ class QandA extends React.Component{
   render() {
     if (!this.state.haveData) {
       return (
-        <div>Questions are Loading</div>
+        <div>
+          <h4>QUESTIONS & ANSWERS</h4>
+          <p>Questions are Loading</p>
+        </div>
+        )
+      } else if (this.state.questionData.length === 0) {
+        return (
+          <div>
+          <h4>QUESTIONS & ANSWERS</h4>
+          <AddQuestion />
+          </div>
         )
       } else {
         return (
           <div>
-        <h2>Q and A</h2>
+        <h4>QUESTIONS & ANSWERS</h4>
         <Search />
         <Questions questions={this.state.slicedData} moreButton={this.moreButton}/>
         <button className='More Question' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions</button>
