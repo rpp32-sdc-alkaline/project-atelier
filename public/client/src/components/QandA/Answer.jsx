@@ -10,15 +10,36 @@ class Answer extends React.Component{
       haveData: false,
       anwsersToShow: 2
     }
+    this.getMore = this.getMore.bind(this);
+  }
+
+  getMore (e) {
+    let newNum = this.state.anwsersToShow + 2;
+    this.setState({
+      anwsersToShow: newNum,
+      haveData: false
+    })
+    let id = this.props.props.question_id;
+    this.getAnswerData(id, 1, newNum);
   }
 
   componentDidMount () {
-
+    let howMany = this.state.anwsersToShow;
     let id = this.props.props.question_id;
     this.setState({
       questionId: id
     })
-    this.getAnswerData(id, 1, 5)
+    this.getAnswerData(id, 1, howMany);
+  }
+
+  dateFormat (date) {
+    let month = date.slice(5, 7);
+    let day = date.slice(8, 10);
+    let year = date.slice(0, 4);
+    let months = ['shiftingToMatch', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+
+    return months[month] + ' ' + day + ', ' + year;
   }
 
   getAnswerData(id, page, count) {
@@ -47,16 +68,18 @@ class Answer extends React.Component{
       )
     } else {
       let eachAnwser = this.state.answerData.map((item) => {
+        //console.log('answerItem', item)
         return (
           <div>
-            {item.body}
+            {item.body} <br></br>
+            by {item.answerer_name}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
           </div>
         )
       })
       return (
         <div>
-          {eachAnwser}
-          <button>More Answers</button>
+          A: {eachAnwser} <br></br>
+          <button onClick={this.getMore}>Load More Answers</button>
         </div>
       )
     }
