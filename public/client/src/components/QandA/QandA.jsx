@@ -1,39 +1,74 @@
 import React from 'react';
 import Search from './Search.jsx';
-import Question from './Question.jsx';
+import Questions from './Questions.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import axios from 'axios';
+const token = require('../../../dist/config.js');
 
 class QandA extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
+      haveData: false,
       qToDisplay: 2
     };
+    this.moreButton = this.moreButton.bind(this);
   }
 
-  moreQuestions (e) {
+  moreButton (e) {
     //adjuest number of questions displayed
+    let newSlice = this.state.qToDisplay + 2;
+    this.setState({
+      qToDisplay: newSlice,
+      slicedData: this.state.questionData.slice(0, newSlice)
+    })
   }
 
-  fetchQuestions () {
-    //set state to questions for passed in product
-    //organize in order of helpfulness
+  componentDidMount () {
+
+    let id = this.props.id;
+    this.setState({
+      product: id
+    })
+    this.getQuestionData(id, 1, 10)
   }
 
+  getQuestionData(id, page, count) {
+    let headers = {
+      'Authorization': token.TOKEN
+    };
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${id}&page=${page}&count=${count}&sort=helpful`, {headers: headers})
+    .then((result) => {
+      this.setState({
+        questionData: result.data.results,
+        slicedData: result.data.results.slice(0, 2),
+        haveData: true
+      })
 
-
+    })
+    .catch((error) => {
+      throw error;
+    })
+  }
 
   render() {
-    return (
-      <div>
-      <h2>Q and A</h2>
-      <Search />
-      <Question />
-      <button>More Anwsered Questions</button>
-      <AddQuestion />
-      </div>
-    )
+    if (!this.state.haveData) {
+      return (
+        <div>Questions are Loading</div>
+        )
+      } else {
+        return (
+          <div>
+        <h2>Q and A</h2>
+        <Search />
+        <Questions questions={this.state.slicedData} moreButton={this.moreButton}/>
+        <button className='More Question' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions</button>
+        <AddQuestion />
+        </div>
+      )
+    }
   }
 }
+
 
 export default QandA;

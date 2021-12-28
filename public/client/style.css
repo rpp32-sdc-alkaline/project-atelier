@@ -59,22 +59,23 @@
 
 .thumbnail-bar {
   position: absolute;
-  bottom: 0;
+  left: 3px;
+  bottom: 0
 }
 
 .click-state {
-  border: 10px;
-  border-color:rgb(3, 172, 3);
-  border-style: groove;
+  border: 5px;
+  border-color: chartreuse;
+  border-style: inset;
   height: 100px;
   width: 80px;
-  padding: 10px;
+  margin: 5px;
 }
 
 .base-state {
   height: 100px;
   width: 80px;
-  padding: 10px;
+  margin: 5px;
 }
 
 
