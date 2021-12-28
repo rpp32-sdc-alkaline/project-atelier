@@ -13,7 +13,7 @@ class Questions extends React.Component{
   }
 
   componentDidMount() {
-    //console.log('questionDidLoad', this.props.questions)
+    //console.log('questionDidLoad', this.props)
   }
 
 
@@ -29,7 +29,7 @@ class Questions extends React.Component{
     } else {
     return (
       <div>
-        <Question props={questions} />
+        <Question props={questions} moreButton={this.props.moreButton}/>
       </div>
     )
     }

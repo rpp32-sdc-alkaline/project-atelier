@@ -4,9 +4,10 @@ import Answer from './Answer.jsx';
 const Question = (props) => {
 
   let eachQuestion = props.props.map((item) => {
+    //console.log('questionItem', item);
     return (
       <div>
-        {item.question_body}
+        Q:{item.question_body} <div className='helpful'>Helpful? <a>Yes ({item.question_helpfulness})</a> | <a>Report</a></div>
         <Answer props ={item}/>
       </div>
     )
