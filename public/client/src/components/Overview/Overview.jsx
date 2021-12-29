@@ -9,6 +9,7 @@ import SizeSelector from './SizeSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
 import AddToCart from './AddToCart.jsx'
 import MainImage from './MainImage.jsx'
+import ThumbnailBar from './ThumbnailBar.jsx'
 import axios from 'axios'
 var token = require('../../../dist/config.js')
 
@@ -22,13 +23,19 @@ class Overview extends React.Component{
       displayedStyleName: '',
       skus: {},
       salePrice: null,
+
       selectedStylePhotos: [],
+      thumbnailBarPhotos: [],
+      mainImage: '',
+      mainImageIndex: 0,
+
       hasData: false,
       selectedSize: 'Select Size',
       showSizes: false,
       noSizeSelected: false,
       availableQuantity: '',
       selectedQuantity: '',
+
       hideAddToCart: false,
       displayAddToCart: false,
       cart: []
@@ -36,6 +43,11 @@ class Overview extends React.Component{
 
     this.getProductData = this.getProductData.bind(this)
     this.changeStyle = this.changeStyle.bind(this)
+    this.mainImageNext = this.mainImageNext.bind(this)
+    this.mainImagePrev = this.mainImagePrev.bind(this)
+    this.changeThumbnail = this.changeThumbnail.bind(this)
+    this.thumbnailScrollUp = this.thumbnailScrollUp.bind(this)
+    this.thumbnailScrollDown = this.thumbnailScrollDown.bind(this)
     this.selectSize = this.selectSize.bind(this)
     this.selectQuantity = this.selectQuantity.bind(this)
     this.addToCart = this.addToCart.bind(this)
@@ -69,11 +81,13 @@ class Overview extends React.Component{
    .then(() => {
      axios.get(stylesUrl, {headers})
      .then(result => {
-      //  console.log('result from styles', result.data)
+       console.log('result from styles', result.data.results[0].photos[0].url)
        this.setState({
          styles: result.data.results,
          displayedStyleName: result.data.results[0].name,
          selectedStylePhotos: result.data.results[0].photos,
+         mainImage: result.data.results[0].photos[0].url,
+         thumbnailBarPhotos: result.data.results[0].photos,
          skus: result.data.results[0].skus,
          salePrice: result.data.results[0].sale_price,
          hasData: true
@@ -86,14 +100,63 @@ class Overview extends React.Component{
  };
 
   changeStyle(name, salePrice, skus, photos) {
-    console.log('change style display called', photos)
+    // console.log('change style display called', photos)
     this.setState({
       displayedStyleName: name,
       skus: skus,
       salePrice: salePrice,
-      selectedStylePhotos: photos
+      selectedStylePhotos: photos,
+      mainImage: photos[0].url,
+      thumbnailBarPhotos: photos
     })
   };
+
+  mainImageNext() {
+    console.log('main image next called')
+    var photos = this.state.selectedStylePhotos
+    var newCurrent = this.state.mainImageIndex === photos.length - 1 ? 0
+    : this.state.mainImageIndex + 1
+
+    this.setState({
+      mainImage: photos[newCurrent].url,
+      mainImageIndex: newCurrent
+    })
+    console.log('current', this.state.mainImageIndex)
+  };
+
+  mainImagePrev(){
+    console.log('main image next called')
+    var photos = this.state.selectedStylePhotos
+    var newCurrent = this.state.mainImageIndex === 0 ? photos.length - 1
+    : this.state.mainImageIndex - 1
+
+    this.setState({
+      mainImage: photos[newCurrent].url,
+      mainImageIndex: newCurrent
+    })
+    console.log('current', this.state.mainImageIndex)
+  };
+
+
+  changeThumbnail(photoUrl, index) {
+    this.setState({
+      mainImage: photoUrl,
+      mainImageIndex: index
+    })
+  };
+
+  thumbnailScrollUp(photos) {
+    console.log('photos', photos)
+    this.setState({
+      thumbnailBarPhotos: photos
+    })
+  };
+
+  thumbnailScrollDown(photos) {
+    this.setState({
+      thumbnailBarPhotos: photos
+    })
+  }
 
   selectSize(size, available) {
     // console.log('select size called', size)
@@ -120,22 +183,21 @@ class Overview extends React.Component{
       showSizes: true,
       noSizeSelected: true
     })
-  }
+  };
 
   addToCart() {
     console.log('add to cart called')
     this.setState({
       displayAddToCart: true
     })
-  }
+  };
 
   hideAddToCart() {
     console.log('hide add to cart called')
     this.setState({
       hideAddToCart: true
     })
-
-  }
+  };
 
   //on component did mount-- query api for products
   componentDidMount() {
@@ -143,7 +205,7 @@ class Overview extends React.Component{
       'id': this.props.id
     })
     this.getProductData(this.props.id)
-  }
+  };
 
 
   render() {
@@ -166,14 +228,18 @@ class Overview extends React.Component{
     }
 
       return (
-        <div>
+        <div className="overview">
           <h2>Overview</h2>
           <StarRating ratings={this.state.ratings}/>
           <Category category = {this.state.product.category}/>
           <ProductTitle name={this.state.product.name}/>
           <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
           {description}
-          <MainImage photos={this.state.selectedStylePhotos} />
+          <div className="default-gallery">
+          <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev} />
+          <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
+          thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}/>
+          </div>
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
           <SizeSelector skus={this.state.skus} selectSize={this.selectSize}

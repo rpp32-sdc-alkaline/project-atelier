@@ -3,8 +3,7 @@ import React from 'react';
 const Search = (props) => {
   return (
     <form>
-      <label for='search'>Search for a question</label>
-      <input type='text' id='search'></input>
+      <input type='text' id='search' size='50' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS...'></input>
     </form>
   )
 };
