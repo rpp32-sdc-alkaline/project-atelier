@@ -3,11 +3,9 @@ import React from 'react'
 class ThumbnailBar extends React.Component {
   constructor(props) {
     super(props)
-    var photos = [...this.props.photos]
     this.state = {
       clicked: false,
       selected: '',
-      photos: photos,
       scrolledPhotos: null,
       currentTopIndex: 0
     }
@@ -17,7 +15,6 @@ class ThumbnailBar extends React.Component {
   }
 
   selectThumbnail(photoUrl, index) {
-    console.log('photo', index)
     this.setState({
       clicked: true,
       selected: photoUrl
@@ -44,7 +41,7 @@ class ThumbnailBar extends React.Component {
     photos.push(photo)
 
     this.props.thumbnailScrollDown(photos)
-  }
+  };
 
   // componentDidMount() {
   //     if (!this.state.scrolledPhotos) {
@@ -65,7 +62,7 @@ class ThumbnailBar extends React.Component {
     var downArrow;
     var index;
     var photos;
-    if (this.state.photos.length > 5) {
+    if (this.props.photos?.length > 5) {
       upArrow = <img className="up-arrow" onClick={this.handleUpClick}
       src="https://img.icons8.com/color/30/000000/circled-chevron-up--v1.png"/>
       downArrow = <img className="down-arrow" onClick={this.handleDownClick}
@@ -74,7 +71,7 @@ class ThumbnailBar extends React.Component {
     return (
       <div className="thumbnail-bar">
         {upArrow}
-        {this.props.photos.map((photo, index) => {
+        {this.props.photos?.map((photo, index) => {
           // console.log('photo index', photo)
           // console.log('this.state.selected', this.state.selected)
           if (index < 7) {

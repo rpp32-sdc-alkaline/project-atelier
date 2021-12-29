@@ -20,9 +20,9 @@ class StarRating extends React.Component {
 
   render () {
     // console.log('this.props.ratings', this.props.ratings)
-    const ratings = Object.keys(this.props.ratings).map(rating=>Number(rating))
+    const ratings = Object.keys(this.props.ratings || {}).map(rating=>Number(rating))
     // console.log('ratings keys', ratings)
-    const quantities = Object.values(this.props.ratings).map(quantity=>Number(quantity))
+    const quantities = Object.values(this.props.ratings || {}).map(quantity=>Number(quantity))
     // console.log('ratings array', quantities)
     const length = quantities.reduce((acc, curr) => acc + curr, 0)
 
