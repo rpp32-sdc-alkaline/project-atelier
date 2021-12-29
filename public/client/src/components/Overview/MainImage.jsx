@@ -37,7 +37,6 @@ class MainImage extends React.Component {
    this.setState({
      current: newCurrent
    })
-   console.log("current", this.state.current)
   }
 
   componentDidUpdate(prevProps) {
