@@ -1,51 +1,48 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ThumbnailBar from './ThumbnailBar.jsx'
+import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 
 class MainImage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentMain: ''
-      // currentMain: props.photos[0].url
+      currentMain: '',
+      photos: [],
+      current: 0
     }
-  this.changeThumbnail = this.changeThumbnail.bind(this)
+  // this.changeThumbnail = this.changeThumbnail.bind(this)
+  this.nextSlide = this.nextSlide.bind(this)
+  this.prevSlide = this.prevSlide.bind(this)
   }
 
-  changeThumbnail(photo) {
-    this.setState({
-      currentMain: photo,
-    })
+  nextSlide() {
+   this.props.mainImageNext()
   }
 
-  componentDidUpdate(prevProps) {
-    if(this.props.photos[0] !== prevProps.photos[0]) {
-      this.setState({
-        currentMain: this.props.photos[0].url
-      })
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      currentMain: this.props.photos[0].url
-    })
+  prevSlide() {
+  this.props.mainImagePrev()
   }
 
   render() {
     const format = {
       height: 700,
       width: 590,
-      padding: 10
+      padding: 30
     }
     return (
-      <div className="wrapper">
-        <img style={format} src={this.state.currentMain}/>
-        <ThumbnailBar changeThumbnail={this.changeThumbnail}
-        photos={this.props.photos} currentMain={this.state.currentMain}/>
+      <div className="slider">
+          <FaArrowAltCircleLeft className="left-arrow" onClick={this.prevSlide}/>
+          <FaArrowAltCircleRight className="right-arrow" onClick={this.nextSlide} />
+            <img style={format} src={this.props.image}/>
       </div>
     )
   }
-
 }
 
 export default MainImage;
+
+ // <div className={index === this.state.current ? 'slide active' : 'slide'} key={index}>
+            //   {index === this.state.current && <img className="image" src={photo.url}/>}
+            // </div>
+ {/* <ThumbnailBar changeThumbnail={this.changeThumbnail}
+        photos={this.props.photos} currentMain={this.state.currentMain}/> */}

@@ -11,10 +11,10 @@ class SizeSelector extends React.Component {
        openList: false,
        testData: {
         2122801: {quantity: 20, size: 'XS'},
-        2122802: {quantity: 0, size: 'S'},
-        2122803: {quantity: 0, size: 'M'},
+        2122802: {quantity: 20, size: 'S'},
+        2122803: {quantity: 20, size: 'M'},
         2122804: {quantity: 0, size: 'L'},
-        2122805: {quantity: 0, size: 'XL'},
+        2122805: {quantity: 20, size: 'XL'},
         2122806: {quantity: 0, size: 'XXL'}
       }
     }
