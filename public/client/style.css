@@ -110,7 +110,7 @@
 .right-arrow {
   position: absolute;
   top: 50%;
-  right: 32px;
+  right: 300px;
   font-size: 3rem;
   color: purple;
   z-index: 10;
@@ -121,7 +121,7 @@
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 32px;
+  left: 300px;
   font-size: 3rem;
   color: purple;
   z-index: 10;
