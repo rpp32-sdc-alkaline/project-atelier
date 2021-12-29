@@ -59,23 +59,38 @@
 
 .thumbnail-bar {
   position: absolute;
-  left: 3px;
-  bottom: 0
+  left: 20px;
+  top: 60px;
 }
 
 .click-state {
   border: 5px;
   border-color: chartreuse;
   border-style: inset;
-  height: 100px;
-  width: 80px;
+  height: 70px;
+  width: 50px;
   margin: 5px;
 }
 
 .base-state {
-  height: 100px;
-  width: 80px;
+  height: 70px;
+  width: 40px;
   margin: 5px;
+}
+
+.up-arrow {
+  position: absolute;
+  left: 15px;
+  top: -30px;
+  font-size: 30px;
+  font-weight: 400;
+  color: chartreuse;
+}
+
+.down-arrow {
+  position: absolute;
+  left: 15px;
+  bottom: -30px;
 }
 
 

@@ -13,21 +13,23 @@ class MainImage extends React.Component {
 
   changeThumbnail(photo) {
     this.setState({
-      currentMain: photo,
+      currentMain: photo
     })
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.photos[0] !== prevProps.photos[0]) {
       this.setState({
-        currentMain: this.props.photos[0].url
+        currentMain: this.props.photos[0].url,
+        photos: this.props.photos
       })
     }
   }
 
   componentDidMount() {
     this.setState({
-      currentMain: this.props.photos[0].url
+      currentMain: this.props.photos[0].url,
+      photos: this.props.photos
     })
   }
 
@@ -35,7 +37,7 @@ class MainImage extends React.Component {
     const format = {
       height: 700,
       width: 590,
-      padding: 10
+      padding: 30
     }
     return (
       <div className="wrapper">

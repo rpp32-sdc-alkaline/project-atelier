@@ -86,7 +86,7 @@ class Overview extends React.Component{
  };
 
   changeStyle(name, salePrice, skus, photos) {
-    console.log('change style display called', photos)
+    // console.log('change style display called', photos)
     this.setState({
       displayedStyleName: name,
       skus: skus,
