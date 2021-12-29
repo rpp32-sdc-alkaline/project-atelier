@@ -10,7 +10,8 @@ class QandA extends React.Component{
     super(props)
     this.state = {
       haveData: false,
-      qToDisplay: 2
+      qToDisplay: 2,
+      allQDisplayed: false
     };
     this.moreButton = this.moreButton.bind(this);
   }
@@ -18,6 +19,11 @@ class QandA extends React.Component{
   moreButton (e) {
     //adjuest number of questions displayed
     let newSlice = this.state.qToDisplay + 2;
+    if (newSlice >= this.state.questionData.length) {
+      this.setState({
+        allQDisplayed: true
+      })
+    }
     this.setState({
       qToDisplay: newSlice,
       slicedData: this.state.questionData.slice(0, newSlice)
@@ -54,15 +60,25 @@ class QandA extends React.Component{
   render() {
     if (!this.state.haveData) {
       return (
-        <div>Questions are Loading</div>
+        <div>
+          <h4>QUESTIONS & ANSWERS</h4>
+          <p>Questions are Loading</p>
+        </div>
+        )
+      } else if (this.state.questionData.length === 0) {
+        return (
+          <div>
+          <h4>QUESTIONS & ANSWERS</h4>
+          <AddQuestion />
+          </div>
         )
       } else {
         return (
           <div>
-        <h2>Q and A</h2>
+        <h4>QUESTIONS & ANSWERS</h4>
         <Search />
         <Questions questions={this.state.slicedData} moreButton={this.moreButton}/>
-        <button className='More Question' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions</button>
+        {!this.state.allQDisplayed && <button className='More Question' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions</button>}
         <AddQuestion />
         </div>
       )
