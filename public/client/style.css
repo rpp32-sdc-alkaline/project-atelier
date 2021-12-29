@@ -53,14 +53,18 @@
   gap: 5px;
 }
 
-.wrapper {
+.overview {
+  position: relative
+}
+
+.default-gallery {
   position: relative;
 }
 
 .thumbnail-bar {
   position: absolute;
-  left: 410px;
-  top: 30px;
+  left: 32px;
+  top: 60px;
 }
 
 .click-state {
@@ -95,22 +99,19 @@
 
 .slider{
   position: relative;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center
 }
 
 .image {
   width: 590px;
   height: 700px;
-  border-radius: 10px
+  border-radius: 10px;
+  margin: 10px
 }
 
 .right-arrow {
   position: absolute;
   top: 50%;
-  right: 300px;
+  right: 800px;
   font-size: 3rem;
   color: purple;
   z-index: 10;
@@ -121,7 +122,7 @@
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 300px;
+  left: 5px;
   font-size: 3rem;
   color: purple;
   z-index: 10;
