@@ -1,20 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ThumbnailBar from './ThumbnailBar.jsx'
+import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 
 class MainImage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentMain: ''
+      currentMain: '',
+      photos: [],
+      current: 0
       // currentMain: props.photos[0].url
     }
   this.changeThumbnail = this.changeThumbnail.bind(this)
+  this.nextSlide = this.nextSlide.bind(this)
+  this.prevSlide = this.prevSlide.bind(this)
   }
 
   changeThumbnail(photo) {
     this.setState({
       currentMain: photo
     })
+  }
+
+  nextSlide() {
+   var newCurrent = this.state.current === this.state.photos.length ? 0
+   : this.state.current + 1
+   this.setState({
+     current: newCurrent
+   })
+
+  }
+
+  prevSlide() {
+   var newCurrent = this.state.current === 0 ? this.state.photos.length
+   :this.state.current - 1
+   this.setState({
+     current: newCurrent
+   })
+   console.log("current", this.state.current)
   }
 
   componentDidUpdate(prevProps) {
@@ -41,9 +64,20 @@ class MainImage extends React.Component {
     }
     return (
       <div className="wrapper">
-        <img style={format} src={this.state.currentMain}/>
+        {/* <img style={format} src={this.state.currentMain}/> */}
+        <section className="slider">
+          <FaArrowAltCircleLeft className="left-arrow" onClick={this.prevSlide}/>
+          <FaArrowAltCircleRight className="right-arrow" onClick={this.nextSlide} />
+        {this.state.photos.map((photo, index) => {
+          return (
+            <div className={index === this.state.current ? 'slide active' : 'slide'} key={index}>
+              {index === this.state.current && <img className="image" src={photo.url}/>}
+            </div>
+          )
+        })}
         <ThumbnailBar changeThumbnail={this.changeThumbnail}
         photos={this.props.photos} currentMain={this.state.currentMain}/>
+        </section>
       </div>
     )
   }

@@ -59,7 +59,7 @@
 
 .thumbnail-bar {
   position: absolute;
-  left: 20px;
+  left: 410px;
   top: 60px;
 }
 
@@ -91,6 +91,42 @@
   position: absolute;
   left: 15px;
   bottom: -30px;
+}
+
+.slider{
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.image {
+  width: 590px;
+  height: 700px;
+  border-radius: 10px
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  font-size: 3rem;
+  color: purple;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  font-size: 3rem;
+  color: purple;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none
 }
 
 
