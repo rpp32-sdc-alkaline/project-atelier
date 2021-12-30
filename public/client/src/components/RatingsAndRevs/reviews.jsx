@@ -52,7 +52,7 @@ class Reviews extends React.Component {
       )
     }
     return (
-      <div id="reviews">
+      <div id="reviews" data-testid="reviews">
         <h4>Reviews</h4>
         <h5>999 reviews. Sort on:</h5>
         <select name="review-sort-options" id="review-sort-options">
