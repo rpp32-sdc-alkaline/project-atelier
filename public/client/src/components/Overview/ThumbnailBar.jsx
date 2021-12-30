@@ -4,10 +4,7 @@ class ThumbnailBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      clicked: false,
-      selected: '',
-      scrolledPhotos: null,
-      currentTopIndex: 0
+      selected: ''
     }
   this.selectThumbnail = this.selectThumbnail.bind(this)
   this.handleUpClick = this.handleUpClick.bind(this)

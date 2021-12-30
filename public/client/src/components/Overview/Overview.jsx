@@ -236,7 +236,8 @@ class Overview extends React.Component{
           <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
           {description}
           <div className="default-gallery">
-          <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev} />
+          <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
+          index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
           <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
           thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}/>
           </div>
