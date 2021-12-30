@@ -81,7 +81,7 @@ class Overview extends React.Component{
    .then(() => {
      axios.get(stylesUrl, {headers})
      .then(result => {
-       console.log('result from styles', result.data.results[0].photos[0].url)
+      //  console.log('result from styles', result.data.results[0].photos[0].url)
        this.setState({
          styles: result.data.results,
          displayedStyleName: result.data.results[0].name,
@@ -112,7 +112,7 @@ class Overview extends React.Component{
   };
 
   mainImageNext() {
-    console.log('main image next called')
+    // console.log('main image next called')
     var photos = this.state.selectedStylePhotos
     var newCurrent = this.state.mainImageIndex === photos.length - 1 ? 0
     : this.state.mainImageIndex + 1
@@ -121,11 +121,11 @@ class Overview extends React.Component{
       mainImage: photos[newCurrent].url,
       mainImageIndex: newCurrent
     })
-    console.log('current', this.state.mainImageIndex)
+    // console.log('current', this.state.mainImageIndex)
   };
 
   mainImagePrev(){
-    console.log('main image next called')
+    // console.log('main image next called')
     var photos = this.state.selectedStylePhotos
     var newCurrent = this.state.mainImageIndex === 0 ? photos.length - 1
     : this.state.mainImageIndex - 1
@@ -134,7 +134,7 @@ class Overview extends React.Component{
       mainImage: photos[newCurrent].url,
       mainImageIndex: newCurrent
     })
-    console.log('current', this.state.mainImageIndex)
+    // console.log('current', this.state.mainImageIndex)
   };
 
 
@@ -146,7 +146,7 @@ class Overview extends React.Component{
   };
 
   thumbnailScrollUp(photos) {
-    console.log('photos', photos)
+    // console.log('photos', photos)
     this.setState({
       thumbnailBarPhotos: photos
     })
@@ -186,14 +186,14 @@ class Overview extends React.Component{
   };
 
   addToCart() {
-    console.log('add to cart called')
+    // console.log('add to cart called')
     this.setState({
       displayAddToCart: true
     })
   };
 
   hideAddToCart() {
-    console.log('hide add to cart called')
+    // console.log('hide add to cart called')
     this.setState({
       hideAddToCart: true
     })
@@ -236,7 +236,8 @@ class Overview extends React.Component{
           <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
           {description}
           <div className="default-gallery">
-          <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev} />
+          <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
+          index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
           <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
           thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}/>
           </div>

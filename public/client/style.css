@@ -122,7 +122,7 @@
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 5px;
+  left: 30px;
   font-size: 3rem;
   color: purple;
   z-index: 10;

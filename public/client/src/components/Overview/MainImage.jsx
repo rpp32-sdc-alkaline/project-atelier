@@ -5,6 +5,7 @@ import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 class MainImage extends React.Component {
   constructor(props) {
     super(props)
+    // console.log('index', this.props.index)
     this.state = {
       currentMain: '',
       photos: [],
@@ -29,10 +30,25 @@ class MainImage extends React.Component {
       width: 590,
       padding: 30
     }
+    var rightArrow;
+    var leftArrow;
+    if(this.props.index < this.props.photos?.length - 1 && this.props.index > 0) {
+      rightArrow = <FaArrowAltCircleRight className="right-arrow" onClick={this.nextSlide} />
+      leftArrow = <FaArrowAltCircleLeft className="left-arrow" onClick={this.prevSlide}/>
+    }
+    if(this.props.index === 0) {
+      leftArrow = <div></div>;
+      rightArrow = <FaArrowAltCircleRight className="right-arrow" onClick={this.nextSlide} />
+    }
+    if(this.props.index === this.props.photos?.length - 1) {
+      rightArrow = <div></div>
+      leftArrow =  <FaArrowAltCircleLeft className="left-arrow" onClick={this.prevSlide}/>
+    }
+
     return (
       <div className="slider">
-          <FaArrowAltCircleLeft className="left-arrow" onClick={this.prevSlide}/>
-          <FaArrowAltCircleRight className="right-arrow" onClick={this.nextSlide} />
+        {leftArrow}
+        {rightArrow}
             <img style={format} src={this.props.image}/>
       </div>
     )
