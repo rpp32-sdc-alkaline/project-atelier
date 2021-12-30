@@ -18,17 +18,17 @@ class Review extends React.Component {
     return (
       <div>
         <h5>Individual Review</h5>
-        <Stars average={review.rating} size={15}/>
-        <p>Summary: {review.summary}</p>
-        <p>Body: {review.body}</p>
-        {review.response &&
-        <p>{review.response}</p>}
-        {review.recommend &&
+        <Stars average={review?.rating} size={15}/>
+        <p>Summary: {review?.summary}</p>
+        <p>Body: {review?.body}</p>
+        {review?.response &&
+        <p>{review?.response}</p>}
+        {review?.recommend &&
         <p>I recommend this product [check]</p>}
-        <p>{review.reviewer_name}</p>
-        <Date date={review.date.slice(0,10)} />
-        <Helpful helpfulness={review.helpfulness} />
-        {review.photos.map(photo =>
+        <p>{review?.reviewer_name}</p>
+        <Date date={review?.date.slice(0,10)} />
+        <Helpful helpfulness={review?.helpfulness} />
+        {review?.photos.map(photo =>
           <img key={photo.id} src={photo.url} height="45px" width="45px"></img>)}
       </div>
     )
