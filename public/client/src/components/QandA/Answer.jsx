@@ -62,7 +62,7 @@ class Answer extends React.Component{
   render() {
     if (!this.state.haveData) {
       return (
-        <div>
+        <div className='loading'>
           Answers are loading
         </div>
       )
@@ -70,14 +70,14 @@ class Answer extends React.Component{
       let eachAnwser = this.state.answerData.map((item) => {
         //console.log('answerItem', item)
         return (
-          <div>
+          <div className='answer'>
             {item.body} <br></br>
             by {item.answerer_name}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
           </div>
         )
       })
       return (
-        <div>
+        <div className='answers'>
           A: {eachAnwser} <br></br>
           <button onClick={this.getMore}>Load More Answers</button>
         </div>
