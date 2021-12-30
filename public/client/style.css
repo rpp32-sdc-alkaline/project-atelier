@@ -130,5 +130,9 @@
   user-select: none
 }
 
+.hovered {
+  cursor: zoom-in
+}
+
 
 
