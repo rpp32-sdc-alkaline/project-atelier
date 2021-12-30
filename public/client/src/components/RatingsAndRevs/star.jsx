@@ -1,9 +1,9 @@
-import React from 'react'
-import fullStar from '../../../../../assets/images/full-gold-star.png'
-import oneQuarterStar from '../../../../../assets/images/one-quarter-gold-star.png'
-import halfStar from '../../../../../assets/images/one-half-gold-star.png'
-import threeQuartersStar from '../../../../../assets/images/three-quarters-gold-star.png'
-import outlineStar from '../../../../../assets/images/star-outline.png'
+import React from 'react';
+import fullStar from '../../../../../assets/images/full-gold-star.png';
+import oneQuarterStar from '../../../../../assets/images/one-quarter-gold-star.png';
+import halfStar from '../../../../../assets/images/one-half-gold-star.png';
+import threeQuartersStar from '../../../../../assets/images/three-quarters-gold-star.png';
+import outlineStar from '../../../../../assets/images/star-outline.png';
 
 const Star = (props) => {
   const { starFill, size } = props
