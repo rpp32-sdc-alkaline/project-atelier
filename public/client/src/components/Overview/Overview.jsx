@@ -17,6 +17,7 @@ class Overview extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
+      id: '',
       product: [],
       ratings: {},
       styles: [],
@@ -202,11 +203,19 @@ class Overview extends React.Component{
   //on component did mount-- query api for products
   componentDidMount() {
     this.setState({
-      'id': this.props.id
+      id: this.props.id
     })
     this.getProductData(this.props.id)
   };
 
+  componentDidUpdate(prevProps) {
+    if(this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id
+      })
+      this.getProductData(this.props.id)
+    }
+  }
 
   render() {
     if (!this.state.hasData) {
