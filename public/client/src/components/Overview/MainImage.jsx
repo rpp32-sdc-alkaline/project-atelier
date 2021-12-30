@@ -5,7 +5,7 @@ import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 class MainImage extends React.Component {
   constructor(props) {
     super(props)
-    console.log('index', this.props.index)
+    // console.log('index', this.props.index)
     this.state = {
       currentMain: '',
       photos: [],
