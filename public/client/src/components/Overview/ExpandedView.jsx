@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
+import $ from 'jquery'
 
 class ExpandedView extends React.Component{
   constructor(props) {
@@ -14,22 +15,23 @@ class ExpandedView extends React.Component{
   }
 
   handleCloseClick() {
-    console.log('clicked out of modal')
+    this.setState({
+      zoom: false
+    })
     this.props.close()
   }
 
   handleZoomClick() {
-    console.log('zoom clicked')
     var zoomState = this.state.zoom
     this.setState({
-      zoom: !zoomState
+      zoom: !this.state.zoom
     })
   }
 
   handleMouseMove(e) {
-    this.setState({
-      zoom: true
-    })
+    const {clientX: x, clientY: y} = e;
+    var $image = $('img')
+    $image.css('transform-origin', `${x}px ${y}px`)
   }
 
   render() {
@@ -43,7 +45,7 @@ class ExpandedView extends React.Component{
           <div className={"modal-box"}>
             <button onClick={this.handleCloseClick}>X</button>
           <img onClick={this.handleZoomClick} onMouseMove={this.handleMouseMove}
-          className={this.state.zoom} src={this.props.image}/>
+          className={imageStyle} src={this.props.image}/>
           </div>
         </div>
       )
