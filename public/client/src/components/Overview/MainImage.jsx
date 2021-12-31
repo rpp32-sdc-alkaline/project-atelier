@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import ThumbnailBar from './ThumbnailBar.jsx'
 import ExpandedView from './ExpandedView.jsx'
+import Modal from 'react-modal'
 import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 
 class MainImage extends React.Component {
@@ -66,7 +67,7 @@ class MainImage extends React.Component {
         {leftArrow}
         {rightArrow}
             <img className={cursor} onMouseEnter={this.handleMouseEnter} onClick={this.handleClick} style={format} src={this.props.image}/>
-            <ExpandedView show={this.state.expand}/>
+            <ExpandedView isOpen={this.state.expand} image={this.props.image}/>
 
       </div>
     )
