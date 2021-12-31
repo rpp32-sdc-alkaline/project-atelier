@@ -114,7 +114,6 @@
   right: 800px;
   font-size: 3rem;
   color: purple;
-  z-index: 10;
   cursor: pointer;
   user-select: none
 }
@@ -125,7 +124,6 @@
   left: 30px;
   font-size: 3rem;
   color: purple;
-  z-index: 10;
   cursor: pointer;
   user-select: none
 }
@@ -148,7 +146,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.6)
 }
 
@@ -162,7 +160,7 @@
   overflow-y: auto;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  z-index: 101;
+  z-index: 2;
   padding: 40px;
   cursor: zoom-in
 }
@@ -174,6 +172,12 @@
 .zoom-in {
   transform: scale(2.5);
   cursor: zoom-out
+}
+
+.thumbnail-icon {
+  position: absolute;
+  background: red;
+  border-radius: 50%
 }
 
 

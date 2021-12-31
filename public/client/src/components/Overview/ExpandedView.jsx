@@ -42,11 +42,13 @@ class ExpandedView extends React.Component{
       return (
         <div className={"modal-wrapper"}>
           <div onClick={this.handleCloseClick} className={"modal-backdrop"} />
-          <div className={"modal-box"}>
-            <button onClick={this.handleCloseClick}>X</button>
-          <img onClick={this.handleZoomClick} onMouseMove={this.handleMouseMove}
-          className={imageStyle} src={this.props.image}/>
-          </div>
+            <div className={"modal-box"}>
+              <button onClick={this.handleCloseClick}>X</button>
+              <div className={"thumbnail-icon"}>test</div>
+              <img onClick={this.handleZoomClick} onMouseMove={this.handleMouseMove}
+              className={imageStyle} src={this.props.image}/>
+
+            </div>
         </div>
       )
     }
