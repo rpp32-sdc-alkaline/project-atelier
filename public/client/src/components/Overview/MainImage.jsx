@@ -35,7 +35,7 @@ class MainImage extends React.Component {
   }
 
   handleClick() {
-    console.log('image clicked')
+    // console.log('image clicked')
     var expandState = this.state.expand
     this.setState({
       expand: !expandState
