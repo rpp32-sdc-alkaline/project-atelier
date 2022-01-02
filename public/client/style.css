@@ -128,7 +128,7 @@
   user-select: none
 }
 
-
+/* Overview */
 .hovered {
   cursor: nesw-resize
 }
@@ -178,7 +178,8 @@
 .thumbnail-icon {
   position: absolute;
   background: red;
-  border-radius: 50%
+  border-radius: 50%;
+}
 
 /*  Question and Answer Style */
 
