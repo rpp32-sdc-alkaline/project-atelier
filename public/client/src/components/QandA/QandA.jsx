@@ -50,9 +50,6 @@ class QandA extends React.Component{
         slicedData: result.data.results.slice(0, 2),
         haveData: true
       })
-      .catch((err) => {
-        throw err;
-      })
       //console.log('questionData', this.state.questionData);
     })
     .catch((error) => {
