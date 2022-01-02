@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
 import ThumbnailBar from './ThumbnailBar.jsx'
+// import ExpandedView from './ExpandedView.jsx'
+import ExpandedView from './ExpandedView'
+import Modal from 'react-modal'
 import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 
 class MainImage extends React.Component {
@@ -7,13 +10,14 @@ class MainImage extends React.Component {
     super(props)
     // console.log('index', this.props.index)
     this.state = {
-      currentMain: '',
-      photos: [],
-      current: 0
+     hovered: false,
+     expand: false
     }
   // this.changeThumbnail = this.changeThumbnail.bind(this)
   this.nextSlide = this.nextSlide.bind(this)
   this.prevSlide = this.prevSlide.bind(this)
+  this.handleMouseEnter = this.handleMouseEnter.bind(this)
+  this.handleClick = this.handleClick.bind(this)
   }
 
   nextSlide() {
@@ -22,6 +26,20 @@ class MainImage extends React.Component {
 
   prevSlide() {
   this.props.mainImagePrev()
+  }
+
+  handleMouseEnter() {
+    this.setState({
+      hovered: true
+    })
+  }
+
+  handleClick() {
+    // console.log('image clicked')
+    var expandState = this.state.expand
+    this.setState({
+      expand: !expandState
+    })
   }
 
   render() {
@@ -44,12 +62,15 @@ class MainImage extends React.Component {
       rightArrow = <div></div>
       leftArrow =  <FaArrowAltCircleLeft className="left-arrow" onClick={this.prevSlide}/>
     }
+    var cursor = this.state.hovered ? 'hovered' : 'not-hovered'
 
     return (
       <div className="slider">
         {leftArrow}
         {rightArrow}
-            <img style={format} src={this.props.image}/>
+            <img className={cursor} onMouseEnter={this.handleMouseEnter} onClick={this.handleClick} style={format} src={this.props.image}/>
+            <ExpandedView isOpen={this.state.expand} image={this.props.image} close={this.handleClick} photos={this.props.photos}/>
+
       </div>
     )
   }
