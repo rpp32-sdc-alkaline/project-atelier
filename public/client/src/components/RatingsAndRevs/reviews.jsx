@@ -13,7 +13,7 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.reviews.results) {
+    if (this.props.reviews?.results) {
       if (this.state.numToShow >= this.props.reviews.results.length) {
         this.setState({
           showingAll: true
@@ -43,7 +43,7 @@ class Reviews extends React.Component {
   }
 
   render() {
-    let reviews = this.props.reviews.results
+    let reviews = this.props.reviews?.results
     if (!reviews) {
       return (
         <div>
