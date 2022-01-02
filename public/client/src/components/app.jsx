@@ -10,6 +10,14 @@ class App extends React.Component{
     super(props)
     this.state = {
     }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(id) {
+    // console.log('id', id)
+    this.setState({
+      'selectedProductId': id
+    })
   }
 
   componentDidMount() {
@@ -17,12 +25,14 @@ class App extends React.Component{
     .then((res) => res.json())
     .then((productList) => {
       console.log('productList', productList)
+
       this.setState({
         'productList': productList,
-        'currentProductId': productList[0].id
+        'defaultProductId': productList[0].id
       })
     })
   }
+
 
   //TO DO: function that changes the current product id
 
@@ -35,12 +45,19 @@ class App extends React.Component{
         </div>
       )
     } else {
+      var id = this.state.selectedProductId ? this.state.selectedProductId : this.state.defaultProductId
       return (
         <div>
           <h1>Project Atelier</h1>
-          <Overview id={this.state.currentProductId}/>
-          <QandA id={this.state.currentProductId}/>
-          <RatingsAndReviews id={this.state.currentProductId}/>
+          <h3>Product List</h3>
+          <div>
+            {this.state.productList.map((product, index) =>
+              <li key={index} onClick={(e)=>{this.handleClick(product.id)}}>{product.name}</li>
+            )}
+          </div>
+          <Overview id={id}/>
+          <QandA id={id}/>
+          <RatingsAndReviews id={id}/>
         </div>
       )
     }

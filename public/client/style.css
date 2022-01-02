@@ -114,7 +114,6 @@
   right: 800px;
   font-size: 3rem;
   color: purple;
-  z-index: 10;
   cursor: pointer;
   user-select: none
 }
@@ -125,10 +124,60 @@
   left: 30px;
   font-size: 3rem;
   color: purple;
-  z-index: 10;
   cursor: pointer;
   user-select: none
 }
 
+.hovered {
+  cursor: nesw-resize
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6)
+}
+
+.modal-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80%;
+  width: 70%;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  padding: 40px;
+  cursor: zoom-in
+}
+
+.zoom-out {
+  position: absolute;
+}
+
+.zoom-in {
+  transform: scale(2.5);
+  cursor: zoom-out
+}
+
+.thumbnail-icon {
+  position: absolute;
+  background: red;
+  border-radius: 50%
+}
 
 
