@@ -31,7 +31,7 @@ class QandA extends React.Component{
   }
 
   componentDidMount () {
-
+    //console.log('QandAProps', this.props);
     let id = this.props.id;
     this.setState({
       product: id
@@ -50,7 +50,7 @@ class QandA extends React.Component{
         slicedData: result.data.results.slice(0, 2),
         haveData: true
       })
-
+      //console.log('questionData', this.state.questionData);
     })
     .catch((error) => {
       throw error;
@@ -79,7 +79,7 @@ class QandA extends React.Component{
         <Search />
         <Questions questions={this.state.slicedData} moreButton={this.moreButton}/>
         {!this.state.allQDisplayed && <button className='More Question' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions</button>}
-        <AddQuestion />
+        <AddQuestion id ={this.props.id}/>
         </div>
       )
     }
