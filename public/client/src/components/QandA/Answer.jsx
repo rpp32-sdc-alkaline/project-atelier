@@ -82,7 +82,7 @@ class Answer extends React.Component{
       return (
         <div className='answers'>
           A: {eachAnwser} <br></br>
-          <button onClick={this.getMore}>Load More Answers</button>
+          {this.state.answerData.length > 2 && <button onClick={this.getMore}>Load More Answers</button>}
         </div>
       )
     } else {
