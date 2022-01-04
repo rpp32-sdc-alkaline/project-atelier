@@ -35,13 +35,13 @@ class RatingBreakdown extends React.Component {
     return (
       <div className="rating-breakdown">
         <h3>Ratings and Reviews</h3>
-        <Stars average={avgRating} size={25}/>
+        <Stars average={avgRating} size={25}/>updateFilters
         <p>{avgRating} Stars, {totalRatings} Ratings</p>
-        <IndividualRatingBreakdown numStars={5} percent={numFiveStars} ratings={ratings[5]}/>
-        <IndividualRatingBreakdown numStars={4} percent={numFourStars} ratings={ratings[4]}/>
-        <IndividualRatingBreakdown numStars={3} percent={numThreeStars} ratings={ratings[3]}/>
-        <IndividualRatingBreakdown numStars={2} percent={numTwoStars} ratings={ratings[2]}/>
-        <IndividualRatingBreakdown numStars={1} percent={numOneStar} ratings={ratings[1]}/>
+        <IndividualRatingBreakdown numStars={5} percent={numFiveStars} ratings={ratings[5]} updateFilters={this.props.updateFilters}/>
+        <IndividualRatingBreakdown numStars={4} percent={numFourStars} ratings={ratings[4]} updateFilters={this.props.updateFilters}/>
+        <IndividualRatingBreakdown numStars={3} percent={numThreeStars} ratings={ratings[3]} updateFilters={this.props.updateFilters}/>
+        <IndividualRatingBreakdown numStars={2} percent={numTwoStars} ratings={ratings[2]} updateFilters={this.props.updateFilters}/>
+        <IndividualRatingBreakdown numStars={1} percent={numOneStar} ratings={ratings[1]} updateFilters={this.props.updateFilters}/>
       </div>
     )
   }
