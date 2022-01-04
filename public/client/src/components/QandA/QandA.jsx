@@ -14,6 +14,7 @@ class QandA extends React.Component{
       allQDisplayed: false
     };
     this.moreButton = this.moreButton.bind(this);
+    this.getQuestionData = this.getQuestionData.bind(this);
   }
 
   moreButton (e) {
@@ -36,7 +37,7 @@ class QandA extends React.Component{
     this.setState({
       product: id
     })
-    this.getQuestionData(id, 1, 10)
+    this.getQuestionData(id, 1, 100)
   }
 
   getQuestionData(id, page, count) {
@@ -48,7 +49,8 @@ class QandA extends React.Component{
       this.setState({
         questionData: result.data.results,
         slicedData: result.data.results.slice(0, 2),
-        haveData: true
+        haveData: true,
+        allQDisplayed: false
       })
       //console.log('questionData', this.state.questionData);
     })
@@ -79,7 +81,7 @@ class QandA extends React.Component{
         <Search />
         <Questions questions={this.state.slicedData} moreButton={this.moreButton}/>
         {!this.state.allQDisplayed && <button className='More Question' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions</button>}
-        <AddQuestion id ={this.props.id}/>
+        <AddQuestion id ={this.props.id} update={this.getQuestionData}/>
         </div>
       )
     }

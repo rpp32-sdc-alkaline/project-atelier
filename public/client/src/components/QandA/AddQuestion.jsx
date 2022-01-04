@@ -23,6 +23,10 @@ class AddQuestion extends React.Component {
     this.setState({ show: false })
   }
 
+  componentDidMount () {
+    console.log('props', this.props)
+  }
+
   addQuestion (e) {
     e.preventDefault();
     let body = e.target[0].value;
@@ -32,9 +36,10 @@ class AddQuestion extends React.Component {
     let header = {
       'Authorization': token.TOKEN
     };
-    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?body=${body}&name=${name}&email=${email}&product_id=${id}`, {headers: header})
+    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions`, {body: body, name: name, email: email, product_id: id}, {headers: header})
     .then((result) => {
-      console.log('add Q result', result);
+      console.log('Question has been added', result);
+      this.props.update(id, 1, 100);
     })
     .catch((error) => {
       throw error;
