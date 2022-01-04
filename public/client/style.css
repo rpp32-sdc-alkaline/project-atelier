@@ -209,7 +209,11 @@
 }
 
 .questions {
-  color: red
+  color: black
+}
+
+.seller {
+  font-weight: bold;
 }
 
 
