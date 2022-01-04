@@ -8,28 +8,31 @@ class Answer extends React.Component{
     super(props)
     this.state = {
       haveData: false,
-      anwsersToShow: 2
+      allADisplayed: false
     }
     this.getMore = this.getMore.bind(this);
+    this.getLess = this.getLess.bind(this);
   }
 
   getMore (e) {
-    let newNum = this.state.anwsersToShow + 2;
     this.setState({
-      anwsersToShow: newNum,
-      haveData: false
+      allADisplayed: true
     })
-    let id = this.props.props.question_id;
-    this.getAnswerData(id, 1, newNum);
+
+  }
+
+  getLess (e) {
+    this.setState({
+      allADisplayed: false
+    })
   }
 
   componentDidMount () {
-    let howMany = this.state.anwsersToShow;
     let id = this.props.props.question_id;
     this.setState({
       questionId: id
     })
-    this.getAnswerData(id, 1, howMany);
+    this.getAnswerData(id);
   }
 
   dateFormat (date) {
@@ -42,11 +45,11 @@ class Answer extends React.Component{
     return months[month] + ' ' + day + ', ' + year;
   }
 
-  getAnswerData(id, page, count) {
+  getAnswerData(id) {
     let headers = {
       'Authorization': token.TOKEN
     };
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${id}/answers?page=${page}&count=${count}`, {headers: headers})
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${id}/answers?page=1&count=100`, {headers: headers})
     .then((result) => {
       this.setState({
         answerData: result.data.results,
@@ -66,6 +69,22 @@ class Answer extends React.Component{
           Answers are loading
         </div>
       )
+    } else if (!this.state.allADisplayed) {
+      let eachAnwser = this.state.answerData.slice(0, 2).map((item) => {
+        //console.log('answerItem', item)
+        return (
+          <div key={item.answer_id} className='answer'>
+            {item.body} <br></br>
+            by {item.answerer_name}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
+          </div>
+        )
+      })
+      return (
+        <div className='answers'>
+          A: {eachAnwser} <br></br>
+          <button onClick={this.getMore}>Load More Answers</button>
+        </div>
+      )
     } else {
       let eachAnwser = this.state.answerData.map((item) => {
         //console.log('answerItem', item)
@@ -79,7 +98,7 @@ class Answer extends React.Component{
       return (
         <div className='answers'>
           A: {eachAnwser} <br></br>
-          <button onClick={this.getMore}>Load More Answers</button>
+          <button onClick={this.getLess}>Collapse Answers</button>
         </div>
       )
     }
