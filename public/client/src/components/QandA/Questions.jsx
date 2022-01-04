@@ -29,7 +29,7 @@ class Questions extends React.Component{
     } else {
     return (
       <div>
-        <Question props={questions} moreButton={this.props.moreButton}/>
+        <Question props={questions} moreButton={this.props.moreButton} />
       </div>
     )
     }

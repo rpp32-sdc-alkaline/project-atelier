@@ -48,7 +48,7 @@ class QandA extends React.Component{
     .then((result) => {
       this.setState({
         questionData: result.data.results,
-        slicedData: result.data.results.slice(0, 2),
+        slicedData: result.data.results.slice(0, this.state.qToDisplay),
         haveData: true,
         allQDisplayed: false
       })
