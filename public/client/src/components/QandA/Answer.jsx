@@ -75,7 +75,7 @@ class Answer extends React.Component{
         return (
           <div key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
           </div>
         )
       })
@@ -91,7 +91,7 @@ class Answer extends React.Component{
         return (
           <div key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
           </div>
         )
       })
