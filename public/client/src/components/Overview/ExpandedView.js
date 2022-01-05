@@ -45,7 +45,7 @@ const ExpandedView = (props) => {
 
               <div className="icon-wrapper">
               {props.photos.map((photo, index) =>
-                <div key={index} className={"thumbnail-icon"}>test</div>
+                <div style={{top: index * 50}} key={index} className={"thumbnail-icon"}>test</div>
                 )}
                 </div>
               <img onClick={handleZoomClick} onMouseMove={handleMouseMove}
