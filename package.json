@@ -4,7 +4,7 @@
   "description": "Front End Capstone: Dominic, Meredith, Zac, Jeff",
   "main": "server/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "start": "nodemon server/index.js",
     "build": "webpack --watch",
     "dev": "npm run start & npm run build"
