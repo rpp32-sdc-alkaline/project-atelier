@@ -13,8 +13,8 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.reviews?.results) {
-      if (this.state.numToShow >= this.props.reviews.results.length) {
+    if (this.props.reviews) {
+      if (this.state.numToShow >= this.props.reviews.length) {
         this.setState({
           showingAll: true
         })
@@ -23,15 +23,15 @@ class Reviews extends React.Component {
   }
 
   showMore() {
-    let results = this.props.reviews.results
-    if (results.length > this.state.numToShow + 2) {
+    let reviews = this.props.reviews
+    if (reviews.length > this.state.numToShow + 2) {
       let numToShow = this.state.numToShow + 2
       this.setState({
         numToShow: numToShow
       })
     } else {
       this.setState({
-        numToShow: results.length,
+        numToShow: reviews.length,
         showingAll: true})
     }
   }
@@ -43,7 +43,7 @@ class Reviews extends React.Component {
   }
 
   render() {
-    let reviews = this.props.reviews?.results
+    let reviews = this.props.reviews
     if (!reviews) {
       return (
         <div>
@@ -69,8 +69,7 @@ class Reviews extends React.Component {
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
         <button onClick={this.showWriteReview.bind(this)}>Add A Review +</button>
         {this.state.showWriteReview &&
-        <WriteReview id={this.props.reviews.product}/>
-        }
+        <WriteReview id={this.props.product}/>}
       </div>
     )
   }

@@ -52,10 +52,9 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then(result => {
-      console.log('result.data', result.data)
       this.setState({
-        allReviews: result.data,
-        filteredReviews: result.data
+        allReviews: result.data.results,
+        filteredReviews: result.data.results
       })
     })
     .catch(error => console.log('error!', error))
@@ -74,9 +73,9 @@ class RatingsAndReviews extends React.Component{
 
 
   updateFilters(rating) {
-    let currentFilters = this.state.filters
+    let currentFilters = Array.from(this.state.filters)
     if (currentFilters.length === 0) {
-      currrentFilters.push(rating)
+      currentFilters.push(rating)
     } else {
       let ratingIndex = currentFilters.indexOf(rating)
       //if current filters contain [input rating]
@@ -89,19 +88,16 @@ class RatingsAndReviews extends React.Component{
     } this.setState({
         filters: currentFilters
     })
+
   }
   //review filtering function that will update state with only the reviews to show
   filterReviews() {
-    let filters = this.state.filters
-    let allReviews = this.state.allReviews.results
+    let filters = Array.from(this.state.filters)
+    let allReviews = Array.from(this.state.allReviews)
     let filteredReviews = []
     if (filters.length === 0) {
       filteredReviews = allReviews
     } else {
-      //iterate through this.state.reviews
-        //if the rating is in filters
-          //push that review to filteredReviews
-      //pass filtered reviews as props
       for (var i = 0; i < allReviews.length; i++) {
         for (var j = 0; j < filters.length; j++) {
           if (allReviews[i].rating === filters[j]) {
@@ -114,8 +110,6 @@ class RatingsAndReviews extends React.Component{
     })
   }
 
-
-
   render() {
     if (!this.state.haveData) {
       return(<div>
@@ -124,9 +118,9 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <Reviews reviews={this.state.filteredReviews}/>
+        <Reviews reviews={this.state.filteredReviews} product={this.state.product}/>
         <div className="ratings-left-sidebar">
-          <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters}/>
+          <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>
         </div>
       </div>
