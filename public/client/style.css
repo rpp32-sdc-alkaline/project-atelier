@@ -53,6 +53,7 @@
   gap: 5px;
 }
 
+/* Overview */
 .overview {
   position: relative
 }
@@ -86,9 +87,6 @@
   position: absolute;
   left: 15px;
   top: -30px;
-  font-size: 30px;
-  font-weight: 400;
-  color: chartreuse;
 }
 
 .down-arrow {
@@ -115,20 +113,20 @@
   font-size: 3rem;
   color: purple;
   cursor: pointer;
-  user-select: none
+  user-select: none;
 }
 
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 30px;
+  left: 75px;
   font-size: 3rem;
   color: purple;
   cursor: pointer;
-  user-select: none
+  user-select: none;
 }
 
-/* Overview */
+
 .hovered {
   cursor: nesw-resize
 }
@@ -175,10 +173,21 @@
   cursor: zoom-out
 }
 
-.thumbnail-icon {
+.icon-wrapper {
+  top: 30px;
   position: absolute;
-  background: red;
+  z-index: 1;
+}
+
+.thumbnail-icon {
+  background-color: red;
   border-radius: 50%;
+  width: 30%;
+  height: 30%;
+  margin: 10px;
+  z-index: 1;
+
+
 }
 
 /*  Question and Answer Style */
