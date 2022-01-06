@@ -9,8 +9,8 @@ class IndividualRatingBreakdown extends React.Component {
   }
 
   handleClick() {
-    console.log('in handle click')
     //call a sort function with this.props.numStars as argument
+    this.props.updateFilters(this.props.numStars)
   }
 
   render() {
@@ -22,6 +22,6 @@ class IndividualRatingBreakdown extends React.Component {
       </div>
       )
     }
-}
+  }
 
 export default IndividualRatingBreakdown

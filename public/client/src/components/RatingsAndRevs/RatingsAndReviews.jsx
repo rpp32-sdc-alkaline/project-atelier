@@ -16,11 +16,14 @@ class RatingsAndReviews extends React.Component{
       sort: 'helpful',
       page: 1,
       count: 5,
-      reviews: [],
+      allReviews: [],
       metadata: [],
-      filters: []
+      filters: [],
+      filteredReviews: []
     }
     this.getReviewData.bind(this)
+    this.filterReviews.bind(this)
+    this.updateFilters.bind(this)
   }
 
   componentDidMount() {
@@ -29,6 +32,17 @@ class RatingsAndReviews extends React.Component{
       product: id
     })
     this.getReviewData(id, 'helpful', 1, 100)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.filters !== prevState.filters) {
+      this.filterReviews()
+    } if (this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id
+      })
+      this.getReviewData(this.props.id, 'helpful', 1, 100)
+    }
   }
 
   getReviewData(product, sort, page, count) {
@@ -44,7 +58,8 @@ class RatingsAndReviews extends React.Component{
     })
     .then(result => {
       this.setState({
-        reviews: result.data
+        allReviews: result.data.results,
+        filteredReviews: result.data.results
       })
     })
     .catch(error => console.log('error!', error))
@@ -60,22 +75,50 @@ class RatingsAndReviews extends React.Component{
     .catch(error => console.log('error!', error))
   }
 
-  //review filtering function that will update state with only the reviews to show
-  //filterReviews(rating) {
-    //get current filters
-    //if current filters contain [input rating]
-      //remove current rating from filters
-      //if filters is empty
-        //render method will return "normal" - passing this.state.reviews to props
-    //else
-      //add current rating to filters
-      //iterate through this.state.reviews
-        //if the rating is in filters
-          //push that review to filteredReviews
-          
+  changeSort(sort) {
+    this.setState({
+      sort: sort
+    })
+    this.getReviewData(this.state.product, sort, 1, 100)
+  }
 
-  // }
-  //
+  updateFilters(rating) {
+    let currentFilters = Array.from(this.state.filters)
+    if (currentFilters.length === 0) {
+      currentFilters.push(rating)
+    } else {
+      let ratingIndex = currentFilters.indexOf(rating)
+      //if current filters contain [input rating]
+      if (ratingIndex !== -1) {
+        //remove current rating from filters
+        currentFilters.splice(ratingIndex, 1)
+      } else {
+        currentFilters.push(rating)
+      }
+    } this.setState({
+        filters: currentFilters
+    })
+
+  }
+  //review filtering function that will update state with only the reviews to show
+  filterReviews() {
+    let filters = Array.from(this.state.filters)
+    let allReviews = Array.from(this.state.allReviews)
+    let filteredReviews = []
+    if (filters.length === 0) {
+      filteredReviews = allReviews
+    } else {
+      for (var i = 0; i < allReviews.length; i++) {
+        for (var j = 0; j < filters.length; j++) {
+          if (allReviews[i].rating === filters[j]) {
+            filteredReviews.push(allReviews[i])
+          }
+        }
+      }
+    } this.setState({
+        filteredReviews: filteredReviews
+    })
+  }
 
   render() {
     if (!this.state.haveData) {
@@ -85,9 +128,9 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <Reviews reviews={this.state.reviews}/>
+        <Reviews reviews={this.state.filteredReviews} product={this.state.product} changeSort={this.changeSort.bind(this)}/>
         <div className="ratings-left-sidebar">
-          <RatingBreakdown metadata={this.state.metadata}/>
+          <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>
         </div>
       </div>
