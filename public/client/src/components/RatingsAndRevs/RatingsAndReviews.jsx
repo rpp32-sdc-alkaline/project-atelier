@@ -70,6 +70,14 @@ class RatingsAndReviews extends React.Component{
     .catch(error => console.log('error!', error))
   }
 
+  changeSort(sort) {
+    console.log('in changeSort:', sort)
+    this.setState({
+      sort: sort
+    })
+    this.getReviewData(this.state.product, sort, 1, 100)
+  }
+
 
 
   updateFilters(rating) {
@@ -118,7 +126,7 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <Reviews reviews={this.state.filteredReviews} product={this.state.product}/>
+        <Reviews reviews={this.state.filteredReviews} product={this.state.product} changeSort={this.changeSort.bind(this)}/>
         <div className="ratings-left-sidebar">
           <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>

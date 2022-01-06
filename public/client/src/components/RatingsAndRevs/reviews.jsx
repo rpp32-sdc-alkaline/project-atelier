@@ -22,6 +22,11 @@ class Reviews extends React.Component {
     }
   }
 
+  changeSort(e) {
+    console.log('e.target.value', e.target.value)
+    this.props.changeSort(e.target.value)
+  }
+
   showMore() {
     let reviews = this.props.reviews
     if (reviews.length > this.state.numToShow + 2) {
@@ -50,7 +55,7 @@ class Reviews extends React.Component {
       <div id="reviews" data-testid="reviews">
         <h4>Reviews</h4>
         <h5>999 reviews. Sort on:</h5>
-        <select name="review-sort-options" id="review-sort-options">
+        <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)}>
           <option value="relevance">Relevant</option>
           <option value="helpful">Helpful</option>
           <option value="newest">Newest</option>
