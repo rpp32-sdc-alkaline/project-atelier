@@ -88,7 +88,7 @@ class QandA extends React.Component{
           <div>
         <h4>QUESTIONS & ANSWERS</h4>
         <Search />
-        <Questions questions={this.state.slicedData} moreButton={this.moreButton}/>
+        <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id}/>
         {!this.state.allQDisplayed && <button className='More Question' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions</button>}
         <AddQuestion id ={this.props.id} update={this.getQuestionData}/>
         </div>

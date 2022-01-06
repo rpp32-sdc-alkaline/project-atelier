@@ -19,6 +19,7 @@ const Question = (props) => {
     })
     .then((result) => {
       console.log('Marked as helpful')
+      props.update(props.productId, 1, 100);
       //console.log('questionData', this.state.questionData);
     })
     .catch((error) => {
