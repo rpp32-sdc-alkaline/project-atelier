@@ -19,6 +19,7 @@ class MainImage extends React.Component {
   this.prevSlide = this.prevSlide.bind(this)
   this.handleMouseEnter = this.handleMouseEnter.bind(this)
   this.handleClick = this.handleClick.bind(this)
+  this.iconClick = this.iconClick.bind(this)
   }
 
   nextSlide() {
@@ -41,6 +42,11 @@ class MainImage extends React.Component {
     this.setState({
       expand: !expandState
     })
+  }
+
+  iconClick(photo) {
+    // console.log('overview icon clicked', photo)
+    this.props.iconClick(photo, index)
   }
 
   render() {
@@ -70,7 +76,8 @@ class MainImage extends React.Component {
         {leftArrow}
         {rightArrow}
             <img className={cursor} onMouseEnter={this.handleMouseEnter} onClick={this.handleClick} style={format} src={this.props.image}/>
-            <ExpandedView isOpen={this.state.expand} image={this.props.image} close={this.handleClick} photos={this.props.photos}/>
+            <ExpandedView isOpen={this.state.expand} close={this.handleClick} iconClick={this.props.iconClick}
+            photos={this.props.photos} image={this.props.image} />
 
       </div>
     )

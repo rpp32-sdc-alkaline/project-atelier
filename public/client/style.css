@@ -180,7 +180,6 @@
 }
 
 .thumbnail-icon {
-  background: purple;
   background-color: purple;
   color: purple;
   border-radius: 50%;
@@ -191,19 +190,9 @@
   content: ""
 }
 
-.clicked-icon {
-  background: purple;
-  background-color: purple;
-  color: purple;
-  border-color: chartreuse;
-  border-width: 2px;
-  border-radius: 50%;
-  width: 2%;
-  margin: 10px;
-  z-index: 1;
-  position: absolute;
-  content: ""
-
+.thumbnail-icon:focus {
+  background-color: chartreuse;
+  color: chartreuse;
 }
 
 /*  Question and Answer Style */

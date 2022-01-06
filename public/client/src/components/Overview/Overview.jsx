@@ -49,6 +49,7 @@ class Overview extends React.Component{
     this.changeThumbnail = this.changeThumbnail.bind(this)
     this.thumbnailScrollUp = this.thumbnailScrollUp.bind(this)
     this.thumbnailScrollDown = this.thumbnailScrollDown.bind(this)
+    this.iconClick = this.iconClick.bind(this)
     this.selectSize = this.selectSize.bind(this)
     this.selectQuantity = this.selectQuantity.bind(this)
     this.addToCart = this.addToCart.bind(this)
@@ -159,6 +160,14 @@ class Overview extends React.Component{
     })
   }
 
+  iconClick(photo, index) {
+    // console.log('overview icon clicked', photo, index)
+    this.setState({
+      mainImage: photo,
+      mainImageIndex: index
+    })
+  }
+
   selectSize(size, available) {
     // console.log('select size called', size)
     // console.log('available', Number(available))
@@ -246,7 +255,7 @@ class Overview extends React.Component{
           {description}
           <div className="default-gallery">
           <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
-          index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
+          iconClick={this.iconClick} index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
           <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
           thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}/>
           </div>
