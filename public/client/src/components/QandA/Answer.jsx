@@ -12,6 +12,7 @@ class Answer extends React.Component{
     }
     this.getMore = this.getMore.bind(this);
     this.getLess = this.getLess.bind(this);
+    this.markHelpful = this.markHelpful.bind(this);
   }
 
   getMore (e) {
@@ -37,10 +38,12 @@ class Answer extends React.Component{
 
   dateFormat (date) {
     let month = date.slice(5, 7);
+    if (month[0] === '0') {
+      month = month[1];
+    }
     let day = date.slice(8, 10);
     let year = date.slice(0, 4);
     let months = ['shiftingToMatch', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
 
     return months[month] + ' ' + day + ', ' + year;
   }
@@ -62,6 +65,26 @@ class Answer extends React.Component{
     })
   }
 
+  markHelpful (e) {
+    let id = e.target.id;
+    console.log('event', e);
+    let headers = {
+      'Authorization': token.TOKEN
+    };
+    axios({
+      method: 'put',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${id}/helpful`,
+      headers: headers
+    })
+    .then((result) => {
+      console.log('Marked as helpful', result)
+      this.getAnswerData(this.props.props.question_id);
+    })
+    .catch((error) => {
+      throw error;
+    })
+  }
+
   render() {
     if (!this.state.haveData) {
       return (
@@ -75,7 +98,7 @@ class Answer extends React.Component{
         return (
           <div key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
           </div>
         )
       })
@@ -91,7 +114,7 @@ class Answer extends React.Component{
         return (
           <div key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
           </div>
         )
       })
