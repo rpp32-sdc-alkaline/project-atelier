@@ -6,6 +6,7 @@ class WriteReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      show: false,
       id: null,
       rating: null,
       recommend: null,
@@ -22,6 +23,7 @@ class WriteReview extends React.Component {
       email: null,
       chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
     }
+    this.toggleWriteReview.bind(this)
   }
 
   handleOverallRating(e) {
@@ -73,7 +75,6 @@ class WriteReview extends React.Component {
 
   onSubmit(e) {
     e.preventDefault()
-    //validate fields
     let invalidFields = ''
     if (!this.state.rating) {
       invalidFields += 'Overall Rating\n'
@@ -108,56 +109,76 @@ class WriteReview extends React.Component {
       }
     }
 
+    toggleWriteReview() {
+      let currentState = this.state.show
+      this.setState({
+        show: !currentState
+      })
+    }
+
+    handleCloseClick() {
+      this.props.hideModal
+    }
 
   render() {
+    if (!this.state.show) {
+      return (
+        <button onClick={this.toggleWriteReview.bind(this)}>Add A Review +</button>
+      )
+    }
     let chars = Array.from(this.state.chars)
     return (
-      <div data-testid="write-1">
-        <h3>Write Your Review</h3>
-        <h5>About the [Product Name Here]</h5>
-        <form>
-          <p>Overall Rating*</p>
-          <select id="rating" name="rating" onChange={this.handleOverallRating.bind(this)}>
-            <option value="5" >5 Stars</option>
-            <option value="4">4 Stars</option>
-            <option value="3">3 Stars</option>
-            <option value="2">2 Stars</option>
-            <option value="1">1 Stars</option>
-          </select>
-          <p>Do you recommend this product?*</p>
-          <input type="radio" id="yes-recommend" name="recommend" value={true} onClick={this.handleRecommend.bind(this)}></input>
-          <label htmlFor="yes-recommend">Yes</label>
-          <input type="radio" id="no-recommend" name="recommend" value={false} onClick={this.handleRecommend.bind(this)}></input>
-          <label htmlFor="no-recommend">No</label>
-          <br></br>
-          <p>Rate these characteristics:</p>
-          {chars.map(char =>
-          <CharacteristicReview thisChar={char} key={char} rateChar={this.rateCharacteristic.bind(this)}/>
-          )}
-          <p>Review Summary:</p>
-          <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"
-          onChange={this.handleSummaryChange.bind(this)}></textarea>
-          <p>Review body:</p>
-          <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
-          onChange={this.handleBodyChange.bind(this)}></textarea>
-          {this.state.body.length < 50 &&
-          <p>Minimum required characters left: {50-this.state.body.length}</p>
-          }
-          {this.state.body.length >= 50 &&
-          <p>Minimum reached</p>
-          }
-          <button id="photo-button" onClick={this.uploadPhotos.bind(this)}>Upload photos</button>
-          <p>What is your nickname?*</p>
-          <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
-          onChange={this.handleNicknameChange.bind(this)}></textarea>
-          <p>For privacy reasons, do not use your full name or email address</p>
-          <p>Your email*</p>
-          <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11@email.com"
-          onChange={this.handleEmailChange.bind(this)}></textarea>
-          <p>For authentication reasons, you will not be emailed</p>
-          <br></br>
-          <button id="submit" onClick={this.onSubmit.bind(this)}>Submit review</button>
-        </form>
+      <div className='modal-wrapper'>
+        <div className='modal-backdrop' onClick={this.toggleWriteReview.bind(this)}>
+          <div className="modal-box">
+            <button onClick={this.toggleWriteReview.bind(this)}>X</button>
+            <h3>Write Your Review</h3>
+            <h5>About the [Product Name Here]</h5>
+            <form>
+              <p>Overall Rating*</p>
+              <select id="rating" name="rating" onChange={this.handleOverallRating.bind(this)}>
+                <option value="5" >5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Stars</option>
+              </select>
+              <p>Do you recommend this product?*</p>
+              <input type="radio" id="yes-recommend" name="recommend" value={true} onClick={this.handleRecommend.bind(this)}></input>
+              <label htmlFor="yes-recommend">Yes</label>
+              <input type="radio" id="no-recommend" name="recommend" value={false} onClick={this.handleRecommend.bind(this)}></input>
+              <label htmlFor="no-recommend">No</label>
+              <br></br>
+              <p>Rate these characteristics:</p>
+              {chars.map(char =>
+              <CharacteristicReview thisChar={char} key={char} rateChar={this.rateCharacteristic.bind(this)}/>
+              )}
+              <p>Review Summary:</p>
+              <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"
+              onChange={this.handleSummaryChange.bind(this)}></textarea>
+              <p>Review body:</p>
+              <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
+              onChange={this.handleBodyChange.bind(this)}></textarea>
+              {this.state.body.length < 50 &&
+              <p>Minimum required characters left: {50-this.state.body.length}</p>
+              }
+              {this.state.body.length >= 50 &&
+              <p>Minimum reached</p>
+              }
+              <button id="photo-button" onClick={this.uploadPhotos.bind(this)}>Upload photos</button>
+              <p>What is your nickname?*</p>
+              <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
+              onChange={this.handleNicknameChange.bind(this)}></textarea>
+              <p>For privacy reasons, do not use your full name or email address</p>
+              <p>Your email*</p>
+              <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11@email.com"
+              onChange={this.handleEmailChange.bind(this)}></textarea>
+              <p>For authentication reasons, you will not be emailed</p>
+              <br></br>
+              <button id="submit" onClick={this.onSubmit.bind(this)}>Submit review</button>
+            </form>
+          </div>
+        </div>
       </div>
     )
   }

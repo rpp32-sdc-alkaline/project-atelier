@@ -36,14 +36,9 @@ class Reviews extends React.Component {
     }
   }
 
-  showWriteReview() {
-    this.setState({
-      showWriteReview: true
-    })
-  }
-
   render() {
     let reviews = this.props.reviews
+    let showWriteReview = this.state.showWriteReview
     if (!reviews) {
       return (
         <div>
@@ -67,9 +62,7 @@ class Reviews extends React.Component {
         </div>
         {!this.state.showingAll &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
-        <button onClick={this.showWriteReview.bind(this)}>Add A Review +</button>
-        {this.state.showWriteReview &&
-        <WriteReview id={this.props.product}/>}
+        <WriteReview id={this.props.product}/>
       </div>
     )
   }
