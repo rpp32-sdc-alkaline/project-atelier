@@ -37,6 +37,11 @@ class RatingsAndReviews extends React.Component{
   componentDidUpdate(prevProps, prevState) {
     if (this.state.filters !== prevState.filters) {
       this.filterReviews()
+    } if (this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id
+      })
+      this.getReviewData(this.props.id, 'helpful', 1, 100)
     }
   }
 
@@ -71,14 +76,11 @@ class RatingsAndReviews extends React.Component{
   }
 
   changeSort(sort) {
-    console.log('in changeSort:', sort)
     this.setState({
       sort: sort
     })
     this.getReviewData(this.state.product, sort, 1, 100)
   }
-
-
 
   updateFilters(rating) {
     let currentFilters = Array.from(this.state.filters)

@@ -23,7 +23,6 @@ class Reviews extends React.Component {
   }
 
   changeSort(e) {
-    console.log('e.target.value', e.target.value)
     this.props.changeSort(e.target.value)
   }
 
