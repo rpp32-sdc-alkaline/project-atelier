@@ -11,7 +11,8 @@ class MainImage extends React.Component {
     // console.log('index', this.props.index)
     this.state = {
      hovered: false,
-     expand: false
+     expand: false,
+     image: this.props.image
     }
   // this.changeThumbnail = this.changeThumbnail.bind(this)
   this.nextSlide = this.nextSlide.bind(this)

@@ -6,7 +6,10 @@ const ExpandedView = (props) => {
 
 
   const [zoom, setZoom] = useState(false)
+  const [image, setImage] = useState(props.image)
   const [imageStyle, setImageStyle] = useState('zoom-out')
+  const [iconStyle, setIconStyle] = useState('thumbnail-icon')
+
   //when compdoesmount and when zoom (whatever is in array) state changes, runs
   //use reducer, use dispatch, use ref, use callback robin wieruch--react blog
 
@@ -18,6 +21,7 @@ const ExpandedView = (props) => {
       setImageStyle('zoom-out')
     }
   }, [zoom])
+
 
   const handleCloseClick = () => {
     setZoom(false)
@@ -35,6 +39,15 @@ const ExpandedView = (props) => {
     $image.css('transform-origin', `${x}px ${y}px`)
   }
 
+  const handleIconClick = (photo) => {
+    console.log('icon clicked', photo)
+    //change main photo to selected thumbnail photo
+    setImage(photo)
+
+    //change css of icon to indicate clicked
+    setIconStyle('clicked-icon')
+  }
+
   // var imageStyle = zoom ? 'zoom-in' : 'zoom-out'
     if (props.isOpen) {
       return (
@@ -42,11 +55,17 @@ const ExpandedView = (props) => {
           <div onClick={handleCloseClick} className={"modal-backdrop"} />
             <div className={"modal-box"}>
               <button onClick={handleCloseClick}>X</button>
-              <div className={"thumbnail-icon"}>test</div>
+
+              <div className="icon-wrapper">
+              {props.photos.map((photo, index) =>
+                <div style={{top: index * 50}} key={index} className={iconStyle}
+                onClick={(e)=>handleIconClick(photo.url)}>.</div>
+                )}
+                </div>
               <img onClick={handleZoomClick} onMouseMove={handleMouseMove}
               className={imageStyle} src={props.image}/>
+              </div>
 
-            </div>
         </div>
       )
     }
@@ -55,4 +74,5 @@ const ExpandedView = (props) => {
 
 export default ExpandedView
 
+//request specific size
 
