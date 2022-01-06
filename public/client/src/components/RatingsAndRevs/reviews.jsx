@@ -22,6 +22,10 @@ class Reviews extends React.Component {
     }
   }
 
+  changeSort(e) {
+    this.props.changeSort(e.target.value)
+  }
+
   showMore() {
     let reviews = this.props.reviews
     if (reviews.length > this.state.numToShow + 2) {
@@ -36,14 +40,9 @@ class Reviews extends React.Component {
     }
   }
 
-  showWriteReview() {
-    this.setState({
-      showWriteReview: true
-    })
-  }
-
   render() {
     let reviews = this.props.reviews
+    let showWriteReview = this.state.showWriteReview
     if (!reviews) {
       return (
         <div>
@@ -55,7 +54,7 @@ class Reviews extends React.Component {
       <div id="reviews" data-testid="reviews">
         <h4>Reviews</h4>
         <h5>999 reviews. Sort on:</h5>
-        <select name="review-sort-options" id="review-sort-options">
+        <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)}>
           <option value="relevance">Relevant</option>
           <option value="helpful">Helpful</option>
           <option value="newest">Newest</option>
@@ -67,9 +66,7 @@ class Reviews extends React.Component {
         </div>
         {!this.state.showingAll &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
-        <button onClick={this.showWriteReview.bind(this)}>Add A Review +</button>
-        {this.state.showWriteReview &&
-        <WriteReview id={this.props.product}/>}
+        <WriteReview id={this.props.product}/>
       </div>
     )
   }
