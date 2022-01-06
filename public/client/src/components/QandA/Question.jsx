@@ -8,7 +8,7 @@ const Question = (props) => {
   //console.log('props', props);
   let markHelpful = (e) => {
     let id = e.target.id;
-    console.log('event', e);
+    //console.log('event', e);
     let headers = {
       'Authorization': token.TOKEN
     };
@@ -18,7 +18,7 @@ const Question = (props) => {
       headers: headers
     })
     .then((result) => {
-      console.log('Marked as helpful', result)
+      console.log('Marked as helpful')
       //console.log('questionData', this.state.questionData);
     })
     .catch((error) => {

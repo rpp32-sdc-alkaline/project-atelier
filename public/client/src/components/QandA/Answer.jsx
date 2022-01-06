@@ -67,7 +67,7 @@ class Answer extends React.Component{
 
   markHelpful (e) {
     let id = e.target.id;
-    console.log('event', e);
+    //console.log('event', e);
     let headers = {
       'Authorization': token.TOKEN
     };
@@ -77,7 +77,7 @@ class Answer extends React.Component{
       headers: headers
     })
     .then((result) => {
-      console.log('Marked as helpful', result)
+      console.log('Marked as helpful')
       this.getAnswerData(this.props.props.question_id);
     })
     .catch((error) => {

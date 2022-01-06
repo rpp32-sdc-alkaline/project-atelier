@@ -35,9 +35,18 @@ class QandA extends React.Component{
     //console.log('QandAProps', this.props);
     let id = this.props.id;
     this.setState({
-      product: id
+      id: id
     })
     this.getQuestionData(id, 1, 100)
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id
+      })
+      this.getQuestionData(this.props.id, 1, 100)
+    }
   }
 
   getQuestionData(id, page, count) {
