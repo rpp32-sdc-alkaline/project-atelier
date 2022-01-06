@@ -4,7 +4,7 @@
   "description": "Front End Capstone: Dominic, Meredith, Zac, Jeff",
   "main": "server/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "start": "nodemon server/index.js",
     "build": "webpack --watch",
     "dev": "npm run start & npm run build"
@@ -20,7 +20,11 @@
   },
   "homepage": "https://github.com/rpp32-fec-oyster/project-atelier#readme",
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -52,6 +56,8 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.16"
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "react-icons": "^4.3.1",
+    "react-modal": "^3.14.4"
   }
 }

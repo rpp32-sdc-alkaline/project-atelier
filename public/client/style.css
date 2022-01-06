@@ -53,3 +53,167 @@
   gap: 5px;
 }
 
+.overview {
+  position: relative
+}
+
+.default-gallery {
+  position: relative;
+}
+
+.thumbnail-bar {
+  position: absolute;
+  left: 32px;
+  top: 60px;
+}
+
+.click-state {
+  border: 5px;
+  border-color: chartreuse;
+  border-style: inset;
+  height: 70px;
+  width: 50px;
+  margin: 5px;
+}
+
+.base-state {
+  height: 70px;
+  width: 40px;
+  margin: 5px;
+}
+
+.up-arrow {
+  position: absolute;
+  left: 15px;
+  top: -30px;
+  font-size: 30px;
+  font-weight: 400;
+  color: chartreuse;
+}
+
+.down-arrow {
+  position: absolute;
+  left: 15px;
+  bottom: -30px;
+}
+
+.slider{
+  position: relative;
+}
+
+.image {
+  width: 590px;
+  height: 700px;
+  border-radius: 10px;
+  margin: 10px
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 800px;
+  font-size: 3rem;
+  color: purple;
+  cursor: pointer;
+  user-select: none
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  font-size: 3rem;
+  color: purple;
+  cursor: pointer;
+  user-select: none
+}
+
+/* Overview */
+.hovered {
+  cursor: nesw-resize
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6)
+}
+
+.modal-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80%;
+  width: 70%;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  padding: 40px;
+  cursor: zoom-in
+}
+
+.zoom-out {
+  position: absolute;
+}
+
+.zoom-in {
+  transform: scale(2.5);
+  cursor: zoom-out
+}
+
+.thumbnail-icon {
+  position: absolute;
+  background: red;
+  border-radius: 50%;
+}
+
+/*  Question and Answer Style */
+
+.modalBackground {
+  opacity:    1;
+  /*background: #000;*/
+  width:      100%;
+  height:     100%;
+  z-index:    10;
+  top:        0;
+  left:       0;
+  position:   fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+.modalContainer {
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+
+}
+
+.questions {
+  color: black
+}
+
+.seller {
+  font-weight: bold;
+}
+
+

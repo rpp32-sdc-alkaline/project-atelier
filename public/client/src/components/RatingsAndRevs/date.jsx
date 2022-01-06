@@ -10,14 +10,16 @@ class Date extends React.Component {
 
   componentDidMount() {
     let date = this.props.date
-    let month =date.slice(5,7)
+    let month = date?.slice(5,7)
     let day
-    if (date[8] === '0') {
-      day = date.slice(9,10)
-    } else {
-      day = date.slice(8,10)
+    if (date) {
+      if (date[8] === '0') {
+        day = date?.slice(9,10)
+      } else {
+        day = date?.slice(8,10)
+      }
     }
-    let year = date.slice(0,4)
+    let year = date?.slice(0,4)
     let dateString = ""
     //set month
     if (month === "01") {

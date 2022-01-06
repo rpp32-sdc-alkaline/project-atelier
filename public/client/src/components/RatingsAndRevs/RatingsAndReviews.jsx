@@ -16,10 +16,14 @@ class RatingsAndReviews extends React.Component{
       sort: 'helpful',
       page: 1,
       count: 5,
-      reviews: [],
-      metadata: []
+      allReviews: [],
+      metadata: [],
+      filters: [],
+      filteredReviews: []
     }
     this.getReviewData.bind(this)
+    this.filterReviews.bind(this)
+    this.updateFilters.bind(this)
   }
 
   componentDidMount() {
@@ -27,7 +31,18 @@ class RatingsAndReviews extends React.Component{
     this.setState({
       product: id
     })
-    this.getReviewData(id, 'helpful', 1, 5)
+    this.getReviewData(id, 'helpful', 1, 100)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.filters !== prevState.filters) {
+      this.filterReviews()
+    } if (this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id
+      })
+      this.getReviewData(this.props.id, 'helpful', 1, 100)
+    }
   }
 
   getReviewData(product, sort, page, count) {
@@ -42,24 +57,67 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then(result => {
-      // console.log('reviews in client', result.data),
       this.setState({
-        reviews: result.data
+        allReviews: result.data.results,
+        filteredReviews: result.data.results
       })
     })
     .catch(error => console.log('error!', error))
-      //get metadata
     axios.get(metadataUrl, {
       headers: headers
     })
     .then (result => {
-      // console.log('metadata', result.data),
       this.setState({
         metadata: result.data,
         haveData: true
       })
     })
     .catch(error => console.log('error!', error))
+  }
+
+  changeSort(sort) {
+    this.setState({
+      sort: sort
+    })
+    this.getReviewData(this.state.product, sort, 1, 100)
+  }
+
+  updateFilters(rating) {
+    let currentFilters = Array.from(this.state.filters)
+    if (currentFilters.length === 0) {
+      currentFilters.push(rating)
+    } else {
+      let ratingIndex = currentFilters.indexOf(rating)
+      //if current filters contain [input rating]
+      if (ratingIndex !== -1) {
+        //remove current rating from filters
+        currentFilters.splice(ratingIndex, 1)
+      } else {
+        currentFilters.push(rating)
+      }
+    } this.setState({
+        filters: currentFilters
+    })
+
+  }
+  //review filtering function that will update state with only the reviews to show
+  filterReviews() {
+    let filters = Array.from(this.state.filters)
+    let allReviews = Array.from(this.state.allReviews)
+    let filteredReviews = []
+    if (filters.length === 0) {
+      filteredReviews = allReviews
+    } else {
+      for (var i = 0; i < allReviews.length; i++) {
+        for (var j = 0; j < filters.length; j++) {
+          if (allReviews[i].rating === filters[j]) {
+            filteredReviews.push(allReviews[i])
+          }
+        }
+      }
+    } this.setState({
+        filteredReviews: filteredReviews
+    })
   }
 
   render() {
@@ -70,9 +128,9 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <Reviews reviews={this.state.reviews}/>
+        <Reviews reviews={this.state.filteredReviews} product={this.state.product} changeSort={this.changeSort.bind(this)}/>
         <div className="ratings-left-sidebar">
-          <RatingBreakdown metadata={this.state.metadata}/>
+          <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>
         </div>
       </div>
