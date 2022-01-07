@@ -22,6 +22,10 @@
   background-color: honeydew;
 }
 
+.individual-rating-breakdown-row:hover {
+  background-color: lightskyblue;
+}
+
 .rating-breakdown-bar-container {
   background-color: rgb(192, 189, 189);
   width: 70px;
