@@ -49,6 +49,7 @@ class Overview extends React.Component{
     this.changeThumbnail = this.changeThumbnail.bind(this)
     this.thumbnailScrollUp = this.thumbnailScrollUp.bind(this)
     this.thumbnailScrollDown = this.thumbnailScrollDown.bind(this)
+    this.iconClick = this.iconClick.bind(this)
     this.selectSize = this.selectSize.bind(this)
     this.selectQuantity = this.selectQuantity.bind(this)
     this.addToCart = this.addToCart.bind(this)
@@ -159,6 +160,14 @@ class Overview extends React.Component{
     })
   }
 
+  iconClick(photo, index) {
+    // console.log('overview icon clicked', photo, index)
+    this.setState({
+      mainImage: photo,
+      mainImageIndex: index
+    })
+  }
+
   selectSize(size, available) {
     // console.log('select size called', size)
     // console.log('available', Number(available))
@@ -238,18 +247,25 @@ class Overview extends React.Component{
 
       return (
         <div className="overview">
-          <h2>Overview</h2>
-          <StarRating ratings={this.state.ratings}/>
-          <Category category = {this.state.product.category}/>
-          <ProductTitle name={this.state.product.name}/>
-          <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
-          {description}
+
+
+
           <div className="default-gallery">
           <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
-          index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
+          iconClick={this.iconClick} index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
           <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
           thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}/>
           </div>
+
+          <div className="product-info">
+          <StarRating ratings={this.state.ratings}/>
+            <div className="product-details">
+          <Category category = {this.state.product.category} className="category"/>
+          <ProductTitle name={this.state.product.name}/>
+          <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
+            </div>
+
+
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
           <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
@@ -261,6 +277,8 @@ class Overview extends React.Component{
           style={this.state.displayedStyleName} size={this.state.selectedSize}
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
           {displayAdded}
+          </div>
+          {description}
         </div>
     )
   }
