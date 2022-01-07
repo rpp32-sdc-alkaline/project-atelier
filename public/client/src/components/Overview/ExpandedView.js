@@ -11,7 +11,12 @@ const ExpandedView = (props) => {
   //when compdoesmount and when zoom (whatever is in array) state changes, runs
   //use reducer, use dispatch, use ref, use callback robin wieruch--react blog
 
+//50 v max height
+//50 v max width
 
+//display: flex
+//justify content: cneter
+//align -items : center
   useEffect(()=> {
     if(zoom) {
       setImageStyle('zoom-in')
@@ -45,7 +50,7 @@ const ExpandedView = (props) => {
         <div className={"modal-wrapper"}>
           <div onClick={handleCloseClick} className={"modal-backdrop"} />
             <div className={"modal-box"}>
-              <button onClick={handleCloseClick}>X</button>
+              <button className={"modal-close-btn"} onClick={handleCloseClick}>X</button>
 
               <div className="icon-wrapper">
               {props.photos.map((photo, index) =>
@@ -55,7 +60,7 @@ const ExpandedView = (props) => {
                 )}
                 </div>
               <img onClick={handleZoomClick} onMouseMove={handleMouseMove}
-              className={imageStyle} src={props.image}/>
+              className={imageStyle} src={props.image} draggable="true"/>
               </div>
 
         </div>
