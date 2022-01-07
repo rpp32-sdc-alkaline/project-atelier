@@ -15,7 +15,7 @@ const Price = (props) => {
     priceDisplay = <div>${props.price}</div>
   }
   return (
-    <div>
+    <div className="price">
       {priceDisplay}
     </div>
 
