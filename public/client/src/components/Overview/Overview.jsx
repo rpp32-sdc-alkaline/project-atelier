@@ -259,13 +259,13 @@ class Overview extends React.Component{
 
           <div className="product-info">
           <StarRating ratings={this.state.ratings}/>
+            <div className="product-details">
           <Category category = {this.state.product.category} className="category"/>
           <ProductTitle name={this.state.product.name}/>
           <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
-          {description}
-          </div>
+            </div>
 
-          <div className="drop-downs">
+
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
           <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
@@ -278,7 +278,7 @@ class Overview extends React.Component{
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
           {displayAdded}
           </div>
-
+          {description}
         </div>
     )
   }
