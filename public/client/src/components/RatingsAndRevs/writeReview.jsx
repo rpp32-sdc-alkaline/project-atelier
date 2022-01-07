@@ -59,6 +59,7 @@ class WriteReview extends React.Component {
 
   uploadPhotos(e) {
     e.preventDefault()
+    console.log('in uploadPhotos')
   }
 
   handleNicknameChange(e) {
@@ -76,6 +77,7 @@ class WriteReview extends React.Component {
   onSubmit(e) {
     e.preventDefault()
     let invalidFields = ''
+    let properEmail = /\w+@.\D{3}/ig
     if (!this.state.rating) {
       invalidFields += 'Overall Rating\n'
     } if (this.state.recommend === null) {
@@ -87,13 +89,12 @@ class WriteReview extends React.Component {
       }
     } if (this.state.body === '' || this.state.body.length < 50) {
       invalidFields += 'Review body\n'
-    } // TODO: handle invalid photo uploads
+    } // TODO: handle invalid photo upload
     if (!this.state.nickname) {
       invalidFields += 'Nickname\n'
-    } if (!this.state.email) {
+    } if (this.state.email !== properEmail) {
       invalidFields += 'Email\n'
-    }
-    if (invalidFields) {
+    } if (invalidFields) {
       alert(`You must enter the following:\n${invalidFields}`)
     } else {
       let reviewFormData = {
@@ -160,12 +161,11 @@ class WriteReview extends React.Component {
               <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
               onChange={this.handleBodyChange.bind(this)}></textarea>
               {this.state.body.length < 50 &&
-              <p>Minimum required characters left: {50-this.state.body.length}</p>
-              }
+              <p>Minimum required characters left: {50-this.state.body.length}</p>}
               {this.state.body.length >= 50 &&
-              <p>Minimum reached</p>
-              }
-              <button id="photo-button" onClick={this.uploadPhotos.bind(this)}>Upload photos</button>
+              <p>Minimum reached</p>}
+              <label htmlFor="photos">Upload photos:</label>
+              <input type="file" id="photos" name="photos"></input>
               <p>What is your nickname?*</p>
               <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
               onChange={this.handleNicknameChange.bind(this)}></textarea>

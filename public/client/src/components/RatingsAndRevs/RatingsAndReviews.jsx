@@ -13,7 +13,7 @@ class RatingsAndReviews extends React.Component{
     this.state = {
       haveData: false,
       product: 0,
-      sort: 'helpful',
+      sort: 'relevant',
       page: 1,
       count: 5,
       allReviews: [],
@@ -31,7 +31,7 @@ class RatingsAndReviews extends React.Component{
     this.setState({
       product: id
     })
-    this.getReviewData(id, 'helpful', 1, 100)
+    this.getReviewData(id, 'relevant', 1, 100)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,7 +41,7 @@ class RatingsAndReviews extends React.Component{
       this.setState({
         id: this.props.id
       })
-      this.getReviewData(this.props.id, 'helpful', 1, 100)
+      this.getReviewData(this.props.id, this.state.sort, 1, 100)
     }
   }
 
