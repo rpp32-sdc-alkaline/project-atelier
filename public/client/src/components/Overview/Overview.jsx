@@ -247,18 +247,25 @@ class Overview extends React.Component{
 
       return (
         <div className="overview">
-          <h2>Overview</h2>
-          <StarRating ratings={this.state.ratings}/>
-          <Category category = {this.state.product.category}/>
-          <ProductTitle name={this.state.product.name}/>
-          <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
-          {description}
+
+
+
           <div className="default-gallery">
           <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
           iconClick={this.iconClick} index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
           <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
           thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}/>
           </div>
+
+          <div className="product-info">
+          <StarRating ratings={this.state.ratings}/>
+          <Category category = {this.state.product.category} className="category"/>
+          <ProductTitle name={this.state.product.name}/>
+          <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
+          {description}
+          </div>
+
+          <div className="drop-downs">
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
           <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
@@ -270,6 +277,8 @@ class Overview extends React.Component{
           style={this.state.displayedStyleName} size={this.state.selectedSize}
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
           {displayAdded}
+          </div>
+
         </div>
     )
   }
