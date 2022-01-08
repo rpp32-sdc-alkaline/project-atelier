@@ -163,7 +163,6 @@ class Overview extends React.Component{
   }
 
   expandedView() {
-    console.log('expanded view')
     var expandState = this.state.expand
     this.setState({
       expand: !expandState
