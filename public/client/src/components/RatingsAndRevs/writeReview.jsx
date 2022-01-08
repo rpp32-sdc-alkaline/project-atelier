@@ -124,6 +124,7 @@ class WriteReview extends React.Component {
     }
 
     toggleWriteReview() {
+      console.log('in toggleWriteReview')
       let currentState = this.state.show
       this.setState({
         show: !currentState
@@ -166,7 +167,7 @@ class WriteReview extends React.Component {
     let chars = Array.from(this.state.chars)
     let rating = this.state.rating
     return (
-        <div className='write-review-modal' onClick={this.toggleWriteReview.bind(this)}>
+        <div className='write-review-modal'>
           <div className="write-review-modal-content">
             <button onClick={this.toggleWriteReview.bind(this)}>X</button>
             <h3>Write Your Review</h3>
