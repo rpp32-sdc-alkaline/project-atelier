@@ -1,6 +1,9 @@
 import React from 'react'
 import CharacteristicReview from './characteristicReview.jsx'
 import axios from 'axios'
+import fullStar from '../../../../../assets/images/full-gold-star.png';
+import outlineStar from '../../../../../assets/images/star-outline.png';
+
 
 class WriteReview extends React.Component {
   constructor(props) {
@@ -9,6 +12,7 @@ class WriteReview extends React.Component {
       show: false,
       id: null,
       rating: null,
+      starsFill: ['grey', 'grey', 'grey', 'grey', 'grey'],
       recommend: null,
       size: null,
       width: null,
@@ -74,6 +78,8 @@ class WriteReview extends React.Component {
     })
   }
 
+
+
   onSubmit(e) {
     e.preventDefault()
     let invalidFields = ''
@@ -110,6 +116,48 @@ class WriteReview extends React.Component {
       }
     }
 
+    handleStarOneClick(e) {
+      e.preventDefault()
+      let newStarsFill = ['gold', 'grey', 'grey', 'grey', 'grey']
+      this.setState({
+        starsFill: newStarsFill
+      })
+    }
+
+    handleStarTwoClick(e) {
+      e.preventDefault()
+      let newStarsFill = ['gold', 'gold', 'grey', 'grey', 'grey']
+      this.setState({
+        starsFill: newStarsFill
+      })
+    }
+
+    handleStarThreeClick(e) {
+      e.preventDefault()
+      let newStarsFill = ['gold', 'gold', 'gold', 'grey', 'grey']
+      this.setState({
+        starsFill: newStarsFill
+      })
+    }
+
+    handleStarFourClick(e) {
+      e.preventDefault()
+      let newStarsFill = ['gold', 'gold', 'gold', 'gold', 'grey']
+      this.setState({
+        starsFill: newStarsFill
+      })
+    }
+
+    handleStarFiveClick(e) {
+      e.preventDefault()
+      let newStarsFill = ['gold', 'gold', 'gold', 'gold', 'gold']
+      this.setState({
+        starsFill: newStarsFill
+      })
+    }
+
+
+
     toggleWriteReview() {
       let currentState = this.state.show
       this.setState({
@@ -126,6 +174,29 @@ class WriteReview extends React.Component {
       return (
         <button onClick={this.toggleWriteReview.bind(this)}>Add A Review +</button>
       )
+    } let starOneSrc = outlineStar;
+    let starTwoSrc = outlineStar;
+    let starThreeSrc = outlineStar;
+    let starFourSrc = outlineStar;
+    let starFiveSrc = outlineStar;
+    for (var i = 0; i < 5; i++) {
+      if (this.state.starsFill[i] === 'gold') {
+        if (i === 0) {
+          starOneSrc = fullStar
+        } if (i === 1) {
+          starTwoSrc = fullStar
+        } if (i === 2) {
+          starThreeSrc = fullStar
+        } if (i === 3) {
+          starFourSrc = fullStar
+        } if (i === 4) {
+          starFiveSrc = fullStar
+        }
+      }
+    }
+    let style = {
+      height: '20px',
+      width: '20px'
     }
     let chars = Array.from(this.state.chars)
     return (
@@ -137,6 +208,15 @@ class WriteReview extends React.Component {
             <h5>About the [Product Name Here]</h5>
             <form>
               <p>Overall Rating*</p>
+              <div className='review-stars'>
+                {[]}
+
+                {/* <img src={starOneSrc} style={style} onClick={this.handleStarOneClick.bind(this)}></img>
+                <img src={starTwoSrc} style={style} onClick={this.handleStarTwoClick.bind(this)}></img>
+                <img src={starThreeSrc} style={style} onClick={this.handleStarThreeClick.bind(this)}></img>
+                <img src={starFourSrc} style={style} onClick={this.handleStarFourClick.bind(this)}></img>
+                <img src={starFiveSrc} style={style} onClick={this.handleStarFiveClick.bind(this)}></img> */}
+              </div>
               <select id="rating" name="rating" onChange={this.handleOverallRating.bind(this)}>
                 <option value="5" >5 Stars</option>
                 <option value="4">4 Stars</option>

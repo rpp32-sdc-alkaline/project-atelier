@@ -8,20 +8,22 @@ let Stars = (props) => {
   if (quarters === 4) {
     quarters = 'gold'
   }
+  //think about 4.02
   let greyStars = Math.floor(5 - average)
   let starsFill=[]
   for (var i = 0; i < fullStars; i++) {
     starsFill.push('gold')
-  } if (quarters !== 0) {
+  }
+  // if (quarters !== 0) {
     starsFill.push(quarters)
-  } for (var i = 0; i < greyStars; i++) {
+  // }
+  for (var i = 0; i < greyStars; i++) {
     starsFill.push('grey')
   }
   return (
     <div className="stars-row">
       {starsFill.map((info, index) =>
-      <Star starFill={info} size={size} key={index}/>)
-      }
+      <Star starFill={info} size={size} key={index}/>)}
     </div>
   )
 }
