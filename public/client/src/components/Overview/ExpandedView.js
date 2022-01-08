@@ -50,8 +50,9 @@ const ExpandedView = (props) => {
         <div className={"modal-wrapper"}>
           <div onClick={handleCloseClick} className={"modal-backdrop"} />
             <div className={"modal-box"}>
-              <button className={"modal-close-btn"} onClick={handleCloseClick}>X</button>
 
+              <div className="modal-side-bar">
+              <button className={"modal-close-btn"} onClick={handleCloseClick}>X</button>
               <div className="icon-wrapper">
               {props.photos.map((photo, index) =>
                 <button style={{top: index * 50}} key={index}
@@ -59,6 +60,8 @@ const ExpandedView = (props) => {
                 onClick={(e)=>handleIconClick(e, photo.url, index)}>.</button>
                 )}
                 </div>
+              </div>
+
               <img onClick={handleZoomClick} onMouseMove={handleMouseMove}
               className={imageStyle} src={props.image} draggable="true"/>
               </div>

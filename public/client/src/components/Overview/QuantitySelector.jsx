@@ -23,7 +23,7 @@ handleChange(e) {
       disable = false
     }
     return (
-      <select style={{margin: 10}} onChange={this.handleChange} disabled={disable}>
+      <select className="quantity-selector" onChange={this.handleChange} disabled={disable}>
         <option value={1}>{disable? '-' : '1'}</option>
         <QuantityDropDown size={this.props.size} available={this.props.available}/>
       </select>

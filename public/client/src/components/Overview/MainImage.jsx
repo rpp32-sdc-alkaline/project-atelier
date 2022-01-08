@@ -38,10 +38,11 @@ class MainImage extends React.Component {
 
   handleClick() {
     // console.log('image clicked')
-    var expandState = this.state.expand
-    this.setState({
-      expand: !expandState
-    })
+    // var expandState = this.state.expand
+    // this.setState({
+    //   expand: !expandState
+    // })
+    this.props.expandedView()
   }
 
   iconClick(photo) {
@@ -76,7 +77,7 @@ class MainImage extends React.Component {
         {leftArrow}
         {rightArrow}
             <img className={cursor} onMouseEnter={this.handleMouseEnter} onClick={this.handleClick} style={format} src={this.props.image}/>
-            <ExpandedView isOpen={this.state.expand} close={this.handleClick} iconClick={this.props.iconClick}
+            <ExpandedView isOpen={this.props.modalOpen} close={this.handleClick} iconClick={this.props.iconClick}
             photos={this.props.photos} image={this.props.image} />
 
       </div>
