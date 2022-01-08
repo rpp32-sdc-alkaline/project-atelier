@@ -284,6 +284,13 @@
 
 /*  Question and Answer Style */
 
+.qAndA {
+  height: auto;
+  width: auto;
+  margin-left: 20px;
+
+}
+
 .modalBackground {
   opacity:    1;
   /*background: #000;*/
@@ -295,7 +302,6 @@
   position:   fixed;
   background-color: rgba(0, 0, 0, 0.6);
 }
-
 
 .modalContainer {
   width: 500px;
@@ -309,12 +315,48 @@
 
 }
 
-.questions {
-  color: black
+.question {
+  color: black;
+  font-weight: bold;
+}
+
+.answer {
+  font-weight: lighter;
+
 }
 
 .seller {
   font-weight: bold;
 }
+
+.helpful {
+  font-weight: lighter;
+  text-align: right;
+  margin-right: 20px;
+  font-size: 12px;
+}
+
+.moreQuestion {
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+}
+
+.addQuestion {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+.addAnswer {
+  font-weight: lighter;
+  text-decoration: underline;
+}
+
+.aHeading {
+  font-weight: bold;
+
+}
+
 
 

@@ -96,16 +96,16 @@ class Answer extends React.Component{
       let eachAnwser = this.state.answerData.slice(0, 2).map((item) => {
         //console.log('answerItem', item)
         return (
-          <div key={item.answer_id} className='answer'>
+          <span key={item.answer_id} className='answer'>
             {item.body} <br></br>
             by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span>Report</span></span><br></br>
-          </div>
+          </span>
         )
       })
       return (
         <div className='answers'>
-          A: {eachAnwser} <br></br>
-          {this.state.answerData.length > 2 && <button onClick={this.getMore}>Load More Answers</button>}
+          <span className='aHeading'>A:</span> {eachAnwser}
+          {this.state.answerData.length > 2 && <span className='loadMoreAnswers' onClick={this.getMore}>Load More Answers</span>}<br></br><br></br>
         </div>
       )
     } else {
@@ -120,8 +120,8 @@ class Answer extends React.Component{
       })
       return (
         <div className='answers'>
-          A: {eachAnwser} <br></br>
-          <button onClick={this.getLess}>Collapse Answers</button>
+          <span className='aHeading'>A:</span>{eachAnwser} <br></br>
+          <span onClick={this.getLess}>Collapse Answers</span><br></br>
         </div>
       )
     }
