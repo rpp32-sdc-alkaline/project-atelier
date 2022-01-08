@@ -11,11 +11,7 @@ const Star = (props) => {
   let style = {
     height: `${size}px`,
     width: `${size}px`
-  }
-  if (typeof starFill === 'number') {
-    if (starFill === 0) {
-      imgSrc = outlineStar
-    }
+  } if (typeof starFill === 'number') {
     if (starFill === 1) {
       imgSrc = oneQuarterStar
     } else if (starFill === 2) {
