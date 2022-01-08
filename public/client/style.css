@@ -399,5 +399,7 @@
 
 }
 
-
-
+.reported {
+  color: red;
+  font-weight: bold;
+}
