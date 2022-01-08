@@ -63,9 +63,13 @@
   border: solid 1px black;
 }
 
+.slider {
+  display: flex;
+  justify-content: center;
+}
+
 .overview-stars {
   display: flex;
-
 }
 
 .ovstar-column img {
@@ -78,6 +82,7 @@
   grid-row-start: 1;
   display: grid;
   grid-template-rows: 1fr, 2fr, 1fr;
+  grid-template-columns: 1fr, 1fr, 1fr, 1fr;
   gap: 5px;
 }
 
@@ -96,19 +101,42 @@
 }
 
 
+
+.selectors {
+  /* display: inline-flex;
+  height: 100%; */
+  grid-row-start: 5;
+  display: grid;
+  grid-template-columns: 60% 30%;
+  grid-template-rows: 1fr;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.size-selector {
+  grid-column-start: 1;
+  align-self: stretch
+}
+
+.size-selector-button {
+  grid-column-start: 1;
+  width: 100%;
+  height: 100%;
+  align-self: stretch;
+}
+
+.quantity-selector {
+  /* flex: 1;
+  height: 3rem; */
+  grid-column-start: 2;
+  align-self: stretch;
+}
+
 .footer {
   grid-column-start: 1;
   grid-row-start: 2;
 }
 
-
-
-
-.drop-downs {
-  border: solid 1px orange;
-  grid-column-start: 2 / 1;
-  grid-row-start: 2;
-}
 
 /* .category {
   grid-column-start: 2 / span 1;
@@ -119,7 +147,7 @@
   /* position: relative; */
   grid-column-start: 1 / 1;
   grid-row-start: 1;
-  justify-items: center;
+  justify-content: center;
   border: solid 1px red;
 }
 
@@ -128,6 +156,14 @@
   left: 32px;
   top: 60px;
   z-index: 0;
+}
+
+.thumbnail-bar-opaque {
+  position: absolute;
+  left: 32px;
+  top: 60px;
+  z-index: 0;
+  opacity: 0.3;
 }
 
 .click-state {
@@ -219,35 +255,40 @@
 /* solution 1 */
 .modal-box {
   position: fixed;
-  /* display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center; */
+  /* align-items: center; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 80%;
-  width: 70%;
-  overflow-y: auto;
+  height: 90%;
+  width: 60%;
+  padding-top: 3rem;
+  padding-right: 2rem;
+  /* overflow-y: auto; */
   background-color: gray;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   z-index: 2;
   /* padding: 40px; */
   cursor: zoom-in;
+
 }
 
+.modal-side-bar {
+  justify-content: flex-start;
+  margin: 2rem;
+}
+
+
 .zoom-out {
-  position: absolute;
-  max-width: 50vmax;
-  /* max-height: ; */
-  height: 35rem;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  display: flex;
+  /* max-width: 50vmax; */
+  width: 80%;
+  height: 95%;
   top: calc(50% - 20vmax);
-  left: calc(50% - 15vmax);
+  left: calc(50% - 10vmax);
   right: calc(50% - 15vmax);
-  /* margin-left: auto;
-  margin-right: auto; */
+
 
 }
 
@@ -262,7 +303,7 @@
 .icon-wrapper {
   top: 5%;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 .thumbnail-icon {

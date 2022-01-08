@@ -29,6 +29,7 @@ class Overview extends React.Component{
       thumbnailBarPhotos: [],
       mainImage: '',
       mainImageIndex: 0,
+      expand: false,
 
       hasData: false,
       selectedSize: 'Select Size',
@@ -49,6 +50,7 @@ class Overview extends React.Component{
     this.changeThumbnail = this.changeThumbnail.bind(this)
     this.thumbnailScrollUp = this.thumbnailScrollUp.bind(this)
     this.thumbnailScrollDown = this.thumbnailScrollDown.bind(this)
+    this.expandedView = this.expandedView.bind(this)
     this.iconClick = this.iconClick.bind(this)
     this.selectSize = this.selectSize.bind(this)
     this.selectQuantity = this.selectQuantity.bind(this)
@@ -160,6 +162,13 @@ class Overview extends React.Component{
     })
   }
 
+  expandedView() {
+    var expandState = this.state.expand
+    this.setState({
+      expand: !expandState
+    })
+  }
+
   iconClick(photo, index) {
     // console.log('overview icon clicked', photo, index)
     this.setState({
@@ -252,9 +261,11 @@ class Overview extends React.Component{
 
           <div className="default-gallery">
           <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
-          iconClick={this.iconClick} index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}/>
+          iconClick={this.iconClick} index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}
+          expandedView={this.expandedView} modalOpen={this.state.expand}/>
           <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
-          thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}/>
+          thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}
+          modalOpen={this.state.expand}/>
           </div>
 
           <div className="product-info">
@@ -268,11 +279,14 @@ class Overview extends React.Component{
 
           <h3>{this.state.displayedStyleName}</h3>
           <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
+          <div className="selectors">
+
           <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
           openSizeDropDown={this.openSizeDropDown} showSizes={this.state.showSizes}
           hideAddToCart={this.hideAddToCart} />
           <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
           selectQuantity={this.selectQuantity}/>
+          </div>
           <AddToCart addToCart={this.addToCart} openSizeDropDown={this.openSizeDropDown} noSizeSelected={this.state.noSizeSelected}
           style={this.state.displayedStyleName} size={this.state.selectedSize}
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />

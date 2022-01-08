@@ -80,8 +80,8 @@ class SizeSelector extends React.Component {
       list = null
     }
   return (
-   <div>
-     <button onClick={this.openDropDown} disabled={this.state.disabled}>{this.state.display}</button>
+   <div className="size-selector">
+     <button className="size-selector-button" onClick={this.openDropDown} disabled={this.state.disabled}>{this.state.display}</button>
      {/* <div style={{margin: 10}} onClick={this.openDropDown}>{this.state.display}</div> */}
      {list}
    </div>

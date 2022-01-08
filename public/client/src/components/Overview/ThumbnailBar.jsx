@@ -59,14 +59,15 @@ class ThumbnailBar extends React.Component {
     var downArrow;
     var index;
     var photos;
-    if (this.props.photos?.length > 5) {
+    if (this.props.photos?.length > 7) {
       upArrow = <img className="up-arrow" onClick={this.handleUpClick}
       src="https://img.icons8.com/color/30/000000/circled-chevron-up--v1.png"/>
       downArrow = <img className="down-arrow" onClick={this.handleDownClick}
       src="https://img.icons8.com/color/30/000000/circled-chevron-down--v1.png"/>
     }
+
     return (
-      <div className="thumbnail-bar">
+      <div className={this.props.modalOpen ? 'thumbnail-bar-opaque' : 'thumbnail-bar'}>
         {upArrow}
         {this.props.photos?.map((photo, index) => {
           // console.log('photo index', photo)

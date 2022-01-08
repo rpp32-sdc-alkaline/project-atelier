@@ -10,8 +10,6 @@ let Stars = (props) => {
   }
 
   let greyStars = Math.floor(5 - average)
-  console.log('average', average)
-  console.log('greystars', greyStars)
   let starsFill = []
   for (var i = 0; i < fullStars; i++) {
     starsFill.push('gold')
