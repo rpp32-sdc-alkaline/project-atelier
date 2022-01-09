@@ -13,6 +13,9 @@ const Star = (props) => {
     width: "2rem"
   }
   if (typeof starFill === 'number') {
+    if (starFill === 0) {
+      imgSrc = outlineStar
+    }
     if (starFill === 1) {
       imgSrc = oneQuarterStar
     } else if (starFill === 2) {
