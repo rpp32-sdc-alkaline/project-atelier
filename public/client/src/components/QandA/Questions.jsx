@@ -27,8 +27,8 @@ class Questions extends React.Component{
       )
     } else {
     return (
-      <div>
-        <Question props={questions} moreButton={this.props.moreButton}/>
+      <div className='questions'>
+        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId}/>
       </div>
     )
     }

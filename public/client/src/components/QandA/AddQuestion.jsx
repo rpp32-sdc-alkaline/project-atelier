@@ -50,7 +50,7 @@ class AddQuestion extends React.Component {
   render () {
     if (this.state.show === false) {
       return(
-        <button className='addQuestion' onClick={this.showModal}>Add A Question</button>
+        <span className='addQuestion' onClick={this.showModal}>Add A Question +</span>
       )
     } else {
       return(
