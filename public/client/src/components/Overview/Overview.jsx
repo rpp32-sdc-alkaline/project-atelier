@@ -269,28 +269,34 @@ class Overview extends React.Component{
           </div>
 
           <div className="product-info">
-          <StarRating ratings={this.state.ratings}/>
             <div className="product-details">
-          <Category category = {this.state.product.category} className="category"/>
-          <ProductTitle name={this.state.product.name}/>
-          <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
+            <StarRating ratings={this.state.ratings}/>
+            <Category category = {this.state.product.category} className="category"/>
+            <ProductTitle name={this.state.product.name}/>
+            <Price price={this.state.product.default_price} salePrice={this.state.salePrice}/>
             </div>
 
+            <div className="style-selector">
+              <div className="selected-style">
+                <p className="style"><b>STYLE</b></p>
+                <p>{this.state.displayedStyleName.toUpperCase()}</p>
+              </div>
+              <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
+            </div>
 
-          <h3>{this.state.displayedStyleName}</h3>
-          <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
-          <div className="selectors">
+            <div className="selectors">
+              <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
+              openSizeDropDown={this.openSizeDropDown} showSizes={this.state.showSizes}
+              hideAddToCart={this.hideAddToCart} />
+              <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
+              selectQuantity={this.selectQuantity}/>
 
-          <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
-          openSizeDropDown={this.openSizeDropDown} showSizes={this.state.showSizes}
-          hideAddToCart={this.hideAddToCart} />
-          <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
-          selectQuantity={this.selectQuantity}/>
-          </div>
+
           <AddToCart addToCart={this.addToCart} openSizeDropDown={this.openSizeDropDown} noSizeSelected={this.state.noSizeSelected}
           style={this.state.displayedStyleName} size={this.state.selectedSize}
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
           {displayAdded}
+          </div>
           </div>
           {description}
         </div>
