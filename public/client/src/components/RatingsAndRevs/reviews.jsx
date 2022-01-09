@@ -22,6 +22,12 @@ class Reviews extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.product) {
+      console.log('this.props.product', this.props.product)
+    }
+  }
+
   changeSort(e) {
     this.props.changeSort(e.target.value)
   }
@@ -66,7 +72,7 @@ class Reviews extends React.Component {
         </div>
         {!this.state.showingAll &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
-        <WriteReview id={this.props.product}/>
+        <WriteReview id={this.props.product} name={this.props.name}/>
       </div>
     )
   }

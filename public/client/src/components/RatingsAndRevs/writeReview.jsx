@@ -34,6 +34,12 @@ class WriteReview extends React.Component {
     this.closeModal.bind(this)
   }
 
+  componentDidUpdate() {
+    if (this.props.id) {
+      console.log('this.props.id', this.props.id)
+    }
+  }
+
   handleOverallRating(e) {
     this.setState({
       rating: e.target.value
@@ -187,7 +193,7 @@ class WriteReview extends React.Component {
           <div className="write-review-modal-box" onClick={() => console.log('clicked in the box')}>
             <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
             <h3>Write Your Review</h3>
-            <h5>About the [Product Name Here]</h5>
+            <h5>About the {this.props.name}</h5>
             <form>
               <p>Overall Rating*</p>
               <div className='review-stars'>
@@ -208,13 +214,16 @@ class WriteReview extends React.Component {
                   )}
                 )}
               </div>
+              <br></br>
               <p>Do you recommend this product?*</p>
               <input type="radio" id="yes-recommend" name="recommend" value={true} onClick={this.handleRecommend.bind(this)}></input>
               <label htmlFor="yes-recommend">Yes</label>
               <input type="radio" id="no-recommend" name="recommend" value={false} onClick={this.handleRecommend.bind(this)}></input>
               <label htmlFor="no-recommend">No</label>
               <br></br>
+              <br></br>
               <p>Rate these characteristics:</p>
+              <br></br>
               {chars.map(char =>
               <CharacteristicReview thisChar={char} key={char} rateChar={this.rateCharacteristic.bind(this)}/>
               )}

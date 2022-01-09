@@ -19,7 +19,8 @@ class RatingsAndReviews extends React.Component{
       allReviews: [],
       metadata: [],
       filters: [],
-      filteredReviews: []
+      filteredReviews: [],
+      name: ''
     }
     this.getReviewData.bind(this)
     this.filterReviews.bind(this)
@@ -57,6 +58,7 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then(result => {
+      console.log('result.data', result.data)
       this.setState({
         allReviews: result.data.results,
         filteredReviews: result.data.results
@@ -67,6 +69,7 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then (result => {
+      console.log('result.data for metadata', result.data)
       this.setState({
         metadata: result.data,
         haveData: true
@@ -128,7 +131,11 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <Reviews reviews={this.state.filteredReviews} product={this.state.product} changeSort={this.changeSort.bind(this)}/>
+        <Reviews
+        reviews={this.state.filteredReviews}
+        product={this.state.product}
+        name={this.props.name}
+        changeSort={this.changeSort.bind(this)}/>
         <div className="ratings-left-sidebar">
           <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>
