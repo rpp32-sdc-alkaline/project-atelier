@@ -30,6 +30,8 @@ class WriteReview extends React.Component {
     }
     this.toggleWriteReview.bind(this)
     this.handleStarClick.bind(this)
+    this.openModal.bind(this)
+    this.closeModal.bind(this)
   }
 
   handleOverallRating(e) {
@@ -123,8 +125,22 @@ class WriteReview extends React.Component {
       })
     }
 
-    toggleWriteReview() {
+    openModal() {
+      this.setState({
+        show: true
+      })
+    }
+
+    closeModal() {
+      console.log('in closeModal')
+      this.setState({
+        show: false
+      })
+    }
+
+    toggleWriteReview(e) {
       console.log('in toggleWriteReview')
+      console.log('e', e)
       let currentState = this.state.show
       this.setState({
         show: !currentState
@@ -138,7 +154,7 @@ class WriteReview extends React.Component {
   render() {
     if (!this.state.show) {
       return (
-        <button onClick={this.toggleWriteReview.bind(this)}>Add A Review +</button>
+        <button onClick={this.openModal.bind(this)}>Add A Review +</button>
       )
     } let starOneSrc = outlineStar;
     let starTwoSrc = outlineStar;
@@ -167,9 +183,9 @@ class WriteReview extends React.Component {
     let chars = Array.from(this.state.chars)
     let rating = this.state.rating
     return (
-        <div className='write-review-modal'>
-          <div className="write-review-modal-content">
-            <button onClick={this.toggleWriteReview.bind(this)}>X</button>
+        <div className="write-review-modal-backdrop" onClick={() => console.log('clicked outside the box')}>
+          <div className="write-review-modal-box" onClick={() => console.log('clicked in the box')}>
+            <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
             <h3>Write Your Review</h3>
             <h5>About the [Product Name Here]</h5>
             <form>
@@ -177,9 +193,16 @@ class WriteReview extends React.Component {
               <div className='review-stars'>
                 {[ ...Array(5)].map((star, i) => {
                   let ratingValue = i + 1;
+                  let id = `star-rating-${i}`
                   return (
                     <label>
-                      <input type="radio" name="star-rating" value={ratingValue} onClick={this.handleStarClick.bind(this)}/>
+                      <input
+                      type="radio"
+                      name="star-rating"
+                      id={id}
+                      value={ratingValue}
+                      onClick={this.handleStarClick.bind(this)}
+                      />
                       <Star className="star" size={25} starFill={ratingValue <= rating ? 'gold' : 'grey'}/>
                     </label>
                   )}
