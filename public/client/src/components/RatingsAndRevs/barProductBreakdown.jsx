@@ -5,12 +5,11 @@ const BarProductBreakdown = (props) => {
   const {position} = props;
 
   const style = {
-    // left: `${position}`
     position: 'relative',
-    left: `${position}%`,
-    height: '21px',
-    width: '21px',
-    top: '-0.1em'
+    paddingLeft: `${position}%`,
+    height: '25px',
+    width: '25px',
+    top: '-0.5em'
   }
 
   const imgSrc = fullStar
@@ -18,7 +17,6 @@ const BarProductBreakdown = (props) => {
   return (
     <div className="product-breakdown-bar-container">
       <img src={imgSrc} style={style}></img>
-      {/* <div className="product-breakdown-pointer"></div> */}
     </div>
   )
 }

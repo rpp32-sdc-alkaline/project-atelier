@@ -58,7 +58,6 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then(result => {
-      console.log('result.data', result.data)
       this.setState({
         allReviews: result.data.results,
         filteredReviews: result.data.results
@@ -69,7 +68,6 @@ class RatingsAndReviews extends React.Component{
       headers: headers
     })
     .then (result => {
-      console.log('result.data for metadata', result.data)
       this.setState({
         metadata: result.data,
         haveData: true

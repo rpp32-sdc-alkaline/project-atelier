@@ -21,13 +21,7 @@ class Reviews extends React.Component {
       }
     }
   }
-
-  componentDidUpdate() {
-    if (this.props.product) {
-      console.log('this.props.product', this.props.product)
-    }
-  }
-
+  
   changeSort(e) {
     this.props.changeSort(e.target.value)
   }

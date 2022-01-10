@@ -34,12 +34,6 @@ class WriteReview extends React.Component {
     this.closeModal.bind(this)
   }
 
-  componentDidUpdate() {
-    if (this.props.id) {
-      console.log('this.props.id', this.props.id)
-    }
-  }
-
   handleOverallRating(e) {
     this.setState({
       rating: e.target.value

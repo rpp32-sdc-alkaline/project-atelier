@@ -16,7 +16,7 @@ class Review extends React.Component {
     let review = this.props.review
 
     return (
-      <div>
+      <div className="individual-review">
         <h5>Individual Review</h5>
         <Stars average={review?.rating} size={15}/>
         <p>Summary: {review?.summary}</p>
