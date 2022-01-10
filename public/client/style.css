@@ -2,7 +2,7 @@
 .ratings-grid-container {
   display: grid;
   grid-template-columns: 30% 70%;
-  padding: 10px
+  margin: 1em;
 }
 
 .write-review-modal-backdrop {
@@ -18,6 +18,7 @@
 .write-review-modal-box {
   justify-self: center;
   justify-content: center;
+  text-align: center;
   background-color: #ffffff;
   z-index: 1;
   margin-left: auto;
@@ -60,6 +61,7 @@
   grid-column: 2;
   grid-row: 1;
   align-self: start;
+  margin: 1em;
 }
 
 .ratings-left-sidebar {
@@ -89,6 +91,20 @@
   border-radius: inherit;
 }
 
+.product-breakdown-row {
+  /* margin-left: 1em;
+  margin-right: 1em; */
+}
+
+.product-breakdown-bar-container {
+  align-self: center;
+  align-content: center;
+  background-color: rgb(192, 189, 189);
+  width: 60%;
+  height: 0.5em;
+  border-radius: 1em;
+}
+
 .gold {
   background-image: 'assets/images/full-gold-star.png';
 }
@@ -108,7 +124,13 @@
 }
 
 .review-stars {
-  display: flex
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.individual-review {
+  margin: 2em;
 }
 
 /* Overview */
