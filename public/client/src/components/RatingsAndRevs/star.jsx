@@ -10,9 +10,8 @@ const Star = (props) => {
   let imgSrc
   let style = {
     height: `${size}px`,
-    width: `${size}px`
-  }
-  if (typeof starFill === 'number') {
+    width: `${size}px`}
+    if (typeof starFill === 'number') {
     if (starFill === 1) {
       imgSrc = oneQuarterStar
     } else if (starFill === 2) {
