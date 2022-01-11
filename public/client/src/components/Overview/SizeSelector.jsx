@@ -19,7 +19,7 @@ class SizeSelector extends React.Component {
       }
     }
     this.handleChange = this.handleChange.bind(this)
-    this.openDropDown = this.openDropDown.bind(this)
+    // this.openDropDown = this.openDropDown.bind(this)
   }
 
   handleChange(size, quantity) {
@@ -30,17 +30,17 @@ class SizeSelector extends React.Component {
     this.props.selectSize(size, quantity)
   };
 
-  openDropDown() {
-    // console.log('open drop down called')
-    this.setState({
-      openList: true
-    })
-    this.props.openSizeDropDown()
-    // return (
-    //   <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
-    //   // skus={this.state.testData}
-    // )
-  }
+  // openDropDown() {
+  //   // console.log('open drop down called')
+  //   this.setState({
+  //     openList: true
+  //   })
+  //   this.props.openSizeDropDown()
+  //   // return (
+  //   //   <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+  //   //   // skus={this.state.testData}
+  //   // )
+  // }
 
   componentDidMount() {
     var sum = 0;
@@ -80,11 +80,14 @@ class SizeSelector extends React.Component {
       list = null
     }
   return (
-   <div className="size-selector">
-     <button className="size-selector-button" onClick={this.openDropDown} disabled={this.state.disabled}>{this.state.display}</button>
-     {/* <div style={{margin: 10}} onClick={this.openDropDown}>{this.state.display}</div> */}
-     {list}
-   </div>
+  //  <div className="size-selector">
+  //    <button className="size-selector-button" onClick={this.openDropDown} disabled={this.state.disabled}>{this.state.display}</button>
+  //    {list}
+  //  </div>
+   <select className="size-selector" onChange={this.openDropDown} disabled={this.state.disabled}>
+     <option value="Select Size">Select Size</option>
+   <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+   </select>
 
 
       // <select style={{margin: 10}} onChange={this.handleChange} disabled={this.state.disabled}>

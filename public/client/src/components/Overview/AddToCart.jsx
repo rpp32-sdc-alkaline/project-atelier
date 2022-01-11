@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery'
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -11,15 +12,25 @@ class AddToCart extends React.Component {
 }
 
   handleClick() {
-    // console.log('handleclick called')
-    if (this.props.size === 'Select Size') {
-     this.props.openSizeDropDown()
-   } else {
-    this.props.addToCart()
-  }
+  //   // console.log('handleclick called')
+  //   var $size = $(".size-selector").val()
+  //   // if (this.props.size === 'Select Size') {
+  //     console.log('$size', $size)
+  //   if ($size === 'Select Size') {
+  //   //  this.props.openSizeDropDown()
+  //   console.log('size', $size)
+  //   this.setState({
+  //     noSizeSelected: true
+  //   })
+  //  } else {
+  //   this.props.addToCart()
+  // }
+  this.props.addToCart()
 }
 
+
   render() {
+    console.log('no size selected', this.props.noSizeSelected)
     var button;
     var display;
     if (this.props.hide) {
@@ -27,7 +38,7 @@ class AddToCart extends React.Component {
     } else {
       button = <button className="add-to-cart" onClick={this.handleClick} disabled={this.props.disable}>Add To Cart</button>
       if (this.props.noSizeSelected) {
-        display = <div>Please Select a Size</div>
+        display = <div className="select-size-alert">Please Select a Size</div>
       }
     }
   return (
