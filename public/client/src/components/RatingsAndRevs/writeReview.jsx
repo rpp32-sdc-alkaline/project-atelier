@@ -26,12 +26,47 @@ class WriteReview extends React.Component {
       photos: [],
       nickname: null,
       email: null,
-      chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
+      metadata: null,
+      chars: null,
+      charRatings : {}
+      // chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
     }
     this.toggleWriteReview.bind(this)
     this.handleStarClick.bind(this)
     this.openModal.bind(this)
     this.closeModal.bind(this)
+    this.setUpChars.bind(this)
+  }
+
+  componentDidMount() {
+    if (this.props.metadata) {
+      this.setState({
+        metadata: this.props.metadata
+      })
+      this.setUpChars()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.metadata !== prevProps.metadata) {
+      this.setState({
+        metadata: this.props.metadata
+      })
+      this.setUpChars()
+    }
+  }
+
+  setUpChars() {
+    let chars = [];
+    for (var key in this.props.metadata.characteristics) {
+      let charObj = {}
+      charObj[key] = this.props.metadata.characteristics[key].id
+      console.log('charObj', charObj)
+      chars.push(charObj)
+    }
+    this.setState({
+      chars: chars
+    })
   }
 
   handleOverallRating(e) {
@@ -40,10 +75,11 @@ class WriteReview extends React.Component {
     })
   }
 
-  rateCharacteristic(char, rating) {
-    char = char.toLowerCase()
+  rateCharacteristic(char, rating, id) {
+    let charRatings = this.state.charRatings
+    charRatings[id] = rating
     this.setState({
-      [char]: rating
+      charRatings: charRatings
     })
   }
 
@@ -113,7 +149,8 @@ class WriteReview extends React.Component {
         recommend: this.state.recommend,
         name: this.state.nickname,
         email: this.state.email,
-        photos: this.state.photos
+        photos: this.state.photos,
+        characteristics: this.state.charRatings
         }
       }
     }
@@ -152,6 +189,7 @@ class WriteReview extends React.Component {
     }
 
   render() {
+    console.log('this.state.chars', this.state.chars)
     if (!this.state.show) {
       return (
         <button onClick={this.openModal.bind(this)}>Add A Review +</button>
@@ -218,8 +256,17 @@ class WriteReview extends React.Component {
               <br></br>
               <p>Rate these characteristics:</p>
               <br></br>
-              {chars.map(char =>
-              <CharacteristicReview thisChar={char} key={char} rateChar={this.rateCharacteristic.bind(this)}/>
+              {chars.map(char => {
+                let charName
+                let charId
+                for (var key in char) {
+                  charName = key;
+                  charId = char[key]
+                }
+                return (
+                  <CharacteristicReview thisChar={charName} key={charName} id={charId} rateChar={this.rateCharacteristic.bind(this)}/>
+                )
+              }
               )}
               <p>Review Summary:</p>
               <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"
