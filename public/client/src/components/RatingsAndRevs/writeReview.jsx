@@ -1,6 +1,10 @@
 import React from 'react'
 import CharacteristicReview from './characteristicReview.jsx'
 import axios from 'axios'
+import fullStar from '../../../../../assets/images/full-gold-star.png';
+import outlineStar from '../../../../../assets/images/star-outline.png';
+import Star from './star.jsx'
+
 
 class WriteReview extends React.Component {
   constructor(props) {
@@ -9,6 +13,7 @@ class WriteReview extends React.Component {
       show: false,
       id: null,
       rating: null,
+      starsFill: ['grey', 'grey', 'grey', 'grey', 'grey'],
       recommend: null,
       size: null,
       width: null,
@@ -24,6 +29,9 @@ class WriteReview extends React.Component {
       chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
     }
     this.toggleWriteReview.bind(this)
+    this.handleStarClick.bind(this)
+    this.openModal.bind(this)
+    this.closeModal.bind(this)
   }
 
   handleOverallRating(e) {
@@ -59,6 +67,7 @@ class WriteReview extends React.Component {
 
   uploadPhotos(e) {
     e.preventDefault()
+    console.log('in uploadPhotos')
   }
 
   handleNicknameChange(e) {
@@ -76,6 +85,7 @@ class WriteReview extends React.Component {
   onSubmit(e) {
     e.preventDefault()
     let invalidFields = ''
+    let properEmail = /\w+@.\D{3}/ig
     if (!this.state.rating) {
       invalidFields += 'Overall Rating\n'
     } if (this.state.recommend === null) {
@@ -87,13 +97,12 @@ class WriteReview extends React.Component {
       }
     } if (this.state.body === '' || this.state.body.length < 50) {
       invalidFields += 'Review body\n'
-    } // TODO: handle invalid photo uploads
+    } // TODO: handle invalid photo upload
     if (!this.state.nickname) {
       invalidFields += 'Nickname\n'
-    } if (!this.state.email) {
+    } if (this.state.email !== properEmail) {
       invalidFields += 'Email\n'
-    }
-    if (invalidFields) {
+    } if (invalidFields) {
       alert(`You must enter the following:\n${invalidFields}`)
     } else {
       let reviewFormData = {
@@ -109,7 +118,29 @@ class WriteReview extends React.Component {
       }
     }
 
-    toggleWriteReview() {
+    handleStarClick(e) {
+      console.log('e.target.value in handleStarClick', e.target.value)
+      this.setState({
+        rating: e.target.value
+      })
+    }
+
+    openModal() {
+      this.setState({
+        show: true
+      })
+    }
+
+    closeModal() {
+      console.log('in closeModal')
+      this.setState({
+        show: false
+      })
+    }
+
+    toggleWriteReview(e) {
+      console.log('in toggleWriteReview')
+      console.log('e', e)
       let currentState = this.state.show
       this.setState({
         show: !currentState
@@ -123,33 +154,70 @@ class WriteReview extends React.Component {
   render() {
     if (!this.state.show) {
       return (
-        <button onClick={this.toggleWriteReview.bind(this)}>Add A Review +</button>
+        <button onClick={this.openModal.bind(this)}>Add A Review +</button>
       )
+    } let starOneSrc = outlineStar;
+    let starTwoSrc = outlineStar;
+    let starThreeSrc = outlineStar;
+    let starFourSrc = outlineStar;
+    let starFiveSrc = outlineStar;
+    for (var i = 0; i < 5; i++) {
+      if (this.state.starsFill[i] === 'gold') {
+        if (i === 0) {
+          starOneSrc = fullStar
+        } if (i === 1) {
+          starTwoSrc = fullStar
+        } if (i === 2) {
+          starThreeSrc = fullStar
+        } if (i === 3) {
+          starFourSrc = fullStar
+        } if (i === 4) {
+          starFiveSrc = fullStar
+        }
+      }
+    }
+    let style = {
+      height: '20px',
+      width: '20px'
     }
     let chars = Array.from(this.state.chars)
+    let rating = this.state.rating
     return (
-      <div className='modal-wrapper'>
-        <div className='modal-backdrop' onClick={this.toggleWriteReview.bind(this)}>
-          <div className="modal-box">
-            <button onClick={this.toggleWriteReview.bind(this)}>X</button>
+        <div className="write-review-modal-backdrop" onClick={() => console.log('clicked outside the box')}>
+          <div className="write-review-modal-box" onClick={() => console.log('clicked in the box')}>
+            <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
             <h3>Write Your Review</h3>
-            <h5>About the [Product Name Here]</h5>
+            <h5>About the {this.props.name}</h5>
             <form>
               <p>Overall Rating*</p>
-              <select id="rating" name="rating" onChange={this.handleOverallRating.bind(this)}>
-                <option value="5" >5 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="2">2 Stars</option>
-                <option value="1">1 Stars</option>
-              </select>
+              <div className='review-stars'>
+                {[ ...Array(5)].map((star, i) => {
+                  let ratingValue = i + 1;
+                  let id = `star-rating-${i}`
+                  return (
+                    <label>
+                      <input
+                      type="radio"
+                      name="star-rating"
+                      id={id}
+                      value={ratingValue}
+                      onClick={this.handleStarClick.bind(this)}
+                      />
+                      <Star className="star" size={25} starFill={ratingValue <= rating ? 'gold' : 'grey'}/>
+                    </label>
+                  )}
+                )}
+              </div>
+              <br></br>
               <p>Do you recommend this product?*</p>
               <input type="radio" id="yes-recommend" name="recommend" value={true} onClick={this.handleRecommend.bind(this)}></input>
               <label htmlFor="yes-recommend">Yes</label>
               <input type="radio" id="no-recommend" name="recommend" value={false} onClick={this.handleRecommend.bind(this)}></input>
               <label htmlFor="no-recommend">No</label>
               <br></br>
+              <br></br>
               <p>Rate these characteristics:</p>
+              <br></br>
               {chars.map(char =>
               <CharacteristicReview thisChar={char} key={char} rateChar={this.rateCharacteristic.bind(this)}/>
               )}
@@ -160,12 +228,11 @@ class WriteReview extends React.Component {
               <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
               onChange={this.handleBodyChange.bind(this)}></textarea>
               {this.state.body.length < 50 &&
-              <p>Minimum required characters left: {50-this.state.body.length}</p>
-              }
+              <p>Minimum required characters left: {50-this.state.body.length}</p>}
               {this.state.body.length >= 50 &&
-              <p>Minimum reached</p>
-              }
-              <button id="photo-button" onClick={this.uploadPhotos.bind(this)}>Upload photos</button>
+              <p>Minimum reached</p>}
+              <label htmlFor="photos">Upload photos:</label>
+              <input type="file" id="photos" name="photos"></input>
               <p>What is your nickname?*</p>
               <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
               onChange={this.handleNicknameChange.bind(this)}></textarea>
@@ -179,7 +246,6 @@ class WriteReview extends React.Component {
             </form>
           </div>
         </div>
-      </div>
     )
   }
 }

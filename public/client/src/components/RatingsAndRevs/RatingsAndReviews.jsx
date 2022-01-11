@@ -13,13 +13,14 @@ class RatingsAndReviews extends React.Component{
     this.state = {
       haveData: false,
       product: 0,
-      sort: 'helpful',
+      sort: 'relevant',
       page: 1,
       count: 5,
       allReviews: [],
       metadata: [],
       filters: [],
-      filteredReviews: []
+      filteredReviews: [],
+      name: ''
     }
     this.getReviewData.bind(this)
     this.filterReviews.bind(this)
@@ -31,7 +32,7 @@ class RatingsAndReviews extends React.Component{
     this.setState({
       product: id
     })
-    this.getReviewData(id, 'helpful', 1, 100)
+    this.getReviewData(id, 'relevant', 1, 100)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,7 +42,7 @@ class RatingsAndReviews extends React.Component{
       this.setState({
         id: this.props.id
       })
-      this.getReviewData(this.props.id, 'helpful', 1, 100)
+      this.getReviewData(this.props.id, this.state.sort, 1, 100)
     }
   }
 
@@ -128,7 +129,11 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <Reviews reviews={this.state.filteredReviews} product={this.state.product} changeSort={this.changeSort.bind(this)}/>
+        <Reviews
+        reviews={this.state.filteredReviews}
+        product={this.state.product}
+        name={this.props.name}
+        changeSort={this.changeSort.bind(this)}/>
         <div className="ratings-left-sidebar">
           <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>

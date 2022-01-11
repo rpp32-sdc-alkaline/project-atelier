@@ -21,7 +21,7 @@ class Reviews extends React.Component {
       }
     }
   }
-
+  
   changeSort(e) {
     this.props.changeSort(e.target.value)
   }
@@ -53,7 +53,7 @@ class Reviews extends React.Component {
     return (
       <div id="reviews" data-testid="reviews">
         <h4>Reviews</h4>
-        <h5>999 reviews. Sort on:</h5>
+        <h5>{reviews.length} reviews. Sort by:</h5>
         <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)}>
           <option value="relevance">Relevant</option>
           <option value="helpful">Helpful</option>
@@ -66,7 +66,7 @@ class Reviews extends React.Component {
         </div>
         {!this.state.showingAll &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
-        <WriteReview id={this.props.product}/>
+        <WriteReview id={this.props.product} name={this.props.name}/>
       </div>
     )
   }
