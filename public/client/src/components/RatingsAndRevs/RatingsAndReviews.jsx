@@ -25,9 +25,11 @@ class RatingsAndReviews extends React.Component{
     this.getReviewData.bind(this)
     this.filterReviews.bind(this)
     this.updateFilters.bind(this)
+    this.postNewReview.bind(this)
   }
 
   componentDidMount() {
+    console.log('token', token)
     let id = this.props.id
     this.setState({
       product: id
@@ -54,6 +56,7 @@ class RatingsAndReviews extends React.Component{
     let headers = {
       'Authorization': token.TOKEN
     }
+    console.log('headers before getting review data', headers)
     axios.get(reviewsUrl, {
       headers: headers
     })
@@ -74,6 +77,25 @@ class RatingsAndReviews extends React.Component{
       })
     })
     .catch(error => console.log('error!', error))
+  }
+
+  postNewReview(review) {
+    console.log('review before posting', review)
+    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`
+    let headers = {
+      'Authorization': token.TOKEN
+    }
+    console.log('headers before POSTING review', headers)
+    axios.post(url, {
+      headers: headers,
+      data: review})
+    .then(result => {
+      console.log('Posted review! Result: ', result)
+    })
+    .catch(error => {
+      console.log('error: ', error)
+    })
+
   }
 
   changeSort(sort) {
@@ -134,7 +156,8 @@ class RatingsAndReviews extends React.Component{
         product={this.state.product}
         name={this.props.name}
         metadata={this.state.metadata}
-        changeSort={this.changeSort.bind(this)}/>
+        changeSort={this.changeSort.bind(this)}
+        postNewReview={this.postNewReview.bind(this)}/>
         <div className="ratings-left-sidebar">
           <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>

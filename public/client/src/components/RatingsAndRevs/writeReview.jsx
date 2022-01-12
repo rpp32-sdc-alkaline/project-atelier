@@ -36,6 +36,7 @@ class WriteReview extends React.Component {
     this.openModal.bind(this)
     this.closeModal.bind(this)
     this.setUpChars.bind(this)
+    this.postData.bind(this)
   }
 
   componentDidMount() {
@@ -56,16 +57,20 @@ class WriteReview extends React.Component {
     }
   }
 
+  postData(formData) {
+    console.log('formData', formData)
+    this.props.postNewReview(formData)
+  }
+
   setUpChars() {
     let chars = [];
     for (var key in this.props.metadata.characteristics) {
-      let charObj = {}
-      charObj[key] = this.props.metadata.characteristics[key].id
-      console.log('charObj', charObj)
-      chars.push(charObj)
+      chars.push({
+        [key]: this.props.metadata.characteristics[key].id
+      })
     }
     this.setState({
-      chars: chars
+      chars: chars,
     })
   }
 
@@ -84,8 +89,9 @@ class WriteReview extends React.Component {
   }
 
   handleRecommend(e) {
+    let recommendation = (e.target.value === 'true')
     this.setState({
-      recommend: e.target.value
+      recommend: recommendation
     })
   }
 
@@ -121,22 +127,21 @@ class WriteReview extends React.Component {
   onSubmit(e) {
     e.preventDefault()
     let invalidFields = ''
-    let properEmail = /\w+@.\D{3}/ig
+    let properEmailRegex = /\S+@\S+\.\S{2,5}/i
     if (!this.state.rating) {
       invalidFields += 'Overall Rating\n'
     } if (this.state.recommend === null) {
       invalidFields += 'Do you recommend this product?\n'
-    } for (var i = 0; i < this.state.chars.length; i++) {
-      let char = this.state.chars[i].toLowerCase()
-      if (this.state[char] === null) {
-        invalidFields += `Characteristic: ${this.state.chars[i]}\n`
+    } for (var key in this.state.charRatings) {
+      if (!this.state.charRatings[key]) {
+        invalidFields += `Characteristic Rating\n`
       }
     } if (this.state.body === '' || this.state.body.length < 50) {
       invalidFields += 'Review body\n'
     } // TODO: handle invalid photo upload
     if (!this.state.nickname) {
       invalidFields += 'Nickname\n'
-    } if (this.state.email !== properEmail) {
+    } if (!properEmailRegex.test(this.state.email)) {
       invalidFields += 'Email\n'
     } if (invalidFields) {
       alert(`You must enter the following:\n${invalidFields}`)
@@ -152,11 +157,11 @@ class WriteReview extends React.Component {
         photos: this.state.photos,
         characteristics: this.state.charRatings
         }
+        this.postData(reviewFormData)
       }
     }
 
     handleStarClick(e) {
-      console.log('e.target.value in handleStarClick', e.target.value)
       this.setState({
         rating: e.target.value
       })
@@ -169,15 +174,12 @@ class WriteReview extends React.Component {
     }
 
     closeModal() {
-      console.log('in closeModal')
       this.setState({
         show: false
       })
     }
 
     toggleWriteReview(e) {
-      console.log('in toggleWriteReview')
-      console.log('e', e)
       let currentState = this.state.show
       this.setState({
         show: !currentState
@@ -189,7 +191,6 @@ class WriteReview extends React.Component {
     }
 
   render() {
-    console.log('this.state.chars', this.state.chars)
     if (!this.state.show) {
       return (
         <button onClick={this.openModal.bind(this)}>Add A Review +</button>
@@ -221,8 +222,8 @@ class WriteReview extends React.Component {
     let chars = Array.from(this.state.chars)
     let rating = this.state.rating
     return (
-        <div className="write-review-modal-backdrop" onClick={() => console.log('clicked outside the box')}>
-          <div className="write-review-modal-box" onClick={() => console.log('clicked in the box')}>
+        <div className="write-review-modal-backdrop">
+          <div className="write-review-modal-box">
             <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
             <h3>Write Your Review</h3>
             <h5>About the {this.props.name}</h5>
@@ -264,7 +265,11 @@ class WriteReview extends React.Component {
                   charId = char[key]
                 }
                 return (
-                  <CharacteristicReview thisChar={charName} key={charName} id={charId} rateChar={this.rateCharacteristic.bind(this)}/>
+                  <CharacteristicReview
+                  thisChar={charName}
+                  key={charName}
+                  id={charId}
+                  rateChar={this.rateCharacteristic.bind(this)}/>
                 )
               }
               )}

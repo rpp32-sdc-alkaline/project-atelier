@@ -73,12 +73,11 @@ class CharacteristicReview extends React.Component {
   }
 
   handleClick(e) {
-    // console.log('e.target.value', e.target.value)
-    // console.log('this.state.selection', this.state.selection)
+    let rating = parseInt(e.target.value, 10)
     this.setState({
       selection: e.target.value
     })
-    this.props.rateChar(this.props.thisChar, e.target.value, this.props.id)
+    this.props.rateChar(this.props.thisChar, rating, this.props.id)
   }
 
   render() {

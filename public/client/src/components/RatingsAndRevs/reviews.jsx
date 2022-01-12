@@ -64,12 +64,13 @@ class Reviews extends React.Component {
             <Review review={review} key={review.review_id} />
           )}
         </div>
-        {!this.state.showingAll &&
+        {(this.state.numToShow <= reviews.length) &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
         <WriteReview
         id={this.props.product}
         name={this.props.name}
-        metadata={this.props.metadata}/>
+        metadata={this.props.metadata}
+        postNewReview={this.props.postNewReview} />
       </div>
     )
   }
