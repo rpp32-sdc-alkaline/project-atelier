@@ -49,17 +49,11 @@ class ThumbnailBar extends React.Component {
   //   }
 
   render() {
-    // var format = {
-    //   height: 100,
-    //   width: 80,
-    //   padding: 10
-    // }
-    // var className = this.state.clicked ? 'click-state' : 'base-state'
     var upArrow;
     var downArrow;
     var index;
     var photos;
-    if (this.props.photos?.length > 7) {
+    if (this.props.photos?.length > 6) {
       upArrow = <img className="up-arrow" onClick={this.handleUpClick}
       src="https://img.icons8.com/color/30/000000/circled-chevron-up--v1.png"/>
       downArrow = <img className="down-arrow" onClick={this.handleDownClick}
@@ -72,7 +66,7 @@ class ThumbnailBar extends React.Component {
         {this.props.photos?.map((photo, index) => {
           // console.log('photo index', photo)
           // console.log('this.state.selected', this.state.selected)
-          if (index < 7) {
+          if (index < 6) {
             var className = photo.url === this.state.selected ? 'click-state' : 'base-state'
             return (
               <div key={index}>

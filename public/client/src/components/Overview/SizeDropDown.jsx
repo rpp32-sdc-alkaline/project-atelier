@@ -17,7 +17,8 @@ const SizeDropDown = (props) => {
 
       // console.log('sku in loop', size )
       if (quantity) {
-        content.push(<li key={sku} onClick={(e) => handleClick(size, quantity)} value={quanAndSize}>{size}</li>)
+        // content.push(<li key={sku} onClick={(e) => handleClick(size, quantity)} value={quanAndSize}>{size}</li>)
+        content.push(<option key={sku} onClick={(e) => handleClick(size, quantity)} value={quanAndSize}>{size}</option>)
       }
    }
   return content

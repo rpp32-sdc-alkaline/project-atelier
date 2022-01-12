@@ -156,16 +156,22 @@
   justify-content: center;
   border: solid 1px red;
   height: 70vh;
+  display: grid;
+  grid-template-columns: 10% 15% 50% 25%;
+  grid-template-rows: 5% 45% 55%
 }
 
 .slider {
-  display: flex;
-  justify-content: center;
+  grid-column-start: 3;
+  grid-row-start: 2;
+  display: grid;
+  grid-template-columns: 2rem 30vw 2rem;
+  grid-template-rows: 25vh 35vh;
+  column-gap: 2rem;
 }
 
 .main-image {
-  /* max-height: 40vmax;
-  max-width: 40vmax; */
+  grid-column-start: 2;
   width: 30vw;
   height: 60vh;
 }
@@ -174,39 +180,35 @@
   cursor: nesw-resize;
 }
 
-.image {
+/* .image { */
   /* width: 590px;
   height: 700px; */
-  border-radius: 10px;
+  /* border-radius: 10px;
   margin: 10px;
   max-height: 50vmax;
-  max-width: 35rem;
-}
+  max-width: 35rem; */
+/* } */
 
 .right-arrow {
-  position: absolute;
-  top: 50%;
-  right: 800px;
-  font-size: 3rem;
+  grid-column-start: 3;
+  grid-row-start: 2;
+  font-size: 2rem;
   color: purple;
   cursor: pointer;
   user-select: none;
 }
 
 .left-arrow {
-  position: absolute;
-  top: 50%;
-  left: 75px;
-  font-size: 3rem;
+  grid-row-start: 2;
+  font-size: 2rem;
   color: purple;
   cursor: pointer;
   user-select: none;
 }
 
 .thumbnail-bar {
-  position: absolute;
-  left: 32px;
-  top: 60px;
+  grid-column-start: 2;
+  grid-row-start: 2;
   z-index: 0;
 }
 
