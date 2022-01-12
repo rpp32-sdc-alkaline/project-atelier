@@ -14,6 +14,14 @@ class RatingBreakdown extends React.Component {
   }
 
   render() {
+    console.log('this.state.filters', this.props.filters)
+    let currentFiltersString = ''
+    for (var i = 0; i < this.props.filters.length; i++) {
+      currentFiltersString += `${this.props.filters[i]} stars`
+      if (i !== this.props.filters.length - 1) {
+        currentFiltersString += ', '
+      }
+    }
     let ratings
     if (this.props.metadata?.ratings) {
       ratings = this.props.metadata.ratings
@@ -48,8 +56,12 @@ class RatingBreakdown extends React.Component {
         <IndividualRatingBreakdown numStars={3} percent={numThreeStars} ratings={ratings[3]} updateFilters={this.props.updateFilters}/>
         <IndividualRatingBreakdown numStars={2} percent={numTwoStars} ratings={ratings[2]} updateFilters={this.props.updateFilters}/>
         <IndividualRatingBreakdown numStars={1} percent={numOneStar} ratings={ratings[1]} updateFilters={this.props.updateFilters}/>
-        <p>Current Filters: </p>
-        <p>Remove all filters</p>
+        {(this.props.filters.length !== 0) &&
+        <>
+          <p>Current filters: {currentFiltersString}</p>
+          <p>Remove all filters</p>
+        </>
+        }
         <p>{percentRecommended}% recommend this product</p>
       </div>
     )
