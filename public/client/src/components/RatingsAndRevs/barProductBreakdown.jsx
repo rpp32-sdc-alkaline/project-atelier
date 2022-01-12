@@ -16,7 +16,7 @@ const BarProductBreakdown = (props) => {
 
   return (
     <div className="product-breakdown-bar-container">
-      <img src={imgSrc} style={style}></img>
+      <img className="star-image" src={imgSrc} style={style}></img>
     </div>
   )
 }

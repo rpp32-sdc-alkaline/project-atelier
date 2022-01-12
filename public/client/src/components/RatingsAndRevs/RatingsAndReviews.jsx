@@ -84,12 +84,13 @@ class RatingsAndReviews extends React.Component{
     console.log('review before posting', review)
     let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`
     let headers = {
+      'Content-Type' : 'application/json',
+      'Accept' : 'application/json',
       'Authorization': token.TOKEN
     }
     console.log('headers before POSTING review', headers)
-    axios.post(url, {
-      headers: headers,
-      data: review})
+    axios.post(url, review, {
+      headers: headers})
     .then(result => {
       console.log('Posted review! Result: ', result)
     })

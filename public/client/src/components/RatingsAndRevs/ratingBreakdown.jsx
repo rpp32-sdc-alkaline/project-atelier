@@ -8,13 +8,9 @@ class RatingBreakdown extends React.Component {
     this.state = {}
   }
   componentDidMount() {
-    if (this.props.metadata) {
-      console.log('this.props.metadata', this.props.metadata)
-    }
   }
 
   render() {
-    console.log('this.state.filters', this.props.filters)
     let currentFiltersString = ''
     for (var i = 0; i < this.props.filters.length; i++) {
       currentFiltersString += `${this.props.filters[i]} stars`
