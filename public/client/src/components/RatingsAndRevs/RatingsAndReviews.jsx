@@ -159,7 +159,10 @@ class RatingsAndReviews extends React.Component{
         changeSort={this.changeSort.bind(this)}
         postNewReview={this.postNewReview.bind(this)}/>
         <div className="ratings-left-sidebar">
-          <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
+          <RatingBreakdown
+          metadata={this.state.metadata}
+          updateFilters={this.updateFilters.bind(this)}
+          filters={this.state.filters}/>
           <ProductBreakdown metadata={this.state.metadata}/>
         </div>
       </div>
