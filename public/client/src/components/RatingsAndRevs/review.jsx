@@ -17,10 +17,9 @@ class Review extends React.Component {
 
     return (
       <div className="individual-review">
-        <h5>Individual Review</h5>
         <Stars average={review?.rating} size={15}/>
-        <p>Summary: {review?.summary}</p>
-        <p>Body: {review?.body}</p>
+        <p className="summary">{review?.summary}</p>
+        <p>{review?.body}</p>
         {review?.response &&
         <p>{review?.response}</p>}
         {review?.recommend &&

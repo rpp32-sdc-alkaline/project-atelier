@@ -26,6 +26,7 @@ class RatingsAndReviews extends React.Component{
     this.filterReviews.bind(this)
     this.updateFilters.bind(this)
     this.postNewReview.bind(this)
+    this.removeFilters.bind(this)
   }
 
   componentDidMount() {
@@ -105,6 +106,13 @@ class RatingsAndReviews extends React.Component{
     this.getReviewData(this.state.product, sort, 1, 100)
   }
 
+  removeFilters() {
+    console.log('in remove filters')
+    this.setState({
+      filters: []
+    })
+  }
+
   updateFilters(rating) {
     let currentFilters = Array.from(this.state.filters)
     if (currentFilters.length === 0) {
@@ -162,7 +170,8 @@ class RatingsAndReviews extends React.Component{
           <RatingBreakdown
           metadata={this.state.metadata}
           updateFilters={this.updateFilters.bind(this)}
-          filters={this.state.filters}/>
+          filters={this.state.filters}
+          removeFilters={this.removeFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>
         </div>
       </div>

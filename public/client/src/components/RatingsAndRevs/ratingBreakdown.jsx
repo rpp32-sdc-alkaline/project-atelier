@@ -59,7 +59,7 @@ class RatingBreakdown extends React.Component {
         {(this.props.filters.length !== 0) &&
         <>
           <p>Current filters: {currentFiltersString}</p>
-          <p>Remove all filters</p>
+          <p className="remove-all-filters" onClick={this.props.removeFilters}>Remove all filters</p>
         </>
         }
         <p>{percentRecommended}% recommend this product</p>
