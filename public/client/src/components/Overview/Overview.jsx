@@ -11,6 +11,7 @@ import AddToCart from './AddToCart.jsx'
 import MainImage from './MainImage.jsx'
 import ThumbnailBar from './ThumbnailBar.jsx'
 import axios from 'axios'
+import $ from 'jquery'
 var token = require('../../../dist/config.js')
 
 class Overview extends React.Component{
@@ -39,7 +40,7 @@ class Overview extends React.Component{
       selectedQuantity: '',
 
       hideAddToCart: false,
-      displayAddToCart: false,
+      // displayAddToCart: false,
       cart: []
     }
 
@@ -178,7 +179,7 @@ class Overview extends React.Component{
   }
 
   selectSize(size, available) {
-    // console.log('select size called', size)
+    console.log('select size called', size)
     // console.log('available', Number(available))
     this.setState({
       selectedSize: size,
@@ -187,6 +188,7 @@ class Overview extends React.Component{
       showSizes: false,
       noSizeSelected: false
     })
+    console.log('no size', this.state.noSizeSelected)
   };
 
   selectQuantity(quantity) {
@@ -206,10 +208,19 @@ class Overview extends React.Component{
 
   addToCart() {
     // console.log('add to cart called')
+    var $size = $(".size-selector").val()
+    console.log('size', $size)
+    if ($size === 'Select Size') {
     this.setState({
-      displayAddToCart: true
+      displayAddToCart: true,
+      noSizeSelected: true
     })
-  };
+  } else {
+    this.setState({
+      noSizeSelected: false
+    })
+  }
+}
 
   hideAddToCart() {
     // console.log('hide add to cart called')
@@ -244,12 +255,12 @@ class Overview extends React.Component{
       if(this.state.product.description) {
         description = <Description description={this.state.product.description} />
       }
-      if(this.state.displayAddToCart) {
+      if(this.state.displayAddToCart && !this.state.noSizeSelected) {
         displayAdded = <div>
-          <p>{`${this.state.displayedStyleName}`}</p>
+          {/* <p>{`${this.state.displayedStyleName}`}</p>
           <p>{`size: ${this.state.selectedSize}`}</p>
-          <p>{`qty: ${this.state.selectedQuantity}`}</p>
-          <p>added to cart!</p>
+          <p>{`qty: ${this.state.selectedQuantity}`}</p> */}
+          <p>Item added to cart!</p>
         </div>
       }
     }

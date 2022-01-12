@@ -4,7 +4,9 @@ import QuantityDropDown from './QuantityDropDown.jsx'
 class QuantitySelector extends React.Component {
   constructor(props) {
     super(props)
-   this.state = {}
+   this.state = {
+     disable: false
+   }
 
    this.handleChange = this.handleChange.bind(this)
 }
@@ -24,7 +26,7 @@ handleChange(e) {
     }
     return (
       <select className="quantity-selector" onChange={this.handleChange} disabled={disable}>
-        <option value={1}>{disable? '-' : '1'}</option>
+        <option value={1}>{this.state.disable? '-' : '1'}</option>
         <QuantityDropDown size={this.props.size} available={this.props.available}/>
       </select>
     )
