@@ -212,7 +212,7 @@ class Overview extends React.Component{
     console.log('size', $size)
     if ($size === 'Select Size') {
     this.setState({
-      // displayAddToCart: true,
+      displayAddToCart: true,
       noSizeSelected: true
     })
   } else {
@@ -255,7 +255,7 @@ class Overview extends React.Component{
       if(this.state.product.description) {
         description = <Description description={this.state.product.description} />
       }
-      if(this.state.displayAddToCart) {
+      if(this.state.displayAddToCart && !this.state.noSizeSelected) {
         displayAdded = <div>
           {/* <p>{`${this.state.displayedStyleName}`}</p>
           <p>{`size: ${this.state.selectedSize}`}</p>
