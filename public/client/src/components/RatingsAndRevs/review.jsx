@@ -44,7 +44,7 @@ class Review extends React.Component {
         {!this.state.showFullReview &&
         <p className="link" onClick={this.showFullReview.bind(this)}>Show more</p>}
         {review?.recommend &&
-        <p>I recommend this product [check]</p>}
+        <p>I recommend this product &#10003;</p>}
         <p>{review?.reviewer_name}</p>
         {review?.response &&
         <p className="response">Response from seller: {review.response}</p>}
