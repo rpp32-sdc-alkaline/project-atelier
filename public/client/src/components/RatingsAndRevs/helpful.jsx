@@ -10,7 +10,7 @@ class Helpful extends React.Component {
   render() {
     return (
       <div>
-        <p>Helpful? <a href=''>Yes</a> {this.props.helpfulness}</p>
+        <p>Helpful?</p><p className="link">Yes {this.props.helpfulness}</p>
       </div>
     )
   }

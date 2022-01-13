@@ -71,11 +71,11 @@
 #reviews-scroll {
   overflow: scroll;
   height:75vh;
-  background-color: honeydew;
 }
 
 .individual-rating-breakdown-row:hover {
-  background-color: lightskyblue;
+  background-color: rgb(179, 226, 255);
+  border-radius: 1em;
 }
 
 .rating-breakdown-bar-container {
@@ -91,10 +91,6 @@
   border-radius: inherit;
 }
 
-.product-breakdown-row {
-  /* margin-left: 1em;
-  margin-right: 1em; */
-}
 
 .product-breakdown-bar-container {
   align-self: center;
@@ -130,9 +126,30 @@
 }
 
 .individual-review {
-  margin: 2em;
+  margin-top: 1em;
+  margin-bottom: 3em;
 }
 
+.link {
+  text-decoration: underline;
+  text-decoration-color: blue;
+}
+
+.link:hover {
+  background-color: lightskyblue;
+}
+
+.summary {
+  font-weight: bold;
+}
+
+.response {
+  background-color: lightskyblue;
+}
+
+.star-image {
+  z-index: 0;
+}
 /* Overview */
 
 /*PARENT GRID*/
