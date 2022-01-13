@@ -25,6 +25,8 @@ class RatingsAndReviews extends React.Component{
     this.getReviewData.bind(this)
     this.filterReviews.bind(this)
     this.updateFilters.bind(this)
+    this.postNewReview.bind(this)
+    this.removeFilters.bind(this)
   }
 
   componentDidMount() {
@@ -32,7 +34,7 @@ class RatingsAndReviews extends React.Component{
     this.setState({
       product: id
     })
-    this.getReviewData(id, 'relevant', 1, 100)
+    this.getReviewData(id, 'relevant', 1, 1000)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -42,7 +44,7 @@ class RatingsAndReviews extends React.Component{
       this.setState({
         id: this.props.id
       })
-      this.getReviewData(this.props.id, this.state.sort, 1, 100)
+      this.getReviewData(this.props.id, this.state.sort, 1, 1000)
     }
   }
 
@@ -76,11 +78,35 @@ class RatingsAndReviews extends React.Component{
     .catch(error => console.log('error!', error))
   }
 
+  postNewReview(review) {
+    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`
+    let headers = {
+      'Content-Type' : 'application/json',
+      'Accept' : 'application/json',
+      'Authorization': token.TOKEN
+    }
+    axios.post(url, review, {
+      headers: headers})
+    .then(result => {
+      console.log('Posted review! Result: ', result)
+    })
+    .catch(error => {
+      console.log('error: ', error)
+    })
+
+  }
+
   changeSort(sort) {
     this.setState({
       sort: sort
     })
-    this.getReviewData(this.state.product, sort, 1, 100)
+    this.getReviewData(this.state.product, sort, 1, 1000)
+  }
+
+  removeFilters() {
+    this.setState({
+      filters: []
+    })
   }
 
   updateFilters(rating) {
@@ -133,9 +159,15 @@ class RatingsAndReviews extends React.Component{
         reviews={this.state.filteredReviews}
         product={this.state.product}
         name={this.props.name}
-        changeSort={this.changeSort.bind(this)}/>
+        metadata={this.state.metadata}
+        changeSort={this.changeSort.bind(this)}
+        postNewReview={this.postNewReview.bind(this)}/>
         <div className="ratings-left-sidebar">
-          <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
+          <RatingBreakdown
+          metadata={this.state.metadata}
+          updateFilters={this.updateFilters.bind(this)}
+          filters={this.state.filters}
+          removeFilters={this.removeFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>
         </div>
       </div>
