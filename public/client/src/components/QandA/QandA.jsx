@@ -11,23 +11,53 @@ class QandA extends React.Component{
     this.state = {
       haveData: false,
       qToDisplay: 2,
-      allQDisplayed: false
+      allQDisplayed: false,
+      searchData: ''
     };
     this.moreButton = this.moreButton.bind(this);
     this.getQuestionData = this.getQuestionData.bind(this);
+    this.searchBarChange = this.searchBarChange.bind(this);
+    this.filterQuestionData = this.filterQuestionData.bind(this);
+  }
+
+  searchBarChange (e) {
+    this.setState({ searchData: e.target.value }, () => {
+      this.filterQuestionData(this.state.searchData);
+    })
+  }
+
+  filterQuestionData (data) {
+    if (this.state.searchData !== '') {
+      let searchTerm = data.toLowerCase().split(' ');
+      let filteredData = [];
+      let checker = (apiData, searchTerms) => searchTerms.every(element => apiData.includes(element));
+
+      for (let i = 0; i < this.state.questionData.length; i++) {
+        let currentBody = this.state.questionData[i].question_body.toLowerCase().split(' ');
+        let flag = checker(currentBody, searchTerm);
+        if (flag) {
+          filteredData.push(this.state.questionData[i]);
+        }
+      }
+      console.log('filtered data', filteredData);
+      this.setState({filteredData: filteredData});
+    } else {
+      this.setState({filteredData: this.state.questionData});
+    }
+
   }
 
   moreButton (e) {
     //adjuest number of questions displayed
     let newSlice = this.state.qToDisplay + 2;
-    if (newSlice >= this.state.questionData.length) {
+    if (newSlice >= this.state.filteredData.length) {
       this.setState({
         allQDisplayed: true
       })
     }
     this.setState({
       qToDisplay: newSlice,
-      slicedData: this.state.questionData.slice(0, newSlice)
+      slicedData: this.state.filteredData.slice(0, newSlice)
     })
   }
 
@@ -59,9 +89,10 @@ class QandA extends React.Component{
         questionData: result.data.results,
         slicedData: result.data.results.slice(0, this.state.qToDisplay),
         haveData: true,
-        allQDisplayed: false
+        allQDisplayed: false,
+        filteredData: result.data.results
       })
-      //console.log('questionData', this.state.questionData);
+      console.log('questionData', this.state.questionData);
     })
     .catch((error) => {
       throw error;
@@ -87,8 +118,8 @@ class QandA extends React.Component{
         return (
           <div className='qAndA'>
         <h4>QUESTIONS & ANSWERS</h4>
-        <Search />
-        <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id}/>
+        <Search searchBarChange={this.searchBarChange}/>
+        <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id} searchData={this.state.searchData}/>
         {!this.state.allQDisplayed && <span className='moreQuestion' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions </span>}
         <AddQuestion id ={this.props.id} update={this.getQuestionData}/> <br></br>
         </div>
