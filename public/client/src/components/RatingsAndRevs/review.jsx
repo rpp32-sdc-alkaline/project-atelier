@@ -8,9 +8,12 @@ class Review extends React.Component {
     super(props);
     this.state = {
       showFullReview: false,
-      markedHelpful: false
+      markedHelpful: false,
+      imageUrlInModal: null
     }
     this.showFullReview.bind(this)
+    this.openInModal.bind(this)
+    this.closeModal.bind(this)
   }
 
   componentDidMount() {
@@ -27,9 +30,21 @@ class Review extends React.Component {
     })
   }
 
+  openInModal(photoUrl) {
+    console.log('photoUrl in openInModal', photoUrl)
+    this.setState({
+      imageUrlInModal: photoUrl
+    })
+  }
+
+  closeModal() {
+    this.setState({
+      imageUrlInModal: null
+    })
+  }
+
   render() {
     let review = this.props.review
-    console.log('review', review)
     let reviewBody
     if (this.state.showFullReview) {
       reviewBody = review.body
@@ -52,7 +67,21 @@ class Review extends React.Component {
         <Date date={review?.date.slice(0,10)} />
         <Helpful helpfulness={review?.helpfulness} markHelpful={this.props.markHelpful} id={this.props.review.review_id}/>
         {review?.photos.map(photo =>
-          <img key={photo.id} src={photo.url} height="45px" width="45px"></img>)}
+          <img
+          key={photo.id}
+          src={photo.url}
+          height="45px"
+          width="45px"
+          onClick={() => this.openInModal(photo.url)}></img>)}
+          {this.state.imageUrlInModal &&
+          <div className="review-modal-backdrop">
+          <div className="review-image-modal-box">
+            <button onClick={() => this.closeModal()}>X</button>
+            <br></br>
+            <br></br>
+            <img src={this.state.imageUrlInModal}></img>
+          </div>
+        </div>}
       </div>
     )
   }
