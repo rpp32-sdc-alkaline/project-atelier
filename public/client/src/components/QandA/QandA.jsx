@@ -12,7 +12,8 @@ class QandA extends React.Component{
       haveData: false,
       qToDisplay: 2,
       allQDisplayed: false,
-      searchData: ''
+      searchData: '',
+      useFiltered: false
     };
     this.moreButton = this.moreButton.bind(this);
     this.getQuestionData = this.getQuestionData.bind(this);
@@ -23,12 +24,13 @@ class QandA extends React.Component{
   searchBarChange (e) {
     this.setState({ searchData: e.target.value }, () => {
       if (this.state.searchData.length > 2) {
+        this.setState({useFiltered: true})
         this.filterQuestionData(this.state.searchData);
       } else {
         this.setState({
-          filteredData: [],
           slicedData: this.state.questionData.slice(0, this.state.qToDisplay),
-          allQDisplayed: false
+          allQDisplayed: false,
+          useFiltered: false
         });
       }
     })
@@ -61,7 +63,7 @@ class QandA extends React.Component{
   moreButton (e) {
     //adjuest number of questions displayed
     let newSlice = this.state.qToDisplay + 2;
-    if (!this.state.filteredData) {
+    if (!this.state.useFiltered) {
       if (newSlice >= this.state.questionData.length) {
         this.setState({
           allQDisplayed: true
