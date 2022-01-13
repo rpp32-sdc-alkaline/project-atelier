@@ -26,12 +26,52 @@ class WriteReview extends React.Component {
       photos: [],
       nickname: null,
       email: null,
-      chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
+      metadata: null,
+      chars: null,
+      charRatings : {}
+      // chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
     }
     this.toggleWriteReview.bind(this)
     this.handleStarClick.bind(this)
     this.openModal.bind(this)
     this.closeModal.bind(this)
+    this.setUpChars.bind(this)
+    this.postData.bind(this)
+  }
+
+  componentDidMount() {
+    if (this.props.metadata) {
+      this.setState({
+        metadata: this.props.metadata
+      })
+      this.setUpChars()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.metadata !== prevProps.metadata) {
+      this.setState({
+        metadata: this.props.metadata
+      })
+      this.setUpChars()
+    }
+  }
+
+  postData(formData) {
+    console.log('formData', formData)
+    this.props.postNewReview(formData)
+  }
+
+  setUpChars() {
+    let chars = [];
+    for (var key in this.props.metadata.characteristics) {
+      chars.push({
+        [key]: this.props.metadata.characteristics[key].id
+      })
+    }
+    this.setState({
+      chars: chars,
+    })
   }
 
   handleOverallRating(e) {
@@ -40,16 +80,18 @@ class WriteReview extends React.Component {
     })
   }
 
-  rateCharacteristic(char, rating) {
-    char = char.toLowerCase()
+  rateCharacteristic(char, rating, id) {
+    let charRatings = this.state.charRatings
+    charRatings[id] = rating
     this.setState({
-      [char]: rating
+      charRatings: charRatings
     })
   }
 
   handleRecommend(e) {
+    let recommendation = (e.target.value === 'true')
     this.setState({
-      recommend: e.target.value
+      recommend: recommendation
     })
   }
 
@@ -85,22 +127,21 @@ class WriteReview extends React.Component {
   onSubmit(e) {
     e.preventDefault()
     let invalidFields = ''
-    let properEmail = /\w+@.\D{3}/ig
+    let properEmailRegex = /\S+@\S+\.\S{2,5}/i
     if (!this.state.rating) {
       invalidFields += 'Overall Rating\n'
     } if (this.state.recommend === null) {
       invalidFields += 'Do you recommend this product?\n'
-    } for (var i = 0; i < this.state.chars.length; i++) {
-      let char = this.state.chars[i].toLowerCase()
-      if (this.state[char] === null) {
-        invalidFields += `Characteristic: ${this.state.chars[i]}\n`
+    } for (var key in this.state.charRatings) {
+      if (!this.state.charRatings[key]) {
+        invalidFields += `Characteristic Rating\n`
       }
     } if (this.state.body === '' || this.state.body.length < 50) {
       invalidFields += 'Review body\n'
     } // TODO: handle invalid photo upload
     if (!this.state.nickname) {
       invalidFields += 'Nickname\n'
-    } if (this.state.email !== properEmail) {
+    } if (!properEmailRegex.test(this.state.email)) {
       invalidFields += 'Email\n'
     } if (invalidFields) {
       alert(`You must enter the following:\n${invalidFields}`)
@@ -113,13 +154,14 @@ class WriteReview extends React.Component {
         recommend: this.state.recommend,
         name: this.state.nickname,
         email: this.state.email,
-        photos: this.state.photos
+        photos: this.state.photos,
+        characteristics: this.state.charRatings
         }
+        this.postData(reviewFormData)
       }
     }
 
     handleStarClick(e) {
-      console.log('e.target.value in handleStarClick', e.target.value)
       this.setState({
         rating: e.target.value
       })
@@ -132,15 +174,12 @@ class WriteReview extends React.Component {
     }
 
     closeModal() {
-      console.log('in closeModal')
       this.setState({
         show: false
       })
     }
 
     toggleWriteReview(e) {
-      console.log('in toggleWriteReview')
-      console.log('e', e)
       let currentState = this.state.show
       this.setState({
         show: !currentState
@@ -182,9 +221,21 @@ class WriteReview extends React.Component {
     }
     let chars = Array.from(this.state.chars)
     let rating = this.state.rating
+    let ratingDesc
+    if (rating === '1') {
+      ratingDesc = 'Poor'
+    } else if (rating === '2') {
+      ratingDesc = 'Fair'
+    } else if (rating === '3') {
+      ratingDesc = 'Average'
+    } else if (rating === '4') {
+      ratingDesc = 'Good'
+    } else if (rating === '5') {
+      ratingDesc = 'Great'
+    }
     return (
-        <div className="write-review-modal-backdrop" onClick={() => console.log('clicked outside the box')}>
-          <div className="write-review-modal-box" onClick={() => console.log('clicked in the box')}>
+        <div className="write-review-modal-backdrop">
+          <div className="write-review-modal-box">
             <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
             <h3>Write Your Review</h3>
             <h5>About the {this.props.name}</h5>
@@ -207,6 +258,7 @@ class WriteReview extends React.Component {
                     </label>
                   )}
                 )}
+                <p>{ratingDesc}</p>
               </div>
               <br></br>
               <p>Do you recommend this product?*</p>
@@ -216,10 +268,22 @@ class WriteReview extends React.Component {
               <label htmlFor="no-recommend">No</label>
               <br></br>
               <br></br>
-              <p>Rate these characteristics:</p>
-              <br></br>
-              {chars.map(char =>
-              <CharacteristicReview thisChar={char} key={char} rateChar={this.rateCharacteristic.bind(this)}/>
+              <p>Rate these characteristics:*</p>
+              {chars.map(char => {
+                let charName
+                let charId
+                for (var key in char) {
+                  charName = key;
+                  charId = char[key]
+                }
+                return (
+                  <CharacteristicReview
+                  thisChar={charName}
+                  key={charName}
+                  id={charId}
+                  rateChar={this.rateCharacteristic.bind(this)}/>
+                )
+              }
               )}
               <p>Review Summary:</p>
               <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"

@@ -10,13 +10,8 @@ class StarRating extends React.Component {
       // length: this.props.ratings.length,
       // average: this.average
     }
-    this.handleClick = this.handleClick.bind(this)
   }
 
-
-  handleClick() {
-    console.log('scroll to Ratings and Reviews')
-  }
 
   render () {
     // console.log('this.props.ratings', this.props.ratings)

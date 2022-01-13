@@ -8,10 +8,16 @@ class RatingBreakdown extends React.Component {
     this.state = {}
   }
   componentDidMount() {
-    // console.log('this.props.metadata', this.props.metadata)
   }
 
   render() {
+    let currentFiltersString = ''
+    for (var i = 0; i < this.props.filters.length; i++) {
+      currentFiltersString += `${this.props.filters[i]} stars`
+      if (i !== this.props.filters.length - 1) {
+        currentFiltersString += ', '
+      }
+    }
     let ratings
     if (this.props.metadata?.ratings) {
       ratings = this.props.metadata.ratings
@@ -32,6 +38,10 @@ class RatingBreakdown extends React.Component {
       numTwoStars = Math.floor(JSON.parse(ratings[2])/totalRatings*100)
       numOneStar = Math.floor(JSON.parse(ratings[1])/totalRatings*100)
     }
+    let recommended
+    if (this.props.metadata?.recommended) {
+      recommended = this.props.metadata.recommended
+    } let percentRecommended = ((parseInt(recommended.true)/(parseInt(recommended.true) + parseInt(recommended.false)))*100).toFixed(1)
     return (
       <div className="rating-breakdown">
         <h3>Ratings and Reviews</h3>
@@ -42,6 +52,13 @@ class RatingBreakdown extends React.Component {
         <IndividualRatingBreakdown numStars={3} percent={numThreeStars} ratings={ratings[3]} updateFilters={this.props.updateFilters}/>
         <IndividualRatingBreakdown numStars={2} percent={numTwoStars} ratings={ratings[2]} updateFilters={this.props.updateFilters}/>
         <IndividualRatingBreakdown numStars={1} percent={numOneStar} ratings={ratings[1]} updateFilters={this.props.updateFilters}/>
+        {(this.props.filters.length !== 0) &&
+        <>
+          <p>Current filters: {currentFiltersString}</p>
+          <p className="link" onClick={this.props.removeFilters}>Remove all filters</p>
+        </>
+        }
+        <p>{percentRecommended}% recommend this product</p>
       </div>
     )
   }
