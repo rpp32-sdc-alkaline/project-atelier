@@ -61,7 +61,10 @@ class Reviews extends React.Component {
         </select>
         <div id="reviews-scroll">
           {reviews.slice(0, this.state.numToShow).map(review =>
-            <Review review={review} key={review.review_id} />
+            <Review
+            review={review}
+            key={review.review_id}
+            markHelpful={this.props.markHelpful}/>
           )}
         </div>
         {(this.state.numToShow <= reviews.length) &&

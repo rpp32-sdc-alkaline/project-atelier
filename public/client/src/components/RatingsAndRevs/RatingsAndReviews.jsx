@@ -15,18 +15,20 @@ class RatingsAndReviews extends React.Component{
       product: 0,
       sort: 'relevant',
       page: 1,
-      count: 5,
+      count: 1000,
       allReviews: [],
       metadata: [],
       filters: [],
       filteredReviews: [],
-      name: ''
+      name: '',
+      markedHelpful: []
     }
     this.getReviewData.bind(this)
     this.filterReviews.bind(this)
     this.updateFilters.bind(this)
     this.postNewReview.bind(this)
     this.removeFilters.bind(this)
+    this.markHelpful.bind(this)
   }
 
   componentDidMount() {
@@ -93,7 +95,27 @@ class RatingsAndReviews extends React.Component{
     .catch(error => {
       console.log('error: ', error)
     })
+  }
 
+  markHelpful(reviewId) {
+    console.log('in markHelpful, about to submit PUT')
+    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${reviewId}/helpful`
+    let headers = {
+      'Authorization': token.TOKEN
+    }
+    axios({
+      method: 'PUT',
+      url: url,
+      headers: headers
+    })
+    .then(result => {
+      console.log('Marked review ', reviewId, 'as helpful', result)
+      //refresh
+      this.getReviewData(this.state.product, this.state.sort, this.state.page, this.state.count)
+    })
+    .catch(error => {
+      console.log('error:', error)
+    })
   }
 
   changeSort(sort) {
@@ -161,7 +183,8 @@ class RatingsAndReviews extends React.Component{
         name={this.props.name}
         metadata={this.state.metadata}
         changeSort={this.changeSort.bind(this)}
-        postNewReview={this.postNewReview.bind(this)}/>
+        postNewReview={this.postNewReview.bind(this)}
+        markHelpful={this.markHelpful.bind(this)}/>
         <div className="ratings-left-sidebar">
           <RatingBreakdown
           metadata={this.state.metadata}

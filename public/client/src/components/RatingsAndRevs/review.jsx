@@ -7,7 +7,8 @@ class Review extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showFullReview: false
+      showFullReview: false,
+      markedHelpful: false
     }
     this.showFullReview.bind(this)
   }
@@ -28,6 +29,7 @@ class Review extends React.Component {
 
   render() {
     let review = this.props.review
+    console.log('review', review)
     let reviewBody
     if (this.state.showFullReview) {
       reviewBody = review.body
@@ -48,7 +50,7 @@ class Review extends React.Component {
         {review?.response &&
         <p className="response">Response from seller: {review.response}</p>}
         <Date date={review?.date.slice(0,10)} />
-        <Helpful helpfulness={review?.helpfulness} />
+        <Helpful helpfulness={review?.helpfulness} markHelpful={this.props.markHelpful} id={this.props.review.review_id}/>
         {review?.photos.map(photo =>
           <img key={photo.id} src={photo.url} height="45px" width="45px"></img>)}
       </div>
