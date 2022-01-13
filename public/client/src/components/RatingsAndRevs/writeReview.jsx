@@ -221,6 +221,18 @@ class WriteReview extends React.Component {
     }
     let chars = Array.from(this.state.chars)
     let rating = this.state.rating
+    let ratingDesc
+    if (rating === '1') {
+      ratingDesc = 'Poor'
+    } else if (rating === '2') {
+      ratingDesc = 'Fair'
+    } else if (rating === '3') {
+      ratingDesc = 'Average'
+    } else if (rating === '4') {
+      ratingDesc = 'Good'
+    } else if (rating === '5') {
+      ratingDesc = 'Great'
+    }
     return (
         <div className="write-review-modal-backdrop">
           <div className="write-review-modal-box">
@@ -246,6 +258,7 @@ class WriteReview extends React.Component {
                     </label>
                   )}
                 )}
+                <p>{ratingDesc}</p>
               </div>
               <br></br>
               <p>Do you recommend this product?*</p>
@@ -255,7 +268,7 @@ class WriteReview extends React.Component {
               <label htmlFor="no-recommend">No</label>
               <br></br>
               <br></br>
-              <p>Rate these characteristics:</p>
+              <p>Rate these characteristics:*</p>
               <br></br>
               {chars.map(char => {
                 let charName
