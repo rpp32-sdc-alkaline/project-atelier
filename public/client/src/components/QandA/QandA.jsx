@@ -61,7 +61,7 @@ class QandA extends React.Component{
   }
 
   moreButton (e) {
-    //adjuest number of questions displayed
+
     let newSlice = this.state.qToDisplay + 2;
     if (!this.state.useFiltered) {
       if (newSlice >= this.state.questionData.length) {
