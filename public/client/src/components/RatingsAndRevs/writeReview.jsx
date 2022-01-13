@@ -269,7 +269,6 @@ class WriteReview extends React.Component {
               <br></br>
               <br></br>
               <p>Rate these characteristics:*</p>
-              <br></br>
               {chars.map(char => {
                 let charName
                 let charId

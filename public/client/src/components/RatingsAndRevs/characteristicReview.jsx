@@ -89,7 +89,9 @@ class CharacteristicReview extends React.Component {
     let fiveId = 'five-' + char
     let selection = this.state.selection;
     let selectionDescription
-    if (this.state.selection === '1') {
+    if (this.state.selection === null) {
+      selectionDescription = 'none selected'
+    } else if (this.state.selection === '1') {
       selectionDescription = this.state.oneDescription
     } else if (this.state.selection === '2') {
       selectionDescription = this.state.twoDescription
@@ -102,16 +104,14 @@ class CharacteristicReview extends React.Component {
     }
     return (
       <div>
-        <p>{char}</p>
-        {selection &&
-        <p>{selection}: {selectionDescription}</p>}
+        <p>{char}*</p>
+        <p>{selectionDescription}</p>
         <input type="radio" name={char} id={oneId} value="1" onClick={this.handleClick.bind(this)}></input>
         <input type="radio" name={char} id={twoId}value="2" onClick={this.handleClick.bind(this)}></input>
         <input type="radio" name={char} id={threeId}value="3" onClick={this.handleClick.bind(this)}></input>
         <input type="radio" name={char} id={fourId}value="4" onClick={this.handleClick.bind(this)}></input>
         <input type="radio" name={char} id={fiveId}value="5" onClick={this.handleClick.bind(this)}></input>
-        <p>1: {this.state.oneDescription}</p>
-        <p>5: {this.state.fiveDescription}</p>
+        <p>1: {this.state.oneDescription}, 5: {this.state.fiveDescription}</p>
         <br></br>
       </div>
     )
