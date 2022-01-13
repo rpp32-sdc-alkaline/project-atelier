@@ -22,7 +22,15 @@ class QandA extends React.Component{
 
   searchBarChange (e) {
     this.setState({ searchData: e.target.value }, () => {
-      this.filterQuestionData(this.state.searchData);
+      if (this.state.searchData.length > 2) {
+        this.filterQuestionData(this.state.searchData);
+      } else {
+        this.setState({
+          filteredData: [],
+          slicedData: this.state.questionData.slice(0, this.state.qToDisplay),
+          allQDisplayed: false
+        });
+      }
     })
   }
 
@@ -39,10 +47,13 @@ class QandA extends React.Component{
           filteredData.push(this.state.questionData[i]);
         }
       }
-      console.log('filtered data', filteredData);
-      this.setState({filteredData: filteredData});
+      this.setState({
+        filteredData: filteredData,
+        slicedData: filteredData.slice(0, this.state.qToDisplay)
+      });
     } else {
-      this.setState({filteredData: this.state.questionData});
+      this.setState({filteredData: [], allQDisplayed: false});
+
     }
 
   }
@@ -50,15 +61,27 @@ class QandA extends React.Component{
   moreButton (e) {
     //adjuest number of questions displayed
     let newSlice = this.state.qToDisplay + 2;
-    if (newSlice >= this.state.filteredData.length) {
+    if (!this.state.filteredData) {
+      if (newSlice >= this.state.questionData.length) {
+        this.setState({
+          allQDisplayed: true
+        })
+      }
       this.setState({
-        allQDisplayed: true
+        qToDisplay: newSlice,
+        slicedData: this.state.questionData.slice(0, newSlice)
+      })
+    } else {
+      if (newSlice >= this.state.filteredData.length) {
+        this.setState({
+          allQDisplayed: true
+        })
+      }
+      this.setState({
+        qToDisplay: newSlice,
+        slicedData: this.state.filteredData.slice(0, newSlice)
       })
     }
-    this.setState({
-      qToDisplay: newSlice,
-      slicedData: this.state.filteredData.slice(0, newSlice)
-    })
   }
 
   componentDidMount () {
@@ -89,10 +112,9 @@ class QandA extends React.Component{
         questionData: result.data.results,
         slicedData: result.data.results.slice(0, this.state.qToDisplay),
         haveData: true,
-        allQDisplayed: false,
-        filteredData: result.data.results
+        allQDisplayed: false
       })
-      console.log('questionData', this.state.questionData);
+      //console.log('questionData', this.state.questionData);
     })
     .catch((error) => {
       throw error;
