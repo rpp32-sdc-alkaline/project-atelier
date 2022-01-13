@@ -14,7 +14,8 @@ class Questions extends React.Component{
   }
 
   componentDidMount() {
-    //console.log('questionDidLoad', this.props)
+    console.log('questionDidLoad', this.props)
+
   }
 
   render() {
@@ -27,8 +28,8 @@ class Questions extends React.Component{
       )
     } else {
     return (
-      <div className='questions'>
-        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId}/>
+      <div key={this.props.questions.length} className='questions'>
+        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId} searchData={this.props.searchData}/>
       </div>
     )
     }
