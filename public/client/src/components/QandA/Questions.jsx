@@ -14,7 +14,7 @@ class Questions extends React.Component{
   }
 
   componentDidMount() {
-    console.log('questionDidLoad', this.props)
+    //console.log('questionDidLoad', this.props)
 
   }
 
