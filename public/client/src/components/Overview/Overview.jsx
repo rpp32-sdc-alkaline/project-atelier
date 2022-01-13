@@ -228,7 +228,6 @@ class Overview extends React.Component{
   };
 
   addToCart() {
-    // console.log('add to cart called')
     var $size = $(".size-selector").val()
     if ($size === 'Select Size') {
     this.setState({
