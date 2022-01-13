@@ -30,7 +30,6 @@ class RatingsAndReviews extends React.Component{
   }
 
   componentDidMount() {
-    console.log('token', token)
     let id = this.props.id
     this.setState({
       product: id
@@ -57,7 +56,6 @@ class RatingsAndReviews extends React.Component{
     let headers = {
       'Authorization': token.TOKEN
     }
-    console.log('headers before getting review data', headers)
     axios.get(reviewsUrl, {
       headers: headers
     })
@@ -81,14 +79,12 @@ class RatingsAndReviews extends React.Component{
   }
 
   postNewReview(review) {
-    console.log('review before posting', review)
     let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`
     let headers = {
       'Content-Type' : 'application/json',
       'Accept' : 'application/json',
       'Authorization': token.TOKEN
     }
-    console.log('headers before POSTING review', headers)
     axios.post(url, review, {
       headers: headers})
     .then(result => {
@@ -108,7 +104,6 @@ class RatingsAndReviews extends React.Component{
   }
 
   removeFilters() {
-    console.log('in remove filters')
     this.setState({
       filters: []
     })
