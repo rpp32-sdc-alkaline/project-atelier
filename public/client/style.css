@@ -84,6 +84,9 @@
   grid-row: 1;
   align-self: start;
   margin: 1em;
+  min-height: 50vh;
+  max-height: 100vh;
+  height: auto;
 }
 
 .ratings-left-sidebar {
@@ -91,8 +94,8 @@
 }
 
 #reviews-scroll {
-  overflow: scroll;
-  height:75vh;
+  overflow: auto;
+  max-height: 70vh;
 }
 
 .individual-rating-breakdown-row:hover {
@@ -120,6 +123,10 @@
   width: 60%;
   height: 0.5em;
   border-radius: 1em;
+}
+
+.product-breakdown {
+  margin-top: 2em;
 }
 
 .gold {

@@ -52,7 +52,6 @@ class Reviews extends React.Component {
     }
     return (
       <div id="reviews" data-testid="reviews">
-        <h3>Reviews</h3>
         <h4>{reviews.length} reviews. Sort by:</h4>
         <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)}>
           <option value="relevance">Relevant</option>
