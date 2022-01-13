@@ -11,24 +11,77 @@ class QandA extends React.Component{
     this.state = {
       haveData: false,
       qToDisplay: 2,
-      allQDisplayed: false
+      allQDisplayed: false,
+      searchData: ''
     };
     this.moreButton = this.moreButton.bind(this);
     this.getQuestionData = this.getQuestionData.bind(this);
+    this.searchBarChange = this.searchBarChange.bind(this);
+    this.filterQuestionData = this.filterQuestionData.bind(this);
+  }
+
+  searchBarChange (e) {
+    this.setState({ searchData: e.target.value }, () => {
+      if (this.state.searchData.length > 2) {
+        this.filterQuestionData(this.state.searchData);
+      } else {
+        this.setState({
+          filteredData: [],
+          slicedData: this.state.questionData.slice(0, this.state.qToDisplay),
+          allQDisplayed: false
+        });
+      }
+    })
+  }
+
+  filterQuestionData (data) {
+    if (this.state.searchData !== '') {
+      let searchTerm = data.toLowerCase().split(' ');
+      let filteredData = [];
+      let checker = (apiData, searchTerms) => searchTerms.every(element => apiData.includes(element));
+
+      for (let i = 0; i < this.state.questionData.length; i++) {
+        let currentBody = this.state.questionData[i].question_body.toLowerCase().split(' ');
+        let flag = checker(currentBody, searchTerm);
+        if (flag) {
+          filteredData.push(this.state.questionData[i]);
+        }
+      }
+      this.setState({
+        filteredData: filteredData,
+        slicedData: filteredData.slice(0, this.state.qToDisplay)
+      });
+    } else {
+      this.setState({filteredData: [], allQDisplayed: false});
+
+    }
+
   }
 
   moreButton (e) {
     //adjuest number of questions displayed
     let newSlice = this.state.qToDisplay + 2;
-    if (newSlice >= this.state.questionData.length) {
+    if (!this.state.filteredData) {
+      if (newSlice >= this.state.questionData.length) {
+        this.setState({
+          allQDisplayed: true
+        })
+      }
       this.setState({
-        allQDisplayed: true
+        qToDisplay: newSlice,
+        slicedData: this.state.questionData.slice(0, newSlice)
+      })
+    } else {
+      if (newSlice >= this.state.filteredData.length) {
+        this.setState({
+          allQDisplayed: true
+        })
+      }
+      this.setState({
+        qToDisplay: newSlice,
+        slicedData: this.state.filteredData.slice(0, newSlice)
       })
     }
-    this.setState({
-      qToDisplay: newSlice,
-      slicedData: this.state.questionData.slice(0, newSlice)
-    })
   }
 
   componentDidMount () {
@@ -87,8 +140,8 @@ class QandA extends React.Component{
         return (
           <div className='qAndA'>
         <h4>QUESTIONS & ANSWERS</h4>
-        <Search />
-        <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id}/>
+        <Search searchBarChange={this.searchBarChange}/>
+        <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id} searchData={this.state.searchData}/>
         {!this.state.allQDisplayed && <span className='moreQuestion' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions </span>}
         <AddQuestion id ={this.props.id} update={this.getQuestionData}/> <br></br>
         </div>
