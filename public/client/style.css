@@ -1,4 +1,8 @@
 /* Ratings and Reviews Styles */
+
+#app {
+  font-family: Questrial, sans-serif;
+}
 .ratings-grid-container {
   display: grid;
   grid-template-columns: 30% 70%;
@@ -133,10 +137,11 @@
 .link {
   text-decoration: underline;
   text-decoration-color: blue;
+  width: max-content;
 }
 
 .link:hover {
-  background-color: lightskyblue;
+  background-color: rgb(179, 226, 255);
 }
 
 .summary {
