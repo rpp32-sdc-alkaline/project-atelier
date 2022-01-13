@@ -65,7 +65,6 @@ class MainImage extends React.Component {
             <img className="main-image" onClick={this.handleClick} src={this.props.image}/>
             <ExpandedView isOpen={this.props.modalOpen} close={this.handleClick} iconClick={this.props.iconClick}
             photos={this.props.photos} image={this.props.image} />
-
       </div>
     )
   }

@@ -121,12 +121,22 @@ class Overview extends React.Component{
     var photos = this.state.selectedStylePhotos
     var newCurrent = this.state.mainImageIndex === photos.length - 1 ? 0
     : this.state.mainImageIndex + 1
+    var nextPhoto = photos[newCurrent]
+    var urls = this.state.thumbnailBarPhotos.map(photo => photo.url)
+
+    if(urls.indexOf(nextPhoto.url) > 4) {
+      const photos = this.state.thumbnailBarPhotos.slice()
+      const photo = photos[0]
+
+      photos.splice(0, 1)
+      photos.push(photo)
+      this.thumbnailScrollDown(photos)
+    }
 
     this.setState({
       mainImage: photos[newCurrent].url,
       mainImageIndex: newCurrent
     })
-    // console.log('current', this.state.mainImageIndex)
   };
 
   mainImagePrev(){
@@ -134,7 +144,19 @@ class Overview extends React.Component{
     var photos = this.state.selectedStylePhotos
     var newCurrent = this.state.mainImageIndex === 0 ? photos.length - 1
     : this.state.mainImageIndex - 1
+    var nextPhoto = photos[newCurrent]
+    var urls = this.state.thumbnailBarPhotos.map(photo => photo.url)
 
+    if(urls.indexOf(nextPhoto.url) > 4) {
+    const photos = this.state.thumbnailBarPhotos.slice()
+    const index = photos.length - 1
+    const photo = photos[index]
+
+    photos.splice(index, 1)
+    photos.unshift(photo)
+    this.thumbnailScrollUp(photos)
+
+    }
     this.setState({
       mainImage: photos[newCurrent].url,
       mainImageIndex: newCurrent
@@ -179,7 +201,7 @@ class Overview extends React.Component{
   }
 
   selectSize(size, available) {
-    console.log('select size called', size)
+    // console.log('select size called', size)
     // console.log('available', Number(available))
     this.setState({
       selectedSize: size,
@@ -188,7 +210,6 @@ class Overview extends React.Component{
       showSizes: false,
       noSizeSelected: false
     })
-    console.log('no size', this.state.noSizeSelected)
   };
 
   selectQuantity(quantity) {
@@ -207,9 +228,7 @@ class Overview extends React.Component{
   };
 
   addToCart() {
-    // console.log('add to cart called')
     var $size = $(".size-selector").val()
-    console.log('size', $size)
     if ($size === 'Select Size') {
     this.setState({
       displayAddToCart: true,
@@ -257,9 +276,6 @@ class Overview extends React.Component{
       }
       if(this.state.displayAddToCart && !this.state.noSizeSelected) {
         displayAdded = <div>
-          {/* <p>{`${this.state.displayedStyleName}`}</p>
-          <p>{`size: ${this.state.selectedSize}`}</p>
-          <p>{`qty: ${this.state.selectedQuantity}`}</p> */}
           <p>Item added to cart!</p>
         </div>
       }
@@ -277,6 +293,7 @@ class Overview extends React.Component{
           <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
           thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}
           modalOpen={this.state.expand}/>
+          {description}
           </div>
 
           <div className="product-info">
@@ -292,7 +309,8 @@ class Overview extends React.Component{
                 <p className="style"><b>STYLE</b></p>
                 <p>{this.state.displayedStyleName.toUpperCase()}</p>
               </div>
-              <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles} />
+              <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles}
+              selectedStyle={this.state.displayedStyleName} />
             </div>
 
             <div className="selectors">
@@ -309,7 +327,7 @@ class Overview extends React.Component{
           {displayAdded}
           </div>
           </div>
-          {description}
+
         </div>
     )
   }
