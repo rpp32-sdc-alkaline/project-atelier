@@ -12,7 +12,7 @@ import MainImage from './MainImage.jsx'
 import ThumbnailBar from './ThumbnailBar.jsx'
 import axios from 'axios'
 import $ from 'jquery'
-var token = require('../../../dist/config.js')
+// var token = require('../../../dist/config.js')
 
 class Overview extends React.Component{
   constructor(props) {
@@ -40,7 +40,7 @@ class Overview extends React.Component{
       selectedQuantity: '',
 
       hideAddToCart: false,
-      // displayAddToCart: false,
+      displayAddToCart: false,
       cart: []
     }
 
@@ -61,48 +61,42 @@ class Overview extends React.Component{
   };
 
   getProductData(id)  {
-      let productUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`
-      let ratingsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${id}`
-      let stylesUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`
-      let headers = {
-        'Authorization': token.TOKEN
-      }
-    axios.get(productUrl, {headers})
+    let data = {data: id}
+    axios.post('/overview-products', data )
     .then(result => {
-      // console.log('product by id', result.data)
+      // console.log('product', result.data)
       this.setState({
         product: result.data
       })
     })
+
     .then(() => {
-      axios.get(ratingsUrl, {headers})
+      axios.post('/overview-ratings', data)
       .then(result => {
-        // console.log('ratings data', result.data)
         this.setState({
           ratings: result.data.ratings
         })
       })
     })
-   .then(() => {
-     axios.get(stylesUrl, {headers})
-     .then(result => {
-      //  console.log('result from styles', result.data.results[0].photos[0].url)
-       this.setState({
-         styles: result.data.results,
-         displayedStyleName: result.data.results[0].name,
-         selectedStylePhotos: result.data.results[0].photos,
-         mainImage: result.data.results[0].photos[0].url,
-         thumbnailBarPhotos: result.data.results[0].photos,
-         skus: result.data.results[0].skus,
-         salePrice: result.data.results[0].sale_price,
-         hasData: true
-       })
-     })
-   })
+    .then(() => {
+      axios.post('/overview-styles', data)
+      .then(result => {
+        this.setState({
+          styles: result.data.results,
+          displayedStyleName: result.data.results[0].name,
+          selectedStylePhotos: result.data.results[0].photos,
+          mainImage: result.data.results[0].photos[0].url,
+          thumbnailBarPhotos: result.data.results[0].photos,
+          skus: result.data.results[0].skus,
+          salePrice: result.data.results[0].sale_price,
+          hasData: true
+        })
+      })
+    })
     .catch(err =>
       console.log('error in get product by id')
     )
- };
+  }
 
   changeStyle(name, salePrice, skus, photos) {
     // console.log('change style display called', photos)
@@ -202,7 +196,7 @@ class Overview extends React.Component{
 
   selectSize(size, available) {
     // console.log('select size called', size)
-    // console.log('available', Number(available))
+    console.log('available', Number(available))
     this.setState({
       selectedSize: size,
       availableQuantity: Number(available),
@@ -231,11 +225,11 @@ class Overview extends React.Component{
     var $size = $(".size-selector").val()
     if ($size === 'Select Size') {
     this.setState({
-      displayAddToCart: true,
       noSizeSelected: true
     })
   } else {
     this.setState({
+      displayAddToCart: true,
       noSizeSelected: false
     })
   }
@@ -316,7 +310,7 @@ class Overview extends React.Component{
             <div className="selectors">
               <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
               openSizeDropDown={this.openSizeDropDown} showSizes={this.state.showSizes}
-              hideAddToCart={this.hideAddToCart} />
+              hideAddToCart={this.hideAddToCart} noSizeSelected={this.state.noSizeSelected}/>
               <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
               selectQuantity={this.selectQuantity}/>
 

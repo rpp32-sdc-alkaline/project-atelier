@@ -10,9 +10,9 @@ class SizeSelector extends React.Component {
        display: '',
        openList: false,
        testData: {
-        2122801: {quantity: 1, size: 'XS'},
+        2122801: {quantity: 0, size: 'XS'},
         2122802: {quantity: 0, size: 'S'},
-        2122803: {quantity: 1, size: 'M'},
+        2122803: {quantity: 0, size: 'M'},
         2122804: {quantity: 0, size: 'L'},
         2122805: {quantity: 0, size: 'XL'},
         2122806: {quantity: 0, size: 'XXL'}
@@ -22,25 +22,26 @@ class SizeSelector extends React.Component {
     // this.openDropDown = this.openDropDown.bind(this)
   }
 
-  handleChange(size, quantity) {
-    // console.log('value', size)
+  handleChange(e) {
+    var size = e.target.value.split(' ')[0]
+    var quantity = e.target.value.split(' ')[1]
     this.setState({
       display: size
     })
     this.props.selectSize(size, quantity)
   };
 
-  // openDropDown() {
-  //   // console.log('open drop down called')
-  //   this.setState({
-  //     openList: true
-  //   })
-  //   this.props.openSizeDropDown()
-  //   // return (
-  //   //   <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
-  //   //   // skus={this.state.testData}
-  //   // )
-  // }
+  openDropDown() {
+    // console.log('open drop down called')
+    this.setState({
+      openList: true
+    })
+    this.props.openSizeDropDown()
+    return (
+      <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+      // skus={this.state.testData}
+    )
+  }
 
   componentDidMount() {
     var sum = 0;
@@ -66,15 +67,21 @@ class SizeSelector extends React.Component {
         display: 'Select Size'
       })
     }
+
+    if (this.props.showSizes) {
+      return <SizeDropDown skus={this.props.skus}/>
+    }
     // console.log('sum', sum)
   }
 
+  //div height conditional -- collapsed height === 0
+  //open height = auto to fit
 
   render() {
     var list;
-    if(this.props.showSizes) {
+    if(this.props.noSizeSelected) {
       ///⚪️
-      list = <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+      list = <SizeDropDown skus={this.props.skus}/>
       // list = <SizeDropDown skus={this.state.testData} handleChange={this.handleChange} />
     } else {
       list = null
@@ -84,20 +91,11 @@ class SizeSelector extends React.Component {
   //    <button className="size-selector-button" onClick={this.openDropDown} disabled={this.state.disabled}>{this.state.display}</button>
   //    {list}
   //  </div>
-   <select className="size-selector" onChange={this.openDropDown} disabled={this.state.disabled}>
-     <option value="Select Size">Select Size</option>
-   <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+   <select className="size-selector" onChange={this.handleChange} disabled={this.state.disabled}>
+     <option value="Select Size">{this.state.display}</option>
+   <SizeDropDown skus={this.props.skus}/>
+   {/* {list} */}
    </select>
-
-
-      // <select style={{margin: 10}} onChange={this.handleChange} disabled={this.state.disabled}>
-      //   <option>{this.state.display}</option>
-
-      //   <SizeDropDown
-      //   skus={this.props.skus}
-      //   // skus={this.state.testData}
-      //   />
-  // </select>
   )
 }
 }

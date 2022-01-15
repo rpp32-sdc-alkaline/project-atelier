@@ -19,14 +19,15 @@ handleChange(e) {
 
   render() {
     var disable;
-    if (!this.props.size || this.props.available === 0) {
+    console.log('this.props.size', this.props.size)
+    if (this.props.size === 'Select Size' || this.props.available === 0) {
       disable = true
     } else {
       disable = false
     }
     return (
       <select className="quantity-selector" onChange={this.handleChange} disabled={disable}>
-        <option value={1}>{this.state.disable? '-' : '1'}</option>
+        <option >{disable? '-' : '1'}</option>
         <QuantityDropDown size={this.props.size} available={this.props.available}/>
       </select>
     )
