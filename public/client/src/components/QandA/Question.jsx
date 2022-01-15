@@ -9,22 +9,25 @@ const Question = (props) => {
   let markHelpful = (e) => {
     let id = e.target.id;
     //console.log('event', e);
-    let headers = {
-      'Authorization': token.TOKEN
-    };
-    axios({
-      method: 'put',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${id}/helpful`,
-      headers: headers
-    })
-    .then((result) => {
-      console.log('Marked as helpful')
-      props.update(props.productId, 1, 100);
-      //console.log('questionData', this.state.questionData);
-    })
-    .catch((error) => {
-      throw error;
-    })
+    if (props.state[id] !== true) {
+      let headers = {
+        'Authorization': token.TOKEN
+      };
+      axios({
+        method: 'put',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${id}/helpful`,
+        headers: headers
+      })
+      .then((result) => {
+        console.log('Marked as helpful');
+        props.wasMarked(e);
+        props.update(props.productId, 1, 100);
+        //console.log('questionData', this.state.questionData);
+      })
+      .catch((error) => {
+        throw error;
+      })
+    }
   }
 
   let eachQuestion = props.props.map((item) => {
