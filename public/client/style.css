@@ -465,9 +465,10 @@
 /*  Question and Answer Style */
 
 .qAndA {
-  height: auto;
+  height:75vh;
   width: auto;
   margin-left: 20px;
+  overflow: scroll;
 
 }
 
