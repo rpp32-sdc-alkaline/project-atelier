@@ -51,15 +51,14 @@ class RatingsAndReviews extends React.Component{
   }
 
   getReviewData(product, sort, page, count) {
-    let reviews
-    let metadata
-    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${sort}&product_id=${product}&page=${page}&count=${count}`
-    let metadataUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${product}`
-    let headers = {
-      'Authorization': token.TOKEN
+    let data = {
+      product: product,
+      sort: sort,
+      page: page,
+      count: count
     }
-    axios.get(reviewsUrl, {
-      headers: headers
+    axios.post('/getreviews', {
+      data: data
     })
     .then(result => {
       this.setState({
@@ -68,8 +67,11 @@ class RatingsAndReviews extends React.Component{
       })
     })
     .catch(error => console.log('error!', error))
-    axios.get(metadataUrl, {
-      headers: headers
+    let dataForMetadata = {
+      product: product,
+    }
+    axios.post('/getreviewsmetadata', {
+      data: dataForMetadata
     })
     .then (result => {
       this.setState({
@@ -81,16 +83,10 @@ class RatingsAndReviews extends React.Component{
   }
 
   postNewReview(review) {
-    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`
-    let headers = {
-      'Content-Type' : 'application/json',
-      'Accept' : 'application/json',
-      'Authorization': token.TOKEN
-    }
-    axios.post(url, review, {
-      headers: headers})
+    axios.post('/newreview', {
+      data: review
+    })
     .then(result => {
-      console.log('Posted review! Result: ', result)
     })
     .catch(error => {
       console.log('error: ', error)
@@ -98,19 +94,10 @@ class RatingsAndReviews extends React.Component{
   }
 
   markHelpful(reviewId) {
-    console.log('in markHelpful, about to submit PUT')
-    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${reviewId}/helpful`
-    let headers = {
-      'Authorization': token.TOKEN
-    }
-    axios({
-      method: 'PUT',
-      url: url,
-      headers: headers
+    axios.post('/markhelpful', {
+      data: reviewId
     })
     .then(result => {
-      console.log('Marked review ', reviewId, 'as helpful', result)
-      //refresh
       this.getReviewData(this.state.product, this.state.sort, this.state.page, this.state.count)
     })
     .catch(error => {
