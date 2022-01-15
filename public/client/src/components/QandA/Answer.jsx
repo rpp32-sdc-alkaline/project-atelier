@@ -13,7 +13,8 @@ class Answer extends React.Component{
     this.getMore = this.getMore.bind(this);
     this.getLess = this.getLess.bind(this);
     this.markHelpful = this.markHelpful.bind(this);
-    this.report =this.report.bind(this);
+    this.report = this.report.bind(this);
+    this.wasMarked = this.wasMarked.bind(this);
   }
 
   getMore (e) {
@@ -69,20 +70,29 @@ class Answer extends React.Component{
   markHelpful (e) {
     let id = e.target.id;
     //console.log('event', e);
-    let headers = {
-      'Authorization': token.TOKEN
-    };
-    axios({
-      method: 'put',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${id}/helpful`,
-      headers: headers
-    })
-    .then((result) => {
-      //console.log('Marked as helpful')
-      this.getAnswerData(this.props.props.question_id);
-    })
-    .catch((error) => {
-      throw error;
+    if (this.state[id] !== true) {
+      let headers = {
+        'Authorization': token.TOKEN
+      };
+      axios({
+        method: 'put',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${id}/helpful`,
+        headers: headers
+      })
+      .then((result) => {
+        //console.log('Marked as helpful')
+        this.wasMarked(e);
+        this.getAnswerData(this.props.props.question_id);
+      })
+      .catch((error) => {
+        throw error;
+      })
+    }
+  }
+
+  wasMarked (e) {
+    this.setState({
+      [e.target.id]: true
     })
   }
 

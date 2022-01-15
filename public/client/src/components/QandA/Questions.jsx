@@ -22,7 +22,7 @@ class Questions extends React.Component{
   wasMarked (e) {
     this.setState({
       [e.target.id]: true
-    }, () => {console.log('marked', this.state[e.target.id])})
+    })
   }
 
   render() {
