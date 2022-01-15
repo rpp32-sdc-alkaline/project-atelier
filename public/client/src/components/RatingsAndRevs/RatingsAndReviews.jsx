@@ -15,18 +15,20 @@ class RatingsAndReviews extends React.Component{
       product: 0,
       sort: 'relevant',
       page: 1,
-      count: 5,
+      count: 1000,
       allReviews: [],
       metadata: [],
       filters: [],
       filteredReviews: [],
-      name: ''
+      name: '',
+      markedHelpful: []
     }
     this.getReviewData.bind(this)
     this.filterReviews.bind(this)
     this.updateFilters.bind(this)
     this.postNewReview.bind(this)
     this.removeFilters.bind(this)
+    this.markHelpful.bind(this)
   }
 
   componentDidMount() {
@@ -49,15 +51,14 @@ class RatingsAndReviews extends React.Component{
   }
 
   getReviewData(product, sort, page, count) {
-    let reviews
-    let metadata
-    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${sort}&product_id=${product}&page=${page}&count=${count}`
-    let metadataUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${product}`
-    let headers = {
-      'Authorization': token.TOKEN
+    let data = {
+      product: product,
+      sort: sort,
+      page: page,
+      count: count
     }
-    axios.get(reviewsUrl, {
-      headers: headers
+    axios.post('/getreviews', {
+      data: data
     })
     .then(result => {
       this.setState({
@@ -66,8 +67,11 @@ class RatingsAndReviews extends React.Component{
       })
     })
     .catch(error => console.log('error!', error))
-    axios.get(metadataUrl, {
-      headers: headers
+    let dataForMetadata = {
+      product: product,
+    }
+    axios.post('/getreviewsmetadata', {
+      data: dataForMetadata
     })
     .then (result => {
       this.setState({
@@ -79,21 +83,26 @@ class RatingsAndReviews extends React.Component{
   }
 
   postNewReview(review) {
-    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`
-    let headers = {
-      'Content-Type' : 'application/json',
-      'Accept' : 'application/json',
-      'Authorization': token.TOKEN
-    }
-    axios.post(url, review, {
-      headers: headers})
+    axios.post('/newreview', {
+      data: review
+    })
     .then(result => {
-      console.log('Posted review! Result: ', result)
     })
     .catch(error => {
       console.log('error: ', error)
     })
+  }
 
+  markHelpful(reviewId) {
+    axios.post('/markhelpful', {
+      data: reviewId
+    })
+    .then(result => {
+      this.getReviewData(this.state.product, this.state.sort, this.state.page, this.state.count)
+    })
+    .catch(error => {
+      console.log('error:', error)
+    })
   }
 
   changeSort(sort) {
@@ -161,7 +170,8 @@ class RatingsAndReviews extends React.Component{
         name={this.props.name}
         metadata={this.state.metadata}
         changeSort={this.changeSort.bind(this)}
-        postNewReview={this.postNewReview.bind(this)}/>
+        postNewReview={this.postNewReview.bind(this)}
+        markHelpful={this.markHelpful.bind(this)}/>
         <div className="ratings-left-sidebar">
           <RatingBreakdown
           metadata={this.state.metadata}
