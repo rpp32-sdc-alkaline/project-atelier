@@ -531,11 +531,22 @@
 .addAnswer {
   font-weight: lighter;
   text-decoration: underline;
+  color: blue;
 }
 
 .aHeading {
   font-weight: bold;
 
+}
+
+.yes {
+  color: blue;
+  text-decoration: underline;
+}
+
+.report {
+  color: blue;
+  text-decoration: underline;
 }
 
 .reported {

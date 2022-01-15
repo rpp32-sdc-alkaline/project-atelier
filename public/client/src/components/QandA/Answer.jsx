@@ -121,7 +121,7 @@ class Answer extends React.Component{
         return (
           <span key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span className='yes' id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span className='report' id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
           </span>
         )
       })
@@ -137,7 +137,7 @@ class Answer extends React.Component{
         return (
           <div key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span className='yes' id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span className='report' id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
           </div>
         )
       })
