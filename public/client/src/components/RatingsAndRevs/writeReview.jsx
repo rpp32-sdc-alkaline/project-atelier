@@ -4,6 +4,7 @@ import axios from 'axios'
 import fullStar from '../../../../../assets/images/full-gold-star.png';
 import outlineStar from '../../../../../assets/images/star-outline.png';
 import Star from './star.jsx'
+import AddImagesModal from './addImagesModal.jsx'
 
 
 class WriteReview extends React.Component {
@@ -28,8 +29,8 @@ class WriteReview extends React.Component {
       email: null,
       metadata: null,
       chars: null,
-      charRatings : {}
-      // chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
+      charRatings : {},
+      showAddImagesModal: false
     }
     this.toggleWriteReview.bind(this)
     this.handleStarClick.bind(this)
@@ -37,6 +38,9 @@ class WriteReview extends React.Component {
     this.closeModal.bind(this)
     this.setUpChars.bind(this)
     this.postData.bind(this)
+    this.openAddImagesModal.bind(this)
+    this.closeAddImagesModal.bind(this)
+    this.uploadPhotos.bind(this)
   }
 
   componentDidMount() {
@@ -58,7 +62,6 @@ class WriteReview extends React.Component {
   }
 
   postData(formData) {
-    console.log('formData', formData)
     this.props.postNewReview(formData)
   }
 
@@ -107,9 +110,12 @@ class WriteReview extends React.Component {
     })
   }
 
-  uploadPhotos(e) {
-    e.preventDefault()
-    console.log('in uploadPhotos')
+  uploadPhotos(url) {
+    let currentPhotos = this.state.photos
+    currentPhotos.push(url)
+    this.setState({
+      photos: currentPhotos
+    })
   }
 
   handleNicknameChange(e) {
@@ -122,6 +128,22 @@ class WriteReview extends React.Component {
     this.setState({
       email: e.target.value
     })
+  }
+  openAddImagesModal(e) {
+    e.preventDefault()
+    if (!this.state.showAddImagesModal) {
+      this.setState({
+        showAddImagesModal: true
+      })
+    }
+  }
+
+  closeAddImagesModal() {
+    if (this.state.showAddImagesModal) {
+      this.setState({
+        showAddImagesModal: false
+      })
+    }
   }
 
   onSubmit(e) {
@@ -236,78 +258,92 @@ class WriteReview extends React.Component {
     return (
         <div className="review-modal-backdrop">
           <div className="write-review-modal-box">
-            <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
-            <h3>Write Your Review</h3>
-            <h5>About the {this.props.name}</h5>
-            <form>
-              <p>Overall Rating*</p>
-              <div className='review-stars'>
-                {[ ...Array(5)].map((star, i) => {
-                  let ratingValue = i + 1;
-                  let id = `star-rating-${i}`
-                  return (
-                    <label>
-                      <input
-                      type="radio"
-                      name="star-rating"
-                      id={id}
-                      value={ratingValue}
-                      onClick={this.handleStarClick.bind(this)}
-                      />
-                      <Star className="star" size={25} starFill={ratingValue <= rating ? 'gold' : 'grey'}/>
-                    </label>
+            <span class="close" onClick={this.closeModal.bind(this)}>&times;</span>
+            <br></br>
+            <h2>Write Your Review</h2>
+            <h3>About the {this.props.name}</h3>
+            <div className="write-review-modal-form">
+              <form>
+                <p>Overall Rating*</p>
+                <div className='review-stars'>
+                  {[ ...Array(5)].map((star, i) => {
+                    let ratingValue = i + 1;
+                    let id = `star-rating-${i}`
+                    return (
+                      <label>
+                        <input
+                        type="radio"
+                        name="star-rating"
+                        id={id}
+                        value={ratingValue}
+                        onClick={this.handleStarClick.bind(this)}
+                        />
+                        <Star className="star" size={25} starFill={ratingValue <= rating ? 'gold' : 'grey'}/>
+                      </label>
+                    )}
                   )}
-                )}
-                <p>{ratingDesc}</p>
-              </div>
-              <br></br>
-              <p>Do you recommend this product?*</p>
-              <input type="radio" id="yes-recommend" name="recommend" value={true} onClick={this.handleRecommend.bind(this)}></input>
-              <label htmlFor="yes-recommend">Yes</label>
-              <input type="radio" id="no-recommend" name="recommend" value={false} onClick={this.handleRecommend.bind(this)}></input>
-              <label htmlFor="no-recommend">No</label>
-              <br></br>
-              <br></br>
-              <p>Rate these characteristics:*</p>
-              {chars.map(char => {
-                let charName
-                let charId
-                for (var key in char) {
-                  charName = key;
-                  charId = char[key]
+                  <p>{ratingDesc}</p>
+                </div>
+                <br></br>
+                <p>Do you recommend this product?*</p>
+                <input type="radio" id="yes-recommend" name="recommend" value={true} onClick={this.handleRecommend.bind(this)}></input>
+                <label htmlFor="yes-recommend">Yes</label>
+                <input type="radio" id="no-recommend" name="recommend" value={false} onClick={this.handleRecommend.bind(this)}></input>
+                <label htmlFor="no-recommend">No</label>
+                <br></br>
+                <br></br>
+                <p>Rate these characteristics:*</p>
+                {chars.map(char => {
+                  let charName
+                  let charId
+                  for (var key in char) {
+                    charName = key;
+                    charId = char[key]
+                  }
+                  return (
+                    <CharacteristicReview
+                    thisChar={charName}
+                    key={charName}
+                    id={charId}
+                    rateChar={this.rateCharacteristic.bind(this)}/>
+                  )
                 }
+                )}
+                <p>Review Summary:</p>
+                <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"
+                onChange={this.handleSummaryChange.bind(this)}></textarea>
+                <p>Review body:</p>
+                <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
+                onChange={this.handleBodyChange.bind(this)}></textarea>
+                {this.state.body.length < 50 &&
+                <p>Minimum required characters left: {50-this.state.body.length}</p>}
+                {this.state.body.length >= 50 &&
+                <p>Minimum reached</p>}
+                <button onClick={this.openAddImagesModal.bind(this)}>Add images</button>
+                <AddImagesModal show={this.state.showAddImagesModal}
+                closeModal={this.closeAddImagesModal.bind(this)}
+                addImageUrl={this.uploadPhotos.bind(this)}/>
+                <br></br>
+                {this.state.photos.map((photo, i) => {
                 return (
-                  <CharacteristicReview
-                  thisChar={charName}
-                  key={charName}
-                  id={charId}
-                  rateChar={this.rateCharacteristic.bind(this)}/>
-                )
-              }
-              )}
-              <p>Review Summary:</p>
-              <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"
-              onChange={this.handleSummaryChange.bind(this)}></textarea>
-              <p>Review body:</p>
-              <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
-              onChange={this.handleBodyChange.bind(this)}></textarea>
-              {this.state.body.length < 50 &&
-              <p>Minimum required characters left: {50-this.state.body.length}</p>}
-              {this.state.body.length >= 50 &&
-              <p>Minimum reached</p>}
-              <label htmlFor="photos">Upload photos:</label>
-              <input type="file" id="photos" name="photos"></input>
-              <p>What is your nickname?*</p>
-              <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
-              onChange={this.handleNicknameChange.bind(this)}></textarea>
-              <p>For privacy reasons, do not use your full name or email address</p>
-              <p>Your email*</p>
-              <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11@email.com"
-              onChange={this.handleEmailChange.bind(this)}></textarea>
-              <p>For authentication reasons, you will not be emailed</p>
-              <br></br>
-              <button id="submit" onClick={this.onSubmit.bind(this)}>Submit review</button>
-            </form>
+                <img key={i}
+                src={photo}
+                height="45px"
+                width="45px"
+                className="thumbnail"></img>)}
+                )}
+                <p>What is your nickname?*</p>
+                <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
+                onChange={this.handleNicknameChange.bind(this)}></textarea>
+                <p>For privacy reasons, do not use your full name or email address</p>
+                <p>Your email*</p>
+                <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11@email.com"
+                onChange={this.handleEmailChange.bind(this)}></textarea>
+                <p>For authentication reasons, you will not be emailed</p>
+                <br></br>
+                <button id="submit" onClick={this.onSubmit.bind(this)}>Submit review</button>
+              </form>
+            </div>
           </div>
         </div>
     )

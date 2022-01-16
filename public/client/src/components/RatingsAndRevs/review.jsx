@@ -31,7 +31,6 @@ class Review extends React.Component {
   }
 
   openInModal(photoUrl) {
-    console.log('photoUrl in openInModal', photoUrl)
     this.setState({
       imageUrlInModal: photoUrl
     })
@@ -72,11 +71,12 @@ class Review extends React.Component {
           src={photo.url}
           height="45px"
           width="45px"
+          className="thumbnail"
           onClick={() => this.openInModal(photo.url)}></img>)}
-          {this.state.imageUrlInModal &&
-          <div className="review-modal-backdrop">
+        {this.state.imageUrlInModal &&
+        <div className="review-modal-backdrop">
           <div className="review-image-modal-box">
-            <button onClick={() => this.closeModal()}>X</button>
+          <span class="close" onClick={this.closeModal.bind(this)}>&times;</span>
             <br></br>
             <br></br>
             <img src={this.state.imageUrlInModal}></img>

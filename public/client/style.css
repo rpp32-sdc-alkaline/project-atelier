@@ -31,10 +31,25 @@
   margin-bottom: 2em;
   padding: 2em;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
   height: 80%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  overflow: auto;
+}
+
+.write-review-modal-form {
+  overflow: scroll;
+  height: 85%;
+}
+
+.close {
+  float:right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: red;
 }
 
 .review-image-modal-box {
@@ -47,9 +62,30 @@
   margin-right: auto;
   margin-top: 2em;
   margin-bottom: 2em;
-  padding: 2em;
+  padding-top: 1em;
+  padding-bottom: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
   border: 1px solid #888;
   width: min-content;
+  height: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+}
+
+.add-images-modal-box {
+  justify-self: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #ffffff;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  padding: 1em;
+  border: 1px solid #888;
+  width: 40%;
   height: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   overflow: auto;
@@ -98,9 +134,14 @@
   max-height: 70vh;
 }
 
+#review-sort-options {
+  cursor: pointer;
+}
+
 .individual-rating-breakdown-row:hover {
   background-color: rgb(179, 226, 255);
   border-radius: 1em;
+  cursor: pointer;
 }
 
 .rating-breakdown-bar-container {
@@ -166,6 +207,8 @@
 
 .link:hover {
   background-color: rgb(179, 226, 255);
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .summary {
@@ -178,6 +221,19 @@
 
 .star-image {
   z-index: 0;
+}
+
+.thumbnail {
+  padding-right: 0.5em;
+  padding-top: 0.5em
+}
+
+.thumbnail:hover {
+  cursor: pointer;
+}
+
+.more-reviews-button {
+  margin-right: 2em;
 }
 /* Overview */
 

@@ -65,6 +65,7 @@ class RatingsAndReviews extends React.Component{
         allReviews: result.data.results,
         filteredReviews: result.data.results
       })
+      this.filterReviews()
     })
     .catch(error => console.log('error!', error))
     let dataForMetadata = {
