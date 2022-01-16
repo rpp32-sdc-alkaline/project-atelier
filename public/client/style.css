@@ -41,6 +41,17 @@
   height: inherit;
 }
 
+.close {
+  float:right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: red;
+}
+
 .review-image-modal-box {
   justify-self: center;
   justify-content: center;

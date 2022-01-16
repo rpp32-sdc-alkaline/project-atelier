@@ -255,7 +255,7 @@ class WriteReview extends React.Component {
     return (
         <div className="review-modal-backdrop">
           <div className="write-review-modal-box">
-            <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
+            <span class="close" onClick={this.closeModal.bind(this)}>&times;</span>
             <h2>Write Your Review</h2>
             <h3>About the {this.props.name}</h3>
             <div className="write-review-modal-form">
