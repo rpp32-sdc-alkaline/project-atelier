@@ -4,6 +4,7 @@ import axios from 'axios'
 import fullStar from '../../../../../assets/images/full-gold-star.png';
 import outlineStar from '../../../../../assets/images/star-outline.png';
 import Star from './star.jsx'
+import AddImagesModal from './addImagesModal.jsx'
 
 
 class WriteReview extends React.Component {
@@ -28,8 +29,8 @@ class WriteReview extends React.Component {
       email: null,
       metadata: null,
       chars: null,
-      charRatings : {}
-      // chars: ['Size', 'Fit', 'Width', 'Comfort', 'Quality', 'Length']
+      charRatings : {},
+      showAddImagesModal: false
     }
     this.toggleWriteReview.bind(this)
     this.handleStarClick.bind(this)
@@ -37,6 +38,8 @@ class WriteReview extends React.Component {
     this.closeModal.bind(this)
     this.setUpChars.bind(this)
     this.postData.bind(this)
+    this.openAddImagesModal.bind(this)
+    this.closeAddImagesModal.bind(this)
   }
 
   componentDidMount() {
@@ -122,6 +125,22 @@ class WriteReview extends React.Component {
     this.setState({
       email: e.target.value
     })
+  }
+  openAddImagesModal(e) {
+    e.preventDefault()
+    if (!this.state.showAddImagesModal) {
+      this.setState({
+        showAddImagesModal: true
+      })
+    }
+  }
+
+  closeAddImagesModal() {
+    if (this.state.showAddImagesModal) {
+      this.setState({
+        showAddImagesModal: false
+      })
+    }
   }
 
   onSubmit(e) {
@@ -295,8 +314,8 @@ class WriteReview extends React.Component {
               <p>Minimum required characters left: {50-this.state.body.length}</p>}
               {this.state.body.length >= 50 &&
               <p>Minimum reached</p>}
-              <label htmlFor="photos">Upload photos:</label>
-              <input type="file" id="photos" name="photos"></input>
+              <button onClick={this.openAddImagesModal.bind(this)}>Add images</button>
+              <AddImagesModal show={this.state.showAddImagesModal} closeModal={this.closeAddImagesModal.bind(this)}/>
               <p>What is your nickname?*</p>
               <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
               onChange={this.handleNicknameChange.bind(this)}></textarea>
