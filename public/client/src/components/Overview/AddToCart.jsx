@@ -13,6 +13,7 @@ class AddToCart extends React.Component {
 
   handleClick() {
   this.props.addToCart()
+
 }
 
 

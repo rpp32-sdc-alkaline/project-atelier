@@ -2,6 +2,7 @@ import React from 'react'
 
 
 const QuantityDropDown = (props) => {
+  console.log('available', props.available)
   let content = []
   var max;
   if (props.available > 15) {

@@ -156,7 +156,6 @@ class ProductBreakdown extends React.Component {
 
     return (
       <div className="product-breakdown">
-        <h5>Product Breakdown</h5>
         {chars.Size &&
         <>
         <div className="product-breakdown-row">

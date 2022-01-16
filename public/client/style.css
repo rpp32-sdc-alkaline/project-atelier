@@ -1,11 +1,15 @@
 /* Ratings and Reviews Styles */
+
+#app {
+  font-family: Questrial, sans-serif;
+}
 .ratings-grid-container {
   display: grid;
   grid-template-columns: 30% 70%;
   margin: 1em;
 }
 
-.write-review-modal-backdrop {
+.review-modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -29,6 +33,24 @@
   border: 1px solid #888;
   width: 80%;
   height: 80%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+}
+
+.review-image-modal-box {
+  justify-self: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #ffffff;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  padding: 2em;
+  border: 1px solid #888;
+  width: min-content;
+  height: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   overflow: auto;
 }
@@ -62,6 +84,9 @@
   grid-row: 1;
   align-self: start;
   margin: 1em;
+  min-height: 50vh;
+  max-height: 100vh;
+  height: auto;
 }
 
 .ratings-left-sidebar {
@@ -69,13 +94,13 @@
 }
 
 #reviews-scroll {
-  overflow: scroll;
-  height:75vh;
-  background-color: honeydew;
+  overflow: auto;
+  max-height: 70vh;
 }
 
 .individual-rating-breakdown-row:hover {
-  background-color: lightskyblue;
+  background-color: rgb(179, 226, 255);
+  border-radius: 1em;
 }
 
 .rating-breakdown-bar-container {
@@ -91,11 +116,6 @@
   border-radius: inherit;
 }
 
-.product-breakdown-row {
-  /* margin-left: 1em;
-  margin-right: 1em; */
-}
-
 .product-breakdown-bar-container {
   align-self: center;
   align-content: center;
@@ -103,6 +123,10 @@
   width: 60%;
   height: 0.5em;
   border-radius: 1em;
+}
+
+.product-breakdown {
+  margin-top: 2em;
 }
 
 .gold {
@@ -130,9 +154,31 @@
 }
 
 .individual-review {
-  margin: 2em;
+  margin-top: 1em;
+  margin-bottom: 3em;
 }
 
+.link {
+  text-decoration: underline;
+  text-decoration-color: blue;
+  width: max-content;
+}
+
+.link:hover {
+  background-color: rgb(179, 226, 255);
+}
+
+.summary {
+  font-weight: bold;
+}
+
+.response {
+  background-color: lightskyblue;
+}
+
+.star-image {
+  z-index: 0;
+}
 /* Overview */
 
 /* @font-face {

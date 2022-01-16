@@ -103,3 +103,5 @@ config.js
 
 # TernJS port file
 .tern-port
+
+*.cer

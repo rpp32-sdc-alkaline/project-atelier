@@ -234,7 +234,7 @@ class WriteReview extends React.Component {
       ratingDesc = 'Great'
     }
     return (
-        <div className="write-review-modal-backdrop">
+        <div className="review-modal-backdrop">
           <div className="write-review-modal-box">
             <button className="close-button" onClick={this.closeModal.bind(this)}>X</button>
             <h3>Write Your Review</h3>
