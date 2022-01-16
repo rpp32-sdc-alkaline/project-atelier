@@ -323,6 +323,15 @@ class WriteReview extends React.Component {
                 <AddImagesModal show={this.state.showAddImagesModal}
                 closeModal={this.closeAddImagesModal.bind(this)}
                 addImageUrl={this.uploadPhotos.bind(this)}/>
+                <br></br>
+                {this.state.photos.map((photo, i) => {
+                return (
+                <img key={i}
+                src={photo}
+                height="45px"
+                width="45px"
+                className="thumbnail"></img>)}
+                )}
                 <p>What is your nickname?*</p>
                 <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
                 onChange={this.handleNicknameChange.bind(this)}></textarea>
