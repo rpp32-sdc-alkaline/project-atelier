@@ -3,7 +3,6 @@ import Search from './Search.jsx';
 import Questions from './Questions.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import axios from 'axios';
-const token = require('../../../dist/config.js');
 
 class QandA extends React.Component{
   constructor(props) {
@@ -87,7 +86,6 @@ class QandA extends React.Component{
   }
 
   componentDidMount () {
-    //console.log('QandAProps', this.props);
     let id = this.props.id;
     this.setState({
       id: id
@@ -104,11 +102,8 @@ class QandA extends React.Component{
     }
   }
 
-  getQuestionData(id, page, count) {
-    let headers = {
-      'Authorization': token.TOKEN
-    };
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${id}&page=${page}&count=${count}&sort=helpful`, {headers: headers})
+  getQuestionData (id, page, count) {
+    axios.post('/questionAndAnswers', {data: {id: id, page: page, count: count}})
     .then((result) => {
       this.setState({
         questionData: result.data.results,
@@ -116,10 +111,6 @@ class QandA extends React.Component{
         haveData: true,
         allQDisplayed: false
       })
-      //console.log('questionData', this.state.questionData);
-    })
-    .catch((error) => {
-      throw error;
     })
   }
 

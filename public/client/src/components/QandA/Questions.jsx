@@ -11,11 +11,13 @@ class Questions extends React.Component{
       qToDisplay: 2,
       showAll: false
     }
+    this.wasMarked =this.wasMarked.bind(this);
   }
 
-  componentDidMount() {
-    //console.log('questionDidLoad', this.props)
-
+  wasMarked (e) {
+    this.setState({
+      [e.target.id]: true
+    })
   }
 
   render() {
@@ -29,7 +31,7 @@ class Questions extends React.Component{
     } else {
     return (
       <div key={this.props.questions.length} className='questions'>
-        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId} searchData={this.props.searchData}/>
+        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId} searchData={this.props.searchData} wasMarked={this.wasMarked} state={this.state}/>
       </div>
     )
     }

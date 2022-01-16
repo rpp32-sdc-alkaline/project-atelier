@@ -13,7 +13,8 @@ class Answer extends React.Component{
     this.getMore = this.getMore.bind(this);
     this.getLess = this.getLess.bind(this);
     this.markHelpful = this.markHelpful.bind(this);
-    this.report =this.report.bind(this);
+    this.report = this.report.bind(this);
+    this.wasMarked = this.wasMarked.bind(this);
   }
 
   getMore (e) {
@@ -50,16 +51,12 @@ class Answer extends React.Component{
   }
 
   getAnswerData(id) {
-    let headers = {
-      'Authorization': token.TOKEN
-    };
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${id}/answers?page=1&count=100`, {headers: headers})
+    axios.post(`/getAnswerData`, {data: {id: id}})
     .then((result) => {
       this.setState({
         answerData: result.data.results,
         haveData: true
       })
-
     })
     .catch((error) => {
       throw error;
@@ -68,35 +65,27 @@ class Answer extends React.Component{
 
   markHelpful (e) {
     let id = e.target.id;
-    //console.log('event', e);
-    let headers = {
-      'Authorization': token.TOKEN
-    };
-    axios({
-      method: 'put',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${id}/helpful`,
-      headers: headers
-    })
-    .then((result) => {
-      //console.log('Marked as helpful')
-      this.getAnswerData(this.props.props.question_id);
-    })
-    .catch((error) => {
-      throw error;
+    if (this.state[id] !== true) {
+      axios('/markAHelpful', {data: {id: id}})
+      .then((result) => {
+        this.wasMarked(e);
+        this.getAnswerData(this.props.props.question_id);
+      })
+      .catch((error) => {
+        throw error;
+      })
+    }
+  }
+
+  wasMarked (e) {
+    this.setState({
+      [e.target.id]: true
     })
   }
 
   report (e) {
     let id = e.target.id;
-   //console.log('event', e);
-    let headers = {
-      'Authorization': token.TOKEN
-    };
-    axios({
-      method: 'put',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${id}/report`,
-      headers: headers
-    })
+    axios.post('/reportAnswer', {data: {id: id}})
     .then((result) => {
       console.log('reported')
       e.target.className = 'reported'
@@ -117,11 +106,10 @@ class Answer extends React.Component{
       )
     } else if (!this.state.allADisplayed) {
       let eachAnwser = this.state.answerData.slice(0, 2).map((item) => {
-        //console.log('answerItem', item)
         return (
           <span key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span className='yes' id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span className='report' id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
           </span>
         )
       })
@@ -133,11 +121,10 @@ class Answer extends React.Component{
       )
     } else {
       let eachAnwser = this.state.answerData.map((item) => {
-        //console.log('answerItem', item)
         return (
           <div key={item.answer_id} className='answer'>
             {item.body} <br></br>
-            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
+            by {item.answerer_name === 'Seller' ? <span className='seller'>{item.answerer_name}</span> : <span className='answerer'>{item.answerer_name}</span>}, {this.dateFormat(item.date)} <span className='helpful'>Helpful? <span className='yes' id={item.answer_id} onClick={this.markHelpful}>Yes ({item.helpfulness})</span> | <span className='report' id={item.answer_id} onClick={this.report}>Report</span></span><br></br>
           </div>
         )
       })

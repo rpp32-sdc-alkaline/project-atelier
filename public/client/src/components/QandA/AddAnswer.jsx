@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-const token = require('../../../dist/config.js');
 
 
 class AddAnswer extends React.Component {
@@ -16,7 +15,6 @@ class AddAnswer extends React.Component {
 
   showModal () {
     this.setState({ show: true })
-    console.log('showModal', this.state.show)
   }
 
   hideModal () {
@@ -33,15 +31,13 @@ class AddAnswer extends React.Component {
     let name = e.target[1].value;
     let email = e.target[2].value;
     let id = this.props.id;
-    let header = {
-      'Authorization': token.TOKEN
-    };
-    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${id}/answers`, {body: body, name: name, email: email}, {headers: header})
+
+    axios.post(`/addAnswer`, {data: {body: body, name: name, email: email, id: id}})
     .then((result) => {
-      console.log('Answer has been added', result);
+      console.log('Answer has been added');
     })
     .catch((error) => {
-      throw error;
+      console.error(error);
     })
     this.hideModal();
   }
@@ -58,13 +54,13 @@ class AddAnswer extends React.Component {
             <h3>Add Your Answer</h3>
             <form className='newAForm' onSubmit={this.addAnswer}>
               <label className='bodylabel' for='body'>Your Answer</label>
-              <input className='bodyInput' type='text' placeholder='Your Answer Here' ref='body' name='body'></input><br></br>
+              <input className='bodyInput' type='text' placeholder='Your Answer Here' ref='body' name='body' required></input><br></br>
               <label className='nameLabel' for='name'>What is your nickname</label>
-              <input className='nameInput' type='text' placeholder='Example: jack543!' ref='name' name='name'></input><br></br>
+              <input className='nameInput' type='text' placeholder='Example: jack543!' ref='name' name='name' required></input><br></br>
               <div className='nameWarning'>For privacy reasons, do not use your full name or email address</div>
               <label className='emailLabel' for='email'>Your email</label>
-              <input className='emailInput' type='text' placeholder='Example: jack@email.com' ref='email' name='email'></input><br></br>
-              <div className='emailWarning'>For authentication reasons, you will not be emailed</div>
+              <input className='emailInput' type='email' placeholder='Example: jack@email.com' ref='email' name='email' required></input><br></br>
+              <div className='emailWarning'>For authentication reasons, you will not be emailed<br></br>Fields Marked with * are required</div>
               <input type='submit' value='submit'></input>
             </form>
           </div>
