@@ -4,7 +4,7 @@ const SizeDropDown = (props) => {
   // console.log('props.skus', props.skus)
 
   const handleClick = (size, quantity) => {
-    // console.log('size, quan', size, quantity)
+    console.log('size, quan', size, quantity)
     props.handleChange(size, quantity)
   }
   let content = []
@@ -17,7 +17,8 @@ const SizeDropDown = (props) => {
 
       // console.log('sku in loop', size )
       if (quantity) {
-        content.push(<li key={sku} onClick={(e) => handleClick(size, quantity)} value={quanAndSize}>{size}</li>)
+        // content.push(<li key={sku} onClick={(e) => handleClick(size, quantity)} value={quanAndSize}>{size}</li>)
+        content.push(<option key={sku} value={quanAndSize}>{size}</option>)
       }
    }
   return content

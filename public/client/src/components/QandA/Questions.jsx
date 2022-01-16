@@ -1,5 +1,7 @@
 import React from 'react';
 import Question from './Question.jsx';
+import axios from 'axios';
+const token = require('../../../dist/config.js');
 
 
 class Questions extends React.Component{
@@ -8,15 +10,13 @@ class Questions extends React.Component{
     this.state = {
       qToDisplay: 2,
       showAll: false
-
     }
   }
 
   componentDidMount() {
     //console.log('questionDidLoad', this.props)
+
   }
-
-
 
   render() {
     let questions = this.props.questions;
@@ -28,8 +28,8 @@ class Questions extends React.Component{
       )
     } else {
     return (
-      <div>
-        <Question props={questions} moreButton={this.props.moreButton} />
+      <div key={this.props.questions.length} className='questions'>
+        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId} searchData={this.props.searchData}/>
       </div>
     )
     }

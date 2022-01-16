@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Stars from './OvStars.jsx'
 
 class StarRating extends React.Component {
 
@@ -10,13 +10,8 @@ class StarRating extends React.Component {
       // length: this.props.ratings.length,
       // average: this.average
     }
-    this.handleClick = this.handleClick.bind(this)
   }
 
-
-  handleClick() {
-    console.log('scroll to Ratings and Reviews')
-  }
 
   render () {
     // console.log('this.props.ratings', this.props.ratings)
@@ -37,13 +32,13 @@ class StarRating extends React.Component {
     const roundedAverage = Number.parseFloat(average).toFixed(2)
 
   return (
-    <div>
-    <div>Star Rating of {length} reviews: {roundedAverage}
-   </div>
-   <a href = "http://localhost:3000" onClick={this.handleClick}>Read Reviews</a>
+    <div className="star-rating">
+    <Stars average={roundedAverage} size={25}/>
+   <a href ="#reviews"  onClick={this.handleClick}>{`Read ${length} Reviews`}</a>
    </div>
   )
 }
 }
+
 
 export default StarRating;

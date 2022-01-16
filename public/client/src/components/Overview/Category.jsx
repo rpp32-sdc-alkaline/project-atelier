@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Category = (props) => {
-
+var upperCase = props.category.toUpperCase()
   return (
-    <h4>{props.category}</h4>
+    <div className="category">{upperCase}</div>
   )
 }
 

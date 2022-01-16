@@ -52,8 +52,7 @@ class Reviews extends React.Component {
     }
     return (
       <div id="reviews" data-testid="reviews">
-        <h4>Reviews</h4>
-        <h5>999 reviews. Sort on:</h5>
+        <h4>{reviews.length} reviews. Sort by:</h4>
         <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)}>
           <option value="relevance">Relevant</option>
           <option value="helpful">Helpful</option>
@@ -61,12 +60,19 @@ class Reviews extends React.Component {
         </select>
         <div id="reviews-scroll">
           {reviews.slice(0, this.state.numToShow).map(review =>
-            <Review review={review} key={review.review_id} />
+            <Review
+            review={review}
+            key={review.review_id}
+            markHelpful={this.props.markHelpful}/>
           )}
         </div>
-        {!this.state.showingAll &&
+        {(this.state.numToShow <= reviews.length) &&
         <button onClick={this.showMore.bind(this)}>More Reviews</button>}
-        <WriteReview id={this.props.product}/>
+        <WriteReview
+        id={this.props.product}
+        name={this.props.name}
+        metadata={this.props.metadata}
+        postNewReview={this.props.postNewReview} />
       </div>
     )
   }

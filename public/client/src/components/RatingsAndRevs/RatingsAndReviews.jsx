@@ -13,17 +13,22 @@ class RatingsAndReviews extends React.Component{
     this.state = {
       haveData: false,
       product: 0,
-      sort: 'helpful',
+      sort: 'relevant',
       page: 1,
-      count: 5,
+      count: 1000,
       allReviews: [],
       metadata: [],
       filters: [],
-      filteredReviews: []
+      filteredReviews: [],
+      name: '',
+      markedHelpful: []
     }
     this.getReviewData.bind(this)
     this.filterReviews.bind(this)
     this.updateFilters.bind(this)
+    this.postNewReview.bind(this)
+    this.removeFilters.bind(this)
+    this.markHelpful.bind(this)
   }
 
   componentDidMount() {
@@ -31,7 +36,7 @@ class RatingsAndReviews extends React.Component{
     this.setState({
       product: id
     })
-    this.getReviewData(id, 'helpful', 1, 100)
+    this.getReviewData(id, 'relevant', 1, 1000)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,20 +46,19 @@ class RatingsAndReviews extends React.Component{
       this.setState({
         id: this.props.id
       })
-      this.getReviewData(this.props.id, 'helpful', 1, 100)
+      this.getReviewData(this.props.id, this.state.sort, 1, 1000)
     }
   }
 
   getReviewData(product, sort, page, count) {
-    let reviews
-    let metadata
-    let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${sort}&product_id=${product}&page=${page}&count=${count}`
-    let metadataUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${product}`
-    let headers = {
-      'Authorization': token.TOKEN
+    let data = {
+      product: product,
+      sort: sort,
+      page: page,
+      count: count
     }
-    axios.get(reviewsUrl, {
-      headers: headers
+    axios.post('/getreviews', {
+      data: data
     })
     .then(result => {
       this.setState({
@@ -63,8 +67,11 @@ class RatingsAndReviews extends React.Component{
       })
     })
     .catch(error => console.log('error!', error))
-    axios.get(metadataUrl, {
-      headers: headers
+    let dataForMetadata = {
+      product: product,
+    }
+    axios.post('/getreviewsmetadata', {
+      data: dataForMetadata
     })
     .then (result => {
       this.setState({
@@ -75,11 +82,40 @@ class RatingsAndReviews extends React.Component{
     .catch(error => console.log('error!', error))
   }
 
+  postNewReview(review) {
+    axios.post('/newreview', {
+      data: review
+    })
+    .then(result => {
+    })
+    .catch(error => {
+      console.log('error: ', error)
+    })
+  }
+
+  markHelpful(reviewId) {
+    axios.post('/markhelpful', {
+      data: reviewId
+    })
+    .then(result => {
+      this.getReviewData(this.state.product, this.state.sort, this.state.page, this.state.count)
+    })
+    .catch(error => {
+      console.log('error:', error)
+    })
+  }
+
   changeSort(sort) {
     this.setState({
       sort: sort
     })
-    this.getReviewData(this.state.product, sort, 1, 100)
+    this.getReviewData(this.state.product, sort, 1, 1000)
+  }
+
+  removeFilters() {
+    this.setState({
+      filters: []
+    })
   }
 
   updateFilters(rating) {
@@ -128,9 +164,20 @@ class RatingsAndReviews extends React.Component{
     } else {
     return (
       <div className="ratings-grid-container">
-        <Reviews reviews={this.state.filteredReviews} product={this.state.product} changeSort={this.changeSort.bind(this)}/>
+        <Reviews
+        reviews={this.state.filteredReviews}
+        product={this.state.product}
+        name={this.props.name}
+        metadata={this.state.metadata}
+        changeSort={this.changeSort.bind(this)}
+        postNewReview={this.postNewReview.bind(this)}
+        markHelpful={this.markHelpful.bind(this)}/>
         <div className="ratings-left-sidebar">
-          <RatingBreakdown metadata={this.state.metadata} updateFilters={this.updateFilters.bind(this)}/>
+          <RatingBreakdown
+          metadata={this.state.metadata}
+          updateFilters={this.updateFilters.bind(this)}
+          filters={this.state.filters}
+          removeFilters={this.removeFilters.bind(this)}/>
           <ProductBreakdown metadata={this.state.metadata}/>
         </div>
       </div>

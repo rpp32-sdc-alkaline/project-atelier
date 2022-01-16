@@ -40,21 +40,8 @@ class ThumbnailBar extends React.Component {
     this.props.thumbnailScrollDown(photos)
   };
 
-  // componentDidMount() {
-  //     if (!this.state.scrolledPhotos) {
-  //       this.setState({
-  //         photos: [...this.props.photos, ...this.props.photos]
-  //       })
-  //     }
-  //   }
 
   render() {
-    // var format = {
-    //   height: 100,
-    //   width: 80,
-    //   padding: 10
-    // }
-    // var className = this.state.clicked ? 'click-state' : 'base-state'
     var upArrow;
     var downArrow;
     var index;
@@ -65,13 +52,14 @@ class ThumbnailBar extends React.Component {
       downArrow = <img className="down-arrow" onClick={this.handleDownClick}
       src="https://img.icons8.com/color/30/000000/circled-chevron-down--v1.png"/>
     }
+
     return (
-      <div className="thumbnail-bar">
+      <div className={this.props.modalOpen ? 'thumbnail-bar-opaque' : 'thumbnail-bar'}>
         {upArrow}
         {this.props.photos?.map((photo, index) => {
           // console.log('photo index', photo)
           // console.log('this.state.selected', this.state.selected)
-          if (index < 7) {
+          if (index < 5) {
             var className = photo.url === this.state.selected ? 'click-state' : 'base-state'
             return (
               <div key={index}>

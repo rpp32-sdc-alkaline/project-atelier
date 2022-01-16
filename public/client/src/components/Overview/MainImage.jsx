@@ -10,14 +10,14 @@ class MainImage extends React.Component {
     super(props)
     // console.log('index', this.props.index)
     this.state = {
-     hovered: false,
-     expand: false
+     expand: false,
+     image: this.props.image
     }
   // this.changeThumbnail = this.changeThumbnail.bind(this)
   this.nextSlide = this.nextSlide.bind(this)
   this.prevSlide = this.prevSlide.bind(this)
-  this.handleMouseEnter = this.handleMouseEnter.bind(this)
   this.handleClick = this.handleClick.bind(this)
+  this.iconClick = this.iconClick.bind(this)
   }
 
   nextSlide() {
@@ -28,26 +28,21 @@ class MainImage extends React.Component {
   this.props.mainImagePrev()
   }
 
-  handleMouseEnter() {
-    this.setState({
-      hovered: true
-    })
+  handleClick() {
+    this.props.expandedView()
   }
 
-  handleClick() {
-    // console.log('image clicked')
-    var expandState = this.state.expand
-    this.setState({
-      expand: !expandState
-    })
+  iconClick(photo) {
+    // console.log('overview icon clicked', photo)
+    this.props.iconClick(photo, index)
   }
 
   render() {
-    const format = {
-      height: 700,
-      width: 590,
-      padding: 30
-    }
+    // const format = {
+    //   height: 700,
+    //   width: 590,
+    //   padding: 30
+    // }
     var rightArrow;
     var leftArrow;
     if(this.props.index < this.props.photos?.length - 1 && this.props.index > 0) {
@@ -62,15 +57,14 @@ class MainImage extends React.Component {
       rightArrow = <div></div>
       leftArrow =  <FaArrowAltCircleLeft className="left-arrow" onClick={this.prevSlide}/>
     }
-    var cursor = this.state.hovered ? 'hovered' : 'not-hovered'
 
     return (
       <div className="slider">
         {leftArrow}
         {rightArrow}
-            <img className={cursor} onMouseEnter={this.handleMouseEnter} onClick={this.handleClick} style={format} src={this.props.image}/>
-            <ExpandedView isOpen={this.state.expand} image={this.props.image} close={this.handleClick} photos={this.props.photos}/>
-
+            <img className="main-image" onClick={this.handleClick} src={this.props.image}/>
+            <ExpandedView isOpen={this.props.modalOpen} close={this.handleClick} iconClick={this.props.iconClick}
+            photos={this.props.photos} image={this.props.image} />
       </div>
     )
   }

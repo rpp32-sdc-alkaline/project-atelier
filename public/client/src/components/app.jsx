@@ -13,10 +13,10 @@ class App extends React.Component{
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(id) {
-    // console.log('id', id)
+  handleClick(id, name) {
     this.setState({
-      'selectedProductId': id
+      'selectedProductId': id,
+      'productName': name
     })
   }
 
@@ -24,18 +24,14 @@ class App extends React.Component{
     fetch('/API')
     .then((res) => res.json())
     .then((productList) => {
-      console.log('productList', productList)
 
       this.setState({
         'productList': productList,
-        'defaultProductId': productList[0].id
+        'defaultProductId': productList[0].id,
+        'productName': productList[0].name
       })
     })
   }
-
-
-  //TO DO: function that changes the current product id
-
 
   render() {
 <<<<<<< HEAD
@@ -56,18 +52,22 @@ class App extends React.Component{
       )
     } else {
       var id = this.state.selectedProductId ? this.state.selectedProductId : this.state.defaultProductId
+      let name
+      if (this.state.productName) {
+        name = this.state.productName
+      }
       return (
         <div>
           <h1>Project Atelier</h1>
           <h3>Product List</h3>
           <div>
             {this.state.productList.map((product, index) =>
-              <li key={index} onClick={(e)=>{this.handleClick(product.id)}}>{product.name}</li>
+              <li key={index} onClick={(e)=>{this.handleClick(product.id, product.name)}}>{product.name}</li>
             )}
           </div>
           <Overview id={id}/>
           <QandA id={id}/>
-          <RatingsAndReviews id={id}/>
+          <RatingsAndReviews id={id} name={name}/>
         </div>
       )
     }
