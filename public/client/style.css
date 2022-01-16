@@ -511,10 +511,11 @@
 /*  Question and Answer Style */
 
 .qAndA {
-  height: auto;
+  height:75vh;
   width: auto;
   margin-left: 20px;
-
+  overflow: scroll;
+  margin-top: 10%;
 }
 
 .modalBackground {
@@ -577,11 +578,22 @@
 .addAnswer {
   font-weight: lighter;
   text-decoration: underline;
+  color: blue;
 }
 
 .aHeading {
   font-weight: bold;
 
+}
+
+.yes {
+  color: blue;
+  text-decoration: underline;
+}
+
+.report {
+  color: blue;
+  text-decoration: underline;
 }
 
 .reported {
