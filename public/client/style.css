@@ -37,7 +37,8 @@
 }
 
 .write-review-modal-form {
-  overflow: auto;
+  overflow: scroll;
+  height: inherit;
 }
 
 .review-image-modal-box {
