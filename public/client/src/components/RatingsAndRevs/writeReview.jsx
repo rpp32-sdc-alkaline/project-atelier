@@ -40,6 +40,7 @@ class WriteReview extends React.Component {
     this.postData.bind(this)
     this.openAddImagesModal.bind(this)
     this.closeAddImagesModal.bind(this)
+    this.uploadPhotos.bind(this)
   }
 
   componentDidMount() {
@@ -61,7 +62,6 @@ class WriteReview extends React.Component {
   }
 
   postData(formData) {
-    console.log('formData', formData)
     this.props.postNewReview(formData)
   }
 
@@ -110,9 +110,12 @@ class WriteReview extends React.Component {
     })
   }
 
-  uploadPhotos(e) {
-    e.preventDefault()
-    console.log('in uploadPhotos')
+  uploadPhotos(url) {
+    let currentPhotos = this.state.photos
+    currentPhotos.push(url)
+    this.setState({
+      photos: currentPhotos
+    })
   }
 
   handleNicknameChange(e) {
@@ -256,6 +259,7 @@ class WriteReview extends React.Component {
         <div className="review-modal-backdrop">
           <div className="write-review-modal-box">
             <span class="close" onClick={this.closeModal.bind(this)}>&times;</span>
+            <br></br>
             <h2>Write Your Review</h2>
             <h3>About the {this.props.name}</h3>
             <div className="write-review-modal-form">
@@ -316,7 +320,9 @@ class WriteReview extends React.Component {
                 {this.state.body.length >= 50 &&
                 <p>Minimum reached</p>}
                 <button onClick={this.openAddImagesModal.bind(this)}>Add images</button>
-                <AddImagesModal show={this.state.showAddImagesModal} closeModal={this.closeAddImagesModal.bind(this)}/>
+                <AddImagesModal show={this.state.showAddImagesModal}
+                closeModal={this.closeAddImagesModal.bind(this)}
+                addImageUrl={this.uploadPhotos.bind(this)}/>
                 <p>What is your nickname?*</p>
                 <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
                 onChange={this.handleNicknameChange.bind(this)}></textarea>

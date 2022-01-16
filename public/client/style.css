@@ -38,7 +38,7 @@
 
 .write-review-modal-form {
   overflow: scroll;
-  height: inherit;
+  height: 85%;
 }
 
 .close {
@@ -78,11 +78,11 @@
   z-index: 1;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  padding: 2em;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  padding: 1em;
   border: 1px solid #888;
-  width: min-content;
+  width: 40%;
   height: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   overflow: auto;

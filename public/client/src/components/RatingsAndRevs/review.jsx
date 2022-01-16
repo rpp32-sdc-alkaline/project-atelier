@@ -31,7 +31,6 @@ class Review extends React.Component {
   }
 
   openInModal(photoUrl) {
-    console.log('photoUrl in openInModal', photoUrl)
     this.setState({
       imageUrlInModal: photoUrl
     })
