@@ -14,11 +14,6 @@ class Questions extends React.Component{
     this.wasMarked =this.wasMarked.bind(this);
   }
 
-  componentDidMount() {
-    //console.log('questionDidLoad', this.props)
-
-  }
-
   wasMarked (e) {
     this.setState({
       [e.target.id]: true
