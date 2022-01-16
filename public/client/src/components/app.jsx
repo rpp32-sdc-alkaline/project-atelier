@@ -34,16 +34,6 @@ class App extends React.Component{
   }
 
   render() {
-<<<<<<< HEAD
-    return (
-      <div>
-        <h1>Project Atelier</h1>
-        <Overview props = {this.state}/>
-        <QandA props = {this.state}/>
-        <RatingsAndReviews props = {this.state}/>
-      </div>
-    )
-=======
     if (!this.state.productList) {
       return (
         <div>
@@ -71,7 +61,6 @@ class App extends React.Component{
         </div>
       )
     }
->>>>>>> e2a41c5c1fe55eea2640984683cfed790f114631
   }
 }
 
