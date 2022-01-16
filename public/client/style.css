@@ -228,6 +228,10 @@
 .thumbnail:hover {
   cursor: pointer;
 }
+
+.more-reviews-button {
+  margin-right: 2em;
+}
 /* Overview */
 
 /* @font-face {

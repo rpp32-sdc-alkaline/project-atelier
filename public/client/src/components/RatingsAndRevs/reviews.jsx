@@ -67,7 +67,7 @@ class Reviews extends React.Component {
           )}
         </div>
         {(this.state.numToShow <= reviews.length) &&
-        <button onClick={this.showMore.bind(this)}>More Reviews</button>}
+        <button className="more-reviews-button" onClick={this.showMore.bind(this)}>More Reviews</button>}
         <WriteReview
         id={this.props.product}
         name={this.props.name}
