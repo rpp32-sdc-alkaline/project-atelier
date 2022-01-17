@@ -4,6 +4,7 @@ import Overview from './Overview/Overview.jsx';
 import RatingsAndReviews from './RatingsAndRevs/RatingsAndReviews.jsx';
 import QandA from './QandA/QandA.jsx';
 import $ from 'jquery';
+import axios from 'axios';
 
 class App extends React.Component{
   constructor(props) {
@@ -21,8 +22,10 @@ class App extends React.Component{
   }
 
   componentDidMount() {
-    fetch('/API')
-    .then((res) => res.json())
+    axios.get('/API')
+    .then((res) => {
+      return res.data
+    })
     .then((productList) => {
 
       this.setState({
