@@ -2,9 +2,9 @@ import React from 'react'
 import Star from './OvStar.jsx'
 
 let Stars = (props) => {
-  // let {average, size} = props;
-  let {size} = props;
-  let average = 4.0
+  let {average, size} = props;
+  // let {size} = props;
+  // let average = 4.0
   let fullStars = Math.floor(average)
   let quarters = Math.round((average - fullStars) * 4)
   if (quarters === 4) {
