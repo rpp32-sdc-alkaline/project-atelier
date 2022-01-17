@@ -1,5 +1,5 @@
 import React from 'react'
-import Star from './Ovstar.jsx'
+import Star from './OvStar.jsx'
 
 let Stars = (props) => {
   // let {average, size} = props;
