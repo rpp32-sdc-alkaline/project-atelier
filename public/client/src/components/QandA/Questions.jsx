@@ -1,7 +1,6 @@
 import React from 'react';
 import Question from './Question.jsx';
 import axios from 'axios';
-const token = require('../../../dist/config.js');
 
 
 class Questions extends React.Component{

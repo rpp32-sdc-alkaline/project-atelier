@@ -3,8 +3,6 @@ import Reviews from './reviews.jsx'
 import RatingBreakdown from './ratingBreakdown.jsx'
 import ProductBreakdown from './productBreakdown.jsx'
 import axios from 'axios'
-const token = require('../../../dist/config.js');
-
 
 
 class RatingsAndReviews extends React.Component{
