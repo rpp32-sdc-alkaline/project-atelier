@@ -62,7 +62,7 @@ class Overview extends React.Component{
 
   getProductData(id)  {
     let data = {data: id}
-    axios.post('/overview-products', data )
+    axios.post('/overview-products/', data )
     .then(result => {
       // console.log('product', result.data)
       this.setState({
@@ -71,7 +71,7 @@ class Overview extends React.Component{
     })
 
     .then(() => {
-      axios.post('/overview-ratings', data)
+      axios.post('/overview-ratings/', data)
       .then(result => {
         this.setState({
           ratings: result.data.ratings
@@ -79,7 +79,7 @@ class Overview extends React.Component{
       })
     })
     .then(() => {
-      axios.post('/overview-styles', data)
+      axios.post('/overview-styles/', data)
       .then(result => {
         this.setState({
           styles: result.data.results,
