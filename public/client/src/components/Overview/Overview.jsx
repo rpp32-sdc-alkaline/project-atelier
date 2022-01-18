@@ -8,6 +8,7 @@ import StyleSelector from './StyleSelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
 import AddToCart from './AddToCart.jsx'
+import StarButton from './StarButton.jsx'
 import MainImage from './MainImage.jsx'
 import ThumbnailBar from './ThumbnailBar.jsx'
 import axios from 'axios'
@@ -62,7 +63,7 @@ class Overview extends React.Component{
 
   getProductData(id)  {
     let data = {data: id}
-    axios.post('/overview-products', data )
+    axios.post('/overview-products/', data )
     .then(result => {
       // console.log('product', result.data)
       this.setState({
@@ -71,7 +72,7 @@ class Overview extends React.Component{
     })
 
     .then(() => {
-      axios.post('/overview-ratings', data)
+      axios.post('/overview-ratings/', data)
       .then(result => {
         this.setState({
           ratings: result.data.ratings
@@ -79,7 +80,7 @@ class Overview extends React.Component{
       })
     })
     .then(() => {
-      axios.post('/overview-styles', data)
+      axios.post('/overview-styles/', data)
       .then(result => {
         this.setState({
           styles: result.data.results,
@@ -318,6 +319,7 @@ class Overview extends React.Component{
           <AddToCart addToCart={this.addToCart} openSizeDropDown={this.openSizeDropDown} noSizeSelected={this.state.noSizeSelected}
           style={this.state.displayedStyleName} size={this.state.selectedSize}
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
+          <StarButton />
           {displayAdded}
           </div>
           </div>
