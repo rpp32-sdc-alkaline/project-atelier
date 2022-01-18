@@ -46,7 +46,11 @@ class Reviews extends React.Component {
     if (!reviews) {
       return (
         <div>
-          <h4>Reviews</h4>
+          <WriteReview
+          id={this.props.product}
+          name={this.props.name}
+          metadata={this.props.metadata}
+          postNewReview={this.props.postNewReview} />
         </div>
       )
     }
