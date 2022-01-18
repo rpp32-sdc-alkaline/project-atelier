@@ -22,7 +22,7 @@ class App extends React.Component{
   }
 
   componentDidMount() {
-    axios.get('/API/')
+    axios.get('/API')
     .then((res) => {
       return res.data
     })
