@@ -8,6 +8,7 @@ import StyleSelector from './StyleSelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
 import AddToCart from './AddToCart.jsx'
+import StarButton from './StarButton.jsx'
 import MainImage from './MainImage.jsx'
 import ThumbnailBar from './ThumbnailBar.jsx'
 import axios from 'axios'
@@ -318,6 +319,7 @@ class Overview extends React.Component{
           <AddToCart addToCart={this.addToCart} openSizeDropDown={this.openSizeDropDown} noSizeSelected={this.state.noSizeSelected}
           style={this.state.displayedStyleName} size={this.state.selectedSize}
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
+          <StarButton />
           {displayAdded}
           </div>
           </div>

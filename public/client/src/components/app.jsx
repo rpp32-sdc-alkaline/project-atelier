@@ -21,7 +21,7 @@ class App extends React.Component{
   }
 
   componentDidMount() {
-    fetch('/API/')
+    fetch('/API')
     .then((res) => res.json())
     .then((productList) => {
 
