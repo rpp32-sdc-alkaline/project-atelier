@@ -54,7 +54,7 @@ app.post('/overview-styles', (req, res) => {
   })
 })
 
-app.get('/API/', (req, res) => {
+app.get('/API', (req, res) => {
   axios({
     method: 'GET',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products',
