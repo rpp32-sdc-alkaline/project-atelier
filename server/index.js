@@ -14,6 +14,7 @@ app.get('/API', (req, res) => {
     method: 'GET',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products',
     headers: {
+      'Accept-Encoding': 'gzip',
       'Content-Type': 'application/json',
       'Authorization': process.env.API_KEY
     }
@@ -33,6 +34,7 @@ app.post('/overview-products', (req, res) => {
    var id = req.body.data
    let productUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`
    let headers = {
+    'Accept-Encoding': 'gzip',
      'Authorization': process.env.API_KEY
    }
    axios.get(productUrl, {headers})
@@ -48,6 +50,7 @@ app.post('/overview-ratings', (req, res) => {
   var id = req.body.data
   let ratingsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${id}`
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   axios.get(ratingsUrl, {headers})
@@ -63,6 +66,7 @@ app.post('/overview-styles', (req, res) => {
   var id = req.body.data
   let stylesUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   axios.get(stylesUrl, {headers})
@@ -80,6 +84,7 @@ app.post('/getreviews', (req, res) => {
   console.log('req', req.body.data)
   let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${req.body.data.sort}&product_id=${req.body.data.product}&page=${req.body.data.page}&count=${req.body.data.count}`
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   axios.get(reviewsUrl, {
@@ -96,6 +101,7 @@ app.post('/getreviews', (req, res) => {
 app.post('/getreviewsmetadata', (req, res) => {
   let metadataUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?&product_id=${req.body.data.product}`
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   axios.get(metadataUrl, {
@@ -112,6 +118,7 @@ app.post('/newreview', (req, res) => {
   console.log('req.body.data in new review', req.body.data)
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Content-Type' : 'application/json',
     'Accept' : 'application/json',
     'Authorization': process.env.API_KEY
@@ -130,6 +137,7 @@ app.post('/newreview', (req, res) => {
 app.post('/markhelpful', (req, res) => {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.body.data}/helpful`
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   axios({
@@ -150,6 +158,7 @@ app.post('/questionAndAnswers', (req, res) => {
   let page = req.body.data.page;
   let count = req.body.data.count;
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${id}&page=${page}&count=${count}&sort=helpful`, {headers: headers})
@@ -164,6 +173,7 @@ app.post('/questionAndAnswers', (req, res) => {
 app.post('/getAnswerData', (req, res) => {
   let id = req.body.data.id;
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${id}/answers?page=1&count=100`, {headers: headers})
@@ -177,6 +187,7 @@ app.post('/getAnswerData', (req, res) => {
 
 app.post('/markAHelpful', (req, res) => {
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   let id = req.body.data.id;
@@ -195,6 +206,7 @@ app.post('/markAHelpful', (req, res) => {
 
 app.post('/markQHelpful', (req, res) => {
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   let id = req.body.data.id;
@@ -213,6 +225,7 @@ app.post('/markQHelpful', (req, res) => {
 
 app.post('/reportAnswer', (req, res) => {
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   let id = req.body.data.id;
@@ -231,6 +244,7 @@ app.post('/reportAnswer', (req, res) => {
 
 app.post('/addQuestion', (req, res) => {
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   let body = req.body.data.body;
@@ -253,6 +267,7 @@ app.post('/addQuestion', (req, res) => {
 
 app.post(`/addAnswer`, (req, res) => {
   let headers = {
+    'Accept-Encoding': 'gzip',
     'Authorization': process.env.API_KEY
   }
   let body = req.body.data.body;
