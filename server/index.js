@@ -9,6 +9,26 @@ require ('dotenv').config()
 app.use(express.static(path.join(__dirname, '..', 'public/client')))
 app.use(express.json())
 
+app.get('/API', (req, res) => {
+  axios({
+    method: 'GET',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': process.env.API_KEY
+    }
+  })
+  .then ((res) => {
+    return res
+  })
+  .then( data => {
+    res.json(data.data);
+  })
+  .catch((error) => {
+    res.send(error)
+  })
+})
+
 app.post('/overview-products', (req, res) => {
    var id = req.body.data
    let productUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`
@@ -54,25 +74,6 @@ app.post('/overview-styles', (req, res) => {
   })
 })
 
-app.get('/API/', (req, res) => {
-  axios({
-    method: 'GET',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': process.env.API_KEY
-    }
-  })
-  .then ((res) => {
-    return res
-  })
-  .then( data => {
-    res.json(data.data);
-  })
-  .catch((error) => {
-    res.sendStatus(404)
-  })
-})
 
 //routes for the ratings widget
 app.post('/getreviews', (req, res) => {

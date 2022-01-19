@@ -27,7 +27,7 @@ class App extends React.Component{
       return res.data
     })
     .then((productList) => {
-
+      console.log('productList', productList)
       this.setState({
         'productList': productList,
         'defaultProductId': productList[0].id,
