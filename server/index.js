@@ -11,12 +11,6 @@ app.use(express.static(path.join(__dirname, '..', 'public/client')))
 app.use(express.json())
 app.use(compression())
 
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
-});
-
 app.get('/API', (req, res) => {
   axios({
     method: 'GET',
