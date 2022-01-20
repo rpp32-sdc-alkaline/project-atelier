@@ -48,7 +48,9 @@ npm install
 ## Team Members
 
 Meredith White - Product Overview
+
 Dominic Carullo - Questions and Answers
+
 Jeff Fox - Ratings and Reviews
 
 ## Roadmap
