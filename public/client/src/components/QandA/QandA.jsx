@@ -103,7 +103,10 @@ class QandA extends React.Component{
   }
 
   getQuestionData (id, page, count) {
-    axios.post('/questionAndAnswers', {data: {id: id, page: page, count: count}})
+    axios.post('/questionAndAnswers', {data: {id: id, page: page, count: count},
+    headers: {
+      'Accept-Encoding': 'gzip',
+    }})
     .then((result) => {
       this.setState({
         questionData: result.data.results,

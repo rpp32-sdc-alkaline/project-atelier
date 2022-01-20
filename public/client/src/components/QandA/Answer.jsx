@@ -65,7 +65,10 @@ class Answer extends React.Component{
   markHelpful (e) {
     let id = e.target.id;
     if (this.state[id] !== true) {
-      axios('/markAHelpful', {data: {id: id}})
+      axios('/markAHelpful', {data: {id: id},
+      headers: {
+        'Accept-Encoding': 'gzip',
+      }})
       .then((result) => {
         this.wasMarked(e);
         this.getAnswerData(this.props.props.question_id);
@@ -84,7 +87,10 @@ class Answer extends React.Component{
 
   report (e) {
     let id = e.target.id;
-    axios.post('/reportAnswer', {data: {id: id}})
+    axios.post('/reportAnswer', {data: {id: id},
+    headers: {
+      'Accept-Encoding': 'gzip',
+    }})
     .then((result) => {
       console.log('reported')
       e.target.className = 'reported'

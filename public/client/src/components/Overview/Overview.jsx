@@ -62,7 +62,10 @@ class Overview extends React.Component{
   };
 
   getProductData(id)  {
-    let data = {data: id}
+    let data = {data: id,
+      headers: {
+        'Accept-Encoding': 'gzip',
+      }}
     axios.post('/overview-products/', data )
     .then(result => {
       // console.log('product', result.data)

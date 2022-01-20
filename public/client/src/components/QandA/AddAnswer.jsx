@@ -32,7 +32,10 @@ class AddAnswer extends React.Component {
     let email = e.target[2].value;
     let id = this.props.id;
 
-    axios.post(`/addAnswer`, {data: {body: body, name: name, email: email, id: id}})
+    axios.post(`/addAnswer`, {data: {body: body, name: name, email: email, id: id},
+    headers: {
+      'Accept-Encoding': 'gzip',
+    }})
     .then((result) => {
       console.log('Answer has been added');
     })

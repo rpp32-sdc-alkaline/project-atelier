@@ -14,6 +14,10 @@ class App extends React.Component{
     this.handleClick = this.handleClick.bind(this)
   }
 
+  headers = {
+    'Accept-Encoding': 'gzip',
+  }
+
   handleClick(id, name) {
     this.setState({
       'selectedProductId': id,
@@ -22,7 +26,10 @@ class App extends React.Component{
   }
 
   componentDidMount() {
-    axios.get('/API')
+    axios.get('/API', {
+      headers: {
+      'Accept-Encoding': 'gzip'}
+    })
     .then((res) => {
       return res.data
     })
