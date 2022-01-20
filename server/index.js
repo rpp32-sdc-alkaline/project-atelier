@@ -4,10 +4,12 @@ const path = require('path');
 const port = 3000;
 const app = express();
 const axios = require('axios');
+const compression = require('compression')
 require ('dotenv').config()
 
 app.use(express.static(path.join(__dirname, '..', 'public/client')))
 app.use(express.json())
+app.use(compression())
 
 app.get('/API', (req, res) => {
   axios({
