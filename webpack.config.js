@@ -1,6 +1,7 @@
 const path = require("path");
 var SRC_DIR = path.join(__dirname, "/public/client/src");
 var DIST_DIR = path.join(__dirname, "/public/client/dist")
+var CompressionPlugin = require('compression-webpack-plugin');
 
 
 module.exports = {
@@ -34,5 +35,23 @@ module.exports = {
         ],
       },
     ]
+  },
+  plugins: [
+    new CompressionPlugin()
+  //   new CompressionPlugin({
+  //     asset: "[path].gz[query]",
+  //     algorithm: "gzip",
+  //     test: /\.js$|\.css$|\.html$/,
+  //     threshold: 10240,
+  //     minRatio: 0.8
+  //   })
+  ],
+  optimization: {
+    chunkIds: "size",
+    // method of generating ids for chunks
+    moduleIds: "size",
+    // method of generating ids for modules
+    mangleExports: "size",
+    minimize: true
   }
 }
