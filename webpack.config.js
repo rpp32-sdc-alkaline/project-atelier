@@ -36,22 +36,12 @@ module.exports = {
       },
     ]
   },
-  plugins: [
-    new CompressionPlugin()
-  //   new CompressionPlugin({
-  //     asset: "[path].gz[query]",
-  //     algorithm: "gzip",
-  //     test: /\.js$|\.css$|\.html$/,
-  //     threshold: 10240,
-  //     minRatio: 0.8
-  //   })
-  ],
+  plugins: [new CompressionPlugin()],
   optimization: {
     chunkIds: "size",
-    // method of generating ids for chunks
     moduleIds: "size",
-    // method of generating ids for modules
     mangleExports: "size",
+    nodeEnv: 'production',
     minimize: true
   }
 }
