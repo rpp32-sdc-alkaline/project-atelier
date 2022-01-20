@@ -56,10 +56,7 @@ class RatingsAndReviews extends React.Component{
       count: count
     }
     axios.post('/getreviews', {
-      data: data,
-      headers: {
-        'Accept-Encoding': 'gzip',
-      }
+      data: data
     })
     .then(result => {
       this.setState({
@@ -73,10 +70,7 @@ class RatingsAndReviews extends React.Component{
       product: product,
     }
     axios.post('/getreviewsmetadata', {
-      data: dataForMetadata,
-      headers: {
-        'Accept-Encoding': 'gzip',
-      }
+      data: dataForMetadata
     })
     .then (result => {
       this.setState({
@@ -89,10 +83,7 @@ class RatingsAndReviews extends React.Component{
 
   postNewReview(review) {
     axios.post('/newreview', {
-      data: review,
-      headers: {
-        'Accept-Encoding': 'gzip',
-      }
+      data: review
     })
     .then(result => {
     })
@@ -103,10 +94,7 @@ class RatingsAndReviews extends React.Component{
 
   markHelpful(reviewId) {
     axios.post('/markhelpful', {
-      data: reviewId,
-      headers: {
-        'Accept-Encoding': 'gzip',
-      }
+      data: reviewId
     })
     .then(result => {
       this.getReviewData(this.state.product, this.state.sort, this.state.page, this.state.count)

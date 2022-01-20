@@ -34,10 +34,7 @@ class AddQuestion extends React.Component {
     let email = e.target[2].value;
     let id = this.props.id;
 
-    axios.post(`/addQuestion`, {data: {body: body, name: name, email: email, product_id: id},
-    headers: {
-      'Accept-Encoding': 'gzip',
-    }})
+    axios.post(`/addQuestion`, {data: {body: body, name: name, email: email, product_id: id}})
     .then((result) => {
       console.log('Question was added');
       this.props.update(id, 1, 100);

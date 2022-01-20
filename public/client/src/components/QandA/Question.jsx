@@ -8,10 +8,7 @@ const Question = (props) => {
   let markHelpful = (e) => {
     let id = e.target.id;
     if (props.state[id] !== true) {
-      axios.post('/markQHelpful', {data: {id: id},
-      headers: {
-        'Accept-Encoding': 'gzip',
-      }})
+      axios.post('/markQHelpful', {data: {id: id}})
       .then((result) => {
         console.log('Marked as helpful');
         props.wasMarked(e);
