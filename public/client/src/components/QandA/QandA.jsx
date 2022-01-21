@@ -58,7 +58,7 @@ class QandA extends React.Component{
   }
 
   moreButton (e) {
-    //this.props.clickTracker('More Questions Button', 'QandA.jsx');
+    this.props.clickTracker('More Questions Button', 'QandA.jsx');
     let newSlice = this.state.qToDisplay + 2;
     if (!this.state.useFiltered) {
       if (newSlice >= this.state.questionData.length) {
@@ -132,7 +132,7 @@ class QandA extends React.Component{
         <Search searchBarChange={this.searchBarChange} />
         <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id} searchData={this.state.searchData} />
         {!this.state.allQDisplayed && <span className='moreQuestion' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions </span>}
-        <AddQuestion id ={this.props.id} update={this.getQuestionData} /> <br></br>
+        <AddQuestion id ={this.props.id} update={this.getQuestionData} clickTracker={this.props.clickTracker}/> <br></br>
         </div>
       )
     }

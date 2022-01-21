@@ -13,8 +13,8 @@ class AddQuestion extends React.Component {
   }
 
   showModal (e) {
-    console.log('here')
-    //this.props.clickTracker('Add Question Button', 'AddQuestion.jsx');
+    console.log('here', this.props);
+    this.props.clickTracker('Add Question Button', 'AddQuestion.jsx');
     this.setState({ show: true })
   }
 
