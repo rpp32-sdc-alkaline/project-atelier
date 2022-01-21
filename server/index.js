@@ -4,10 +4,32 @@ const path = require('path');
 const port = 3000;
 const app = express();
 const axios = require('axios');
+const compression = require('compression')
 require ('dotenv').config()
 
 app.use(express.static(path.join(__dirname, '..', 'public/client')))
 app.use(express.json())
+app.use(compression())
+
+app.get('/API', (req, res) => {
+  axios({
+    method: 'GET',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': process.env.API_KEY
+    }
+  })
+  .then ((res) => {
+    return res
+  })
+  .then( data => {
+    res.json(data.data);
+  })
+  .catch((error) => {
+    res.send(error)
+  })
+})
 
 app.post('/overview-products', (req, res) => {
    var id = req.body.data
@@ -54,29 +76,9 @@ app.post('/overview-styles', (req, res) => {
   })
 })
 
-app.get('/API', (req, res) => {
-  axios({
-    method: 'GET',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': process.env.API_KEY
-    }
-  })
-  .then ((res) => {
-    return res
-  })
-  .then( data => {
-    res.json(data.data);
-  })
-  .catch((error) => {
-    res.sendStatus(404)
-  })
-})
 
 //routes for the ratings widget
 app.post('/getreviews', (req, res) => {
-  console.log('req', req.body.data)
   let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${req.body.data.sort}&product_id=${req.body.data.product}&page=${req.body.data.page}&count=${req.body.data.count}`
   let headers = {
     'Authorization': process.env.API_KEY
