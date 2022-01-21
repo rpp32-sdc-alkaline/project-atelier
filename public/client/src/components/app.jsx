@@ -23,8 +23,21 @@ class App extends React.Component{
     })
   }
 
-  clickTracker (e) {
-    console.log('Click Event', e);
+  clickTracker (e, element, module) {
+    let d = new Date();
+    let time = d.toUTCString();
+    let click = {
+      element: element,
+      time: time,
+      module: module
+    }
+    let current = this.state.clickData;
+    current.push(click);
+    this.setState({
+      clickData: current
+    }, ()=>{window.localStorage.setItem('ClickData', current)})
+
+
 
   }
 
@@ -35,10 +48,12 @@ class App extends React.Component{
     })
     .then((productList) => {
       console.log('productList', productList)
+      let current = window.localStorage.getItem('ClickData');
       this.setState({
         'productList': productList,
         'defaultProductId': productList[0].id,
-        'productName': productList[0].name
+        'productName': productList[0].name,
+        clickData: current
       })
     })
   }
