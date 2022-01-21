@@ -12,11 +12,13 @@ class AddQuestion extends React.Component {
   this.addQuestion = this.addQuestion.bind(this);
   }
 
-  showModal () {
+  showModal (e) {
+    this.props.clickTracker(e, 'Add Question Button', 'AddQuestion.jsx');
     this.setState({ show: true })
   }
 
-  hideModal () {
+  hideModal (e) {
+    this.props.clickTracker(e, 'Submit Question Button', 'AddQuestion.jsx');
     this.setState({ show: false })
   }
 
@@ -41,7 +43,7 @@ class AddQuestion extends React.Component {
   render () {
     if (this.state.show === false) {
       return(
-        <span className='addQuestion' onClick={this.showModal}>Add A Question +</span>
+        <span className='addQuestion stuff' onClick={this.showModal}>Add A Question +</span>
       )
     } else {
       return(
