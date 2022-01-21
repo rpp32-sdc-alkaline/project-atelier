@@ -16,14 +16,17 @@ class Answer extends React.Component{
   }
 
   getMore (e) {
+    //this.props.clickTracker('Get more answers button', 'Answer.jsx');
     this.setState({ allADisplayed: true })
   }
 
   getLess (e) {
+    //this.props.clickTracker('collapse anwsers button', 'Answer.jsx');
     this.setState({ allADisplayed: false })
   }
 
   componentDidMount () {
+    console.log('answers', this.props);
     let id = this.props.props.question_id;
     this.setState({ questionId: id })
     this.getAnswerData(id);
@@ -55,6 +58,7 @@ class Answer extends React.Component{
   }
 
   markHelpful (e) {
+    //this.props.clickTracker('Mark Answer Helpful', 'Answer.jsx');
     let id = e.target.id;
     if (this.state[id] !== true) {
       axios('/markAHelpful', {data: {id: id}})
@@ -73,6 +77,7 @@ class Answer extends React.Component{
   }
 
   report (e) {
+    //this.props.clickTracker('Report Answer Button', 'Answer.jsx');
     let id = e.target.id;
     axios.post('/reportAnswer', {data: {id: id}})
     .then((result) => {
