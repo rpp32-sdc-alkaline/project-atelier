@@ -4,10 +4,12 @@ const path = require('path');
 const port = 3000;
 const app = express();
 const axios = require('axios');
+const compression = require('compression')
 require ('dotenv').config()
 
 app.use(express.static(path.join(__dirname, '..', 'public/client')))
 app.use(express.json())
+app.use(compression())
 
 app.get('/API', (req, res) => {
   axios({
@@ -77,7 +79,6 @@ app.post('/overview-styles', (req, res) => {
 
 //routes for the ratings widget
 app.post('/getreviews', (req, res) => {
-  console.log('req', req.body.data)
   let reviewsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?sort=${req.body.data.sort}&product_id=${req.body.data.product}&page=${req.body.data.page}&count=${req.body.data.count}`
   let headers = {
     'Authorization': process.env.API_KEY

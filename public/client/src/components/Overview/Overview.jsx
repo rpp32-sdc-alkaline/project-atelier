@@ -61,13 +61,19 @@ class Overview extends React.Component{
     this.openSizeDropDown = this.openSizeDropDown.bind(this)
   };
 
+<<<<<<< HEAD
   resizeImage(url) {
     console.log('mainimage', url)
+=======
+  resizeImages(url) {
+    console.log('main imageurl', url)
+    // var sizedImage = image.split('')
+>>>>>>> c052710c84c8fc7c6479b664b380ebcb57ac9098
   }
 
   getProductData(id)  {
     let data = {data: id}
-    axios.post('/overview-products/', data )
+    axios.post('/overview-products', data )
     .then(result => {
       // console.log('product', result.data)
       this.setState({
@@ -76,7 +82,7 @@ class Overview extends React.Component{
     })
 
     .then(() => {
-      axios.post('/overview-ratings/', data)
+      axios.post('/overview-ratings', data)
       .then(result => {
         this.setState({
           ratings: result.data.ratings
@@ -84,12 +90,19 @@ class Overview extends React.Component{
       })
     })
     .then(() => {
-      axios.post('/overview-styles/', data)
+      axios.post('/overview-styles', data)
       .then(result => {
         var mainImage = result.data.results[0].photos[0].url
+<<<<<<< HEAD
         var selectedStylePhotos = result.data.results[0].photos
         var thumbnailBarPhotos = result.data.results[0].photos
         this.resizeImage(mainImage)
+=======
+        var thumbnailBarPhotos = result.data.results[0].photos
+        var selectedStylePhotos = result.data.results[0].photos
+        this.resizeImages(mainImage)
+
+>>>>>>> c052710c84c8fc7c6479b664b380ebcb57ac9098
         this.setState({
           styles: result.data.results,
           displayedStyleName: result.data.results[0].name,
