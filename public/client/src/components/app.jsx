@@ -10,8 +10,10 @@ class App extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
+      clickData: []
     }
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
+    this.clickTracker = this.clickTracker.bind(this);
   }
 
   handleClick(id, name) {
@@ -19,6 +21,11 @@ class App extends React.Component{
       'selectedProductId': id,
       'productName': name
     })
+  }
+
+  clickTracker (e) {
+    console.log('Click Event', e);
+
   }
 
   componentDidMount() {
@@ -58,9 +65,9 @@ class App extends React.Component{
               <li key={index} onClick={(e)=>{this.handleClick(product.id, product.name)}}>{product.name}</li>
             )}
           </div>
-          <Overview id={id}/>
-          <QandA id={id}/>
-          <RatingsAndReviews id={id} name={name}/>
+          <Overview id={id} clickTracker={this.clickTracker}/>
+          <QandA id={id} clickTracker={this.clickTracker}/>
+          <RatingsAndReviews id={id} name={name} clickTracker={this.clickTracker}/>
         </div>
       )
     }

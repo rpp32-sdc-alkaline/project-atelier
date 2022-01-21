@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
-
 class AddQuestion extends React.Component {
   constructor(props) {
   super(props)
@@ -16,15 +14,10 @@ class AddQuestion extends React.Component {
 
   showModal () {
     this.setState({ show: true })
-    console.log('showModal', this.state.show)
   }
 
   hideModal () {
     this.setState({ show: false })
-  }
-
-  componentDidMount () {
-    //console.log('props', this.props)
   }
 
   addQuestion (e) {
