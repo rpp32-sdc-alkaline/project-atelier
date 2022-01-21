@@ -21,10 +21,6 @@ class AddAnswer extends React.Component {
     this.setState({ show: false })
   }
 
-  componentDidMount () {
-    //console.log('props', this.props)
-  }
-
   addAnswer (e) {
     e.preventDefault();
     let body = e.target[0].value;
