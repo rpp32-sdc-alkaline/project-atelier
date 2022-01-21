@@ -14,6 +14,7 @@ class App extends React.Component{
     this.handleClick = this.handleClick.bind(this)
   }
 
+
   handleClick(id, name) {
     this.setState({
       'selectedProductId': id,
@@ -58,7 +59,7 @@ class App extends React.Component{
               <li key={index} onClick={(e)=>{this.handleClick(product.id, product.name)}}>{product.name}</li>
             )}
           </div>
-          <Overview id={id}/>
+          <Overview clickTracker={this.clickTracker} id={id}/>
           <QandA id={id}/>
           <RatingsAndReviews id={id} name={name}/>
         </div>
