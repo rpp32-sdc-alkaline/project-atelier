@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
 class Answer extends React.Component{
   constructor(props){
     super(props)
@@ -17,23 +16,16 @@ class Answer extends React.Component{
   }
 
   getMore (e) {
-    this.setState({
-      allADisplayed: true
-    })
-
+    this.setState({ allADisplayed: true })
   }
 
   getLess (e) {
-    this.setState({
-      allADisplayed: false
-    })
+    this.setState({ allADisplayed: false })
   }
 
   componentDidMount () {
     let id = this.props.props.question_id;
-    this.setState({
-      questionId: id
-    })
+    this.setState({ questionId: id })
     this.getAnswerData(id);
   }
 
@@ -58,7 +50,7 @@ class Answer extends React.Component{
       })
     })
     .catch((error) => {
-      throw error;
+      console.error(error);
     })
   }
 
@@ -71,29 +63,25 @@ class Answer extends React.Component{
         this.getAnswerData(this.props.props.question_id);
       })
       .catch((error) => {
-        throw error;
+        console.error(error);
       })
     }
   }
 
   wasMarked (e) {
-    this.setState({
-      [e.target.id]: true
-    })
+    this.setState({ [e.target.id]: true })
   }
 
   report (e) {
     let id = e.target.id;
     axios.post('/reportAnswer', {data: {id: id}})
     .then((result) => {
-      console.log('reported')
       e.target.className = 'reported'
       e.target.innerText = 'Reported'
     })
     .catch((error) => {
-      throw error;
+      console.error(error);
     })
-
   }
 
   render() {

@@ -10,12 +10,11 @@ const Question = (props) => {
     if (props.state[id] !== true) {
       axios.post('/markQHelpful', {data: {id: id}})
       .then((result) => {
-        console.log('Marked as helpful');
         props.wasMarked(e);
         props.update(props.productId, 1, 100);
       })
       .catch((error) => {
-        throw error;
+        console.error(error);
       })
     }
   }

@@ -54,13 +54,10 @@ class QandA extends React.Component{
       });
     } else {
       this.setState({filteredData: [], allQDisplayed: false});
-
     }
-
   }
 
   moreButton (e) {
-
     let newSlice = this.state.qToDisplay + 2;
     if (!this.state.useFiltered) {
       if (newSlice >= this.state.questionData.length) {
@@ -86,10 +83,9 @@ class QandA extends React.Component{
   }
 
   componentDidMount () {
+    console.log('this', this.props)
     let id = this.props.id;
-    this.setState({
-      id: id
-    })
+    this.setState({ id: id })
     this.getQuestionData(id, 1, 100)
   }
 
@@ -136,12 +132,11 @@ class QandA extends React.Component{
         <Search searchBarChange={this.searchBarChange}/>
         <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id} searchData={this.state.searchData}/>
         {!this.state.allQDisplayed && <span className='moreQuestion' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions </span>}
-        <AddQuestion id ={this.props.id} update={this.getQuestionData}/> <br></br>
+        <AddQuestion id ={this.props.id} update={this.getQuestionData} clickTracker={this.props.clickTracker}/> <br></br>
         </div>
       )
     }
   }
 }
-
 
 export default QandA;

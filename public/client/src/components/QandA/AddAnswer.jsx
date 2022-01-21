@@ -14,15 +14,13 @@ class AddAnswer extends React.Component {
   }
 
   showModal () {
+    //this.props.clickTracker(e, 'Add Answer Button', 'AddQuestion.jsx');
     this.setState({ show: true })
   }
 
   hideModal () {
+    //this.props.clickTracker(e, 'Submit Answer Button', 'AddQuestion.jsx');
     this.setState({ show: false })
-  }
-
-  componentDidMount () {
-    //console.log('props', this.props)
   }
 
   addAnswer (e) {

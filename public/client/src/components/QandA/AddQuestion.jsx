@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
-
 class AddQuestion extends React.Component {
   constructor(props) {
   super(props)
@@ -14,17 +12,14 @@ class AddQuestion extends React.Component {
   this.addQuestion = this.addQuestion.bind(this);
   }
 
-  showModal () {
+  showModal (e) {
+    this.props.clickTracker(e, 'Add Question Button', 'AddQuestion.jsx');
     this.setState({ show: true })
-    console.log('showModal', this.state.show)
   }
 
-  hideModal () {
+  hideModal (e) {
+    this.props.clickTracker(e, 'Submit Question Button', 'AddQuestion.jsx');
     this.setState({ show: false })
-  }
-
-  componentDidMount () {
-    //console.log('props', this.props)
   }
 
   addQuestion (e) {
@@ -48,7 +43,7 @@ class AddQuestion extends React.Component {
   render () {
     if (this.state.show === false) {
       return(
-        <span className='addQuestion' onClick={this.showModal}>Add A Question +</span>
+        <span className='addQuestion stuff' onClick={this.showModal}>Add A Question +</span>
       )
     } else {
       return(
