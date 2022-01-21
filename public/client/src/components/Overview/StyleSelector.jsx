@@ -3,16 +3,6 @@ import Style from './Style.jsx'
 // const imageThumbnail = require('image-thumbnail')
 
 const StyleSelector = (props) => {
-  // const [selected, setSelected] = useState(props.styles.name)
-  // const [photoStyle, setPhotoStyle] = useState('selected-state')
-
-  // const handleChange = (name) {
-  //   setSelected(name)
-  // }
-
-  // useEffect(() => {
-  //   if()
-  // })
 
   const styles = props.styles
 

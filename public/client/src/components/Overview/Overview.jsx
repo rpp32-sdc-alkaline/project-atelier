@@ -61,9 +61,14 @@ class Overview extends React.Component{
     this.openSizeDropDown = this.openSizeDropDown.bind(this)
   };
 
+  resizeImages(url) {
+    console.log('main imageurl', url)
+    // var sizedImage = image.split('')
+  }
+
   getProductData(id)  {
     let data = {data: id}
-    axios.post('/overview-products/', data )
+    axios.post('/overview-products', data )
     .then(result => {
       // console.log('product', result.data)
       this.setState({
@@ -72,7 +77,7 @@ class Overview extends React.Component{
     })
 
     .then(() => {
-      axios.post('/overview-ratings/', data)
+      axios.post('/overview-ratings', data)
       .then(result => {
         this.setState({
           ratings: result.data.ratings
@@ -80,8 +85,13 @@ class Overview extends React.Component{
       })
     })
     .then(() => {
-      axios.post('/overview-styles/', data)
+      axios.post('/overview-styles', data)
       .then(result => {
+        var mainImage = result.data.results[0].photos[0].url
+        var thumbnailBarPhotos = result.data.results[0].photos
+        var selectedStylePhotos = result.data.results[0].photos
+        this.resizeImages(mainImage)
+
         this.setState({
           styles: result.data.results,
           displayedStyleName: result.data.results[0].name,
