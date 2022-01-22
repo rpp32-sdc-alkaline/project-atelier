@@ -171,6 +171,7 @@ class WriteReview extends React.Component {
     } if (invalidFields) {
       alert(`You must enter the following:\n${invalidFields}`)
     } else {
+      this.closeModal();
       let reviewFormData = {
         product_id: parseInt(this.props.id, 10),
         rating: parseInt(this.state.rating, 10),
@@ -181,11 +182,8 @@ class WriteReview extends React.Component {
         email: this.state.email,
         photos: this.state.photos,
         characteristics: this.state.charRatings
-        }
-        this.postData(reviewFormData)
-        this.setState({
-          show: false;
-        })
+      }
+      this.postData(reviewFormData)
       }
       this.props.clickTracker('submit review', 'writeReview.jsx')
     }
