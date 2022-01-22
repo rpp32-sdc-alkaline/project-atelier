@@ -15,6 +15,7 @@ handleChange(e) {
   // console.log('quantity', e.target.value)
   var quantity = e.target.value
   this.props.selectQuantity(quantity)
+  this.props.clickTracker('Quantity DropDown', 'QuantitySelector.jsx')
 }
 
   render() {

@@ -16,6 +16,7 @@ class App extends React.Component{
     this.clickTracker = this.clickTracker.bind(this);
   }
 
+
   handleClick(id, name) {
     this.setState({
       'selectedProductId': id,

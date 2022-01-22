@@ -4,8 +4,9 @@ const Style = (props) => {
 
   return (
   <img className={props.selected} src={props.photos[0].thumbnail_url}
-  onClick={(e)=>
-    props.changeStyle(props.name, props.salePrice, props.skus, props.photos)}>
+  onClick={(e)=>{
+    props.changeStyle(props.name, props.salePrice, props.skus, props.photos)
+    props.clickTracker('Style Image', 'Style.jsx')}}>
   </img>
   )
 }
