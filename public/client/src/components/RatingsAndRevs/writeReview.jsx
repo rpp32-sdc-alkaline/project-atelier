@@ -183,6 +183,9 @@ class WriteReview extends React.Component {
         characteristics: this.state.charRatings
         }
         this.postData(reviewFormData)
+        this.setState({
+          show: false;
+        })
       }
       this.props.clickTracker('submit review', 'writeReview.jsx')
     }
