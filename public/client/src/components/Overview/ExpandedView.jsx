@@ -47,9 +47,7 @@ class ExpandedView extends React.Component{
               <button onClick={this.handleCloseClick}>X</button>
               <div className={"thumbnail-icon"}>test</div>
               <img onClick={this.handleZoomClick} onMouseMove={this.handleMouseMove}
-              className={imageStyle} src={this.props.image}/>
-
-
+              className={imageStyle} src={this.props.image} alt="image-expanded"/>
             </div>
         </div>
       )

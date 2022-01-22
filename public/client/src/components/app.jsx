@@ -76,11 +76,13 @@ class App extends React.Component{
       return (
         <div>
           <h1>Project Atelier</h1>
-          <h3>Product List</h3>
+          <h2>Product List</h2>
           <div>
+            <ul>
             {this.state.productList.map((product, index) =>
               <li key={index} onClick={(e)=>{this.handleClick(product.id, product.name)}}>{product.name}</li>
             )}
+            </ul>
           </div>
           <Overview id={id} clickTracker={this.clickTracker}/>
           <QandA id={id} clickTracker={this.clickTracker}/>

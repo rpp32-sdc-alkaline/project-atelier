@@ -50,9 +50,9 @@ class ThumbnailBar extends React.Component {
     var index;
     var photos;
     if (this.props.photos?.length > 5) {
-      upArrow = <img className="up-arrow" onClick={this.handleUpClick}
+      upArrow = <img className="up-arrow" alt="up-arrow" onClick={this.handleUpClick}
       src="https://img.icons8.com/color/30/000000/circled-chevron-up--v1.png"/>
-      downArrow = <img className="down-arrow" onClick={this.handleDownClick}
+      downArrow = <img className="down-arrow" alt="down-arrow" onClick={this.handleDownClick}
       src="https://img.icons8.com/color/30/000000/circled-chevron-down--v1.png"/>
     }
 
@@ -66,7 +66,7 @@ class ThumbnailBar extends React.Component {
             var className = photo.url === this.state.selected ? 'click-state' : 'base-state'
             return (
               <div key={index}>
-              <img className={className} onClick={(e)=>{
+              <img className={className} alt="product-thumbnail" onClick={(e)=>{
                 this.selectThumbnail(photo.url, index)}}
               src={photo.thumbnail_url}>
               </img>

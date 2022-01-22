@@ -22,7 +22,7 @@ const StarButton = (props) => {
   }
  return  (
    <div className="star-button ">
-     <img src={imgSrc} onClick={handleClick}></img>
+     <img src={imgSrc} alt="star" onClick={handleClick}></img>
    </div>
  )
 }

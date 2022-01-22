@@ -26,7 +26,7 @@ const Star = (props) => {
   }
   return (
     <div className="star-column">
-      <img src={imgSrc} style={style}></img>
+      <img src={imgSrc} style={style} alt="star"></img>
     </div>
   )
 }

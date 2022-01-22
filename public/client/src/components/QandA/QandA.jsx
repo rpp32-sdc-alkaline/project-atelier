@@ -114,21 +114,21 @@ class QandA extends React.Component{
     if (!this.state.haveData) {
       return (
         <div>
-          <h4>QUESTIONS & ANSWERS</h4>
+          <h3>QUESTIONS & ANSWERS</h3>
           <p>Questions are Loading</p>
         </div>
         )
       } else if (this.state.questionData.length === 0) {
         return (
           <div>
-          <h4>QUESTIONS & ANSWERS</h4>
+          <h3>QUESTIONS & ANSWERS</h3>
           <AddQuestion clickTracker={this.props.clickTracker}/>
           </div>
         )
       } else {
         return (
           <div className='qAndA'>
-        <h4>QUESTIONS & ANSWERS</h4>
+        <h3>QUESTIONS & ANSWERS</h3>
         <Search searchBarChange={this.searchBarChange} clickTracker={this.props.clickTracker}/>
         <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id} searchData={this.state.searchData} clickTracker={this.props.clickTracker}/>
         {!this.state.allQDisplayed && <span className='moreQuestion' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions </span>}
