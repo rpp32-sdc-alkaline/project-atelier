@@ -30,7 +30,7 @@ class Questions extends React.Component{
     } else {
     return (
       <div key={this.props.questions.length} className='questions'>
-        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId} searchData={this.props.searchData} wasMarked={this.wasMarked} state={this.state} />
+        <Question props={questions} moreButton={this.props.moreButton} update={this.props.update} productId={this.props.productId} searchData={this.props.searchData} wasMarked={this.wasMarked} state={this.state} clickTracker={this.props.clickTracker}/>
       </div>
     )
     }
