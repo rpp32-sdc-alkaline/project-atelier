@@ -24,7 +24,8 @@ class App extends React.Component{
     })
   }
 
-  clickTracker (e, element, module) {
+  clickTracker (element, module) {
+    console.log('clickTracker', element, module)
     let d = new Date();
     let time = d.toUTCString();
     let click = {
@@ -81,15 +82,9 @@ class App extends React.Component{
               <li key={index} onClick={(e)=>{this.handleClick(product.id, product.name)}}>{product.name}</li>
             )}
           </div>
-<<<<<<< HEAD
-          <Overview clickTracker={this.clickTracker} id={id}/>
-          <QandA id={id}/>
-          <RatingsAndReviews id={id} name={name}/>
-=======
           <Overview id={id} clickTracker={this.clickTracker}/>
           <QandA id={id} clickTracker={this.clickTracker}/>
           <RatingsAndReviews id={id} name={name} clickTracker={this.clickTracker}/>
->>>>>>> 26e8198f3643fd33980bea0f3ae6445b538f9188
         </div>
       )
     }

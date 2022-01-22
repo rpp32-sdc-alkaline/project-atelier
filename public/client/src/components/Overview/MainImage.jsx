@@ -13,7 +13,6 @@ class MainImage extends React.Component {
      expand: false,
      image: this.props.image
     }
-  // this.changeThumbnail = this.changeThumbnail.bind(this)
   this.nextSlide = this.nextSlide.bind(this)
   this.prevSlide = this.prevSlide.bind(this)
   this.handleClick = this.handleClick.bind(this)
@@ -22,6 +21,7 @@ class MainImage extends React.Component {
 
   nextSlide() {
    this.props.mainImageNext()
+   this.props.clickTracker('Main Image Next', 'MainImage.')
   }
 
   prevSlide() {
@@ -63,7 +63,7 @@ class MainImage extends React.Component {
         {leftArrow}
         {rightArrow}
             <img className="main-image" onClick={this.handleClick} src={this.props.image}/>
-            <ExpandedView isOpen={this.props.modalOpen} close={this.handleClick} iconClick={this.props.iconClick}
+            <ExpandedView clickTracker={this.props.clickTracker} isOpen={this.props.modalOpen} close={this.handleClick} iconClick={this.props.iconClick}
             photos={this.props.photos} image={this.props.image} />
       </div>
     )

@@ -29,10 +29,12 @@ const ExpandedView = (props) => {
   const handleCloseClick = () => {
     setZoom(false)
     props.close()
+    props.clickTracker('Close Expanded View', 'ExpandedView.js')
   }
 
   const handleZoomClick = () => {
     setZoom(prev => !prev)
+    props.clickTracker('Zoom Expanded View', 'ExpandedView.js')
   }
 
   const handleMouseMove = () => {
@@ -43,6 +45,7 @@ const ExpandedView = (props) => {
 
   const handleIconClick = (event, photo, index) => {
     props.iconClick(photo, index)
+    props.clickTracker('Expanded View Icon', 'ExpandedView.js')
   }
 
     if (props.isOpen) {

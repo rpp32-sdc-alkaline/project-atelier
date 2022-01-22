@@ -61,14 +61,9 @@ class Overview extends React.Component{
     this.openSizeDropDown = this.openSizeDropDown.bind(this)
   };
 
-<<<<<<< HEAD
-  resizeImage(url) {
-    console.log('mainimage', url)
-=======
   resizeImages(url) {
     console.log('main imageurl', url)
     // var sizedImage = image.split('')
->>>>>>> c052710c84c8fc7c6479b664b380ebcb57ac9098
   }
 
   getProductData(id)  {
@@ -93,16 +88,10 @@ class Overview extends React.Component{
       axios.post('/overview-styles', data)
       .then(result => {
         var mainImage = result.data.results[0].photos[0].url
-<<<<<<< HEAD
-        var selectedStylePhotos = result.data.results[0].photos
-        var thumbnailBarPhotos = result.data.results[0].photos
-        this.resizeImage(mainImage)
-=======
         var thumbnailBarPhotos = result.data.results[0].photos
         var selectedStylePhotos = result.data.results[0].photos
         this.resizeImages(mainImage)
 
->>>>>>> c052710c84c8fc7c6479b664b380ebcb57ac9098
         this.setState({
           styles: result.data.results,
           displayedStyleName: result.data.results[0].name,
@@ -299,14 +288,11 @@ class Overview extends React.Component{
 
       return (
         <div className="overview">
-
-
-
           <div className="default-gallery">
-          <MainImage image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
+          <MainImage clickTracker={this.props.clickTracker} image={this.state.mainImage} mainImageNext={this.mainImageNext} mainImagePrev={this.mainImagePrev}
           iconClick={this.iconClick} index={this.state.mainImageIndex} photos={this.state.selectedStylePhotos}
           expandedView={this.expandedView} modalOpen={this.state.expand}/>
-          <ThumbnailBar photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
+          <ThumbnailBar clickTracker={this.props.clickTracker} photos={this.state.thumbnailBarPhotos} changeThumbnail={this.changeThumbnail}
           thumbnailScrollUp={this.thumbnailScrollUp} thumbnailScrollDown={this.thumbnailScrollDown}
           modalOpen={this.state.expand}/>
           {description}
@@ -325,22 +311,22 @@ class Overview extends React.Component{
                 <p className="style"><b>STYLE</b></p>
                 <p>{this.state.displayedStyleName.toUpperCase()}</p>
               </div>
-              <StyleSelector changeStyle={this.changeStyle} styles={this.state.styles}
+              <StyleSelector clickTracker={this.props.clickTracker} changeStyle={this.changeStyle} styles={this.state.styles}
               selectedStyle={this.state.displayedStyleName} />
             </div>
 
             <div className="selectors">
-              <SizeSelector skus={this.state.skus} selectSize={this.selectSize}
+              <SizeSelector clickTracker={this.props.clickTracker} skus={this.state.skus} selectSize={this.selectSize}
               openSizeDropDown={this.openSizeDropDown} showSizes={this.state.showSizes}
               hideAddToCart={this.hideAddToCart} noSizeSelected={this.state.noSizeSelected}/>
-              <QuantitySelector size={this.state.selectedSize} available={this.state.availableQuantity}
+              <QuantitySelector clickTracker={this.props.clickTracker} size={this.state.selectedSize} available={this.state.availableQuantity}
               selectQuantity={this.selectQuantity}/>
 
 
-          <AddToCart addToCart={this.addToCart} openSizeDropDown={this.openSizeDropDown} noSizeSelected={this.state.noSizeSelected}
+          <AddToCart clickTracker={this.props.clickTracker} addToCart={this.addToCart} openSizeDropDown={this.openSizeDropDown} noSizeSelected={this.state.noSizeSelected}
           style={this.state.displayedStyleName} size={this.state.selectedSize}
           quantity={this.state.selectedQuantity} hide={this.state.hideAddToCart} />
-          <StarButton />
+          <StarButton clickTracker={this.props.clickTracker}/>
           {displayAdded}
           </div>
           </div>

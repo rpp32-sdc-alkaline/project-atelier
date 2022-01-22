@@ -17,6 +17,7 @@ class ThumbnailBar extends React.Component {
       selected: photoUrl
     })
   this.props.changeThumbnail(photoUrl, index)
+  this.props.clickTracker('Thumbnail', 'ThumbnailBar.jsx')
   }
 
   handleUpClick(e) {
