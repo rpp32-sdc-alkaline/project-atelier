@@ -58,6 +58,7 @@ class QandA extends React.Component{
   }
 
   moreButton (e) {
+    this.props.clickTracker('More Questions Button', 'QandA.jsx');
     let newSlice = this.state.qToDisplay + 2;
     if (!this.state.useFiltered) {
       if (newSlice >= this.state.questionData.length) {
@@ -83,7 +84,6 @@ class QandA extends React.Component{
   }
 
   componentDidMount () {
-    console.log('this', this.props)
     let id = this.props.id;
     this.setState({ id: id })
     this.getQuestionData(id, 1, 100)
@@ -122,15 +122,15 @@ class QandA extends React.Component{
         return (
           <div>
           <h4>QUESTIONS & ANSWERS</h4>
-          <AddQuestion />
+          <AddQuestion clickTracker={this.props.clickTracker}/>
           </div>
         )
       } else {
         return (
           <div className='qAndA'>
         <h4>QUESTIONS & ANSWERS</h4>
-        <Search searchBarChange={this.searchBarChange}/>
-        <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id} searchData={this.state.searchData}/>
+        <Search searchBarChange={this.searchBarChange} clickTracker={this.props.clickTracker}/>
+        <Questions questions={this.state.slicedData} moreButton={this.moreButton} update={this.getQuestionData} productId={this.state.id} searchData={this.state.searchData} clickTracker={this.props.clickTracker}/>
         {!this.state.allQDisplayed && <span className='moreQuestion' id='MoreQuestion' onClick={this.moreButton}>More Anwsered Questions </span>}
         <AddQuestion id ={this.props.id} update={this.getQuestionData} clickTracker={this.props.clickTracker}/> <br></br>
         </div>
