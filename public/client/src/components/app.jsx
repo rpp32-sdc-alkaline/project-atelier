@@ -23,7 +23,7 @@ class App extends React.Component{
     })
   }
 
-  clickTracker (e, element, module) {
+  clickTracker (element, module) {
     let d = new Date();
     let time = d.toUTCString();
     let click = {
@@ -38,7 +38,14 @@ class App extends React.Component{
     current.push(click);
     this.setState({
       clickData: current
+<<<<<<< HEAD
     }, ()=>{window.localStorage.setItem('ClickData', current)})
+=======
+    }, ()=>{window.localStorage.setItem('ClickTData', JSON.stringify(current))})
+
+
+
+>>>>>>> 7cdc22bfb637c44170a658844a4678692b4a77e6
   }
 
   componentDidMount() {
@@ -47,8 +54,12 @@ class App extends React.Component{
       return res.data
     })
     .then((productList) => {
-      console.log('productList', productList)
-      let current = window.localStorage.getItem('ClickData');
+      let current;
+      if (window.localStorage.getItem('ClickTData') !== null) {
+        current = JSON.parse(window.localStorage.getItem('ClickTData'));
+      } else {
+        current = [];
+      }
       this.setState({
         'productList': productList,
         'defaultProductId': productList[0].id,
