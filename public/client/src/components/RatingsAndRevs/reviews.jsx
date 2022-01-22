@@ -38,6 +38,7 @@ class Reviews extends React.Component {
         numToShow: reviews.length,
         showingAll: true})
     }
+    this.props.clickTracker('show more reviews button', 'reviews.jsx')
   }
 
   render() {
@@ -50,14 +51,15 @@ class Reviews extends React.Component {
           id={this.props.product}
           name={this.props.name}
           metadata={this.props.metadata}
-          postNewReview={this.props.postNewReview} />
+          postNewReview={this.props.postNewReview}
+          clickTracker={this.props.clickTracker}/>
         </div>
       )
     }
     return (
       <div id="reviews" data-testid="reviews">
         <h4>{reviews.length} reviews. Sort by:</h4>
-        <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)}>
+        <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)} onClick={this.props.clickTracker('change review sort dropdown', 'reviews.jsx')}>
           <option value="relevance">Relevant</option>
           <option value="helpful">Helpful</option>
           <option value="newest">Newest</option>
@@ -67,7 +69,8 @@ class Reviews extends React.Component {
             <Review
             review={review}
             key={review.review_id}
-            markHelpful={this.props.markHelpful}/>
+            markHelpful={this.props.markHelpful}
+            clickTracker={this.props.clickTracker}/>
           )}
         </div>
         {(this.state.numToShow <= reviews.length) &&
@@ -76,7 +79,8 @@ class Reviews extends React.Component {
         id={this.props.product}
         name={this.props.name}
         metadata={this.props.metadata}
-        postNewReview={this.props.postNewReview} />
+        postNewReview={this.props.postNewReview}
+        clickTracker={this.props.clickTracker}/>
       </div>
     )
   }

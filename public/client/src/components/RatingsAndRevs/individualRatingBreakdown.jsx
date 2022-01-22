@@ -11,6 +11,7 @@ class IndividualRatingBreakdown extends React.Component {
   handleClick() {
     //call a sort function with this.props.numStars as argument
     this.props.updateFilters(this.props.numStars)
+    this.props.clickTracker(`${this.props.numStars} stars rating breakdown bar`, 'individualRatingBreakdown.jsx')
   }
 
   render() {

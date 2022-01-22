@@ -31,14 +31,14 @@ class App extends React.Component{
       time: time,
       module: module
     }
+    console.log('this.state.clickData', this.state.clickData)
     let current = this.state.clickData;
+    console.log('current', current)
+    console.log('click', click)
     current.push(click);
     this.setState({
       clickData: current
     }, ()=>{window.localStorage.setItem('ClickData', current)})
-
-
-
   }
 
   componentDidMount() {

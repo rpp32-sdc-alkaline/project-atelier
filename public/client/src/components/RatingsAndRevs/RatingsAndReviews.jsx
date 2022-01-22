@@ -102,6 +102,7 @@ class RatingsAndReviews extends React.Component{
     .catch(error => {
       console.log('error:', error)
     })
+    this.props.clickTracker('mark review helpful link', 'review.jsx')
   }
 
   changeSort(sort) {
@@ -115,6 +116,7 @@ class RatingsAndReviews extends React.Component{
     this.setState({
       filters: []
     })
+    this.props.clickTracker('remove filters button', 'ratingBreakdown.jsx')
   }
 
   updateFilters(rating) {
@@ -170,14 +172,18 @@ class RatingsAndReviews extends React.Component{
         metadata={this.state.metadata}
         changeSort={this.changeSort.bind(this)}
         postNewReview={this.postNewReview.bind(this)}
-        markHelpful={this.markHelpful.bind(this)}/>
+        markHelpful={this.markHelpful.bind(this)}
+        clickTracker={this.props.clickTracker}/>
         <div className="ratings-left-sidebar">
           <RatingBreakdown
           metadata={this.state.metadata}
           updateFilters={this.updateFilters.bind(this)}
           filters={this.state.filters}
-          removeFilters={this.removeFilters.bind(this)}/>
-          <ProductBreakdown metadata={this.state.metadata}/>
+          removeFilters={this.removeFilters.bind(this)}
+          clickTracker={this.props.clickTracker}/>
+          <ProductBreakdown
+          metadata={this.state.metadata}
+          clickTracker={this.props.clickTracker}/>
         </div>
       </div>
     )

@@ -81,6 +81,7 @@ class WriteReview extends React.Component {
     this.setState({
       rating: e.target.value
     })
+    this.props.clickTracker(`${e.target.value} stars in overall rating radio button`, 'writeReview.jsx')
   }
 
   rateCharacteristic(char, rating, id) {
@@ -96,6 +97,7 @@ class WriteReview extends React.Component {
     this.setState({
       recommend: recommendation
     })
+    this.props.clickTracker(`recommend this product: ${e.target.value}`, 'writeReview.jsx')
   }
 
   handleSummaryChange(e) {
@@ -193,6 +195,7 @@ class WriteReview extends React.Component {
       this.setState({
         show: true
       })
+      this.props.clickTracker('add a review button', 'writeReview.jsx')
     }
 
     closeModal() {
@@ -206,10 +209,6 @@ class WriteReview extends React.Component {
       this.setState({
         show: !currentState
       })
-    }
-
-    handleCloseClick() {
-      this.props.hideModal
     }
 
   render() {
@@ -305,13 +304,14 @@ class WriteReview extends React.Component {
                     thisChar={charName}
                     key={charName}
                     id={charId}
-                    rateChar={this.rateCharacteristic.bind(this)}/>
+                    rateChar={this.rateCharacteristic.bind(this)}
+                    clickTracker={this.props.clickTracker}/>
                   )
                 }
                 )}
                 <p>Review Summary:</p>
                 <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"
-                onChange={this.handleSummaryChange.bind(this)}></textarea>
+                onChange={this.handleSummaryChange.bind(this)} onClick></textarea>
                 <p>Review body:</p>
                 <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
                 onChange={this.handleBodyChange.bind(this)}></textarea>
@@ -322,7 +322,8 @@ class WriteReview extends React.Component {
                 <button onClick={this.openAddImagesModal.bind(this)}>Add images</button>
                 <AddImagesModal show={this.state.showAddImagesModal}
                 closeModal={this.closeAddImagesModal.bind(this)}
-                addImageUrl={this.uploadPhotos.bind(this)}/>
+                addImageUrl={this.uploadPhotos.bind(this)}
+                clickTracker={this.props.clickTracker}/>
                 <br></br>
                 {this.state.photos.map((photo, i) => {
                 return (
