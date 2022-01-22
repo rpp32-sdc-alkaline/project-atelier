@@ -75,6 +75,7 @@ class Review extends React.Component {
           height="45px"
           width="45px"
           className="thumbnail"
+          alt="review-image-thumbnail"
           onClick={() => this.openInModal(photo.url)}></img>)}
         {this.state.imageUrlInModal &&
         <div className="review-modal-backdrop">
@@ -82,7 +83,7 @@ class Review extends React.Component {
           <span class="close" onClick={this.closeModal.bind(this)}>&times;</span>
             <br></br>
             <br></br>
-            <img className="review-image" src={this.state.imageUrlInModal}></img>
+            <img className="review-image" alt="review-image" src={this.state.imageUrlInModal}></img>
           </div>
         </div>}
       </div>

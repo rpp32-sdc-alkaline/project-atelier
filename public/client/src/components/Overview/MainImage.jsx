@@ -64,7 +64,7 @@ class MainImage extends React.Component {
       <div className="slider">
         {leftArrow}
         {rightArrow}
-            <img className="main-image" onClick={this.handleClick} src={this.props.image}/>
+            <img className="main-image" alt="main-image" onClick={this.handleClick} src={this.props.image}/>
             <ExpandedView clickTracker={this.props.clickTracker} isOpen={this.props.modalOpen} close={this.handleClick} iconClick={this.props.iconClick}
             photos={this.props.photos} image={this.props.image} />
       </div>

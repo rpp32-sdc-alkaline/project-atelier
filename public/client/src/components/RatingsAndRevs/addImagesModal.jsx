@@ -66,7 +66,8 @@ class AddImagesModal extends React.Component {
                 src={photo}
                 height="45px"
                 width="45px"
-                className="thumbnail"></img>)}
+                className="thumbnail"
+                alt="thumbnail"></img>)}
             )}
             <p>Images remaining: {5 - this.state.photoUrls.length}</p>
             <br></br>

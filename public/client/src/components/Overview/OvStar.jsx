@@ -30,7 +30,7 @@ const Star = (props) => {
   }
   return (
     <div className="ovstar-column">
-      <img src={imgSrc}></img>
+      <img src={imgSrc} alt="star"></img>
     </div>
   )
 

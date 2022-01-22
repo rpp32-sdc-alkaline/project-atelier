@@ -336,7 +336,9 @@ class WriteReview extends React.Component {
                 src={photo}
                 height="45px"
                 width="45px"
-                className="thumbnail"></img>)}
+                className="thumbnail"
+                alt="your-image-thumbnail">
+                </img>)}
                 )}
                 <p>What is your nickname?*</p>
                 <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11!"
