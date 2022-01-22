@@ -82,7 +82,7 @@ class Review extends React.Component {
           <span class="close" onClick={this.closeModal.bind(this)}>&times;</span>
             <br></br>
             <br></br>
-            <img src={this.state.imageUrlInModal}></img>
+            <img className="review-image" src={this.state.imageUrlInModal}></img>
           </div>
         </div>}
       </div>

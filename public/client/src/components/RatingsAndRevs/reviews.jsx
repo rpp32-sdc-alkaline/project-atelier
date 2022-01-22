@@ -8,7 +8,8 @@ class Reviews extends React.Component {
     this.state = {
       numToShow: 2,
       showingAll: false,
-      showWriteReview: false
+      showWriteReview: false,
+      id: 0
     }
   }
 
@@ -19,6 +20,17 @@ class Reviews extends React.Component {
           showingAll: true
         })
       }
+    } this.setState({
+      id: this.props.product
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.product !== this.props.product) {
+      this.setState({
+        numToShow: 2,
+        id: this.props.product
+      })
     }
   }
 

@@ -42,7 +42,10 @@ class RatingsAndReviews extends React.Component{
       this.filterReviews()
     } if (this.props.id !== prevProps.id) {
       this.setState({
-        id: this.props.id
+        product: this.props.id,
+        filters: [],
+        sort: 'relevant'
+
       })
       this.getReviewData(this.props.id, this.state.sort, 1, 1000)
     }
