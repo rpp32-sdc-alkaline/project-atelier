@@ -35,7 +35,7 @@ class App extends React.Component{
     current.push(click);
     this.setState({
       clickData: current
-    }, ()=>{window.localStorage.setItem('ClickData', current)})
+    }, ()=>{window.localStorage.setItem('ClickTData', JSON.stringify(current))})
 
 
 
@@ -47,13 +47,10 @@ class App extends React.Component{
       return res.data
     })
     .then((productList) => {
-      console.log('productList', productList)
-      console.log('current local', window.localStorage.getItem('ClickData'));
       let current;
-      if (window.localStorage.getItem('ClickData') !== null) {
-        current = window.localStorage.getItem('ClickData');
+      if (window.localStorage.getItem('ClickTData') !== null) {
+        current = JSON.parse(window.localStorage.getItem('ClickTData'));
       } else {
-        console.log('hey look ma i made it');
         current = [];
       }
       this.setState({
