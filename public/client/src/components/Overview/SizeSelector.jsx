@@ -32,17 +32,17 @@ class SizeSelector extends React.Component {
     this.props.clickTracker('Size DropDown', 'SizeSelector.jsx')
   };
 
-  openDropDown() {
-    // console.log('open drop down called')
-    this.setState({
-      openList: true
-    })
-    this.props.openSizeDropDown()
-    return (
-      <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
-      // skus={this.state.testData}
-    )
-  }
+  // openDropDown() {
+  //   // console.log('open drop down called')
+  //   this.setState({
+  //     openList: true
+  //   })
+  //   this.props.openSizeDropDown()
+  //   return (
+  //     <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+  //     // skus={this.state.testData}
+  //   )
+  // }
 
   componentDidMount() {
     var sum = 0;

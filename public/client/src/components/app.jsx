@@ -25,7 +25,6 @@ class App extends React.Component{
   }
 
   clickTracker (element, module) {
-    console.log('clicktracker', element, module)
     let d = new Date();
     let time = d.toUTCString();
     let click = {
@@ -38,7 +37,6 @@ class App extends React.Component{
     this.setState({
       clickData: current
     }, ()=>{window.localStorage.setItem('ClickTData', JSON.stringify(current))})
-
   }
 
   componentDidMount() {

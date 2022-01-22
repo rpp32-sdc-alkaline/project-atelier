@@ -81,11 +81,6 @@ class Overview extends React.Component{
     .then(() => {
       axios.post('/overview-styles', data)
       .then(result => {
-        // var mainImage = result.data.results[0].photos[0].url
-        // var thumbnailBarPhotos = result.data.results[0].photos
-        // var selectedStylePhotos = result.data.results[0].photos
-        // this.resizeImages(mainImage)
-
         this.setState({
           styles: result.data.results,
           displayedStyleName: result.data.results[0].name,
@@ -200,8 +195,6 @@ class Overview extends React.Component{
   }
 
   selectSize(size, available) {
-    // console.log('select size called', size)
-    // console.log('available', Number(available))
     this.setState({
       selectedSize: size,
       availableQuantity: Number(available),
