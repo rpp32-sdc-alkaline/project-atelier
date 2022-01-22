@@ -38,14 +38,7 @@ class App extends React.Component{
     current.push(click);
     this.setState({
       clickData: current
-<<<<<<< HEAD
-    }, ()=>{window.localStorage.setItem('ClickData', current)})
-=======
     }, ()=>{window.localStorage.setItem('ClickTData', JSON.stringify(current))})
-
-
-
->>>>>>> 7cdc22bfb637c44170a658844a4678692b4a77e6
   }
 
   componentDidMount() {
