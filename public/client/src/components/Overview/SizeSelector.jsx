@@ -19,7 +19,6 @@ class SizeSelector extends React.Component {
       }
     }
     this.handleChange = this.handleChange.bind(this)
-    // this.openDropDown = this.openDropDown.bind(this)
   }
 
   handleChange(e) {
