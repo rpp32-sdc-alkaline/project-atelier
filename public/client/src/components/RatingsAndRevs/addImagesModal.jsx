@@ -15,6 +15,7 @@ class AddImagesModal extends React.Component {
   handleCloseClick(e) {
     e.preventDefault()
     this.props.closeModal()
+    this.props.clickTracker('done button in add images modal', 'writeReview.jsx')
   }
 
   handleUrlChange(e) {
@@ -36,6 +37,7 @@ class AddImagesModal extends React.Component {
     } else {
       alert('Maximum 5 images allowed per review')
     }
+    this.props.clickTracker('add image button add review', 'addImagesModal.jsx')
   }
 
   render() {

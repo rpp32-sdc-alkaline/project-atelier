@@ -138,6 +138,7 @@ class WriteReview extends React.Component {
         showAddImagesModal: true
       })
     }
+    this.props.clickTracker('add images button in add review', 'writeReview.jsx')
   }
 
   closeAddImagesModal() {
@@ -183,12 +184,14 @@ class WriteReview extends React.Component {
         }
         this.postData(reviewFormData)
       }
+      this.props.clickTracker('submit review', 'writeReview.jsx')
     }
 
     handleStarClick(e) {
       this.setState({
         rating: e.target.value
       })
+      this.props.clickTracker(`add overall rating of ${e.target.value} stars in add review`, 'writeReview.jsx')
     }
 
     openModal() {
@@ -202,6 +205,7 @@ class WriteReview extends React.Component {
       this.setState({
         show: false
       })
+      this.props.clickTracker('close add review modal', 'writeReview.jsx')
     }
 
     toggleWriteReview(e) {
@@ -311,7 +315,7 @@ class WriteReview extends React.Component {
                 )}
                 <p>Review Summary:</p>
                 <textarea name="summary" id="summary" maxLength="60" defaultValue="Example: Best purchase ever!"
-                onChange={this.handleSummaryChange.bind(this)} onClick></textarea>
+                onChange={this.handleSummaryChange.bind(this)}></textarea>
                 <p>Review body:</p>
                 <textarea name="body" id="body" maxLength="1000" defaultValue="Why did you like the product or not?"
                 onChange={this.handleBodyChange.bind(this)}></textarea>
@@ -338,7 +342,7 @@ class WriteReview extends React.Component {
                 onChange={this.handleNicknameChange.bind(this)}></textarea>
                 <p>For privacy reasons, do not use your full name or email address</p>
                 <p>Your email*</p>
-                <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11@email.com"
+                <textarea name="email" id="email" maxLength="60" defaultValue="Example: jackson11@email.com"
                 onChange={this.handleEmailChange.bind(this)}></textarea>
                 <p>For authentication reasons, you will not be emailed</p>
                 <br></br>

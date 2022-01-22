@@ -24,6 +24,7 @@ class Reviews extends React.Component {
 
   changeSort(e) {
     this.props.changeSort(e.target.value)
+    this.props.clickTracker(`change review sort dropdown to ${e.target.value}`, 'reviews.jsx')
   }
 
   showMore() {
@@ -59,7 +60,7 @@ class Reviews extends React.Component {
     return (
       <div id="reviews" data-testid="reviews">
         <h4>{reviews.length} reviews. Sort by:</h4>
-        <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)} onClick={this.props.clickTracker('change review sort dropdown', 'reviews.jsx')}>
+        <select name="review-sort-options" id="review-sort-options" onChange={this.changeSort.bind(this)}>
           <option value="relevance">Relevant</option>
           <option value="helpful">Helpful</option>
           <option value="newest">Newest</option>

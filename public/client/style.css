@@ -385,7 +385,6 @@
   grid-template-rows: 1fr, 2fr, 2fr;
   grid-template-columns: 1fr, 1fr, 1fr, 1fr;
   align-content: start;
-
 }
 
 .product-title {
@@ -610,7 +609,6 @@
   display: flex;
   flex-direction: column;
   padding: 25px;
-
 }
 
 .question {
