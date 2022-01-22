@@ -29,6 +29,7 @@ class SizeSelector extends React.Component {
       display: size
     })
     this.props.selectSize(size, quantity)
+    this.props.clickTracker('Size DropDown', 'SizeSelector.jsx')
   };
 
   openDropDown() {
@@ -71,7 +72,6 @@ class SizeSelector extends React.Component {
     if (this.props.showSizes) {
       return <SizeDropDown skus={this.props.skus}/>
     }
-    // console.log('sum', sum)
   }
 
   //div height conditional -- collapsed height === 0

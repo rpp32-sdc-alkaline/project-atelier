@@ -21,15 +21,17 @@ class MainImage extends React.Component {
 
   nextSlide() {
    this.props.mainImageNext()
-   this.props.clickTracker('Main Image Next', 'MainImage.')
+   this.props.clickTracker('Main Image Next', 'MainImage.jsx')
   }
 
   prevSlide() {
   this.props.mainImagePrev()
+  this.props.clickTracker('Main Image Previous', 'MainImage.jsx')
   }
 
   handleClick() {
     this.props.expandedView()
+    this.props.clickTracker('Main Image Expanded View', 'MainImage.jsx')
   }
 
   iconClick(photo) {
