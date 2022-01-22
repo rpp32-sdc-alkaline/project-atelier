@@ -19,7 +19,6 @@ class SizeSelector extends React.Component {
       }
     }
     this.handleChange = this.handleChange.bind(this)
-    // this.openDropDown = this.openDropDown.bind(this)
   }
 
   handleChange(e) {
@@ -29,19 +28,20 @@ class SizeSelector extends React.Component {
       display: size
     })
     this.props.selectSize(size, quantity)
+    this.props.clickTracker('Size DropDown', 'SizeSelector.jsx')
   };
 
-  openDropDown() {
-    // console.log('open drop down called')
-    this.setState({
-      openList: true
-    })
-    this.props.openSizeDropDown()
-    return (
-      <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
-      // skus={this.state.testData}
-    )
-  }
+  // openDropDown() {
+  //   // console.log('open drop down called')
+  //   this.setState({
+  //     openList: true
+  //   })
+  //   this.props.openSizeDropDown()
+  //   return (
+  //     <SizeDropDown skus={this.props.skus} handleChange={this.handleChange}/>
+  //     // skus={this.state.testData}
+  //   )
+  // }
 
   componentDidMount() {
     var sum = 0;
@@ -71,7 +71,6 @@ class SizeSelector extends React.Component {
     if (this.props.showSizes) {
       return <SizeDropDown skus={this.props.skus}/>
     }
-    // console.log('sum', sum)
   }
 
   //div height conditional -- collapsed height === 0

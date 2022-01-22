@@ -19,6 +19,7 @@ class ExpandedView extends React.Component{
       zoom: false
     })
     this.props.close()
+    this.props.clickTracker('Close Expanded View', 'ExpandedView')
   }
 
   handleZoomClick() {

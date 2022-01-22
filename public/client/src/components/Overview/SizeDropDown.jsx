@@ -4,7 +4,7 @@ const SizeDropDown = (props) => {
   // console.log('props.skus', props.skus)
 
   const handleClick = (size, quantity) => {
-    console.log('size, quan', size, quantity)
+    // console.log('size, quan', size, quantity)
     props.handleChange(size, quantity)
   }
   let content = []

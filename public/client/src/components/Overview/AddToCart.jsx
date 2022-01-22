@@ -13,7 +13,7 @@ class AddToCart extends React.Component {
 
   handleClick() {
   this.props.addToCart()
-
+  this.props.clickTracker('Add to Bag', 'AddToCart.jsx')
 }
 
 

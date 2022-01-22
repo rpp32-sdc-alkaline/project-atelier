@@ -17,6 +17,7 @@ class ThumbnailBar extends React.Component {
       selected: photoUrl
     })
   this.props.changeThumbnail(photoUrl, index)
+  this.props.clickTracker('Thumbnail', 'ThumbnailBar.jsx')
   }
 
   handleUpClick(e) {
@@ -28,6 +29,7 @@ class ThumbnailBar extends React.Component {
     photos.unshift(photo)
 
     this.props.thumbnailScrollUp(photos)
+    this.props.clickTracker('Thumbnail Bar Up Click', 'ThumbnailBar.jsx')
   };
 
   handleDownClick() {
@@ -38,6 +40,7 @@ class ThumbnailBar extends React.Component {
     photos.push(photo)
 
     this.props.thumbnailScrollDown(photos)
+    this.props.clickTracker('Thumbnail Bar Down Click', 'ThumbnailBar.jsx')
   };
 
 
@@ -63,7 +66,8 @@ class ThumbnailBar extends React.Component {
             var className = photo.url === this.state.selected ? 'click-state' : 'base-state'
             return (
               <div key={index}>
-              <img className={className} onClick={(e)=>{this.selectThumbnail(photo.url, index)}}
+              <img className={className} onClick={(e)=>{
+                this.selectThumbnail(photo.url, index)}}
               src={photo.thumbnail_url}>
               </img>
             </div>

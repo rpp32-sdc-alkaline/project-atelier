@@ -16,6 +16,7 @@ class App extends React.Component{
     this.clickTracker = this.clickTracker.bind(this);
   }
 
+
   handleClick(id, name) {
     this.setState({
       'selectedProductId': id,
@@ -36,9 +37,6 @@ class App extends React.Component{
     this.setState({
       clickData: current
     }, ()=>{window.localStorage.setItem('ClickTData', JSON.stringify(current))})
-
-
-
   }
 
   componentDidMount() {

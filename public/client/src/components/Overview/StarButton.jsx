@@ -18,6 +18,7 @@ const StarButton = (props) => {
 
   const handleClick = () => {
     setFillStar(prev => !prev)
+    props.clickTracker('Star Button', 'StarButton.jsx')
   }
  return  (
    <div className="star-button ">
