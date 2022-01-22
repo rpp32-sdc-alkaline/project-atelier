@@ -28,18 +28,21 @@ class Review extends React.Component {
     this.setState({
       showFullReview: true
     })
+    this.props.clickTracker('show full review body link', 'review.jsx')
   }
 
   openInModal(photoUrl) {
     this.setState({
       imageUrlInModal: photoUrl
     })
+    this.props.clickTracker('image in review', 'review.jsx')
   }
 
   closeModal() {
     this.setState({
       imageUrlInModal: null
     })
+    this.props.clickTracker('close image modal in review', 'review.jsx')
   }
 
   render() {
@@ -79,7 +82,7 @@ class Review extends React.Component {
           <span class="close" onClick={this.closeModal.bind(this)}>&times;</span>
             <br></br>
             <br></br>
-            <img src={this.state.imageUrlInModal}></img>
+            <img className="review-image" src={this.state.imageUrlInModal}></img>
           </div>
         </div>}
       </div>

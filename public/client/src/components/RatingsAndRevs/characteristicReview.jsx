@@ -78,6 +78,7 @@ class CharacteristicReview extends React.Component {
       selection: e.target.value
     })
     this.props.rateChar(this.props.thisChar, rating, this.props.id)
+    this.props.clickTracker(`characteristic rating ${this.props.thisChar}: ${rating}`, 'characteristicReview.jsx')
   }
 
   render() {

@@ -8,7 +8,8 @@ class Reviews extends React.Component {
     this.state = {
       numToShow: 2,
       showingAll: false,
-      showWriteReview: false
+      showWriteReview: false,
+      id: 0
     }
   }
 
@@ -19,11 +20,23 @@ class Reviews extends React.Component {
           showingAll: true
         })
       }
+    } this.setState({
+      id: this.props.product
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.product !== this.props.product) {
+      this.setState({
+        numToShow: 2,
+        id: this.props.product
+      })
     }
   }
 
   changeSort(e) {
     this.props.changeSort(e.target.value)
+    this.props.clickTracker(`change review sort dropdown to ${e.target.value}`, 'reviews.jsx')
   }
 
   showMore() {
@@ -38,6 +51,7 @@ class Reviews extends React.Component {
         numToShow: reviews.length,
         showingAll: true})
     }
+    this.props.clickTracker('show more reviews button', 'reviews.jsx')
   }
 
   render() {
@@ -50,7 +64,8 @@ class Reviews extends React.Component {
           id={this.props.product}
           name={this.props.name}
           metadata={this.props.metadata}
-          postNewReview={this.props.postNewReview} />
+          postNewReview={this.props.postNewReview}
+          clickTracker={this.props.clickTracker}/>
         </div>
       )
     }
@@ -67,7 +82,8 @@ class Reviews extends React.Component {
             <Review
             review={review}
             key={review.review_id}
-            markHelpful={this.props.markHelpful}/>
+            markHelpful={this.props.markHelpful}
+            clickTracker={this.props.clickTracker}/>
           )}
         </div>
         {(this.state.numToShow <= reviews.length) &&
@@ -76,7 +92,8 @@ class Reviews extends React.Component {
         id={this.props.product}
         name={this.props.name}
         metadata={this.props.metadata}
-        postNewReview={this.props.postNewReview} />
+        postNewReview={this.props.postNewReview}
+        clickTracker={this.props.clickTracker}/>
       </div>
     )
   }

@@ -81,6 +81,7 @@ class WriteReview extends React.Component {
     this.setState({
       rating: e.target.value
     })
+    this.props.clickTracker(`${e.target.value} stars in overall rating radio button`, 'writeReview.jsx')
   }
 
   rateCharacteristic(char, rating, id) {
@@ -96,6 +97,7 @@ class WriteReview extends React.Component {
     this.setState({
       recommend: recommendation
     })
+    this.props.clickTracker(`recommend this product: ${e.target.value}`, 'writeReview.jsx')
   }
 
   handleSummaryChange(e) {
@@ -136,6 +138,7 @@ class WriteReview extends React.Component {
         showAddImagesModal: true
       })
     }
+    this.props.clickTracker('add images button in add review', 'writeReview.jsx')
   }
 
   closeAddImagesModal() {
@@ -168,6 +171,7 @@ class WriteReview extends React.Component {
     } if (invalidFields) {
       alert(`You must enter the following:\n${invalidFields}`)
     } else {
+      this.closeModal();
       let reviewFormData = {
         product_id: parseInt(this.props.id, 10),
         rating: parseInt(this.state.rating, 10),
@@ -178,27 +182,31 @@ class WriteReview extends React.Component {
         email: this.state.email,
         photos: this.state.photos,
         characteristics: this.state.charRatings
-        }
-        this.postData(reviewFormData)
       }
+      this.postData(reviewFormData)
+      }
+      this.props.clickTracker('submit review', 'writeReview.jsx')
     }
 
     handleStarClick(e) {
       this.setState({
         rating: e.target.value
       })
+      this.props.clickTracker(`add overall rating of ${e.target.value} stars in add review`, 'writeReview.jsx')
     }
 
     openModal() {
       this.setState({
         show: true
       })
+      this.props.clickTracker('add a review button', 'writeReview.jsx')
     }
 
     closeModal() {
       this.setState({
         show: false
       })
+      this.props.clickTracker('close add review modal', 'writeReview.jsx')
     }
 
     toggleWriteReview(e) {
@@ -206,10 +214,6 @@ class WriteReview extends React.Component {
       this.setState({
         show: !currentState
       })
-    }
-
-    handleCloseClick() {
-      this.props.hideModal
     }
 
   render() {
@@ -305,7 +309,8 @@ class WriteReview extends React.Component {
                     thisChar={charName}
                     key={charName}
                     id={charId}
-                    rateChar={this.rateCharacteristic.bind(this)}/>
+                    rateChar={this.rateCharacteristic.bind(this)}
+                    clickTracker={this.props.clickTracker}/>
                   )
                 }
                 )}
@@ -322,7 +327,8 @@ class WriteReview extends React.Component {
                 <button onClick={this.openAddImagesModal.bind(this)}>Add images</button>
                 <AddImagesModal show={this.state.showAddImagesModal}
                 closeModal={this.closeAddImagesModal.bind(this)}
-                addImageUrl={this.uploadPhotos.bind(this)}/>
+                addImageUrl={this.uploadPhotos.bind(this)}
+                clickTracker={this.props.clickTracker}/>
                 <br></br>
                 {this.state.photos.map((photo, i) => {
                 return (
@@ -337,7 +343,7 @@ class WriteReview extends React.Component {
                 onChange={this.handleNicknameChange.bind(this)}></textarea>
                 <p>For privacy reasons, do not use your full name or email address</p>
                 <p>Your email*</p>
-                <textarea name="nickname" id="nickname" maxLength="60" defaultValue="Example: jackson11@email.com"
+                <textarea name="email" id="email" maxLength="60" defaultValue="Example: jackson11@email.com"
                 onChange={this.handleEmailChange.bind(this)}></textarea>
                 <p>For authentication reasons, you will not be emailed</p>
                 <br></br>
