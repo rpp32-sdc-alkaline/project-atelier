@@ -30,13 +30,13 @@ class RatingBreakdown extends React.Component {
     let numTwoStars = 2
     let numOneStar = 2
     if (ratings) {
-      totalRatings = JSON.parse(ratings[1]) + JSON.parse(ratings[2]) + JSON.parse(ratings[3]) + JSON.parse(ratings[4]) + JSON.parse(ratings[5])
-      avgRating = ((Math.round(((JSON.parse(ratings[1]) + 2 * JSON.parse(ratings[2]) + 3 * JSON.parse(ratings[3]) + 4 * JSON.parse(ratings[4]) + 5 * JSON.parse(ratings[5])) / totalRatings )*10))/10).toFixed(1)
-      numFiveStars = Math.floor(JSON.parse(ratings[5])/totalRatings*100)
-      numFourStars = Math.floor(JSON.parse(ratings[4])/totalRatings*100)
-      numThreeStars = Math.floor(JSON.parse(ratings[3])/totalRatings*100)
-      numTwoStars = Math.floor(JSON.parse(ratings[2])/totalRatings*100)
-      numOneStar = Math.floor(JSON.parse(ratings[1])/totalRatings*100)
+      totalRatings = (ratings[1]) + (ratings[2]) + (ratings[3]) + (ratings[4]) + (ratings[5])
+      avgRating = ((Math.round((((ratings[1]) + 2 * (ratings[2]) + 3 * (ratings[3]) + 4 * (ratings[4]) + 5 * (ratings[5])) / totalRatings )*10))/10).toFixed(1)
+      numFiveStars = Math.floor((ratings[5])/totalRatings*100)
+      numFourStars = Math.floor((ratings[4])/totalRatings*100)
+      numThreeStars = Math.floor((ratings[3])/totalRatings*100)
+      numTwoStars = Math.floor((ratings[2])/totalRatings*100)
+      numOneStar = Math.floor((ratings[1])/totalRatings*100)
     }
     let recommended
     if (this.props.metadata?.recommended) {
