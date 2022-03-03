@@ -43,18 +43,18 @@ class Answer extends React.Component{
     return months[month] + ' ' + day + ', ' + year;
   }
 
-  getAnswerData(id) {
-    axios.post(`/getAnswerData`, {data: {id: id}})
-    .then((result) => {
-      this.setState({
-        answerData: result.data.results,
-        haveData: true
-      })
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-  }
+  // getAnswerData(id) {
+  //   axios.post(`/getAnswerData`, {data: {id: id}})
+  //   .then((result) => {
+  //     this.setState({
+  //       answerData: result.data.results,
+  //       haveData: true
+  //     })
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   })
+  // }
 
   markHelpful (e) {
     this.props.clickTracker('Mark Answer Helpful', 'Answer.jsx');

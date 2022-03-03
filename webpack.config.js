@@ -5,7 +5,7 @@ var CompressionPlugin = require('compression-webpack-plugin');
 
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: `${SRC_DIR}/index.js`,
   output: {
     filename: "bundle.js",

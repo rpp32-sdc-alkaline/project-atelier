@@ -15,7 +15,7 @@ class QandA extends React.Component{
       useFiltered: false
     };
     this.moreButton = this.moreButton.bind(this);
-    this.getQuestionData = this.getQuestionData.bind(this);
+    //this.getQuestionData = this.getQuestionData.bind(this);
     this.searchBarChange = this.searchBarChange.bind(this);
     this.filterQuestionData = this.filterQuestionData.bind(this);
   }
@@ -86,7 +86,7 @@ class QandA extends React.Component{
   componentDidMount () {
     let id = this.props.id;
     this.setState({ id: id })
-    this.getQuestionData(id, 1, 100)
+    //this.getQuestionData(id, 1, 100)
   }
 
   componentDidUpdate(prevProps) {
@@ -94,21 +94,21 @@ class QandA extends React.Component{
       this.setState({
         id: this.props.id
       })
-      this.getQuestionData(this.props.id, 1, 100)
+      //this.getQuestionData(this.props.id, 1, 100)
     }
   }
 
-  getQuestionData (id, page, count) {
-    axios.post('/questionAndAnswers', {data: {id: id, page: page, count: count}})
-    .then((result) => {
-      this.setState({
-        questionData: result.data.results,
-        slicedData: result.data.results.slice(0, this.state.qToDisplay),
-        haveData: true,
-        allQDisplayed: false
-      })
-    })
-  }
+  // getQuestionData (id, page, count) {
+  //   axios.post('/questionAndAnswers', {data: {id: id, page: page, count: count}})
+  //   .then((result) => {
+  //     this.setState({
+  //       questionData: result.data.results,
+  //       slicedData: result.data.results.slice(0, this.state.qToDisplay),
+  //       haveData: true,
+  //       allQDisplayed: false
+  //     })
+  //   })
+  // }
 
   render() {
     if (!this.state.haveData) {

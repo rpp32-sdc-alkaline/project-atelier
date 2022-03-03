@@ -14,6 +14,7 @@ class App extends React.Component{
     }
     this.handleClick = this.handleClick.bind(this);
     this.clickTracker = this.clickTracker.bind(this);
+    //this.adjustURL = this.adjustURL.bind(this);
   }
 
 
@@ -21,8 +22,14 @@ class App extends React.Component{
     this.setState({
       'selectedProductId': id,
       'productName': name
-    })
+    }//, this.adjustURL()
+    )
   }
+
+  // adjustURL() {
+  //   var id = this.state.selectedProductId ? this.state.selectedProductId : this.state.defaultProductId
+  //   history.pushState('http://localhost:3000', '', `/product/${id}`);
+  // }
 
   clickTracker (element, module) {
     let d = new Date();
@@ -42,6 +49,7 @@ class App extends React.Component{
   componentDidMount() {
     axios.get('/API')
     .then((res) => {
+      console.log('component did mount: ', res.data);
       return res.data
     })
     .then((productList) => {
@@ -86,7 +94,7 @@ class App extends React.Component{
           </div>
           <Overview id={id} clickTracker={this.clickTracker}/>
           <QandA id={id} clickTracker={this.clickTracker}/>
-          <RatingsAndReviews id={id} name={name} clickTracker={this.clickTracker}/>
+          {/* <RatingsAndReviews id={id} name={name} clickTracker={this.clickTracker}/> */}
         </div>
       )
     }

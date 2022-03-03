@@ -70,25 +70,25 @@ class Overview extends React.Component{
       })
     })
 
-    .then(() => {
-      axios.post('/overview-ratings', data)
-      .then(result => {
-        this.setState({
-          ratings: result.data.ratings
-        })
-      })
-    })
+    // .then(() => {
+    //   axios.post('/overview-ratings', data)
+    //   .then(result => {
+    //     this.setState({
+    //       ratings: result.data.ratings
+    //     })
+    //   })
+    // })
     .then(() => {
       axios.post('/overview-styles', data)
       .then(result => {
         this.setState({
-          styles: result.data.results,
-          displayedStyleName: result.data.results[0].name,
-          selectedStylePhotos: result.data.results[0].photos,
-          mainImage: result.data.results[0].photos[0].url,
-          thumbnailBarPhotos: result.data.results[0].photos,
-          skus: result.data.results[0].skus,
-          salePrice: result.data.results[0].sale_price,
+          styles: result.data,
+          displayedStyleName: result.data[0].name,
+          selectedStylePhotos: result.data[0].photos,
+          mainImage: result.data[0].photos[0].url,
+          thumbnailBarPhotos: result.data[0].photos,
+          skus: result.data[0].skus,
+          salePrice: result.data[0].sale_price,
           hasData: true
         })
       })
